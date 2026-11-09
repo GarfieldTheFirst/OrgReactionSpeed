@@ -345,7 +345,7 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
     <div class="grid g2">
       <div class="card">
         <div class="mono muted">Für wen und wozu</div>
-        <p style="margin-top:8px">Für Geschäftsleitungen mittlerer und grosser etablierter Unternehmen mit informationsdichtem Geschäftsmodell. Ziel ist, veränderte Kundenbedürfnisse wiederholt schneller zu bedienen, nicht dieselbe Leistung günstiger zu erbringen. Gedacht für eine moderierte Sitzung der Geschäftsleitung von rund einem halben Tag.</p>
+        <p style="margin-top:8px">Für Geschäftsleitungen mittlerer und grosser etablierter Unternehmen mit informationsdichtem Geschäftsmodell. Geschäftsleitung steht für das oberste Führungsgremium, je nach Rechtsform auch Geschäftsführung oder Vorstand. Ziel ist, veränderte Kundenbedürfnisse wiederholt schneller zu bedienen, nicht dieselbe Leistung günstiger zu erbringen. Gedacht für eine moderierte Sitzung der Geschäftsleitung von rund einem halben Tag.</p>
       </div>
       <div class="card">
         <div class="mono muted">So arbeiten Sie damit</div>
@@ -365,7 +365,7 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
     <div class="sec-head"><span class="mono">01 · Kernbefund</span><h2>Der Engpass wandert</h2></div>
     <div class="kern">
       <div>
-        <p class="big">Reaktionsfähig ist ein Unternehmen, wenn es verschobene Kundenbedürfnisse <b>wiederholt</b> erfüllt, ohne dass jede weitere Anpassung länger dauert. Agentische KI beschleunigt die Ausführung. Danach bestimmen in etablierten Unternehmen <b>Entscheidung, Spezifikation und Freigabe</b> die Dauer einer Anpassung.</p>
+        <p class="big">Reaktionsfähig ist ein Unternehmen, wenn es verschobene Kundenbedürfnisse <b>wiederholt</b> erfüllt, ohne dass jede weitere vergleichbare Anpassung länger dauert. Umfangreichere Vorhaben dürfen länger dauern. Agentische KI beschleunigt die Ausführung. Danach bestimmen in etablierten Unternehmen <b>Entscheidung, Spezifikation und Freigabe</b> die Dauer einer Anpassung.</p>
         <p>Wächst mit der schnelleren Ausführung die Zahl der Vorhaben und bleiben diese Stellen gleich, droht das Unternehmen mit jedem weiteren Vorhaben langsamer statt schneller zu werden. Schnelle Organisationen unterscheiden sich vor allem darin, wer entscheidet, wie geprüft wird, wie der Nutzen verbucht wird und ob Anpassungen beim Kunden beginnen. Agenten selbst können zur neuen Koordinationslast werden, wenn niemand den Überblick über sie hat.</p>
       </div>
       <div class="erwart">
@@ -462,12 +462,13 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
         <li>Entscheidungsmatrix für die drei häufigsten Anpassungstypen</li>
         <li>Durchsatz der Freigabestellen messen</li>
         <li>Erprobungsteam mit GL-Auftrag bilden</li>
-        <li>Agentenregister anlegen</li></ul></div>
+        <li>Agentenregister anlegen</li>
+        <li>Zwischenrunde der Standortbestimmung in der Geschäftsleitung mit Vergleich zur ersten Runde</li></ul></div>
       <div class="card"><div class="mono" style="color:var(--accent)">Tage 61 bis 90</div><h3>Erste Ergebnisse</h3><ul>
         <li>Zwei kleine, messbare Vorhaben mit Enddatum und Abbruchkriterium starten, ausgehend von einem Kundensignal</li>
         <li>Erstes geklärtes Thema an die Linie übergeben</li>
         <li>Portfolio mit Liste der nicht verfolgten Vorhaben beschliessen</li>
-        <li>Standortbestimmung wiederholen</li></ul></div>
+        <li>Zweite vollständige Runde der Standortbestimmung über alle Führungsstufen, danach quartalsweise</li></ul></div>
     </div>
   </div>
 </section>
@@ -501,7 +502,7 @@ const HF={
   ziel:"Die Geschäftsleitung versteht Möglichkeiten und Grenzen agentischer KI, hat realistische Erwartungen und behält die Grundsatzentscheide.",
   m:["Jedes GL-Mitglied nutzt innerhalb von drei Monaten selbst einen Agenten für die eigene Arbeit.",
      "Die Geschäftsleitung bildet sich in einem geschützten, begleiteten Rahmen weiter, in dem auch einfache Fragen Platz haben, und wiederholt dies mindestens halbjährlich.",
-     "Das Aufsichtsgremium (Verwaltungsrat oder Aufsichtsrat) erhält dieselbe Grundkompetenz.",
+     "Das Aufsichtsgremium, also Verwaltungsrat, Aufsichtsrat oder Beirat, erhält dieselbe Grundkompetenz.",
      "Die Verantwortung liegt bei einem GL-Mitglied mit Budget- und Ergebnisverantwortung, nicht im IT-Betrieb.",
      "Vor jedem grösseren Vorhaben hält die Geschäftsleitung schriftlich fest, was sie erwartet und was nicht."],
   ind:"Anteil der GL-Mitglieder mit eigener Nutzung, Verortung der Verantwortung.",
@@ -510,12 +511,12 @@ const HF={
   ziel:"Anstösse zu Anpassungen kommen aus dem Kundenkontakt, wenige ausgerichtete Vorhaben werden verfolgt, und Signale lösen nach festen Regeln Anpassungen aus.",
   m:["Signale aus Kundengesprächen, Anfragen und Beschwerden werden erfasst und mindestens wöchentlich zusammengeführt, auch für Kunden ohne persönliche Betreuung.",
      "Wissen über Kunden gehört ins System, nicht allein zu den Betreuenden.",
-     "Die Geschäftsleitung überprüft das Portfolio quartalsweise und beschliesst eine Liste der nicht verfolgten Vorhaben.",
+     "Die Geschäftsleitung überprüft das Portfolio der Vorhaben quartalsweise, also alle geplanten und laufenden Anpassungen an Angeboten und Abläufen einschliesslich der Anwendungsfälle für Agenten, und beschliesst eine Liste der nicht verfolgten Vorhaben.",
      "Ideen durchlaufen früh einen günstigen Prototyp, damit schwache Ideen ausscheiden, bevor Freigabestellen belastet werden.",
      "Experimente erhalten vorab ein Enddatum und ein Abbruchkriterium.",
      "Für jedes Angebot ist festgelegt, ab welcher Signalstärke eine Anpassung geprüft wird und welche Elemente bewusst stabil bleiben."],
   ind:"Anteil der Anpassungen mit Anstoss aus Kundensignalen (F6), Zahl der aktiven Vorhaben, Anteil mit Enddatum.",
-  warn:"Der Jahreskalender der Kampagnen bestimmt, worüber mit Kunden gesprochen wird, überall laufen kleine Initiativen ohne Enddatum, einzelne Rückmeldungen lösen Änderungen aus."},
+  warn:"Der jährliche Verkaufsplan bestimmt, worüber mit Kunden gesprochen wird, überall laufen kleine Initiativen ohne Enddatum, einzelne Rückmeldungen lösen Änderungen aus."},
  3:{t:"Entscheidungs- und Freigabearchitektur",ph:"Integration",eb:"Organisation",p:[2,3],
   ziel:"Die Anpassungsdauer sinkt oder bleibt gleich, auch wenn die Zahl der Vorhaben steigt.",
   m:["Für die häufigsten Anpassungstypen legt eine Entscheidungsmatrix fest, wer entscheidet, wer angehört und wer informiert wird, jeweils mit Frist.",
@@ -534,17 +535,18 @@ const HF={
  4:{t:"Governance und Lebenszyklus für Agenten",ph:"Integration",eb:"System und Organisation",p:[4,6],
   ziel:"Jeder Agent ist identifizierbar, berechtigt, verantwortet und kann stillgelegt werden, und die Gesamtzahl der Agenten und Plattformen bleibt überschaubar.",
   m:["Jedes Vorhaben beginnt mit einer Governance-Prüfung und endet nicht mit ihr.",
-     "Daten werden nach Vertraulichkeit in Schutzklassen eingeteilt. Je Schutzklasse ist festgelegt, welche Werkzeuge zugelassen sind und wo die Daten liegen und verarbeitet werden.",
+     "Aus einer Datenstrategie werden Datenprodukte abgeleitet, und für jedes ist eine fachliche Stelle verantwortlich, die Inhalt und Aktualität sicherstellt.",
+     "Daten werden nach Vertraulichkeit und Verbindlichkeit in Schutzklassen eingeteilt. Je Schutzklasse ist festgelegt, welche Werkzeuge und Agenten sie nutzen dürfen und wo sie gespeichert und verarbeitet werden.",
      "Ein Register hält für jeden Agenten Zweck, fachlichen Eigner, Berechtigung und Stilllegungsregel fest, bei einem Eignerwechsel wird der Agent neu zugeordnet.",
-     "Dashboards, Alerts und Protokolle zeigen, was Agenten tun und wie sie entscheiden.",
+     "Dashboards und Alerts zeigen, was Agenten tun, und Protokolle machen nachvollziehbar, wie sie entschieden haben.",
      "Zugriffsregeln, die für Menschen geschrieben sind, werden für Agenten neu gefasst.",
      "Das Unternehmen beschränkt sich auf wenige Plattformen mit gemeinsamer Kontrolle und Kostenübersicht.",
-     "Bevor ein bestehender Prozess automatisiert oder ein neuer eingeführt wird, wird er vom Agenten her entworfen, mit Kontrollpunkten dort, wo Verantwortung es verlangt, und auf einer geprüften Datenbasis."],
-  ind:"Anteil der Agenten im Register mit Eigner, Zahl der Plattformen, Zahl der Agenten ohne Nutzung oder Eigner.",
+     "Bevor ein Prozess automatisiert oder ein neuer eingeführt wird, wird er vom Agenten her entworfen, mit Kontrollpunkten dort, wo Verantwortung es verlangt, und auf einer geprüften Datenbasis."],
+  ind:"Anteil der Agenten im Register mit Eigner, Anteil der Datenprodukte mit verantwortlicher Stelle, Zahl der Plattformen, Zahl der Agenten ohne Nutzung oder Eigner.",
   warn:"Die Governance stoppt Vorhaben erst nach der Beauftragung, Agenten laufen ohne Eigner, jeder Bereich hat eine eigene Plattform, bestehende Abläufe werden unverändert automatisiert."},
  5:{t:"Erproben und in die Linie zurückgeben",ph:"Implementierung",eb:"Organisation",p:[5,8],
   ziel:"Neues entsteht schnell, ohne dass ein zentrales Team zum Engpass wird.",
-  m:["Ein Team ausgewählter Personen aus Fachbereichen und Technologie erprobt mit Auftrag aus der Geschäftsleitung, festem Takt, Budget und Zeitrahmen neue Arbeitsweisen.",
+  m:["Ein Team ausgewählter Fach- und Technologieleute aus verschiedenen Bereichen erprobt mit Auftrag aus der Geschäftsleitung, festem Takt, Budget und Zeitrahmen neue Arbeitsweisen.",
      "Alternativ ist das Team virtuell organisiert, sodass seine Mitglieder in Linienaufgaben und Kundenkontakt bleiben, die Zeit dafür ist ausdrücklich eingeplant.",
      "Mitarbeitende erhalten geschützte Testumgebungen und freigegebene Datenbestände, auf denen sie gefahrlos probieren dürfen.",
      "Geklärte Themen gehen an die zuständige Linieneinheit über.",
@@ -554,14 +556,15 @@ const HF={
   ind:"Zahl der an die Linie übergebenen Themen, Zeit bis zur Übergabe, Anteil der Pilotvorhaben mit Skalierungsentscheid, Kompetenzentwicklung gegenüber der Basismessung.",
   warn:"Alle Anfragen landen beim Erprobungsteam, Pilotvorhaben enden ohne Entscheid, gescheiterte Vorhaben werden aus Kostengründen weitergeführt."},
  6:{t:"Wirksame Kontrolle und Menschen",ph:"Implementierung",eb:"Führung und Organisation",p:[7,10,11],
-  ziel:"Menschliche Kontrolle ist echt, Prüfkompetenz bleibt erhalten, Betroffene tragen die Veränderung mit, und der Nutzen wird so verbucht, dass er Anpassung belohnt.",
+  ziel:"Menschliche Kontrolle ist echt, Prüfkompetenz bleibt erhalten, Betroffene tragen die Veränderung mit, und wer mit Agenten Nutzen schafft, wird dafür anerkannt und verliert nicht die eigene Arbeitsgrundlage, auch wenn die bisherige Aufgabe wegfällt.",
   m:["Die Autonomie eines Agenten wird je Aufgabe nach dem Schadenspotenzial festgelegt, im Kundenkontakt zuerst mit menschlicher Prüfung, und die Prüftiefe erst gesenkt, wenn die Qualität in einer Ende-zu-Ende-Erprobung belegt ist.",
      "Agenten dürfen keine Zusagen machen, die nur das Unternehmen machen darf.",
-     "Prüfende dürfen widersprechen, ihre Meldungen werden ausgewertet statt sanktioniert.",
-     "Das Unternehmen erhält die Fähigkeit, Agentenaufgaben selbst auszuführen, und vergleicht Ergebnisse regelmässig stichprobenweise.",
+     "Prüfende dürfen widersprechen, ihre Meldungen werden ausgewertet und für Verbesserungen genutzt, nicht sanktioniert.",
+     "Das Unternehmen erhält die Fähigkeit, Agentenaufgaben bei Bedarf ohne Agent selbst auszuführen, und vergleicht Ergebnisse regelmässig stichprobenweise.",
      "Nachwuchskräfte führen Aufgaben weiterhin selbst aus, damit künftige Prüfende entstehen.",
      "Betroffene werden als Lehrende und Supervisoren neuer Systeme eingebunden, die Arbeitnehmervertretung früh einbezogen, und neue Werkzeuge werden dosiert eingeführt.",
      "Vor dem Start eines Vorhabens wird mit dem Team vereinbart, wofür frei werdende Kapazität eingesetzt wird.",
+     "Wer die eigene Aufgabe mit Agenten überflüssig macht, erhält eine neue Aufgabe und Anerkennung für den geschaffenen Nutzen.",
      "Der Nutzen wird an Ergebnissen für Kunden gemessen.",
      "Dienstleister, die nach Aufwand abrechnen, prüfen, welche Leistungen sie nach Ergebnis abrechnen können."],
   ind:"Anteil stichprobenweise geprüfter Ergebnisse, Zahl der Widersprüche, Nachwuchs in Prüfrollen, Zielgrösse der Vorhaben.",
@@ -569,39 +572,39 @@ const HF={
 };
 const P=[
  "Die Geschäftsleitung versteht aus eigener Anwendung, was Agenten können und wo sie enden, und trifft die Grundsatzentscheide selbst.",
- "Es ist festgelegt, wer entscheidet, bevor über Technologie gesprochen wird. Das Portfolio sagt auch, was nicht gemacht wird.",
+ "Bevor über Technologie gesprochen wird, ist festgelegt, wer entscheidet. Das Portfolio der Vorhaben sagt auch, was nicht gemacht wird.",
  "Freigabe und Spezifikation wachsen mit der Zahl der Vorhaben mit.",
- "Agenten erhalten eine eigene Governance mit Identität, Berechtigung, Eigner, Stilllegungsregel und festgelegtem Ort, an dem Daten liegen und verarbeitet werden.",
+ "Agenten erhalten eine eigene Governance mit Identität, Berechtigung, Eigner, Stilllegungsregel und festgelegtem Ort, an dem ihre Daten gespeichert und verarbeitet werden.",
  "Neues wird schnell erprobt, ohne dass eine Insel entsteht. Geklärtes geht zurück in die Linie.",
- "Prozesse und Daten werden neu gedacht, bevor sie automatisiert werden.",
+ "Prozesse und Daten werden neu gedacht, bevor sie automatisiert werden. Jedes Datenprodukt hat eine verantwortliche Stelle.",
  "Autonomie folgt dem Risiko, und die Kontrolle bleibt echt.",
  "Experimente enden zu einem festen Termin, Skalierung ist ein Organisationsentscheid.",
  "Für jedes Angebot ist festgelegt, ab wann ein Signal eine Anpassung auslöst.",
  "Betroffene gestalten mit und werden nicht mit neuen Werkzeugen überflutet.",
- "Der Nutzen wird als Ergebnis für Kunden verbucht, nicht als Stellenabbau oder Aufwand.",
- "Anpassungen beginnen beim Bedürfnis des Kunden, nicht bei der Kampagne."];
+ "Der Nutzen wird als Ergebnis für die eigenen Kunden verbucht, nicht als Stellenabbau oder Aufwand.",
+ "Anpassungen beginnen beim Bedürfnis des Kunden, nicht beim internen Verkaufsplan."];
 const PHF=P.map((_,i)=>Object.keys(HF).map(Number).filter(h=>HF[h].p.includes(i+1)));
 const FAELLE=[
  {n:1,t:"Entscheid in Stunden",m:"Stunden",p:[2,12],b:"In einem kleinen Software-Unternehmen sammelt das Team Produktinputs aus dem Kundenkontakt einmal pro Woche. Eine Person entscheidet innerhalb von Stunden, was gebaut wird. Aus einer Kundenidee kann am Abend ein Prototyp entstehen, der in derselben Woche gezeigt wird. Grössere Komponenten bleiben aufwendig."},
  {n:2,t:"Fertig nach 48 Stunden, eingeführt nach sechs Wochen",m:"48 h → 6 Wo.",p:[3],b:"In einem Industrieunternehmen stand ein Chatbot für Anfragen nach 48 Stunden bereit. Eingeführt war er nach rund sechs Wochen, vier davon entfielen auf das Warten bis zur nächsten regulären Sitzung."},
  {n:3,t:"Hundert Vorhaben, fünf Prüfende",m:"5 → 100",p:[3],b:"Bei Kunden einer Beratung reichten Mitarbeitende früher etwa fünf Vorhaben pro Woche ein, mit KI-Werkzeugen sind es nach beispielhafter Angabe rund hundert. Das Prüfteam blieb bei rund fünf Personen und wurde zum Engpass."},
- {n:4,t:"Zu viel Autonomie zurückgenommen",m:"20 → 4",p:[4,7],b:"Ein Softwarekonzern liess Agenten sich selbst optimieren. Ein Agent gab sich gegenüber einem Kunden als Account Manager aus, andere sagten Funktionen zu, die erst später kommen sollten. Das Unternehmen reduzierte die Zahl dieser Agenten im betroffenen Bereich von fast 20 auf vier und führte für die verbleibenden Dashboards, Alerts und Mindestanforderungen ein."},
+ {n:4,t:"Zu viel Autonomie zurückgenommen",m:"20 → 4",p:[4,7],b:"Ein Softwarekonzern liess Agenten sich selbst optimieren. Ein Agent gab sich gegenüber einem Kunden als Account Manager aus, andere sagten Funktionen zu, die erst später kommen sollten. Gelöst wurde das in zwei Schritten. Die Zahl dieser Agenten im betroffenen Bereich wurde von fast 20 auf vier reduziert, und die verbliebenen laufen seither unter einer festen Governance mit Dashboards, Alerts und Mindestanforderungen."},
  {n:5,t:"Die Vorstudie",m:"15 Abteilungen",p:[2,3],b:"In einer Bank geht eine Vorstudie an 15 Fachabteilungen und wird mehrfach in der Geschäftsleitung rapportiert. Eine Vorstudie für eine zentrale Datenbasis war nach drei Monaten noch nicht unterzeichnet."},
- {n:6,t:"Die Kampagne bestimmt das Gespräch",m:"3 Kampagnen",p:[12],b:"Banken richten das Gespräch mit Kunden nach Darstellung einer befragten Person an drei Jahreskampagnen aus. Kunden werden der Kampagne zugeordnet, Wissen über sie bleibt bei den Betreuenden, und Kunden wandern ab, nachdem sie ihren Wunsch mehrfach geäussert haben."}];
+ {n:6,t:"Der Verkaufsplan bestimmt das Gespräch",m:"3 Kampagnen",p:[12],b:"Banken richten das Gespräch mit Kunden nach Darstellung einer befragten Person an drei Jahreskampagnen aus. Kunden werden der Kampagne zugeordnet, Wissen über sie bleibt bei den Betreuenden, und Kunden wandern ab, nachdem sie ihren Wunsch mehrfach geäussert haben."}];
 const Q=[
  {g:"Führung",id:"F1",t:"Hat jedes Mitglied der Geschäftsleitung in den letzten drei Monaten selbst mit einem Agenten gearbeitet?",o:["nein oder vereinzelt","ja, in einer Schulung","ja, im eigenen Arbeitsalltag"],hf:1},
  {g:"Führung",id:"F2",t:"Wo liegt die Verantwortung für agentische KI?",o:["im IT-Betrieb","in einer zentralen Digital- oder KI-Einheit","bei einem GL-Mitglied mit Budget- und Ergebnisverantwortung"],hf:1},
  {g:"Führung",id:"F3",t:"Gibt es eine Liste der Vorhaben, die bewusst nicht verfolgt werden?",o:["nein","ja, jährlich","ja, quartalsweise überprüft"],hf:2},
- {g:"Erkennen",id:"F4",t:"Wie wird das Bild vom Kunden nachgeführt?",o:["über einzelne Kontakte, ohne Rhythmus","zyklisch, etwa quartalsweise oder entlang von Kampagnen","laufend, aus erfassten Signalen"],hf:2},
+ {g:"Erkennen",id:"F4",t:"Wie wird das Bild vom Kunden nachgeführt?",o:["über einzelne Kontakte, ohne Rhythmus","zyklisch, etwa quartalsweise oder entlang des Verkaufsplans","laufend, aus erfassten Signalen"],hf:2},
  {g:"Erkennen",id:"F5",t:"Ist festgelegt, ab welcher Signalstärke eine Anpassung geprüft wird?",o:["nein","informell","ja, je Angebot"],hf:2},
- {g:"Erkennen",id:"F6",t:"Woher kam der Anstoss zu den letzten drei Angebotsanpassungen?",o:["aus Kampagnen oder interner Planung","aus einzelnen Kundenanfragen","aus systematisch erfassten Signalen des Kundenkontakts"],hf:2},
+ {g:"Erkennen",id:"F6",t:"Woher kam der Anstoss zu den letzten drei Angebotsanpassungen?",o:["aus dem Verkaufsplan oder anderer interner Planung","aus einzelnen Kundenanfragen","aus systematisch erfassten Signalen des Kundenkontakts"],hf:2},
  {g:"Entscheiden und Freigeben",id:"F7",t:"Wer entscheidet bei einer typischen Angebotsanpassung abschliessend?",o:["unklar oder mehrere Gremien","klar, aber mehr als drei Freigaben","eine benannte Person mit Frist"],hf:3},
  {g:"Entscheiden und Freigeben",id:"F8",t:"Wie viele Vorhaben warten auf eine Freigabe durch Sicherheit, Recht oder Datenschutz, und wie viele schafft diese Stelle pro Woche?",o:["unbekannt","bekannt, die Warteschlange wächst","bekannt, der Durchsatz wächst mit"],hf:3},
  {g:"Entscheiden und Freigeben",id:"F9",t:"Aus welchem Budget wird der Betrieb agentischer Systeme bezahlt?",o:["ungeklärt","IT-Budget","Budget des prozessverantwortlichen Bereichs, Kosten je Vorhaben sichtbar"],hf:3},
- {g:"Entscheiden und Freigeben",id:"F10",t:"Wie lange dauerte die letzte Anpassung vom erkannten Bedarf bis zum produktiven Einsatz, und war die vorletzte schneller oder langsamer?",o:["unbekannt","bekannt, gleich oder langsamer","bekannt, schneller"],hf:3},
- {g:"Umbauen",id:"F11",t:"Haben Agenten eine eigene Identität, einen fachlichen Eigner, eine Berechtigung nach Schutzklasse der Daten und einen festgelegten Ort, an dem Daten liegen und verarbeitet werden?",o:["nein","teilweise","ja, mit Register und Stilllegungsregel"],hf:4},
+ {g:"Entscheiden und Freigeben",id:"F10",t:"Wie lange dauerte die letzte Anpassung vom erkannten Bedarf bis zum produktiven Einsatz, und ging sie schneller als eine vergleichbare frühere Anpassung?",o:["unbekannt","bekannt, gleich schnell oder langsamer","bekannt, schneller"],hf:3},
+ {g:"Umbauen",id:"F11",t:"Haben Agenten eine eigene Identität, einen fachlichen Eigner, eine Berechtigung nach Schutzklasse der Daten und einen festgelegten Ort der Datenverarbeitung?",o:["nein","teilweise","ja, mit Register und Stilllegungsregel"],hf:4},
  {g:"Umbauen",id:"F12",t:"Wo wird Neues erprobt, und wie gelangt es in die Linie?",o:["in einzelnen Initiativen","in einem zentralen Team ohne Übergabe","in einem Team mit GL-Auftrag und festgelegter Übergabe"],hf:5},
- {g:"Umbauen",id:"F13",t:"Könnten Sie die Aufgaben Ihrer Agenten auch ohne Agenten selbst erledigen, und vergleichen Sie Ergebnisse stichprobenweise?",o:["nein","teilweise","ja, regelmässig geübt"],hf:6},
+ {g:"Umbauen",id:"F13",t:"Könnten Sie die Aufgaben Ihrer Agenten bei Bedarf auch ohne Agent selbst erledigen, und vergleichen Sie Ergebnisse stichprobenweise?",o:["nein","teilweise","ja, regelmässig geübt"],hf:6},
  {g:"Umbauen",id:"F14",t:"Woran wird der Nutzen eines Vorhabens gemessen?",o:["an wegfallenden Stellen oder gar nicht","an gesparter Zeit, ohne Entscheid über frei werdende Kapazität","an Ergebnissen für Kunden, mit vorab vereinbarter Verwendung der Kapazität"],hf:6}];
 const L="ABC", STUFE={GL:"Geschäftsleitung",F2:"Zweite Führungsstufe",F3:"Dritte Führungsstufe"};
 
