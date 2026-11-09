@@ -2,82 +2,82 @@
 <html lang="de-CH">
 <head>
 <meta charset="utf-8">
-<meta name="theme-color" content="#0b2545">
+<meta name="theme-color" content="#0c3066">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Reaktionsfähig mit agentischer KI · Leitfaden für die Geschäftsleitung</title>
 <meta name="description" content="Leitfaden für Geschäftsleitungen etablierter Unternehmen: veränderte Kundenbedürfnisse wiederholt schneller erfüllen, ohne mit jedem Vorhaben langsamer zu werden. Mit interaktiver Standortbestimmung.">
 <style>
 :root{
-  --navy:#0b2545; --navy2:#13315c;
-  --paper:#ffffff; --alt:#f4f2ee; --card:#ffffff; --line:#dcd8d0; --line2:#bdb8ad;
-  --fg:#1c1f24; --muted:#565c66; --soft:#7b808a;
-  --accent:#7d6332; --accentlight:#d8c79c;
-  --warn:#9b1c1c; --warnbg:#fbf1f0; --warnline:#e3c2bf; --ok:#1d6b45;
-  --radius:2px;
-  --serif:Georgia,"Times New Roman",Times,serif;
-  --sans:"Helvetica Neue",Helvetica,Arial,"Segoe UI",Roboto,sans-serif;
+  --navy:#041f3d; --navy2:#01205e; --deep:#073871; --foot:#082646;
+  --paper:#ffffff; --alt:#f3f9ff; --tile:#e8f2fe; --card:#e8f2fe; --line:#d3dde9; --line2:#9fb0c4;
+  --fg:#161e26; --muted:#4a5663; --soft:#6b7783;
+  --accent:#0047d6; --accentlight:#8bc0fc;
+  --warn:#a81c1c; --warnbg:#fdf1f0; --warnline:#ecc5c1; --ok:#18704a;
+  --radius:0;
+  --head:"Univers Next","Univers","Helvetica Neue","Segoe UI",Helvetica,Arial,sans-serif;
+  --sans:"Univers Next","Univers","Helvetica Neue","Segoe UI",Helvetica,Arial,sans-serif;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:76px}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
-body{margin:0;font-family:var(--sans);color:var(--fg);background:var(--paper);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased}
-a{color:var(--navy)}
-h1,h2,h3{font-family:var(--serif);font-weight:400;color:var(--navy);line-height:1.2;margin:0 0 .5em}
-h2{font-size:clamp(1.6rem,3vw,2.15rem)}
+body{margin:0;font-family:var(--sans);color:var(--fg);background:var(--paper);line-height:1.6;font-size:17px;letter-spacing:.015em;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--head);font-weight:300;color:var(--navy);line-height:1.25;letter-spacing:.01em;margin:0 0 .5em}
+h2{font-size:clamp(1.8rem,3.6vw,2.6rem)}
 h3{font-size:1.2rem}
 p{margin:0 0 1em}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-.mono{font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.mono{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .muted{color:var(--muted)}
-.chip{display:inline-flex;align-items:center;font-family:var(--sans);font-size:.82rem;padding:5px 10px;border-radius:var(--radius);border:1px solid var(--line2);color:var(--navy);background:#fff;text-align:left}
-.chip:hover{border-color:var(--navy)}
+.chip{display:inline-flex;align-items:center;font-family:var(--sans);font-size:.82rem;padding:5px 10px;border-radius:var(--radius);border:1px solid var(--line2);color:var(--accent);background:#fff;text-align:left}
+.chip:hover{border-color:var(--accent)}
 .chip .dot{display:none}
 
 /* Navigation */
 header.top{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
-header.top .wrap{display:flex;align-items:center;gap:24px;height:64px}
-.brand{color:var(--navy);text-decoration:none;font-family:var(--serif);font-size:1.15rem;white-space:nowrap}
+header.top .wrap{display:flex;align-items:center;gap:24px;height:72px}
+.brand{color:var(--navy);text-decoration:none;font-family:var(--head);font-size:1.2rem;font-weight:300;letter-spacing:.02em;white-space:nowrap}
 nav.main{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-left:auto;min-width:0;align-self:stretch}
 @media (max-width:640px){.brand{display:none}nav.main{margin-left:0}}
 nav.main::-webkit-scrollbar{display:none}
-nav.main a{display:flex;align-items:center;color:var(--muted);text-decoration:none;font-size:.9rem;padding:0 11px;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px}
-nav.main a:hover{color:var(--navy)}
-nav.main a.on{color:var(--navy);border-bottom-color:var(--navy)}
+nav.main a{display:flex;align-items:center;color:var(--navy);text-decoration:none;font-size:.92rem;padding:0 12px;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px}
+nav.main a:hover{color:var(--accent)}
+nav.main a.on{color:var(--accent);border-bottom-color:var(--accent)}
 .progress{position:absolute;left:0;bottom:-1px;height:2px;background:var(--accent);width:0}
 
 /* Kopfbereich */
-.hero{background:var(--navy);color:#e9edf3}
+.hero{background:var(--deep);color:#e8f2fe}
 .hero .wrap{padding:88px 24px 0}
 .hero .eyebrow{color:var(--accentlight)}
-.hero h1{color:#fff;font-size:clamp(2.1rem,4.6vw,3.4rem);margin:16px 0 20px;max-width:20ch}
+.hero h1{color:#fff;font-size:clamp(2.2rem,5vw,3.8rem);margin:16px 0 20px;max-width:20ch}
 .hero .lead{font-size:clamp(1.05rem,1.8vw,1.25rem);max-width:52ch;color:#cfd6e2}
 .hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-.btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:.95rem;font-weight:600;padding:11px 20px;border-radius:var(--radius);border:1px solid var(--line2);background:#fff;color:var(--navy);cursor:pointer;text-decoration:none}
-.btn:hover{border-color:var(--navy)}
-.btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
-.btn.primary:hover{background:var(--navy2)}
-.btn.ghost{background:transparent;border-color:var(--navy)}
-.btn.ghost:hover{background:rgba(11,37,69,.06)}
-.btn.small{padding:7px 14px;font-size:.85rem}
-.hero .btn.primary,.res-start .btn.primary{background:#fff;color:var(--navy);border-color:#fff}
-.hero .btn.primary:hover,.res-start .btn.primary:hover{background:#e9edf3}
-.hero .btn.ghost,footer .btn.ghost,.res-start .btn.ghost{color:#fff;border-color:rgba(255,255,255,.5)}
-.hero .btn.ghost:hover,footer .btn.ghost:hover,.res-start .btn.ghost:hover{background:rgba(255,255,255,.08);border-color:#fff}
+.btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:13px 22px 12px;border-radius:var(--radius);border:1px solid var(--accent);background:#fff;color:var(--accent);cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--navy2);color:var(--navy2)}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.primary:hover{background:var(--navy2);border-color:var(--navy2);color:#fff}
+.btn.ghost{background:transparent}
+.btn.ghost:hover{background:var(--tile)}
+.btn.small{padding:9px 16px 8px;font-size:.76rem}
+.hero .btn.primary,.res-start .btn.primary{background:#fff;color:var(--deep);border-color:#fff}
+.hero .btn.primary:hover,.res-start .btn.primary:hover{background:#dbf1ff;border-color:#dbf1ff;color:var(--navy2)}
+.hero .btn.ghost,footer .btn.ghost,.res-start .btn.ghost{color:#fff;border-color:#fff}
+.hero .btn.ghost:hover,footer .btn.ghost:hover,.res-start .btn.ghost:hover{background:rgba(255,255,255,.12);border-color:#fff;color:#fff}
 .facts{display:grid;grid-template-columns:repeat(4,1fr);margin:64px 0 0;padding:0;list-style:none;border-top:1px solid rgba(255,255,255,.22)}
 .facts li{padding:22px 20px 26px 0;font-size:.9rem;color:#cfd6e2}
 .facts li+li{padding-left:20px;border-left:1px solid rgba(255,255,255,.22)}
-.facts b{display:block;font-family:var(--serif);font-weight:400;font-size:2rem;line-height:1.1;color:#fff}
+.facts b{display:block;font-family:var(--head);font-weight:300;font-size:2.4rem;line-height:1.1;color:#fff}
 @media (max-width:640px){.facts{grid-template-columns:repeat(2,1fr)}.facts li:nth-child(3){padding-left:0;border-left:0}.facts li:nth-child(n+3){border-top:1px solid rgba(255,255,255,.22)}}
 
-section{padding:76px 0;border-bottom:1px solid var(--line)}
+section{padding:88px 0;border-bottom:0}
 section.dark{background:var(--alt)}
 .sec-head{margin-bottom:26px}
 .sec-head .mono{display:block;color:var(--accent);margin-bottom:10px}
 .sec-head h2{margin:0}
 .intro{max-width:70ch;color:var(--muted);font-size:1.05rem}
 
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px}
+.card{background:var(--card);border:0;border-radius:var(--radius);padding:26px 28px}
 .grid{display:grid;gap:16px}
 .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 .g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
@@ -85,8 +85,8 @@ section.dark{background:var(--alt)}
 /* Kernbefund */
 .kern{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:start}
 @media (max-width:860px){.kern{grid-template-columns:1fr}}
-.kern .big{font-family:var(--serif);font-size:1.3rem;line-height:1.55;color:var(--fg)}
-.kern .big b{font-weight:400;color:var(--navy);border-bottom:1px solid var(--accent)}
+.kern .big{font-family:var(--head);font-weight:300;font-size:1.4rem;line-height:1.55;color:var(--navy)}
+.kern .big b{font-weight:400;color:var(--navy);border-bottom:2px solid var(--accent)}
 .erwart{border-left:2px solid var(--accent);padding:4px 0 4px 18px;color:var(--muted)}
 
 /* Ablauf */
@@ -109,7 +109,7 @@ section.dark{background:var(--alt)}
 .prinz{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 32px;border-top:1px solid var(--line)}
 .p{display:flex;gap:16px;align-items:baseline;background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:16px 4px;cursor:pointer;text-align:left;font:inherit;color:inherit}
 .p:hover{background:var(--alt)}
-.p .n{flex:none;min-width:2.2em;font-family:var(--serif);font-size:1.15rem;color:var(--accent)}
+.p .n{flex:none;min-width:2.4em;font-family:var(--head);font-weight:700;font-size:.95rem;letter-spacing:.04em;color:var(--accent)}
 .p .hfs{display:block;margin-top:4px;font-size:.8rem;color:var(--soft)}
 
 /* Standortbestimmung */
@@ -118,13 +118,13 @@ select,textarea{font:inherit;background:#fff;color:var(--fg);border:1px solid va
 textarea{width:100%;min-height:120px;font-family:var(--mono);font-size:.88rem}
 .tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:24px;border-bottom:1px solid var(--line)}
 .tabs button{font:inherit;font-size:.95rem;padding:10px 16px;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;color:var(--muted);cursor:pointer}
-.tabs button:hover{color:var(--navy)}
-.tabs button[aria-selected=true]{color:var(--navy);font-weight:600;border-bottom-color:var(--navy)}
+.tabs button:hover{color:var(--accent)}
+.tabs button[aria-selected=true]{color:var(--accent);font-weight:700;border-bottom-color:var(--accent)}
 .meter{height:4px;background:var(--line);overflow:hidden;flex:1;min-width:140px}
-.meter span{display:block;height:100%;width:0;background:var(--navy);transition:width .3s}
+.meter span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
 .grp{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:30px 0 10px}
 .q{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:0 0 10px;min-width:0}
-.q.done{border-left:3px solid var(--navy)}
+.q.done{border-left:3px solid var(--accent)}
 .q .qt{float:left;width:100%;font-weight:600;margin-bottom:12px}
 .q .opts{clear:both}
 .q .qt .id{color:var(--accent);margin-right:8px}
@@ -134,21 +134,21 @@ textarea{width:100%;min-height:120px;font-family:var(--mono);font-size:.88rem}
 .opt{position:relative}
 .opt input{position:absolute;opacity:0;pointer-events:none}
 .opt span{display:flex;gap:10px;height:100%;padding:11px 13px;border:1px solid var(--line2);border-radius:var(--radius);cursor:pointer;font-size:.92rem;line-height:1.45;background:#fff}
-.opt span:hover{border-color:var(--navy)}
+.opt span:hover{border-color:var(--accent)}
 .opt span i{font-style:normal;font-weight:700;color:var(--soft)}
-.opt input:checked+span{border-color:var(--navy);background:#eef1f6;box-shadow:inset 0 0 0 1px var(--navy)}
-.opt input:checked+span i{color:var(--navy)}
+.opt input:checked+span{border-color:var(--accent);background:var(--tile);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt input:checked+span i{color:var(--accent)}
 .opt input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
-.res-start{background:var(--navy);color:#fff;border:0}
+.res-start{background:var(--deep);color:#fff;border:0}
 .res-start .mono{color:var(--accentlight)}
-.res-start h3{color:#fff;font-size:1.5rem;margin:8px 0}
+.res-start h3{color:#fff;font-size:1.7rem;margin:8px 0}
 .res-start p{color:#cfd6e2;margin:0 0 4px}
 .warnbox{background:var(--warnbg);border:1px solid var(--warnline);border-left:3px solid var(--warn);border-radius:var(--radius);padding:14px 18px;margin-top:12px}
 .bars{display:grid;gap:10px}
 .barrow{display:grid;grid-template-columns:minmax(180px,1.4fr) 2fr 70px;gap:12px;align-items:center;font-size:.92rem}
 .bar{height:8px;background:var(--line);overflow:hidden}
 .bar span{display:block;height:100%;background:var(--warn)}
-code.res{display:block;font-family:var(--mono);font-size:1.05rem;background:var(--alt);color:var(--navy);border:1px solid var(--line);padding:12px 14px;border-radius:var(--radius);margin:10px 0;overflow-wrap:anywhere}
+code.res{display:block;font-family:var(--mono);font-size:1.05rem;background:#fff;color:var(--navy);border:1px solid var(--line2);padding:12px 14px;border-radius:var(--radius);margin:10px 0;overflow-wrap:anywhere}
 table{width:100%;border-collapse:collapse;font-size:.92rem}
 th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--navy)}
@@ -163,7 +163,7 @@ th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 .phases{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:18px;border:1px solid var(--line);background:#fff}
 .phase{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:12px 16px;color:var(--soft)}
 .phase+.phase{border-left:1px solid var(--line)}
-.phase b{display:block;color:var(--navy);font-family:var(--serif);font-weight:400;text-transform:none;letter-spacing:0;font-size:1.05rem;margin-top:2px}
+.phase b{display:block;color:var(--navy);font-family:var(--head);font-weight:300;text-transform:none;letter-spacing:0;font-size:1.05rem;margin-top:2px}
 @media (max-width:720px){.phases{grid-template-columns:repeat(2,1fr)}.phase:nth-child(3){border-left:0}.phase:nth-child(n+3){border-top:1px solid var(--line)}}
 .hfnav{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:16px}
 @media (max-width:860px){.hfnav{grid-template-columns:repeat(3,1fr)}}
@@ -171,17 +171,17 @@ th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 .hfnav button{font:inherit;text-align:left;padding:12px;border-radius:var(--radius);border:1px solid var(--line);border-top:3px solid var(--line2);background:#fff;color:var(--fg);cursor:pointer;position:relative;font-size:.86rem;line-height:1.35}
 .hfnav button:hover{border-color:var(--line2)}
 .hfnav button .mono{display:block;color:var(--soft);font-size:.64rem;margin-bottom:4px}
-.hfnav button[aria-selected=true]{border-color:var(--navy);color:var(--navy);font-weight:600}
+.hfnav button[aria-selected=true]{border-color:var(--accent);color:var(--accent);font-weight:700}
 .hfnav button .start{position:absolute;top:-10px;right:8px;font-size:.62rem;letter-spacing:.08em;background:var(--accent);color:#fff;padding:1px 7px;font-weight:700}
 .hfnav button .done{display:block;font-size:.74rem;font-weight:400;color:var(--ok);margin-top:6px}
 .hfpanel{background:#fff;color:var(--fg);border:1px solid var(--line);border-radius:var(--radius);padding:30px;display:grid;grid-template-columns:1.5fr 1fr;gap:32px}
 @media (max-width:860px){.hfpanel{grid-template-columns:1fr;padding:22px}}
 .hfpanel h3{font-size:1.5rem;margin-top:8px}
-.ziel{font-family:var(--serif);font-size:1.12rem;border-left:2px solid var(--accent);padding-left:16px;margin-bottom:22px}
+.ziel{font-family:var(--head);font-weight:300;font-size:1.25rem;color:var(--navy);border-left:2px solid var(--accent);padding-left:16px;margin-bottom:22px}
 .mass{list-style:none;padding:0;margin:0}
 .mass li{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
 .mass li:last-child{border-bottom:0}
-.mass input{flex:none;margin-top:5px;width:17px;height:17px;accent-color:var(--navy)}
+.mass input{flex:none;margin-top:5px;width:17px;height:17px;accent-color:var(--accent)}
 .mass li.chk span{color:var(--soft);text-decoration:line-through;text-decoration-color:var(--line2)}
 .side .box{border-top:1px solid var(--navy);padding:14px 0 6px;margin-bottom:14px}
 .side .box .mono{color:var(--navy);font-size:.68rem}
@@ -193,32 +193,177 @@ th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 /* 90 Tage */
 .tl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media (max-width:860px){.tl{grid-template-columns:1fr}}
-.tl .card{border-top:3px solid var(--navy)}
+.tl .card{border-top:3px solid var(--accent)}
 .tl .card h3{margin-top:6px}
 .tl ul{margin:10px 0 0;padding-left:18px}
 .tl li{margin-bottom:6px;font-size:.95rem}
 
-footer{background:var(--navy);color:#b9c3d3;padding:48px 0;font-size:.9rem}
-footer b{color:#fff;font-family:var(--serif);font-weight:400;font-size:1.05rem}
+footer{background:var(--foot);color:#cdd7e3;padding:48px 0;font-size:.9rem}
+footer b{color:#fff;font-weight:700}
 
 dialog{border:0;border-radius:var(--radius);padding:0;max-width:560px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(11,37,69,.3)}
 dialog::backdrop{background:rgba(11,37,69,.5)}
-dialog .dh{background:var(--navy);padding:22px 24px}
+dialog .dh{background:var(--deep);padding:22px 24px}
 dialog .dh h3{color:#fff}
 dialog .dh .mono{color:var(--accentlight)}
 dialog .db{padding:20px 24px}
 dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 
+/* Feinschliff: Kopf mit Wellenfläche, Balken über Überschriften, farbige Kacheln */
+:root{--deep:#0c3066;--panel:#0b2340;--foot:#081c36;--yellow:#e9e84f;--rose:#ded3d2;--lemon:#f1f18a;--mist:#e6ebf1;
+  --waves-dark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 640' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%232f6fe0' stroke-opacity='.38' stroke-width='1'%3E%3Cpath d='M-300,20q150,-40.0 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-323,41q150,-47.3 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-346,61q150,-53.2 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-368,82q150,-57.4 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-389,103q150,-59.6 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-409,123q150,-59.9 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-427,144q150,-58.1 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-442,165q150,-54.4 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-455,186q150,-48.9 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-466,206q150,-41.9 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-473,227q150,-33.7 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-478,248q150,-24.6 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-480,268q150,-15.0 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-479,289q150,-5.4 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-474,310q150,3.8 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-467,330q150,12.3 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-457,351q150,19.6 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-444,372q150,25.4 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-429,392q150,29.5 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-412,413q150,31.7 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-393,434q150,31.8 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-372,454q150,30.0 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-350,475q150,26.2 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-327,496q150,20.7 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-304,517q150,13.6 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-281,537q150,5.3 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-257,558q150,-3.8 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-235,579q150,-13.4 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-214,599q150,-23.0 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-194,620q150,-32.2 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3C/g%3E%3C/svg%3E");
+  --waves-light:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 640' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23bcd6f7' stroke-opacity='.6' stroke-width='1.5'%3E%3Cpath d='M-300,20q150,-40.0 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-323,49q150,-47.3 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-346,77q150,-53.2 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-368,106q150,-57.4 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-389,134q150,-59.6 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-409,163q150,-59.9 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-427,191q150,-58.1 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-442,220q150,-54.4 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-455,249q150,-48.9 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-466,277q150,-41.9 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-473,306q150,-33.7 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-478,334q150,-24.6 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-480,363q150,-15.0 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-479,391q150,-5.4 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-474,420q150,3.8 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-467,449q150,12.3 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-457,477q150,19.6 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-444,506q150,25.4 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-429,534q150,29.5 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-412,563q150,31.7 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-393,591q150,31.8 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3Cpath d='M-372,620q150,30.0 300,0t300,0t300,0t300,0t300,0t300,0t300,0'/%3E%3C/g%3E%3C/svg%3E");}
+body{letter-spacing:.03em}
+header.top{background:var(--deep);border-bottom:1px solid rgba(255,255,255,.14)}
+.brand{color:#fff;font-weight:400}
+nav.main a{color:#fff;font-size:1rem;letter-spacing:.04em}
+nav.main a:hover{color:#dbf1ff}
+nav.main a.on{color:#fff;border-bottom-color:var(--yellow)}
+.progress{background:var(--yellow)}
+.hero{position:relative;background:var(--deep);margin-bottom:48px}
+.hero::before{content:"";position:absolute;top:0;bottom:-48px;left:max(24%,calc(50% - 300px));right:max(0px,calc(50% - 720px));background:var(--panel) var(--waves-dark) left top/max(1200px,100%) 100% no-repeat}
+.hero .wrap{position:relative;padding-top:72px}
+.hero .eyebrow{color:#fff;font-size:.95rem;font-weight:700;letter-spacing:.06em;text-transform:none}
+.hero .eyebrow::after{content:"";display:block;width:240px;max-width:60%;height:5px;background:var(--yellow);margin-top:26px}
+.hero h1{font-size:clamp(2.4rem,5.6vw,4.3rem);margin:44px 0 22px;max-width:16ch}
+.hero .lead{color:#fff;font-weight:300}
+.facts{border-top-color:rgba(255,255,255,.3)}
+.btn{letter-spacing:.12em;padding:15px 24px 14px}
+.btn.small{letter-spacing:.1em}
+.btn .arr{font-size:1.2em;line-height:0}
+section{padding:80px 0}
+#nutzung{padding-top:56px}
+.sec-head{margin-bottom:34px}
+.sec-head::before{content:"";display:block;width:150px;height:5px;background:var(--deep);margin-bottom:34px}
+.sec-head .mono{color:var(--muted);font-weight:700}
+h2{font-size:clamp(1.9rem,4vw,3rem);letter-spacing:.02em}
+.intro{font-size:1.1rem;color:var(--fg)}
+section.dark{background:#fff var(--waves-light) center top/100% 720px no-repeat}
+#prinzipien{background:#fff var(--waves-light) center 40px/100% 620px no-repeat}
+.card{background:var(--mist)}
+#nutzung .card:first-child,.tl .card:nth-child(1){background:var(--rose)}
+.tl .card:nth-child(2){background:var(--lemon)}
+.tl .card{border-top:0;padding:32px}
+.tl .card h3,.card h3{font-weight:700;font-size:1.35rem;letter-spacing:.06em;color:var(--fg)}
+.tl .card .mono,#nutzung .card .mono{color:var(--fg)!important}
+.kern .big{font-size:1.5rem;line-height:1.6;letter-spacing:.04em;color:var(--fg)}
+.kern .big b{color:var(--fg);border-bottom:0;font-weight:700}
+.erwart{border-left:5px solid var(--deep);padding-left:24px;color:var(--fg)}
+.stage{border-color:var(--line)}
+.prinz{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px;border-top:0}
+.p{flex-direction:column;gap:0;align-items:flex-start;background:#fff;border:1px solid #cdd7e3;padding:24px 22px 26px;min-height:210px;box-shadow:0 2px 14px rgba(12,48,102,.05)}
+.p:hover{background:#fff;border-color:var(--accent)}
+.p .n{color:var(--fg);font-size:.82rem;letter-spacing:.08em}
+.p .n::after{content:"";display:block;width:48px;height:1px;background:var(--fg);margin:22px 0 18px}
+.p>span:last-child{font-size:1.02rem;line-height:1.5}
+.p .hfs{margin-top:12px;color:var(--accent);font-weight:700;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase}
+.q{border-color:#cdd7e3}
+.res-start{background:var(--panel);padding:40px 36px}
+.res-start::before{content:"";display:block;width:150px;height:5px;background:var(--yellow);margin-bottom:28px}
+.res-start .mono{color:#fff}
+.res-start h3{font-size:2rem}
+.hfpanel{border-color:#cdd7e3;box-shadow:0 2px 14px rgba(12,48,102,.05)}
+.hfpanel h3{font-size:1.8rem}
+.ziel{border-left:5px solid var(--deep);padding-left:20px}
+.phases,.hfnav button{border-color:#cdd7e3}
+.hfnav button[aria-selected=true]{border-top-color:var(--accent)}
+.hfnav button .start{background:var(--yellow);color:var(--fg)}
+footer{background:var(--foot);border-top:70px solid var(--deep)}
+dialog .dh{background:var(--panel)}
+@media (max-width:640px){.hero::before{left:30%}.hero .wrap{padding-top:48px}.sec-head::before{width:110px;margin-bottom:26px}}
+
+#druck{display:none}
+@page{size:A4;margin:20mm 18mm 22mm;
+  @bottom-left{content:"Reaktionsfähig mit agentischer KI · Leitfaden für die Geschäftsleitung";font:8pt "Helvetica Neue",Helvetica,Arial,sans-serif;color:#7b808a}
+  @bottom-right{content:counter(page);font:8pt "Helvetica Neue",Helvetica,Arial,sans-serif;color:#7b808a}}
+@page :first{@bottom-left{content:none}@bottom-right{content:none}}
 @media print{
-  header.top,.cta,.tabs,.sb-top,.hfnav,.no-print{display:none!important}
-  body{background:#fff;font-size:11pt}
-  section{padding:24px 0;break-inside:avoid-page}
-  section.dark,.hero,footer{background:#fff!important;color:#000!important}
-  .hero h1,.facts b,footer b{color:#000}
-  .hero .lead,.hero .eyebrow,.facts li{color:#333}
-  .facts,.facts li+li{border-color:#999}
-  .hfpanel{display:block}
-  [hidden].print-all{display:block!important}
+  html{scroll-behavior:auto}
+  body{background:#fff;font-size:10pt;line-height:1.5;color:#1c1f24}
+  body>*:not(#druck){display:none!important}
+  #druck{display:block;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #druck h1,#druck h2,#druck h3{break-after:avoid}
+  #druck p{margin:0 0 .7em;orphans:3;widows:3}
+  .d-lab{font-size:7.5pt;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  /* Deckblatt */
+  .d-cover{display:flex;flex-direction:column;height:250mm;break-after:page}
+  .d-cover .d-top{border-top:2.5pt solid var(--navy);padding-top:10pt}
+  .d-cover h1{font-size:36pt;line-height:1.1;margin:52mm 0 8mm;max-width:13cm}
+  .d-cover .d-lead{font-family:var(--head);font-size:14pt;line-height:1.45;max-width:13cm;color:#333}
+  .d-cover .d-foot{margin-top:auto}
+  .d-facts{display:grid;grid-template-columns:repeat(4,1fr);list-style:none;margin:0 0 10mm;padding:0;border-top:.5pt solid var(--line2);border-bottom:.5pt solid var(--line2)}
+  .d-facts li{padding:9pt 10pt 10pt 0;font-size:8.5pt;color:var(--muted)}
+  .d-facts li+li{padding-left:10pt;border-left:.5pt solid var(--line2)}
+  .d-facts b{display:block;font-family:var(--head);font-weight:400;font-size:22pt;line-height:1.1;color:var(--navy)}
+  .d-imp{font-size:8.5pt;color:var(--muted)}
+  .d-imp p{margin:0 0 .3em}
+  /* Kapitel */
+  .d-sec{margin-top:11mm}
+  .d-sec.d-new{break-before:page;margin-top:0}
+  .d-sec>h2{font-size:19pt;margin:3pt 0 6mm;padding-bottom:3mm;border-bottom:.5pt solid var(--navy)}
+  .d-intro{color:var(--muted);max-width:15cm}
+  .d-two{display:grid;grid-template-columns:1fr 1fr;gap:9mm}
+  .d-two ol{margin:0;padding-left:14pt}
+  .d-big{font-family:var(--head);font-size:12.5pt;line-height:1.5}
+  .d-big b{font-weight:400;color:var(--navy);border-bottom:.5pt solid var(--accent)}
+  .d-box{border-left:1.5pt solid var(--accent);padding-left:10pt;color:var(--muted);break-inside:avoid}
+  .d-steps{display:grid;grid-template-columns:repeat(5,1fr);margin:6mm 0 0;break-inside:avoid}
+  .d-steps div{border:.5pt solid var(--line2);border-top:2pt solid var(--line2);padding:6pt 7pt;font-size:8pt;color:var(--muted)}
+  .d-steps div+div{border-left:0}
+  .d-steps b{display:block;font-size:9pt;color:var(--navy);margin:1pt 0}
+  .d-steps .d-lab{font-size:6.5pt;color:var(--soft)}
+  .d-steps .slow{border-top-color:var(--warn)}.d-steps .slow .d-lab{color:var(--warn)}
+  .d-steps .fast{border-top-color:var(--ok)}.d-steps .fast .d-lab{color:var(--ok)}
+  /* Prinzipien */
+  .d-prinz{columns:2;column-gap:9mm;margin:0;padding:0;list-style:none;border-top:.5pt solid var(--line2)}
+  .d-prinz li{display:flex;gap:8pt;padding:6pt 0;border-bottom:.5pt solid var(--line2);break-inside:avoid}
+  .d-prinz .n{flex:none;width:20pt;font-family:var(--head);font-size:11pt;color:var(--accent)}
+  .d-prinz small{display:block;font-size:7.5pt;color:var(--soft)}
+  /* Standortbestimmung */
+  .d-stufe{display:flex;gap:14pt;align-items:center;margin:5mm 0 2mm;font-size:9pt}
+  .d-ck{display:inline-block;flex:none;width:8pt;height:8pt;border:.75pt solid var(--navy);margin-right:5pt;vertical-align:-1pt}
+  .d-ck.on{background:var(--navy);box-shadow:inset 0 0 0 1.5pt #fff}
+  .d-grp{margin:6mm 0 2mm;break-after:avoid}
+  .d-q{break-inside:avoid;padding:5pt 0 7pt;border-top:.5pt solid var(--line2)}
+  .d-q .t{font-weight:600;margin-bottom:4pt}
+  .d-q .t span{color:var(--accent);margin-right:5pt}
+  .d-q .t small{font-weight:400;color:var(--soft);font-size:7.5pt;margin-left:5pt}
+  .d-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8pt;font-size:9pt}
+  .d-opts div{display:flex}
+  .d-opts i{font-style:normal;font-weight:700;color:var(--soft);margin-right:5pt}
+  .d-opts .on{font-weight:600;color:var(--navy)}
+  .d-opts .on i{color:var(--navy)}
+  .d-res{break-inside:avoid;margin-top:8mm;border:.75pt solid var(--navy);padding:12pt 14pt}
+  .d-res h3{font-size:14pt;margin:3pt 0 4pt}
+  .d-res table{margin:8pt 0;font-size:9pt}
+  .d-res th,.d-res td{padding:4pt 6pt 4pt 0}
+  .d-res .bar{height:5pt;min-width:40mm}
+  .d-res code{font-family:var(--mono);font-size:11pt;color:var(--navy)}
+  .d-warn{background:var(--warnbg);border-left:1.5pt solid var(--warn);padding:6pt 10pt;margin:6pt 0;font-size:9pt}
+  /* Handlungsfelder */
+  .d-phasen{display:grid;grid-template-columns:repeat(4,1fr);border:.5pt solid var(--line2);margin:5mm 0 0}
+  .d-phasen div{padding:5pt 8pt;font-size:7pt;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+  .d-phasen div+div{border-left:.5pt solid var(--line2)}
+  .d-phasen b{display:block;font-family:var(--head);font-weight:400;font-size:10.5pt;letter-spacing:0;text-transform:none;color:var(--navy)}
+  .d-hf{break-inside:avoid;margin-top:9mm;padding-top:4mm;border-top:1.5pt solid var(--navy)}
+  .d-hf h3{font-size:14pt;margin:2pt 0 6pt}
+  .d-hf .d-start{float:right;font-size:7pt;font-weight:700;letter-spacing:.08em;background:var(--accent);color:#fff;padding:1pt 6pt}
+  .d-ziel{font-family:var(--head);font-size:11pt;border-left:1.5pt solid var(--accent);padding-left:10pt;margin:0 0 9pt!important}
+  .d-mass{list-style:none;margin:3pt 0 9pt;padding:0}
+  .d-mass li{display:flex;padding:3.5pt 0;border-bottom:.5pt solid var(--line)}
+  .d-mass .d-ck{margin-top:3pt}
+  .d-hf .d-two{gap:7mm;font-size:9pt}
+  .d-hf .d-two>div{border-top:.5pt solid var(--navy);padding-top:5pt}
+  .d-hf .d-two>div.w{border-top-color:var(--warn);background:var(--warnbg);padding:5pt 8pt}
+  .d-hf .d-two>div.w .d-lab{color:var(--warn)}
+  .d-hf .d-two .d-lab{color:var(--navy)}
+  .d-fr{font-size:8.5pt;color:var(--muted);margin-top:6pt!important}
+  /* 90 Tage */
+  .d-tl{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+  .d-tl>div{border-top:1.5pt solid var(--navy);padding-top:6pt;break-inside:avoid}
+  .d-tl h3{font-size:12pt;margin:2pt 0 4pt}
+  .d-tl ul{margin:0;padding-left:12pt;font-size:9pt}
+  .d-tl li{margin-bottom:3pt}
 }
 </style>
 </head>
@@ -245,8 +390,9 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
     <h1>Reaktionsfähig mit agentischer KI</h1>
     <p class="lead">Wie Ihr Unternehmen veränderte Kundenbedürfnisse wiederholt schneller erfüllt, ohne mit jedem weiteren Vorhaben langsamer zu werden.</p>
     <div class="cta">
-      <a class="btn primary" href="#standort">Standortbestimmung starten <span aria-hidden="true">→</span></a>
+      <a class="btn primary" href="#standort">Standortbestimmung starten <span class="arr" aria-hidden="true">→</span></a>
       <a class="btn ghost" href="#kern">Kernbefund lesen</a>
+      <button class="btn ghost" onclick="buildDruck();window.print()">Als PDF sichern</button>
     </div>
     <ul class="facts">
       <li><b>12</b>Prinzipien</li>
@@ -262,7 +408,7 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
     <div class="grid g2">
       <div class="card">
         <div class="mono muted">Für wen und wozu</div>
-        <p style="margin-top:8px">Für Geschäftsleitungen mittlerer und grosser etablierter Unternehmen mit informationsdichtem Geschäftsmodell. Ziel ist, veränderte Kundenbedürfnisse wiederholt schneller zu bedienen, nicht dieselbe Leistung günstiger zu erbringen. Gedacht für eine moderierte Sitzung der Geschäftsleitung von rund einem halben Tag.</p>
+        <p style="margin-top:8px">Für Geschäftsleitungen mittlerer und grosser etablierter Unternehmen mit informationsdichtem Geschäftsmodell. Geschäftsleitung steht für das oberste Führungsgremium, je nach Rechtsform auch Geschäftsführung oder Vorstand. Ziel ist, veränderte Kundenbedürfnisse wiederholt schneller zu bedienen, nicht dieselbe Leistung günstiger zu erbringen. Gedacht für eine moderierte Sitzung der Geschäftsleitung von rund einem halben Tag.</p>
       </div>
       <div class="card">
         <div class="mono muted">So arbeiten Sie damit</div>
@@ -282,7 +428,7 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
     <div class="sec-head"><span class="mono">01 · Kernbefund</span><h2>Der Engpass wandert</h2></div>
     <div class="kern">
       <div>
-        <p class="big">Reaktionsfähig ist ein Unternehmen, wenn es verschobene Kundenbedürfnisse <b>wiederholt</b> erfüllt, ohne dass jede weitere Anpassung länger dauert. Agentische KI beschleunigt die Ausführung. Danach bestimmen in etablierten Unternehmen <b>Entscheidung, Spezifikation und Freigabe</b> die Dauer einer Anpassung.</p>
+        <p class="big">Reaktionsfähig ist ein Unternehmen, wenn es verschobene Kundenbedürfnisse <b>wiederholt</b> erfüllt, ohne dass jede weitere vergleichbare Anpassung länger dauert. Umfangreichere Vorhaben dürfen länger dauern. Agentische KI beschleunigt die Ausführung. Danach bestimmen in etablierten Unternehmen <b>Entscheidung, Spezifikation und Freigabe</b> die Dauer einer Anpassung.</p>
         <p>Wächst mit der schnelleren Ausführung die Zahl der Vorhaben und bleiben diese Stellen gleich, droht das Unternehmen mit jedem weiteren Vorhaben langsamer statt schneller zu werden. Schnelle Organisationen unterscheiden sich vor allem darin, wer entscheidet, wie geprüft wird, wie der Nutzen verbucht wird und ob Anpassungen beim Kunden beginnen. Agenten selbst können zur neuen Koordinationslast werden, wenn niemand den Überblick über sie hat.</p>
       </div>
       <div class="erwart">
@@ -353,7 +499,7 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 <section class="dark" id="felder">
   <div class="wrap">
     <div class="sec-head"><span class="mono">04 · Handlungsfelder</span><h2>Sechs Handlungsfelder</h2></div>
-    <p class="intro">Die Felder folgen den vier Phasen Initiierung, Ideenfindung, Integration und Implementierung. Jedes nennt Ziel, Massnahmen, einen Indikator und ein Warnsignal. Erledigte Massnahmen können Sie abhaken, der Stand bleibt in diesem Browser.</p>
+    <p class="intro">Die Felder folgen den vier Phasen Initiierung, Ideenfindung, Integration und Implementierung. Jedes nennt Ziel, Massnahmen, einen Indikator und ein Warnsignal.<span class="no-print"> Erledigte Massnahmen können Sie abhaken, der Stand bleibt in diesem Browser.</span></p>
     <div class="phases">
       <div class="phase">Phase 1<b>Initiierung</b></div>
       <div class="phase">Phase 2<b>Ideenfindung</b></div>
@@ -379,12 +525,13 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
         <li>Entscheidungsmatrix für die drei häufigsten Anpassungstypen</li>
         <li>Durchsatz der Freigabestellen messen</li>
         <li>Erprobungsteam mit GL-Auftrag bilden</li>
-        <li>Agentenregister anlegen</li></ul></div>
+        <li>Agentenregister anlegen</li>
+        <li>Zwischenrunde der Standortbestimmung in der Geschäftsleitung mit Vergleich zur ersten Runde</li></ul></div>
       <div class="card"><div class="mono" style="color:var(--accent)">Tage 61 bis 90</div><h3>Erste Ergebnisse</h3><ul>
         <li>Zwei kleine, messbare Vorhaben mit Enddatum und Abbruchkriterium starten, ausgehend von einem Kundensignal</li>
         <li>Erstes geklärtes Thema an die Linie übergeben</li>
         <li>Portfolio mit Liste der nicht verfolgten Vorhaben beschliessen</li>
-        <li>Standortbestimmung wiederholen</li></ul></div>
+        <li>Zweite vollständige Runde der Standortbestimmung über alle Führungsstufen, danach quartalsweise</li></ul></div>
     </div>
   </div>
 </section>
@@ -400,9 +547,11 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
   <div class="wrap">
     <p><b>Reaktionsfähig mit agentischer KI</b>. Ergebnis der Masterarbeit «Organisationale Reaktionsfähigkeit im Zeitalter agentischer KI», Executive MBA in Business Engineering, Universität St.Gallen. Andreas Klopp, Dario Meier, Gerrit Alexander Schatte.</p>
     <p>Validierungsfassung, Stand November 2026. Die Herleitung jeder Empfehlung ist in Anhang F der Arbeit dokumentiert.</p>
-    <p class="no-print"><button class="btn small ghost" onclick="window.print()">Drucken oder als PDF sichern</button></p>
+    <p class="no-print"><button class="btn small ghost" onclick="buildDruck();window.print()">Leitfaden drucken oder als PDF sichern</button></p>
   </div>
 </footer>
+
+<div id="druck" aria-hidden="true"></div>
 
 <dialog id="dlg">
   <div class="dh"><div class="mono" id="dlg-n"></div><h3 id="dlg-t" style="margin:6px 0 0"></h3></div>
@@ -416,7 +565,7 @@ const HF={
   ziel:"Die Geschäftsleitung versteht Möglichkeiten und Grenzen agentischer KI, hat realistische Erwartungen und behält die Grundsatzentscheide.",
   m:["Jedes GL-Mitglied nutzt innerhalb von drei Monaten selbst einen Agenten für die eigene Arbeit.",
      "Die Geschäftsleitung bildet sich in einem geschützten, begleiteten Rahmen weiter, in dem auch einfache Fragen Platz haben, und wiederholt dies mindestens halbjährlich.",
-     "Der Verwaltungsrat erhält dieselbe Grundkompetenz.",
+     "Das Aufsichtsgremium, also Verwaltungsrat, Aufsichtsrat oder Beirat, erhält dieselbe Grundkompetenz.",
      "Die Verantwortung liegt bei einem GL-Mitglied mit Budget- und Ergebnisverantwortung, nicht im IT-Betrieb.",
      "Vor jedem grösseren Vorhaben hält die Geschäftsleitung schriftlich fest, was sie erwartet und was nicht."],
   ind:"Anteil der GL-Mitglieder mit eigener Nutzung, Verortung der Verantwortung.",
@@ -425,12 +574,12 @@ const HF={
   ziel:"Anstösse zu Anpassungen kommen aus dem Kundenkontakt, wenige ausgerichtete Vorhaben werden verfolgt, und Signale lösen nach festen Regeln Anpassungen aus.",
   m:["Signale aus Kundengesprächen, Anfragen und Beschwerden werden erfasst und mindestens wöchentlich zusammengeführt, auch für Kunden ohne persönliche Betreuung.",
      "Wissen über Kunden gehört ins System, nicht allein zu den Betreuenden.",
-     "Die Geschäftsleitung überprüft das Portfolio quartalsweise und beschliesst eine Liste der nicht verfolgten Vorhaben.",
+     "Die Geschäftsleitung überprüft das Portfolio der Vorhaben quartalsweise, also alle geplanten und laufenden Anpassungen an Angeboten und Abläufen einschliesslich der Anwendungsfälle für Agenten, und beschliesst eine Liste der nicht verfolgten Vorhaben.",
      "Ideen durchlaufen früh einen günstigen Prototyp, damit schwache Ideen ausscheiden, bevor Freigabestellen belastet werden.",
      "Experimente erhalten vorab ein Enddatum und ein Abbruchkriterium.",
      "Für jedes Angebot ist festgelegt, ab welcher Signalstärke eine Anpassung geprüft wird und welche Elemente bewusst stabil bleiben."],
   ind:"Anteil der Anpassungen mit Anstoss aus Kundensignalen (F6), Zahl der aktiven Vorhaben, Anteil mit Enddatum.",
-  warn:"Der Jahreskalender der Kampagnen bestimmt, worüber mit Kunden gesprochen wird, überall laufen kleine Initiativen ohne Enddatum, einzelne Rückmeldungen lösen Änderungen aus."},
+  warn:"Der jährliche Verkaufsplan bestimmt, worüber mit Kunden gesprochen wird, überall laufen kleine Initiativen ohne Enddatum, einzelne Rückmeldungen lösen Änderungen aus."},
  3:{t:"Entscheidungs- und Freigabearchitektur",ph:"Integration",eb:"Organisation",p:[2,3],
   ziel:"Die Anpassungsdauer sinkt oder bleibt gleich, auch wenn die Zahl der Vorhaben steigt.",
   m:["Für die häufigsten Anpassungstypen legt eine Entscheidungsmatrix fest, wer entscheidet, wer angehört und wer informiert wird, jeweils mit Frist.",
@@ -449,17 +598,18 @@ const HF={
  4:{t:"Governance und Lebenszyklus für Agenten",ph:"Integration",eb:"System und Organisation",p:[4,6],
   ziel:"Jeder Agent ist identifizierbar, berechtigt, verantwortet und kann stillgelegt werden, und die Gesamtzahl der Agenten und Plattformen bleibt überschaubar.",
   m:["Jedes Vorhaben beginnt mit einer Governance-Prüfung und endet nicht mit ihr.",
-     "Daten werden in Klassen eingeteilt und Werkzeuge je Klasse freigegeben, der Datenstandort ist je Klasse festgelegt.",
+     "Aus einer Datenstrategie werden Datenprodukte abgeleitet, und für jedes ist eine fachliche Stelle verantwortlich, die Inhalt und Aktualität sicherstellt.",
+     "Daten werden nach Vertraulichkeit und Verbindlichkeit in Schutzklassen eingeteilt. Je Schutzklasse ist festgelegt, welche Werkzeuge und Agenten sie nutzen dürfen und wo sie gespeichert und verarbeitet werden.",
      "Ein Register hält für jeden Agenten Zweck, fachlichen Eigner, Berechtigung und Stilllegungsregel fest, bei einem Eignerwechsel wird der Agent neu zugeordnet.",
-     "Dashboards und Alerts zeigen, was Agenten tun.",
+     "Dashboards und Alerts zeigen, was Agenten tun, und Protokolle machen nachvollziehbar, wie sie entschieden haben.",
      "Zugriffsregeln, die für Menschen geschrieben sind, werden für Agenten neu gefasst.",
      "Das Unternehmen beschränkt sich auf wenige Plattformen mit gemeinsamer Kontrolle und Kostenübersicht.",
-     "Bevor ein Prozess automatisiert wird, wird er vom Agenten her neu entworfen, mit Kontrollpunkten dort, wo Verantwortung es verlangt, und auf einer geprüften Datenbasis."],
-  ind:"Anteil der Agenten im Register mit Eigner, Zahl der Plattformen, Zahl der Agenten ohne Nutzung oder Eigner.",
+     "Bevor ein Prozess automatisiert oder ein neuer eingeführt wird, wird er vom Agenten her entworfen, mit Kontrollpunkten dort, wo Verantwortung es verlangt, und auf einer geprüften Datenbasis."],
+  ind:"Anteil der Agenten im Register mit Eigner, Anteil der Datenprodukte mit verantwortlicher Stelle, Zahl der Plattformen, Zahl der Agenten ohne Nutzung oder Eigner.",
   warn:"Die Governance stoppt Vorhaben erst nach der Beauftragung, Agenten laufen ohne Eigner, jeder Bereich hat eine eigene Plattform, bestehende Abläufe werden unverändert automatisiert."},
  5:{t:"Erproben und in die Linie zurückgeben",ph:"Implementierung",eb:"Organisation",p:[5,8],
   ziel:"Neues entsteht schnell, ohne dass ein zentrales Team zum Engpass wird.",
-  m:["Ein Team ausgewählter Personen aus verschiedenen Bereichen erprobt mit Auftrag aus der Geschäftsleitung, festem Takt, Budget und Zeitrahmen neue Arbeitsweisen.",
+  m:["Ein Team ausgewählter Fach- und Technologieleute aus verschiedenen Bereichen erprobt mit Auftrag aus der Geschäftsleitung, festem Takt, Budget und Zeitrahmen neue Arbeitsweisen.",
      "Alternativ ist das Team virtuell organisiert, sodass seine Mitglieder in Linienaufgaben und Kundenkontakt bleiben, die Zeit dafür ist ausdrücklich eingeplant.",
      "Mitarbeitende erhalten geschützte Testumgebungen und freigegebene Datenbestände, auf denen sie gefahrlos probieren dürfen.",
      "Geklärte Themen gehen an die zuständige Linieneinheit über.",
@@ -469,14 +619,15 @@ const HF={
   ind:"Zahl der an die Linie übergebenen Themen, Zeit bis zur Übergabe, Anteil der Pilotvorhaben mit Skalierungsentscheid, Kompetenzentwicklung gegenüber der Basismessung.",
   warn:"Alle Anfragen landen beim Erprobungsteam, Pilotvorhaben enden ohne Entscheid, gescheiterte Vorhaben werden aus Kostengründen weitergeführt."},
  6:{t:"Wirksame Kontrolle und Menschen",ph:"Implementierung",eb:"Führung und Organisation",p:[7,10,11],
-  ziel:"Menschliche Kontrolle ist echt, Prüfkompetenz bleibt erhalten, Betroffene tragen die Veränderung mit, und der Nutzen wird so verbucht, dass er Anpassung belohnt.",
+  ziel:"Menschliche Kontrolle ist echt, Prüfkompetenz bleibt erhalten, Betroffene tragen die Veränderung mit, und wer mit Agenten Nutzen schafft, wird dafür anerkannt und verliert nicht die eigene Arbeitsgrundlage, auch wenn die bisherige Aufgabe wegfällt.",
   m:["Die Autonomie eines Agenten wird je Aufgabe nach dem Schadenspotenzial festgelegt, im Kundenkontakt zuerst mit menschlicher Prüfung, und die Prüftiefe erst gesenkt, wenn die Qualität in einer Ende-zu-Ende-Erprobung belegt ist.",
      "Agenten dürfen keine Zusagen machen, die nur das Unternehmen machen darf.",
-     "Prüfende dürfen widersprechen, ihre Meldungen werden ausgewertet statt sanktioniert.",
-     "Das Unternehmen erhält die Fähigkeit, Agentenaufgaben selbst auszuführen, und vergleicht Ergebnisse regelmässig stichprobenweise.",
+     "Prüfende dürfen widersprechen, ihre Meldungen werden ausgewertet und für Verbesserungen genutzt, nicht sanktioniert.",
+     "Das Unternehmen erhält die Fähigkeit, Agentenaufgaben bei Bedarf ohne Agent selbst auszuführen, und vergleicht Ergebnisse regelmässig stichprobenweise.",
      "Nachwuchskräfte führen Aufgaben weiterhin selbst aus, damit künftige Prüfende entstehen.",
      "Betroffene werden als Lehrende und Supervisoren neuer Systeme eingebunden, die Arbeitnehmervertretung früh einbezogen, und neue Werkzeuge werden dosiert eingeführt.",
      "Vor dem Start eines Vorhabens wird mit dem Team vereinbart, wofür frei werdende Kapazität eingesetzt wird.",
+     "Wer die eigene Aufgabe mit Agenten überflüssig macht, erhält eine neue Aufgabe und Anerkennung für den geschaffenen Nutzen.",
      "Der Nutzen wird an Ergebnissen für Kunden gemessen.",
      "Dienstleister, die nach Aufwand abrechnen, prüfen, welche Leistungen sie nach Ergebnis abrechnen können."],
   ind:"Anteil stichprobenweise geprüfter Ergebnisse, Zahl der Widersprüche, Nachwuchs in Prüfrollen, Zielgrösse der Vorhaben.",
@@ -484,39 +635,39 @@ const HF={
 };
 const P=[
  "Die Geschäftsleitung versteht aus eigener Anwendung, was Agenten können und wo sie enden, und trifft die Grundsatzentscheide selbst.",
- "Wer entscheidet, ist geklärt, bevor über Technologie gesprochen wird. Das Portfolio sagt auch, was nicht gemacht wird.",
+ "Bevor über Technologie gesprochen wird, ist festgelegt, wer entscheidet. Das Portfolio der Vorhaben sagt auch, was nicht gemacht wird.",
  "Freigabe und Spezifikation wachsen mit der Zahl der Vorhaben mit.",
- "Agenten erhalten eine eigene Governance mit Identität, Berechtigung, Eigner, Stilllegungsregel und Datenstandort.",
+ "Agenten erhalten eine eigene Governance mit Identität, Berechtigung, Eigner, Stilllegungsregel und festgelegtem Ort, an dem ihre Daten gespeichert und verarbeitet werden.",
  "Neues wird schnell erprobt, ohne dass eine Insel entsteht. Geklärtes geht zurück in die Linie.",
- "Prozesse und Daten werden neu gedacht, bevor sie automatisiert werden.",
+ "Prozesse und Daten werden neu gedacht, bevor sie automatisiert werden. Jedes Datenprodukt hat eine verantwortliche Stelle.",
  "Autonomie folgt dem Risiko, und die Kontrolle bleibt echt.",
  "Experimente enden zu einem festen Termin, Skalierung ist ein Organisationsentscheid.",
  "Für jedes Angebot ist festgelegt, ab wann ein Signal eine Anpassung auslöst.",
- "Betroffene gestalten mit und werden nicht mit Werkzeugen überflutet.",
- "Der Nutzen wird als Ergebnis für Kunden verbucht, nicht als Stellenabbau oder Aufwand.",
- "Anpassungen beginnen beim Bedürfnis des Kunden, nicht bei der Kampagne."];
+ "Betroffene gestalten mit und werden nicht mit neuen Werkzeugen überflutet.",
+ "Der Nutzen wird als Ergebnis für die eigenen Kunden verbucht, nicht als Stellenabbau oder Aufwand.",
+ "Anpassungen beginnen beim Bedürfnis des Kunden, nicht beim internen Verkaufsplan."];
 const PHF=P.map((_,i)=>Object.keys(HF).map(Number).filter(h=>HF[h].p.includes(i+1)));
 const FAELLE=[
  {n:1,t:"Entscheid in Stunden",m:"Stunden",p:[2,12],b:"In einem kleinen Software-Unternehmen sammelt das Team Produktinputs aus dem Kundenkontakt einmal pro Woche. Eine Person entscheidet innerhalb von Stunden, was gebaut wird. Aus einer Kundenidee kann am Abend ein Prototyp entstehen, der in derselben Woche gezeigt wird. Grössere Komponenten bleiben aufwendig."},
  {n:2,t:"Fertig nach 48 Stunden, eingeführt nach sechs Wochen",m:"48 h → 6 Wo.",p:[3],b:"In einem Industrieunternehmen stand ein Chatbot für Anfragen nach 48 Stunden bereit. Eingeführt war er nach rund sechs Wochen, vier davon entfielen auf das Warten bis zur nächsten regulären Sitzung."},
  {n:3,t:"Hundert Vorhaben, fünf Prüfende",m:"5 → 100",p:[3],b:"Bei Kunden einer Beratung reichten Mitarbeitende früher etwa fünf Vorhaben pro Woche ein, mit KI-Werkzeugen sind es nach beispielhafter Angabe rund hundert. Das Prüfteam blieb bei rund fünf Personen und wurde zum Engpass."},
- {n:4,t:"Zu viel Autonomie zurückgenommen",m:"20 → 4",p:[4,7],b:"Ein Softwarekonzern liess Agenten sich selbst optimieren. Ein Agent gab sich gegenüber einem Kunden als Account Manager aus, andere sagten Funktionen zu, die erst später kommen sollten. Die Zahl dieser Agenten im betroffenen Bereich sank von fast 20 auf vier, seither gelten Dashboards, Alerts und Mindestanforderungen."},
+ {n:4,t:"Zu viel Autonomie zurückgenommen",m:"20 → 4",p:[4,7],b:"Ein Softwarekonzern liess Agenten sich selbst optimieren. Ein Agent gab sich gegenüber einem Kunden als Account Manager aus, andere sagten Funktionen zu, die erst später kommen sollten. Gelöst wurde das in zwei Schritten. Die Zahl dieser Agenten im betroffenen Bereich wurde von fast 20 auf vier reduziert, und die verbliebenen laufen seither unter einer festen Governance mit Dashboards, Alerts und Mindestanforderungen."},
  {n:5,t:"Die Vorstudie",m:"15 Abteilungen",p:[2,3],b:"In einer Bank geht eine Vorstudie an 15 Fachabteilungen und wird mehrfach in der Geschäftsleitung rapportiert. Eine Vorstudie für eine zentrale Datenbasis war nach drei Monaten noch nicht unterzeichnet."},
- {n:6,t:"Die Kampagne bestimmt das Gespräch",m:"3 Kampagnen",p:[12],b:"Banken richten das Gespräch mit Kunden nach Darstellung einer befragten Person an drei Jahreskampagnen aus. Kunden werden der Kampagne zugeordnet, Wissen über sie bleibt bei den Betreuenden, und Kunden wandern ab, nachdem sie ihren Wunsch mehrfach geäussert haben."}];
+ {n:6,t:"Der Verkaufsplan bestimmt das Gespräch",m:"3 Kampagnen",p:[12],b:"Banken richten das Gespräch mit Kunden nach Darstellung einer befragten Person an drei Jahreskampagnen aus. Kunden werden der Kampagne zugeordnet, Wissen über sie bleibt bei den Betreuenden, und Kunden wandern ab, nachdem sie ihren Wunsch mehrfach geäussert haben."}];
 const Q=[
  {g:"Führung",id:"F1",t:"Hat jedes Mitglied der Geschäftsleitung in den letzten drei Monaten selbst mit einem Agenten gearbeitet?",o:["nein oder vereinzelt","ja, in einer Schulung","ja, im eigenen Arbeitsalltag"],hf:1},
  {g:"Führung",id:"F2",t:"Wo liegt die Verantwortung für agentische KI?",o:["im IT-Betrieb","in einer zentralen Digital- oder KI-Einheit","bei einem GL-Mitglied mit Budget- und Ergebnisverantwortung"],hf:1},
  {g:"Führung",id:"F3",t:"Gibt es eine Liste der Vorhaben, die bewusst nicht verfolgt werden?",o:["nein","ja, jährlich","ja, quartalsweise überprüft"],hf:2},
- {g:"Erkennen",id:"F4",t:"Wie wird das Bild vom Kunden nachgeführt?",o:["über einzelne Kontakte, ohne Rhythmus","zyklisch, etwa quartalsweise oder entlang von Kampagnen","laufend, aus erfassten Signalen"],hf:2},
+ {g:"Erkennen",id:"F4",t:"Wie wird das Bild vom Kunden nachgeführt?",o:["über einzelne Kontakte, ohne Rhythmus","zyklisch, etwa quartalsweise oder entlang des Verkaufsplans","laufend, aus erfassten Signalen"],hf:2},
  {g:"Erkennen",id:"F5",t:"Ist festgelegt, ab welcher Signalstärke eine Anpassung geprüft wird?",o:["nein","informell","ja, je Angebot"],hf:2},
- {g:"Erkennen",id:"F6",t:"Woher kam der Anstoss zu den letzten drei Angebotsanpassungen?",o:["aus Kampagnen oder interner Planung","aus einzelnen Kundenanfragen","aus systematisch erfassten Signalen des Kundenkontakts"],hf:2},
+ {g:"Erkennen",id:"F6",t:"Woher kam der Anstoss zu den letzten drei Angebotsanpassungen?",o:["aus dem Verkaufsplan oder anderer interner Planung","aus einzelnen Kundenanfragen","aus systematisch erfassten Signalen des Kundenkontakts"],hf:2},
  {g:"Entscheiden und Freigeben",id:"F7",t:"Wer entscheidet bei einer typischen Angebotsanpassung abschliessend?",o:["unklar oder mehrere Gremien","klar, aber mehr als drei Freigaben","eine benannte Person mit Frist"],hf:3},
  {g:"Entscheiden und Freigeben",id:"F8",t:"Wie viele Vorhaben warten auf eine Freigabe durch Sicherheit, Recht oder Datenschutz, und wie viele schafft diese Stelle pro Woche?",o:["unbekannt","bekannt, die Warteschlange wächst","bekannt, der Durchsatz wächst mit"],hf:3},
  {g:"Entscheiden und Freigeben",id:"F9",t:"Aus welchem Budget wird der Betrieb agentischer Systeme bezahlt?",o:["ungeklärt","IT-Budget","Budget des prozessverantwortlichen Bereichs, Kosten je Vorhaben sichtbar"],hf:3},
- {g:"Entscheiden und Freigeben",id:"F10",t:"Wie lange dauerte die letzte Anpassung vom erkannten Bedarf bis zum produktiven Einsatz, und war die vorletzte schneller oder langsamer?",o:["unbekannt","bekannt, gleich oder langsamer","bekannt, schneller"],hf:3},
- {g:"Umbauen",id:"F11",t:"Haben Agenten eine eigene Identität, einen fachlichen Eigner, eine Berechtigung nach Datenklasse und einen festgelegten Datenstandort?",o:["nein","teilweise","ja, mit Register und Stilllegungsregel"],hf:4},
+ {g:"Entscheiden und Freigeben",id:"F10",t:"Wie lange dauerte die letzte Anpassung vom erkannten Bedarf bis zum produktiven Einsatz, und ging sie schneller als eine vergleichbare frühere Anpassung?",o:["unbekannt","bekannt, gleich schnell oder langsamer","bekannt, schneller"],hf:3},
+ {g:"Umbauen",id:"F11",t:"Haben Agenten eine eigene Identität, einen fachlichen Eigner, eine Berechtigung nach Schutzklasse der Daten und einen festgelegten Ort der Datenverarbeitung?",o:["nein","teilweise","ja, mit Register und Stilllegungsregel"],hf:4},
  {g:"Umbauen",id:"F12",t:"Wo wird Neues erprobt, und wie gelangt es in die Linie?",o:["in einzelnen Initiativen","in einem zentralen Team ohne Übergabe","in einem Team mit GL-Auftrag und festgelegter Übergabe"],hf:5},
- {g:"Umbauen",id:"F13",t:"Könnten Sie die Aufgaben Ihrer Agenten im Notfall selbst erledigen, und vergleichen Sie Ergebnisse stichprobenweise?",o:["nein","teilweise","ja, regelmässig geübt"],hf:6},
+ {g:"Umbauen",id:"F13",t:"Könnten Sie die Aufgaben Ihrer Agenten bei Bedarf auch ohne Agent selbst erledigen, und vergleichen Sie Ergebnisse stichprobenweise?",o:["nein","teilweise","ja, regelmässig geübt"],hf:6},
  {g:"Umbauen",id:"F14",t:"Woran wird der Nutzen eines Vorhabens gemessen?",o:["an wegfallenden Stellen oder gar nicht","an gesparter Zeit, ohne Entscheid über frei werdende Kapazität","an Ergebnissen für Kunden, mit vorab vereinbarter Verwendung der Kapazität"],hf:6}];
 const L="ABC", STUFE={GL:"Geschäftsleitung",F2:"Zweite Führungsstufe",F3:"Dritte Führungsstufe"};
 
@@ -629,6 +780,50 @@ function openFall(n){const f=FAELLE.find(x=>x.n===n);const d=$("#dlg");
  $("#dlg-r").innerHTML=`<button class="btn small" onclick="document.getElementById('dlg').close()">Schliessen</button>`;
  if(d.showModal)d.showModal();else alert(f.t+"\n\n"+f.b);}
 $("#dlg").addEventListener("click",e=>{if(e.target.id==="dlg")e.target.close();});
+
+/* ---------- Druckfassung ---------- */
+function buildDruck(){
+ const H=s=>{const e=$(s);return e?e.innerHTML:"";};
+ const sec=(n,lab,tit,body,neu)=>`<div class="d-sec${neu?" d-new":""}"><div class="d-lab">${n} · ${lab}</div><h2>${tit}</h2>${body}</div>`;
+ const ck=on=>`<span class="d-ck${on?" on":""}"></span>`;
+ const n=Q.filter(q=>S.ans[q.id]).length, voll=n===Q.length;
+ const nutz=document.querySelectorAll("#nutzung .card"), imp=[...document.querySelectorAll("footer p:not(.no-print)")].map(p=>`<p>${p.innerHTML}</p>`).join("");
+ let h=`<div class="d-cover"><div class="d-top d-lab">${H(".hero .eyebrow")}</div><h1>${H(".hero h1")}</h1><p class="d-lead">${H(".hero .lead")}</p>
+  <div class="d-foot"><ul class="d-facts">${H(".facts")}</ul><div class="d-imp">${imp}</div></div></div>`;
+ // Einstieg und Kernbefund
+ h+=`<div class="d-two">${[...nutz].map(c=>{const k=c.cloneNode(true),l=k.querySelector(".mono");l.remove();k.querySelectorAll("[style]").forEach(e=>e.removeAttribute("style"));return `<div><div class="d-lab">${l.textContent}</div>${k.innerHTML}</div>`;}).join("")}</div>`;
+ const kp=document.querySelectorAll("#kern .kern>div:first-child p");
+ h+=sec("01","Kernbefund",H("#kern h2"),`<p class="d-big">${kp[0].innerHTML}</p><p>${kp[1].innerHTML}</p>
+  <div class="d-box"><div class="d-lab">${H("#kern .erwart .mono")}</div><p>${H("#kern .erwart p")}</p></div>
+  <div class="d-steps">${[...document.querySelectorAll("#kern .stage")].map(s=>`<div class="${s.classList.contains("slow")?"slow":s.classList.contains("fast")?"fast":""}"><span class="d-lab">${s.querySelector(".mono").textContent}</span><b>${s.querySelector("b").textContent}</b>${s.querySelector("small").textContent}</div>`).join("")}</div>`);
+ // Prinzipien
+ h+=sec("02","Prinzipien",H("#prinzipien h2"),`<ol class="d-prinz">${P.map((t,i)=>`<li><span class="n">P${i+1}</span><span>${esc(t)}<small>Handlungsfeld ${PHF[i].join(", ")}</small></span></li>`).join("")}</ol>`,true);
+ // Standortbestimmung
+ let b=`<p class="d-intro">${H("#standort .intro")}</p><div class="d-stufe"><b>Führungsstufe</b>${Object.keys(STUFE).map(s=>`<span>${ck(n>0&&S.stufe===s)}${STUFE[s]}</span>`).join("")}</div>`;
+ let g="";Q.forEach(q=>{if(q.g!==g){g=q.g;b+=`<div class="d-grp d-lab">${esc(g)}</div>`;}
+  b+=`<div class="d-q"><div class="t"><span>${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></div><div class="d-opts">${q.o.map((o,k)=>{const on=S.ans[q.id]===L[k];return `<div class="${on?"on":""}">${ck(on)}<i>${L[k]}</i><span>${esc(o)}</span></div>`;}).join("")}</div></div>`;});
+ if(voll){const s=startfeld(S.ans),w=[];
+  if(S.ans.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(S.ans.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
+  b+=`<div class="d-res"><div class="d-lab">Auswertung · ${STUFE[S.stufe]} · Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+esc(HF[s.hf].t):"In der Sitzung festlegen"}</h3><p>${s.grund}</p>
+   ${w.length?`<div class="d-warn"><b>Zahlen innerhalb von vier Wochen beschaffen.</b> Ohne sie lässt sich die Reaktionsfähigkeit nicht beurteilen.<br>${w.join("<br>")}</div>`:""}
+   <table><tr><th>Handlungsfeld</th><th colspan="2">Anteil A-Antworten</th></tr>${[1,2,3,4,5,6].map(k=>{const qs=Q.filter(q=>q.hf===k),nA=qs.filter(q=>S.ans[q.id]==="A").length;return `<tr><td>${k} · ${esc(HF[k].t)}</td><td><div class="bar"><span style="width:${Math.round(100*nA/qs.length)}%"></span></div></td><td>${nA} von ${qs.length}</td></tr>`;}).join("")}</table>
+   <div class="d-lab">Ergebniscode</div><code>${code(S.stufe,S.ans)}</code></div>`;}
+ h+=sec("03","Standortbestimmung",H("#standort h2"),b,true);
+ // Handlungsfelder
+ const fi=$("#felder .intro").cloneNode(true);fi.querySelectorAll(".no-print").forEach(e=>e.remove());
+ b=`<p class="d-intro">${fi.innerHTML}</p><div class="d-phasen">${[...document.querySelectorAll("#felder .phase")].map(p=>`<div>${p.innerHTML}</div>`).join("")}</div>`;
+ Object.keys(HF).forEach(k=>{const f=HF[k],fr=Q.filter(q=>q.hf===+k);
+  b+=`<div class="d-hf">${voll&&S.start==k?'<span class="d-start">EMPFOHLENES STARTFELD</span>':""}<div class="d-lab">Handlungsfeld ${k} · ${f.ph} · ${f.eb} · ${f.p.map(p=>"P"+p).join(", ")}</div><h3>${esc(f.t)}</h3>
+   <p class="d-ziel">${f.ziel}</p><div class="d-lab">Massnahmen</div><ul class="d-mass">${f.m.map((m,i)=>`<li>${ck(S.chk[k+"-"+i])}<span>${esc(m)}</span></li>`).join("")}</ul>
+   <div class="d-two"><div><div class="d-lab">Indikator</div>${f.ind}</div><div class="w"><div class="d-lab">Warnsignal</div>${f.warn}</div></div>
+   <p class="d-fr">Fragen der Standortbestimmung: ${fr.map(q=>q.id+(S.ans[q.id]?" ("+S.ans[q.id]+")":"")).join(", ")}</p></div>`;});
+ h+=sec("04","Handlungsfelder",H("#felder h2"),b,true);
+ // 90 Tage und Grenzen
+ h+=sec("05","Vorgehen",H("#tage h2"),`<div class="d-tl">${[...document.querySelectorAll("#tage .tl .card")].map(c=>`<div><div class="d-lab">${c.querySelector(".mono").textContent}</div><h3>${c.querySelector("h3").textContent}</h3><ul>${c.querySelector("ul").innerHTML}</ul></div>`).join("")}</div>`,true);
+ h+=sec("06","Grenzen",H("#grenzen h2"),`<p>${H("#grenzen .intro")}</p>`);
+ $("#druck").innerHTML=h;
+}
+addEventListener("beforeprint",buildDruck);
 
 /* ---------- Navigation ---------- */
 const secs=["kern","prinzipien","standort","felder","tage","grenzen"].map(id=>document.getElementById(id));
