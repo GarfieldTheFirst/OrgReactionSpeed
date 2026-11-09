@@ -501,7 +501,7 @@ const HF={
   ziel:"Die Geschäftsleitung versteht Möglichkeiten und Grenzen agentischer KI, hat realistische Erwartungen und behält die Grundsatzentscheide.",
   m:["Jedes GL-Mitglied nutzt innerhalb von drei Monaten selbst einen Agenten für die eigene Arbeit.",
      "Die Geschäftsleitung bildet sich in einem geschützten, begleiteten Rahmen weiter, in dem auch einfache Fragen Platz haben, und wiederholt dies mindestens halbjährlich.",
-     "Der Verwaltungsrat erhält dieselbe Grundkompetenz.",
+     "Das Aufsichtsgremium (Verwaltungsrat oder Aufsichtsrat) erhält dieselbe Grundkompetenz.",
      "Die Verantwortung liegt bei einem GL-Mitglied mit Budget- und Ergebnisverantwortung, nicht im IT-Betrieb.",
      "Vor jedem grösseren Vorhaben hält die Geschäftsleitung schriftlich fest, was sie erwartet und was nicht."],
   ind:"Anteil der GL-Mitglieder mit eigener Nutzung, Verortung der Verantwortung.",
@@ -534,17 +534,17 @@ const HF={
  4:{t:"Governance und Lebenszyklus für Agenten",ph:"Integration",eb:"System und Organisation",p:[4,6],
   ziel:"Jeder Agent ist identifizierbar, berechtigt, verantwortet und kann stillgelegt werden, und die Gesamtzahl der Agenten und Plattformen bleibt überschaubar.",
   m:["Jedes Vorhaben beginnt mit einer Governance-Prüfung und endet nicht mit ihr.",
-     "Daten werden in Klassen eingeteilt und Werkzeuge je Klasse freigegeben, der Datenstandort ist je Klasse festgelegt.",
+     "Daten werden nach Vertraulichkeit in Schutzklassen eingeteilt. Je Schutzklasse ist festgelegt, welche Werkzeuge zugelassen sind und wo die Daten liegen und verarbeitet werden.",
      "Ein Register hält für jeden Agenten Zweck, fachlichen Eigner, Berechtigung und Stilllegungsregel fest, bei einem Eignerwechsel wird der Agent neu zugeordnet.",
-     "Dashboards und Alerts zeigen, was Agenten tun.",
+     "Dashboards, Alerts und Protokolle zeigen, was Agenten tun und wie sie entscheiden.",
      "Zugriffsregeln, die für Menschen geschrieben sind, werden für Agenten neu gefasst.",
      "Das Unternehmen beschränkt sich auf wenige Plattformen mit gemeinsamer Kontrolle und Kostenübersicht.",
-     "Bevor ein Prozess automatisiert wird, wird er vom Agenten her neu entworfen, mit Kontrollpunkten dort, wo Verantwortung es verlangt, und auf einer geprüften Datenbasis."],
+     "Bevor ein bestehender Prozess automatisiert oder ein neuer eingeführt wird, wird er vom Agenten her entworfen, mit Kontrollpunkten dort, wo Verantwortung es verlangt, und auf einer geprüften Datenbasis."],
   ind:"Anteil der Agenten im Register mit Eigner, Zahl der Plattformen, Zahl der Agenten ohne Nutzung oder Eigner.",
   warn:"Die Governance stoppt Vorhaben erst nach der Beauftragung, Agenten laufen ohne Eigner, jeder Bereich hat eine eigene Plattform, bestehende Abläufe werden unverändert automatisiert."},
  5:{t:"Erproben und in die Linie zurückgeben",ph:"Implementierung",eb:"Organisation",p:[5,8],
   ziel:"Neues entsteht schnell, ohne dass ein zentrales Team zum Engpass wird.",
-  m:["Ein Team ausgewählter Personen aus verschiedenen Bereichen erprobt mit Auftrag aus der Geschäftsleitung, festem Takt, Budget und Zeitrahmen neue Arbeitsweisen.",
+  m:["Ein Team ausgewählter Personen aus Fachbereichen und Technologie erprobt mit Auftrag aus der Geschäftsleitung, festem Takt, Budget und Zeitrahmen neue Arbeitsweisen.",
      "Alternativ ist das Team virtuell organisiert, sodass seine Mitglieder in Linienaufgaben und Kundenkontakt bleiben, die Zeit dafür ist ausdrücklich eingeplant.",
      "Mitarbeitende erhalten geschützte Testumgebungen und freigegebene Datenbestände, auf denen sie gefahrlos probieren dürfen.",
      "Geklärte Themen gehen an die zuständige Linieneinheit über.",
@@ -569,15 +569,15 @@ const HF={
 };
 const P=[
  "Die Geschäftsleitung versteht aus eigener Anwendung, was Agenten können und wo sie enden, und trifft die Grundsatzentscheide selbst.",
- "Wer entscheidet, ist geklärt, bevor über Technologie gesprochen wird. Das Portfolio sagt auch, was nicht gemacht wird.",
+ "Es ist festgelegt, wer entscheidet, bevor über Technologie gesprochen wird. Das Portfolio sagt auch, was nicht gemacht wird.",
  "Freigabe und Spezifikation wachsen mit der Zahl der Vorhaben mit.",
- "Agenten erhalten eine eigene Governance mit Identität, Berechtigung, Eigner, Stilllegungsregel und Datenstandort.",
+ "Agenten erhalten eine eigene Governance mit Identität, Berechtigung, Eigner, Stilllegungsregel und festgelegtem Ort, an dem Daten liegen und verarbeitet werden.",
  "Neues wird schnell erprobt, ohne dass eine Insel entsteht. Geklärtes geht zurück in die Linie.",
  "Prozesse und Daten werden neu gedacht, bevor sie automatisiert werden.",
  "Autonomie folgt dem Risiko, und die Kontrolle bleibt echt.",
  "Experimente enden zu einem festen Termin, Skalierung ist ein Organisationsentscheid.",
  "Für jedes Angebot ist festgelegt, ab wann ein Signal eine Anpassung auslöst.",
- "Betroffene gestalten mit und werden nicht mit Werkzeugen überflutet.",
+ "Betroffene gestalten mit und werden nicht mit neuen Werkzeugen überflutet.",
  "Der Nutzen wird als Ergebnis für Kunden verbucht, nicht als Stellenabbau oder Aufwand.",
  "Anpassungen beginnen beim Bedürfnis des Kunden, nicht bei der Kampagne."];
 const PHF=P.map((_,i)=>Object.keys(HF).map(Number).filter(h=>HF[h].p.includes(i+1)));
@@ -585,7 +585,7 @@ const FAELLE=[
  {n:1,t:"Entscheid in Stunden",m:"Stunden",p:[2,12],b:"In einem kleinen Software-Unternehmen sammelt das Team Produktinputs aus dem Kundenkontakt einmal pro Woche. Eine Person entscheidet innerhalb von Stunden, was gebaut wird. Aus einer Kundenidee kann am Abend ein Prototyp entstehen, der in derselben Woche gezeigt wird. Grössere Komponenten bleiben aufwendig."},
  {n:2,t:"Fertig nach 48 Stunden, eingeführt nach sechs Wochen",m:"48 h → 6 Wo.",p:[3],b:"In einem Industrieunternehmen stand ein Chatbot für Anfragen nach 48 Stunden bereit. Eingeführt war er nach rund sechs Wochen, vier davon entfielen auf das Warten bis zur nächsten regulären Sitzung."},
  {n:3,t:"Hundert Vorhaben, fünf Prüfende",m:"5 → 100",p:[3],b:"Bei Kunden einer Beratung reichten Mitarbeitende früher etwa fünf Vorhaben pro Woche ein, mit KI-Werkzeugen sind es nach beispielhafter Angabe rund hundert. Das Prüfteam blieb bei rund fünf Personen und wurde zum Engpass."},
- {n:4,t:"Zu viel Autonomie zurückgenommen",m:"20 → 4",p:[4,7],b:"Ein Softwarekonzern liess Agenten sich selbst optimieren. Ein Agent gab sich gegenüber einem Kunden als Account Manager aus, andere sagten Funktionen zu, die erst später kommen sollten. Die Zahl dieser Agenten im betroffenen Bereich sank von fast 20 auf vier, seither gelten Dashboards, Alerts und Mindestanforderungen."},
+ {n:4,t:"Zu viel Autonomie zurückgenommen",m:"20 → 4",p:[4,7],b:"Ein Softwarekonzern liess Agenten sich selbst optimieren. Ein Agent gab sich gegenüber einem Kunden als Account Manager aus, andere sagten Funktionen zu, die erst später kommen sollten. Das Unternehmen reduzierte die Zahl dieser Agenten im betroffenen Bereich von fast 20 auf vier und führte für die verbleibenden Dashboards, Alerts und Mindestanforderungen ein."},
  {n:5,t:"Die Vorstudie",m:"15 Abteilungen",p:[2,3],b:"In einer Bank geht eine Vorstudie an 15 Fachabteilungen und wird mehrfach in der Geschäftsleitung rapportiert. Eine Vorstudie für eine zentrale Datenbasis war nach drei Monaten noch nicht unterzeichnet."},
  {n:6,t:"Die Kampagne bestimmt das Gespräch",m:"3 Kampagnen",p:[12],b:"Banken richten das Gespräch mit Kunden nach Darstellung einer befragten Person an drei Jahreskampagnen aus. Kunden werden der Kampagne zugeordnet, Wissen über sie bleibt bei den Betreuenden, und Kunden wandern ab, nachdem sie ihren Wunsch mehrfach geäussert haben."}];
 const Q=[
@@ -599,9 +599,9 @@ const Q=[
  {g:"Entscheiden und Freigeben",id:"F8",t:"Wie viele Vorhaben warten auf eine Freigabe durch Sicherheit, Recht oder Datenschutz, und wie viele schafft diese Stelle pro Woche?",o:["unbekannt","bekannt, die Warteschlange wächst","bekannt, der Durchsatz wächst mit"],hf:3},
  {g:"Entscheiden und Freigeben",id:"F9",t:"Aus welchem Budget wird der Betrieb agentischer Systeme bezahlt?",o:["ungeklärt","IT-Budget","Budget des prozessverantwortlichen Bereichs, Kosten je Vorhaben sichtbar"],hf:3},
  {g:"Entscheiden und Freigeben",id:"F10",t:"Wie lange dauerte die letzte Anpassung vom erkannten Bedarf bis zum produktiven Einsatz, und war die vorletzte schneller oder langsamer?",o:["unbekannt","bekannt, gleich oder langsamer","bekannt, schneller"],hf:3},
- {g:"Umbauen",id:"F11",t:"Haben Agenten eine eigene Identität, einen fachlichen Eigner, eine Berechtigung nach Datenklasse und einen festgelegten Datenstandort?",o:["nein","teilweise","ja, mit Register und Stilllegungsregel"],hf:4},
+ {g:"Umbauen",id:"F11",t:"Haben Agenten eine eigene Identität, einen fachlichen Eigner, eine Berechtigung nach Schutzklasse der Daten und einen festgelegten Ort, an dem Daten liegen und verarbeitet werden?",o:["nein","teilweise","ja, mit Register und Stilllegungsregel"],hf:4},
  {g:"Umbauen",id:"F12",t:"Wo wird Neues erprobt, und wie gelangt es in die Linie?",o:["in einzelnen Initiativen","in einem zentralen Team ohne Übergabe","in einem Team mit GL-Auftrag und festgelegter Übergabe"],hf:5},
- {g:"Umbauen",id:"F13",t:"Könnten Sie die Aufgaben Ihrer Agenten im Notfall selbst erledigen, und vergleichen Sie Ergebnisse stichprobenweise?",o:["nein","teilweise","ja, regelmässig geübt"],hf:6},
+ {g:"Umbauen",id:"F13",t:"Könnten Sie die Aufgaben Ihrer Agenten auch ohne Agenten selbst erledigen, und vergleichen Sie Ergebnisse stichprobenweise?",o:["nein","teilweise","ja, regelmässig geübt"],hf:6},
  {g:"Umbauen",id:"F14",t:"Woran wird der Nutzen eines Vorhabens gemessen?",o:["an wegfallenden Stellen oder gar nicht","an gesparter Zeit, ohne Entscheid über frei werdende Kapazität","an Ergebnissen für Kunden, mit vorab vereinbarter Verwendung der Kapazität"],hf:6}];
 const L="ABC", STUFE={GL:"Geschäftsleitung",F2:"Zweite Führungsstufe",F3:"Dritte Führungsstufe"};
 
