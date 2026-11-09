@@ -209,16 +209,98 @@ dialog .dh .mono{color:var(--accentlight)}
 dialog .db{padding:20px 24px}
 dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 
+#druck{display:none}
+@page{size:A4;margin:20mm 18mm 22mm;
+  @bottom-left{content:"Reaktionsfähig mit agentischer KI · Leitfaden für die Geschäftsleitung";font:8pt "Helvetica Neue",Helvetica,Arial,sans-serif;color:#7b808a}
+  @bottom-right{content:counter(page);font:8pt "Helvetica Neue",Helvetica,Arial,sans-serif;color:#7b808a}}
+@page :first{@bottom-left{content:none}@bottom-right{content:none}}
 @media print{
-  header.top,.cta,.tabs,.sb-top,.hfnav,.no-print{display:none!important}
-  body{background:#fff;font-size:11pt}
-  section{padding:24px 0;break-inside:avoid-page}
-  section.dark,.hero,footer{background:#fff!important;color:#000!important}
-  .hero h1,.facts b,footer b{color:#000}
-  .hero .lead,.hero .eyebrow,.facts li{color:#333}
-  .facts,.facts li+li{border-color:#999}
-  .hfpanel{display:block}
-  [hidden].print-all{display:block!important}
+  html{scroll-behavior:auto}
+  body{background:#fff;font-size:10pt;line-height:1.5;color:#1c1f24}
+  body>*:not(#druck){display:none!important}
+  #druck{display:block;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #druck h1,#druck h2,#druck h3{break-after:avoid}
+  #druck p{margin:0 0 .7em;orphans:3;widows:3}
+  .d-lab{font-size:7.5pt;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  /* Deckblatt */
+  .d-cover{display:flex;flex-direction:column;height:250mm;break-after:page}
+  .d-cover .d-top{border-top:2.5pt solid var(--navy);padding-top:10pt}
+  .d-cover h1{font-size:36pt;line-height:1.1;margin:52mm 0 8mm;max-width:13cm}
+  .d-cover .d-lead{font-family:var(--serif);font-size:14pt;line-height:1.45;max-width:13cm;color:#333}
+  .d-cover .d-foot{margin-top:auto}
+  .d-facts{display:grid;grid-template-columns:repeat(4,1fr);list-style:none;margin:0 0 10mm;padding:0;border-top:.5pt solid var(--line2);border-bottom:.5pt solid var(--line2)}
+  .d-facts li{padding:9pt 10pt 10pt 0;font-size:8.5pt;color:var(--muted)}
+  .d-facts li+li{padding-left:10pt;border-left:.5pt solid var(--line2)}
+  .d-facts b{display:block;font-family:var(--serif);font-weight:400;font-size:22pt;line-height:1.1;color:var(--navy)}
+  .d-imp{font-size:8.5pt;color:var(--muted)}
+  .d-imp p{margin:0 0 .3em}
+  /* Kapitel */
+  .d-sec{margin-top:11mm}
+  .d-sec.d-new{break-before:page;margin-top:0}
+  .d-sec>h2{font-size:19pt;margin:3pt 0 6mm;padding-bottom:3mm;border-bottom:.5pt solid var(--navy)}
+  .d-intro{color:var(--muted);max-width:15cm}
+  .d-two{display:grid;grid-template-columns:1fr 1fr;gap:9mm}
+  .d-two ol{margin:0;padding-left:14pt}
+  .d-big{font-family:var(--serif);font-size:12.5pt;line-height:1.5}
+  .d-big b{font-weight:400;color:var(--navy);border-bottom:.5pt solid var(--accent)}
+  .d-box{border-left:1.5pt solid var(--accent);padding-left:10pt;color:var(--muted);break-inside:avoid}
+  .d-steps{display:grid;grid-template-columns:repeat(5,1fr);margin:6mm 0 0;break-inside:avoid}
+  .d-steps div{border:.5pt solid var(--line2);border-top:2pt solid var(--line2);padding:6pt 7pt;font-size:8pt;color:var(--muted)}
+  .d-steps div+div{border-left:0}
+  .d-steps b{display:block;font-size:9pt;color:var(--navy);margin:1pt 0}
+  .d-steps .d-lab{font-size:6.5pt;color:var(--soft)}
+  .d-steps .slow{border-top-color:var(--warn)}.d-steps .slow .d-lab{color:var(--warn)}
+  .d-steps .fast{border-top-color:var(--ok)}.d-steps .fast .d-lab{color:var(--ok)}
+  /* Prinzipien */
+  .d-prinz{columns:2;column-gap:9mm;margin:0;padding:0;list-style:none;border-top:.5pt solid var(--line2)}
+  .d-prinz li{display:flex;gap:8pt;padding:6pt 0;border-bottom:.5pt solid var(--line2);break-inside:avoid}
+  .d-prinz .n{flex:none;width:20pt;font-family:var(--serif);font-size:11pt;color:var(--accent)}
+  .d-prinz small{display:block;font-size:7.5pt;color:var(--soft)}
+  /* Standortbestimmung */
+  .d-stufe{display:flex;gap:14pt;align-items:center;margin:5mm 0 2mm;font-size:9pt}
+  .d-ck{display:inline-block;flex:none;width:8pt;height:8pt;border:.75pt solid var(--navy);margin-right:5pt;vertical-align:-1pt}
+  .d-ck.on{background:var(--navy);box-shadow:inset 0 0 0 1.5pt #fff}
+  .d-grp{margin:6mm 0 2mm;break-after:avoid}
+  .d-q{break-inside:avoid;padding:5pt 0 7pt;border-top:.5pt solid var(--line2)}
+  .d-q .t{font-weight:600;margin-bottom:4pt}
+  .d-q .t span{color:var(--accent);margin-right:5pt}
+  .d-q .t small{font-weight:400;color:var(--soft);font-size:7.5pt;margin-left:5pt}
+  .d-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8pt;font-size:9pt}
+  .d-opts div{display:flex}
+  .d-opts i{font-style:normal;font-weight:700;color:var(--soft);margin-right:5pt}
+  .d-opts .on{font-weight:600;color:var(--navy)}
+  .d-opts .on i{color:var(--navy)}
+  .d-res{break-inside:avoid;margin-top:8mm;border:.75pt solid var(--navy);padding:12pt 14pt}
+  .d-res h3{font-size:14pt;margin:3pt 0 4pt}
+  .d-res table{margin:8pt 0;font-size:9pt}
+  .d-res th,.d-res td{padding:4pt 6pt 4pt 0}
+  .d-res .bar{height:5pt;min-width:40mm}
+  .d-res code{font-family:var(--mono);font-size:11pt;color:var(--navy)}
+  .d-warn{background:var(--warnbg);border-left:1.5pt solid var(--warn);padding:6pt 10pt;margin:6pt 0;font-size:9pt}
+  /* Handlungsfelder */
+  .d-phasen{display:grid;grid-template-columns:repeat(4,1fr);border:.5pt solid var(--line2);margin:5mm 0 0}
+  .d-phasen div{padding:5pt 8pt;font-size:7pt;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+  .d-phasen div+div{border-left:.5pt solid var(--line2)}
+  .d-phasen b{display:block;font-family:var(--serif);font-weight:400;font-size:10.5pt;letter-spacing:0;text-transform:none;color:var(--navy)}
+  .d-hf{break-inside:avoid;margin-top:9mm;padding-top:4mm;border-top:1.5pt solid var(--navy)}
+  .d-hf h3{font-size:14pt;margin:2pt 0 6pt}
+  .d-hf .d-start{float:right;font-size:7pt;font-weight:700;letter-spacing:.08em;background:var(--accent);color:#fff;padding:1pt 6pt}
+  .d-ziel{font-family:var(--serif);font-size:11pt;border-left:1.5pt solid var(--accent);padding-left:10pt;margin:0 0 9pt!important}
+  .d-mass{list-style:none;margin:3pt 0 9pt;padding:0}
+  .d-mass li{display:flex;padding:3.5pt 0;border-bottom:.5pt solid var(--line)}
+  .d-mass .d-ck{margin-top:3pt}
+  .d-hf .d-two{gap:7mm;font-size:9pt}
+  .d-hf .d-two>div{border-top:.5pt solid var(--navy);padding-top:5pt}
+  .d-hf .d-two>div.w{border-top-color:var(--warn);background:var(--warnbg);padding:5pt 8pt}
+  .d-hf .d-two>div.w .d-lab{color:var(--warn)}
+  .d-hf .d-two .d-lab{color:var(--navy)}
+  .d-fr{font-size:8.5pt;color:var(--muted);margin-top:6pt!important}
+  /* 90 Tage */
+  .d-tl{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+  .d-tl>div{border-top:1.5pt solid var(--navy);padding-top:6pt;break-inside:avoid}
+  .d-tl h3{font-size:12pt;margin:2pt 0 4pt}
+  .d-tl ul{margin:0;padding-left:12pt;font-size:9pt}
+  .d-tl li{margin-bottom:3pt}
 }
 </style>
 </head>
@@ -247,6 +329,7 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
     <div class="cta">
       <a class="btn primary" href="#standort">Standortbestimmung starten <span aria-hidden="true">→</span></a>
       <a class="btn ghost" href="#kern">Kernbefund lesen</a>
+      <button class="btn ghost" onclick="buildDruck();window.print()">Als PDF sichern</button>
     </div>
     <ul class="facts">
       <li><b>12</b>Prinzipien</li>
@@ -353,7 +436,7 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 <section class="dark" id="felder">
   <div class="wrap">
     <div class="sec-head"><span class="mono">04 · Handlungsfelder</span><h2>Sechs Handlungsfelder</h2></div>
-    <p class="intro">Die Felder folgen den vier Phasen Initiierung, Ideenfindung, Integration und Implementierung. Jedes nennt Ziel, Massnahmen, einen Indikator und ein Warnsignal. Erledigte Massnahmen können Sie abhaken, der Stand bleibt in diesem Browser.</p>
+    <p class="intro">Die Felder folgen den vier Phasen Initiierung, Ideenfindung, Integration und Implementierung. Jedes nennt Ziel, Massnahmen, einen Indikator und ein Warnsignal.<span class="no-print"> Erledigte Massnahmen können Sie abhaken, der Stand bleibt in diesem Browser.</span></p>
     <div class="phases">
       <div class="phase">Phase 1<b>Initiierung</b></div>
       <div class="phase">Phase 2<b>Ideenfindung</b></div>
@@ -400,9 +483,11 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
   <div class="wrap">
     <p><b>Reaktionsfähig mit agentischer KI</b>. Ergebnis der Masterarbeit «Organisationale Reaktionsfähigkeit im Zeitalter agentischer KI», Executive MBA in Business Engineering, Universität St.Gallen. Andreas Klopp, Dario Meier, Gerrit Alexander Schatte.</p>
     <p>Validierungsfassung, Stand November 2026. Die Herleitung jeder Empfehlung ist in Anhang F der Arbeit dokumentiert.</p>
-    <p class="no-print"><button class="btn small ghost" onclick="window.print()">Drucken oder als PDF sichern</button></p>
+    <p class="no-print"><button class="btn small ghost" onclick="buildDruck();window.print()">Leitfaden drucken oder als PDF sichern</button></p>
   </div>
 </footer>
+
+<div id="druck" aria-hidden="true"></div>
 
 <dialog id="dlg">
   <div class="dh"><div class="mono" id="dlg-n"></div><h3 id="dlg-t" style="margin:6px 0 0"></h3></div>
@@ -629,6 +714,50 @@ function openFall(n){const f=FAELLE.find(x=>x.n===n);const d=$("#dlg");
  $("#dlg-r").innerHTML=`<button class="btn small" onclick="document.getElementById('dlg').close()">Schliessen</button>`;
  if(d.showModal)d.showModal();else alert(f.t+"\n\n"+f.b);}
 $("#dlg").addEventListener("click",e=>{if(e.target.id==="dlg")e.target.close();});
+
+/* ---------- Druckfassung ---------- */
+function buildDruck(){
+ const H=s=>{const e=$(s);return e?e.innerHTML:"";};
+ const sec=(n,lab,tit,body,neu)=>`<div class="d-sec${neu?" d-new":""}"><div class="d-lab">${n} · ${lab}</div><h2>${tit}</h2>${body}</div>`;
+ const ck=on=>`<span class="d-ck${on?" on":""}"></span>`;
+ const n=Q.filter(q=>S.ans[q.id]).length, voll=n===Q.length;
+ const nutz=document.querySelectorAll("#nutzung .card"), imp=[...document.querySelectorAll("footer p:not(.no-print)")].map(p=>`<p>${p.innerHTML}</p>`).join("");
+ let h=`<div class="d-cover"><div class="d-top d-lab">${H(".hero .eyebrow")}</div><h1>${H(".hero h1")}</h1><p class="d-lead">${H(".hero .lead")}</p>
+  <div class="d-foot"><ul class="d-facts">${H(".facts")}</ul><div class="d-imp">${imp}</div></div></div>`;
+ // Einstieg und Kernbefund
+ h+=`<div class="d-two">${[...nutz].map(c=>{const k=c.cloneNode(true),l=k.querySelector(".mono");l.remove();k.querySelectorAll("[style]").forEach(e=>e.removeAttribute("style"));return `<div><div class="d-lab">${l.textContent}</div>${k.innerHTML}</div>`;}).join("")}</div>`;
+ const kp=document.querySelectorAll("#kern .kern>div:first-child p");
+ h+=sec("01","Kernbefund",H("#kern h2"),`<p class="d-big">${kp[0].innerHTML}</p><p>${kp[1].innerHTML}</p>
+  <div class="d-box"><div class="d-lab">${H("#kern .erwart .mono")}</div><p>${H("#kern .erwart p")}</p></div>
+  <div class="d-steps">${[...document.querySelectorAll("#kern .stage")].map(s=>`<div class="${s.classList.contains("slow")?"slow":s.classList.contains("fast")?"fast":""}"><span class="d-lab">${s.querySelector(".mono").textContent}</span><b>${s.querySelector("b").textContent}</b>${s.querySelector("small").textContent}</div>`).join("")}</div>`);
+ // Prinzipien
+ h+=sec("02","Prinzipien",H("#prinzipien h2"),`<ol class="d-prinz">${P.map((t,i)=>`<li><span class="n">P${i+1}</span><span>${esc(t)}<small>Handlungsfeld ${PHF[i].join(", ")}</small></span></li>`).join("")}</ol>`,true);
+ // Standortbestimmung
+ let b=`<p class="d-intro">${H("#standort .intro")}</p><div class="d-stufe"><b>Führungsstufe</b>${Object.keys(STUFE).map(s=>`<span>${ck(n>0&&S.stufe===s)}${STUFE[s]}</span>`).join("")}</div>`;
+ let g="";Q.forEach(q=>{if(q.g!==g){g=q.g;b+=`<div class="d-grp d-lab">${esc(g)}</div>`;}
+  b+=`<div class="d-q"><div class="t"><span>${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></div><div class="d-opts">${q.o.map((o,k)=>{const on=S.ans[q.id]===L[k];return `<div class="${on?"on":""}">${ck(on)}<i>${L[k]}</i><span>${esc(o)}</span></div>`;}).join("")}</div></div>`;});
+ if(voll){const s=startfeld(S.ans),w=[];
+  if(S.ans.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(S.ans.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
+  b+=`<div class="d-res"><div class="d-lab">Auswertung · ${STUFE[S.stufe]} · Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+esc(HF[s.hf].t):"In der Sitzung festlegen"}</h3><p>${s.grund}</p>
+   ${w.length?`<div class="d-warn"><b>Zahlen innerhalb von vier Wochen beschaffen.</b> Ohne sie lässt sich die Reaktionsfähigkeit nicht beurteilen.<br>${w.join("<br>")}</div>`:""}
+   <table><tr><th>Handlungsfeld</th><th colspan="2">Anteil A-Antworten</th></tr>${[1,2,3,4,5,6].map(k=>{const qs=Q.filter(q=>q.hf===k),nA=qs.filter(q=>S.ans[q.id]==="A").length;return `<tr><td>${k} · ${esc(HF[k].t)}</td><td><div class="bar"><span style="width:${Math.round(100*nA/qs.length)}%"></span></div></td><td>${nA} von ${qs.length}</td></tr>`;}).join("")}</table>
+   <div class="d-lab">Ergebniscode</div><code>${code(S.stufe,S.ans)}</code></div>`;}
+ h+=sec("03","Standortbestimmung",H("#standort h2"),b,true);
+ // Handlungsfelder
+ const fi=$("#felder .intro").cloneNode(true);fi.querySelectorAll(".no-print").forEach(e=>e.remove());
+ b=`<p class="d-intro">${fi.innerHTML}</p><div class="d-phasen">${[...document.querySelectorAll("#felder .phase")].map(p=>`<div>${p.innerHTML}</div>`).join("")}</div>`;
+ Object.keys(HF).forEach(k=>{const f=HF[k],fr=Q.filter(q=>q.hf===+k);
+  b+=`<div class="d-hf">${voll&&S.start==k?'<span class="d-start">EMPFOHLENES STARTFELD</span>':""}<div class="d-lab">Handlungsfeld ${k} · ${f.ph} · ${f.eb} · ${f.p.map(p=>"P"+p).join(", ")}</div><h3>${esc(f.t)}</h3>
+   <p class="d-ziel">${f.ziel}</p><div class="d-lab">Massnahmen</div><ul class="d-mass">${f.m.map((m,i)=>`<li>${ck(S.chk[k+"-"+i])}<span>${esc(m)}</span></li>`).join("")}</ul>
+   <div class="d-two"><div><div class="d-lab">Indikator</div>${f.ind}</div><div class="w"><div class="d-lab">Warnsignal</div>${f.warn}</div></div>
+   <p class="d-fr">Fragen der Standortbestimmung: ${fr.map(q=>q.id+(S.ans[q.id]?" ("+S.ans[q.id]+")":"")).join(", ")}</p></div>`;});
+ h+=sec("04","Handlungsfelder",H("#felder h2"),b,true);
+ // 90 Tage und Grenzen
+ h+=sec("05","Vorgehen",H("#tage h2"),`<div class="d-tl">${[...document.querySelectorAll("#tage .tl .card")].map(c=>`<div><div class="d-lab">${c.querySelector(".mono").textContent}</div><h3>${c.querySelector("h3").textContent}</h3><ul>${c.querySelector("ul").innerHTML}</ul></div>`).join("")}</div>`,true);
+ h+=sec("06","Grenzen",H("#grenzen h2"),`<p>${H("#grenzen .intro")}</p>`);
+ $("#druck").innerHTML=h;
+}
+addEventListener("beforeprint",buildDruck);
 
 /* ---------- Navigation ---------- */
 const secs=["kern","prinzipien","standort","felder","tage","grenzen"].map(id=>document.getElementById(id));
