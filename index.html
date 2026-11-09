@@ -102,27 +102,8 @@ section.dark{background:var(--alt)}
 .stage.slow{border-top-color:var(--warn)}
 .stage.slow .mono{color:var(--warn)}
 
-/* Modellrechnung */
-.sim{display:grid;grid-template-columns:330px 1fr;gap:20px;margin-top:28px}
-@media (max-width:860px){.sim{grid-template-columns:minmax(0,1fr)}}
-.sim>*,.kern>*,.hfpanel>*{min-width:0}
-.sim .ctl,.sim .out{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-.ctl label{display:block;font-size:.92rem;color:var(--fg);margin:16px 0 6px}
-.ctl label:first-child{margin-top:0}
-.ctl output{float:right;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums}
-input[type=range]{width:100%;accent-color:var(--navy)}
-.ctl label.toggle{display:flex;align-items:flex-start;gap:10px;margin-top:18px;cursor:pointer;font-size:.92rem}
-.toggle input{flex:none;width:17px;height:17px;margin-top:4px;accent-color:var(--navy)}
-.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:16px;border-bottom:1px solid var(--line)}
-.kpi{padding:0 16px 14px}
-.kpi:first-child{padding-left:0}
-.kpi+.kpi{border-left:1px solid var(--line)}
-.kpi .mono{font-size:.66rem;color:var(--muted)}
-.kpi .v{font-family:var(--serif);font-size:1.7rem;color:var(--navy);font-variant-numeric:tabular-nums}
-.kpi .v.bad{color:var(--warn)}.kpi .v.good{color:var(--ok)}
-#chart{width:100%;height:240px;display:block}
-@media (max-width:520px){.kpis{grid-template-columns:minmax(0,1fr)}.kpi{padding:10px 0}.kpi+.kpi{border-left:0;border-top:1px solid var(--line)}#chart{height:200px}.barrow{grid-template-columns:1fr 70px}.barrow .bar{grid-column:1/-1;grid-row:2}}
-.simnote{font-size:.82rem;color:var(--muted);margin:10px 0 0}
+.kern>*,.hfpanel>*{min-width:0}
+@media (max-width:520px){.barrow{grid-template-columns:1fr 70px}.barrow .bar{grid-column:1/-1;grid-row:2}}
 
 /* Prinzipien */
 .prinz{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 32px;border-top:1px solid var(--line)}
@@ -240,7 +221,7 @@ dialog .db{padding:20px 24px}
 dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 
 @media print{
-  header.top,.cta,.sim .ctl,.tabs,.sb-top,.filter,.hfnav,.no-print{display:none!important}
+  header.top,.cta,.tabs,.sb-top,.filter,.hfnav,.no-print{display:none!important}
   body{background:#fff;font-size:11pt}
   section{padding:24px 0;break-inside:avoid-page}
   section.dark,.hero,footer{background:#fff!important;color:#000!important}
@@ -331,40 +312,9 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
   </div>
 </section>
 
-<section class="dark" id="modell">
-  <div class="wrap">
-    <div class="sec-head"><span class="mono">02 · Modellrechnung</span><h2>Was passiert, wenn nur die Umsetzung schneller wird?</h2></div>
-    <p class="intro">Verschieben Sie die Regler. Die Rechnung zeigt den Mechanismus aus Fall&nbsp;3: Werkzeuge vervielfachen die Zahl der Vorhaben, die Freigabestelle bleibt gleich gross. In Fall&nbsp;3 stieg die Zahl von rund fünf auf rund hundert Vorhaben pro Woche. Es ist eine vereinfachte Warteschlange zur Veranschaulichung, keine Messung.</p>
-    <div class="sim">
-      <div class="ctl">
-        <label for="s-arr">Neue Vorhaben pro Woche <output id="o-arr"></output></label>
-        <input type="range" id="s-arr" min="1" max="100" value="20">
-        <label for="s-cap">Freigaben pro Woche <output id="o-cap"></output></label>
-        <input type="range" id="s-cap" min="1" max="60" value="5">
-        <label for="s-bau">Umsetzungsdauer in Tagen <output id="o-bau"></output></label>
-        <input type="range" id="s-bau" min="1" max="40" value="3">
-        <label class="toggle"><input type="checkbox" id="s-grow"> Freigabe wächst mit der Zahl der Vorhaben mit (P3)</label>
-        <div class="row" style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn small ghost" data-preset="vorher">Vor den Werkzeugen</button>
-          <button class="btn small ghost" data-preset="nachher">Nach den Werkzeugen</button>
-        </div>
-      </div>
-      <div class="out">
-        <div class="kpis">
-          <div class="kpi"><div class="mono">Durchlaufzeit Woche 1</div><div class="v" id="k1"></div></div>
-          <div class="kpi"><div class="mono">Durchlaufzeit Woche 12</div><div class="v" id="k12"></div></div>
-          <div class="kpi"><div class="mono">Warteschlange Woche 12</div><div class="v" id="kq"></div></div>
-        </div>
-        <svg id="chart" viewBox="0 0 640 240" role="img" aria-label="Durchlaufzeit je Woche"></svg>
-        <p class="simnote">Durchlaufzeit eines Vorhabens, das Mitte Woche eingeht: Umsetzung plus Wartezeit bis zur Freigabe. Annahmen: gleichmässiger Eingang, Freigaben in Eingangsreihenfolge, keine Abbrüche. Die Arbeitsdefinition verlangt, dass die Kurve nicht steigt.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="prinzipien">
   <div class="wrap">
-    <div class="sec-head"><span class="mono">03 · Prinzipien</span><h2>Zwölf Prinzipien</h2></div>
+    <div class="sec-head"><span class="mono">02 · Prinzipien</span><h2>Zwölf Prinzipien</h2></div>
     <p class="intro">Ein Klick auf ein Prinzip führt zum Handlungsfeld, in dem es umgesetzt wird.</p>
     <div class="prinz" id="prinzliste"></div>
   </div>
@@ -372,7 +322,7 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 
 <section id="standort">
   <div class="wrap">
-    <div class="sec-head"><span class="mono">04 · Standortbestimmung</span><h2>Wo steht Ihr Unternehmen heute?</h2></div>
+    <div class="sec-head"><span class="mono">03 · Standortbestimmung</span><h2>Wo steht Ihr Unternehmen heute?</h2></div>
     <p class="intro">Vierzehn Fragen, getrennt beantwortet von der Geschäftsleitung und mindestens einer weiteren Führungsstufe. Abweichungen zwischen den Stufen sind ein Befund. Massgeblich ist der heutige Zustand, nicht die Absicht. Wer eine Frage nur mit einer Einschätzung statt mit einem Fall oder einer Zahl beantworten kann, wählt die tiefere Stufe.</p>
     <div class="tabs" role="tablist">
       <button role="tab" data-v="fragen" aria-selected="true">1 · Fragen</button>
@@ -414,7 +364,7 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 
 <section class="dark" id="felder">
   <div class="wrap">
-    <div class="sec-head"><span class="mono">05 · Handlungsfelder</span><h2>Sechs Handlungsfelder</h2></div>
+    <div class="sec-head"><span class="mono">04 · Handlungsfelder</span><h2>Sechs Handlungsfelder</h2></div>
     <p class="intro">Die Felder folgen den vier Phasen Initiierung, Ideenfindung, Integration und Implementierung. Jedes nennt Ziel, Massnahmen, einen Indikator und ein Warnsignal. Erledigte Massnahmen können Sie abhaken, der Stand bleibt in diesem Browser.</p>
     <div class="phases">
       <div class="phase">Phase 1<b>Initiierung</b></div>
@@ -429,7 +379,7 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 
 <section id="faelle">
   <div class="wrap">
-    <div class="sec-head"><span class="mono">06 · Fälle</span><h2>Sechs Fälle aus den Gesprächen</h2></div>
+    <div class="sec-head"><span class="mono">05 · Fälle</span><h2>Sechs Fälle aus den Gesprächen</h2></div>
     <p class="intro">Anonymisiert und auf Angaben der befragten Personen beruhend. Sie zeigen, wie ein Prinzip aussieht oder woran es scheitert.</p>
     <div class="filter" id="filter"></div>
     <div class="grid g3" id="fallliste"></div>
@@ -438,7 +388,7 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 
 <section id="tage">
   <div class="wrap">
-    <div class="sec-head"><span class="mono">07 · Vorgehen</span><h2>Die ersten 90 Tage</h2></div>
+    <div class="sec-head"><span class="mono">06 · Vorgehen</span><h2>Die ersten 90 Tage</h2></div>
     <div class="tl">
       <div class="card"><div class="mono" style="color:var(--accent)">Tage 1 bis 30</div><h3>Standort</h3><ul>
         <li>Lernsitzung der Geschäftsleitung im geschützten Rahmen</li>
@@ -462,7 +412,7 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 
 <section id="grenzen">
   <div class="wrap">
-    <div class="sec-head"><span class="mono">08 · Grenzen</span><h2>Wofür der Leitfaden nicht gilt</h2></div>
+    <div class="sec-head"><span class="mono">07 · Grenzen</span><h2>Wofür der Leitfaden nicht gilt</h2></div>
     <p class="intro" style="color:var(--fg)">Der Leitfaden gilt nicht für sicherheitskritische Systeme, deren Korrektheit garantiert sein muss, und nicht für Branchen, deren Produktentwicklung einer Zulassungspflicht unterliegt. Er beruht auf der Literatur und auf elf Experteninterviews, davon zwei mit AI-First Firms. Für Dienstleister, die nach Aufwand abrechnen, begrenzt das Ertragsmodell, wie weit sich die Empfehlungen umsetzen lassen. Die Wirkung des Leitfadens ist nicht gemessen, die Nutzenerwartung wird in der Validierung erhoben. Die Kosten agentischer Systeme werden nicht bewertet.</p>
   </div>
 </section>
@@ -708,34 +658,6 @@ function openFall(n){const f=FAELLE.find(x=>x.n===n);const d=$("#dlg");
  if(d.showModal)d.showModal();else alert(f.t+"\n\n"+f.b);}
 $("#dlg").addEventListener("click",e=>{if(e.target.id==="dlg")e.target.close();});
 
-/* ---------- Modellrechnung ---------- */
-const sA=$("#s-arr"),sC=$("#s-cap"),sB=$("#s-bau"),sG=$("#s-grow");
-function sim(){
- const arr=+sA.value,cap0=+sC.value,bau=+sB.value,grow=sG.checked;
- $("#o-arr").textContent=arr;$("#o-cap").textContent=cap0;$("#o-bau").textContent=bau;
- const cap=grow?Math.max(cap0,arr):cap0;
- let q=0;const dl=[];
- for(let w=1;w<=12;w++){const vor=Math.max(0,q+(arr-cap)/2);dl.push(bau+vor/cap*7);q=Math.max(0,q+arr-cap);}
- // Durchlaufzeit eines Vorhabens, das in Woche w eingeht: Umsetzung + Wartezeit vor ihm in der Schlange
- const qEnd=q;
- const fmt=d=>d<14?`${Math.round(d)} Tg.`:`${(d/7).toFixed(d<70?1:0)} Wo.`;
- $("#k1").textContent=fmt(dl[0]);$("#k12").textContent=fmt(dl[11]);$("#kq").textContent=Math.round(qEnd);
- $("#k12").className="v "+(dl[11]>dl[0]*1.2?"bad":"good");
- const wk=Math.max(...dl)>60, u=wk?7:1, dv=dl.map(d=>d/u);
- const W=640,H=240,pl=48,pr=12,pt=14,pb=30,raw=Math.max(wk?4:14,...dv)*1.05,stp=[1,2,5,10,20,50,100,200,500].find(v=>raw/v<=5)||1000,max=Math.ceil(raw/stp)*stp;
- const x=i=>pl+(W-pl-pr)*i/11, y=v=>pt+(H-pt-pb)*(1-v/max);
- let g="";
- const ticks=Math.round(max/stp);for(let t=0;t<=ticks;t++){const v=stp*t;g+=`<line x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}" stroke="#e6e2da"/><text x="${pl-8}" y="${y(v)+4}" fill="#565c66" font-size="11" text-anchor="end" font-family="Helvetica,Arial,sans-serif">${Math.round(v)}</text>`;}
- for(let i=0;i<12;i+=1)g+=`<text x="${x(i)}" y="${H-10}" fill="#565c66" font-size="11" text-anchor="middle" font-family="Helvetica,Arial,sans-serif">${i+1}</text>`;
- g+=`<text x="${pl}" y="${pt-2}" fill="#565c66" font-size="10" font-family="Helvetica,Arial,sans-serif">${wk?"WOCHEN":"TAGE"}</text><text x="${W-pr}" y="${H-10}" fill="#565c66" font-size="10" text-anchor="end" font-family="Helvetica,Arial,sans-serif" dy="-14">WOCHE</text>`;
- const pts=dv.map((v,i)=>`${x(i)},${y(v)}`).join(" ");
-  g+=`<polygon points="${x(0)},${y(0)} ${pts} ${x(11)},${y(0)}" fill="#0b2545" fill-opacity=".07"/><polyline points="${pts}" fill="none" stroke="#0b2545" stroke-width="2" stroke-linejoin="round"/>`;
- g+=dv.map((v,i)=>`<circle cx="${x(i)}" cy="${y(v)}" r="3" fill="#fff" stroke="#0b2545" stroke-width="1.5"><title>Woche ${i+1}: ${fmt(dl[i])}</title></circle>`).join("");
- $("#chart").innerHTML=g;
-}
-[sA,sC,sB,sG].forEach(e=>e.addEventListener("input",sim));
-document.querySelectorAll("[data-preset]").forEach(b=>b.onclick=()=>{if(b.dataset.preset==="vorher"){sA.value=5;sC.value=5;sB.value=20;}else{sA.value=20;sC.value=5;sB.value=2;}sG.checked=false;sim();});
-
 /* ---------- Navigation ---------- */
 const secs=["kern","prinzipien","standort","felder","faelle","tage","grenzen"].map(id=>document.getElementById(id));
 addEventListener("scroll",()=>{const h=document.documentElement;$("#prog").style.width=(100*h.scrollTop/(h.scrollHeight-h.clientHeight))+"%";
@@ -749,7 +671,7 @@ $("#zumErgebnis").onclick=()=>{show("ergebnis");$("#standort").scrollIntoView();
 $("#leeren").onclick=()=>{if(confirm("Alle Antworten löschen?")){S.ans={};S.start=null;save();renderFragen();renderHFNav();renderHF();}};
 $("#stufe").onchange=e=>{S.stufe=e.target.value;save();};
 $("#vergleichen").onclick=vergleich;
-renderPrinzipien();renderFragen();renderHFNav();renderHF();renderFaelle();sim();
+renderPrinzipien();renderFragen();renderHFNav();renderHF();renderFaelle();
 </script>
 </body>
 </html>
