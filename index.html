@@ -190,17 +190,6 @@ th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 .side .box p{margin:6px 0 0;font-size:.95rem}
 .faelle-mini{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 
-/* Fälle */
-.filter{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
-.filter button{font:inherit;font-size:.82rem;padding:5px 12px;border-radius:var(--radius);border:1px solid var(--line2);background:#fff;color:var(--muted);cursor:pointer}
-.filter button:hover{border-color:var(--navy);color:var(--navy)}
-.filter button[aria-pressed=true]{background:var(--navy);border-color:var(--navy);color:#fff}
-.fall{display:flex;flex-direction:column;gap:6px;border-top:3px solid var(--navy)}
-.fall.hide{display:none}
-.fall .metric{font-family:var(--serif);font-size:1.7rem;color:var(--navy);line-height:1.15;margin-top:4px}
-.fall h3{margin:4px 0;font-family:var(--sans);font-weight:600;font-size:1.02rem;color:var(--fg)}
-.fall p{color:var(--muted);font-size:.95rem;margin:0}
-
 /* 90 Tage */
 .tl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media (max-width:860px){.tl{grid-template-columns:1fr}}
@@ -221,7 +210,7 @@ dialog .db{padding:20px 24px}
 dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 
 @media print{
-  header.top,.cta,.tabs,.sb-top,.filter,.hfnav,.no-print{display:none!important}
+  header.top,.cta,.tabs,.sb-top,.hfnav,.no-print{display:none!important}
   body{background:#fff;font-size:11pt}
   section{padding:24px 0;break-inside:avoid-page}
   section.dark,.hero,footer{background:#fff!important;color:#000!important}
@@ -243,7 +232,6 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
       <a href="#prinzipien">Prinzipien</a>
       <a href="#standort">Standortbestimmung</a>
       <a href="#felder">Handlungsfelder</a>
-      <a href="#faelle">Fälle</a>
       <a href="#tage">90 Tage</a>
       <a href="#grenzen">Grenzen</a>
     </nav>
@@ -377,18 +365,9 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
   </div>
 </section>
 
-<section id="faelle">
-  <div class="wrap">
-    <div class="sec-head"><span class="mono">05 · Fälle</span><h2>Sechs Fälle aus den Gesprächen</h2></div>
-    <p class="intro">Anonymisiert und auf Angaben der befragten Personen beruhend. Sie zeigen, wie ein Prinzip aussieht oder woran es scheitert.</p>
-    <div class="filter" id="filter"></div>
-    <div class="grid g3" id="fallliste"></div>
-  </div>
-</section>
-
 <section id="tage">
   <div class="wrap">
-    <div class="sec-head"><span class="mono">06 · Vorgehen</span><h2>Die ersten 90 Tage</h2></div>
+    <div class="sec-head"><span class="mono">05 · Vorgehen</span><h2>Die ersten 90 Tage</h2></div>
     <div class="tl">
       <div class="card"><div class="mono" style="color:var(--accent)">Tage 1 bis 30</div><h3>Standort</h3><ul>
         <li>Lernsitzung der Geschäftsleitung im geschützten Rahmen</li>
@@ -412,7 +391,7 @@ dialog .db .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 
 <section id="grenzen">
   <div class="wrap">
-    <div class="sec-head"><span class="mono">07 · Grenzen</span><h2>Wofür der Leitfaden nicht gilt</h2></div>
+    <div class="sec-head"><span class="mono">06 · Grenzen</span><h2>Wofür der Leitfaden nicht gilt</h2></div>
     <p class="intro" style="color:var(--fg)">Der Leitfaden gilt nicht für sicherheitskritische Systeme, deren Korrektheit garantiert sein muss, und nicht für Branchen, deren Produktentwicklung einer Zulassungspflicht unterliegt. Er beruht auf der Literatur und auf elf Experteninterviews, davon zwei mit AI-First Firms. Für Dienstleister, die nach Aufwand abrechnen, begrenzt das Ertragsmodell, wie weit sich die Empfehlungen umsetzen lassen. Die Wirkung des Leitfadens ist nicht gemessen, die Nutzenerwartung wird in der Validierung erhoben. Die Kosten agentischer Systeme werden nicht bewertet.</p>
   </div>
 </section>
@@ -645,13 +624,6 @@ function renderHF(){
 function openHF(k){S.hf=k;save();renderHFNav();renderHF();$("#felder").scrollIntoView();}
 
 /* ---------- Fälle ---------- */
-let filt=null;
-function renderFaelle(){
- const ps=[...new Set(FAELLE.flatMap(f=>f.p))].sort((a,b)=>a-b);
- $("#filter").innerHTML=`<button aria-pressed="${filt===null}" data-p="">Alle</button>`+ps.map(p=>`<button aria-pressed="${filt===p}" data-p="${p}">P${p}</button>`).join("");
- $("#filter").querySelectorAll("button").forEach(b=>b.onclick=()=>{filt=b.dataset.p?+b.dataset.p:null;renderFaelle();});
- $("#fallliste").innerHTML=FAELLE.map(f=>`<article class="card fall${filt&&!f.p.includes(filt)?" hide":""}"><div class="mono muted">Fall ${f.n} · ${f.p.map(p=>"P"+p).join(", ")}</div><div class="metric">${f.m}</div><h3>${esc(f.t)}</h3><p>${esc(f.b)}</p></article>`).join("");
-}
 function openFall(n){const f=FAELLE.find(x=>x.n===n);const d=$("#dlg");
  $("#dlg-n").textContent=`Fall ${f.n} · ${f.p.map(p=>"P"+p).join(", ")}`;$("#dlg-t").textContent=f.t;$("#dlg-b").textContent=f.b;
  $("#dlg-r").innerHTML=`<button class="btn small" onclick="document.getElementById('dlg').close()">Schliessen</button>`;
@@ -659,7 +631,7 @@ function openFall(n){const f=FAELLE.find(x=>x.n===n);const d=$("#dlg");
 $("#dlg").addEventListener("click",e=>{if(e.target.id==="dlg")e.target.close();});
 
 /* ---------- Navigation ---------- */
-const secs=["kern","prinzipien","standort","felder","faelle","tage","grenzen"].map(id=>document.getElementById(id));
+const secs=["kern","prinzipien","standort","felder","tage","grenzen"].map(id=>document.getElementById(id));
 addEventListener("scroll",()=>{const h=document.documentElement;$("#prog").style.width=(100*h.scrollTop/(h.scrollHeight-h.clientHeight))+"%";
  let cur="";for(const s of secs)if(s.getBoundingClientRect().top<120)cur=s.id;
  document.querySelectorAll("nav.main a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+cur));},{passive:true});
@@ -671,7 +643,7 @@ $("#zumErgebnis").onclick=()=>{show("ergebnis");$("#standort").scrollIntoView();
 $("#leeren").onclick=()=>{if(confirm("Alle Antworten löschen?")){S.ans={};S.start=null;save();renderFragen();renderHFNav();renderHF();}};
 $("#stufe").onchange=e=>{S.stufe=e.target.value;save();};
 $("#vergleichen").onclick=vergleich;
-renderPrinzipien();renderFragen();renderHFNav();renderHF();renderFaelle();
+renderPrinzipien();renderFragen();renderHFNav();renderHF();
 </script>
 </body>
 </html>
