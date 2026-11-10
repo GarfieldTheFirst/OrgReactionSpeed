@@ -19,6 +19,7 @@
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 body{margin:0;font-family:var(--sans);color:var(--fg);background:var(--paper);line-height:1.6;font-size:17px;letter-spacing:.015em;-webkit-font-smoothing:antialiased}
@@ -83,34 +84,95 @@ section.dark{background:var(--alt)}
 .g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 
 /* Kernbefund */
-.kern{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:start}
-@media (max-width:860px){.kern{grid-template-columns:1fr}}
-.kern .big{font-family:var(--head);font-weight:300;font-size:1.4rem;line-height:1.55;color:var(--navy)}
-.kern .big b{font-weight:400;color:var(--navy);border-bottom:2px solid var(--accent)}
-.erwart{border-left:2px solid var(--accent);padding:4px 0 4px 18px;color:var(--muted)}
-
-/* Ablauf */
-.pipe{display:flex;align-items:stretch;gap:0;margin:30px 0 8px;overflow-x:auto}
-.stage{flex:1;min-width:150px;padding:16px 18px;border:1px solid var(--line);border-top:3px solid var(--line2);background:#fff}
-.stage+.stage{border-left:0}
-.stage .mono{color:var(--soft);font-size:.68rem}
-.stage b{display:block;margin:4px 0 2px;color:var(--navy)}
-.stage small{color:var(--muted);font-size:.85rem;line-height:1.4;display:block}
-@media (max-width:720px){.pipe{flex-direction:column}.stage{min-width:0}.stage+.stage{border-left:1px solid var(--line)}}
-.stage.fast{border-top-color:var(--ok)}
-.stage.fast .mono{color:var(--ok)}
-.stage.slow{border-top-color:var(--warn)}
-.stage.slow .mono{color:var(--warn)}
-
+.kern{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start}
+@media (max-width:860px){.kern{grid-template-columns:1fr;gap:28px}}
+.kern .big{font-family:var(--head);font-weight:300;font-size:clamp(1.35rem,2.4vw,1.75rem);line-height:1.45;color:var(--fg);margin:0}
+.kern .big b{font-weight:700}
+.kpts{list-style:none;margin:0;padding:0;counter-reset:k}
+.kpts li{display:grid;grid-template-columns:44px 1fr;padding:14px 0;border-top:1px solid var(--line2)}
+.kpts li:first-child{border-top:0;padding-top:4px}
+.kpts li::before{counter-increment:k;content:"0" counter(k);font-weight:700;color:var(--accent);font-size:.85rem;letter-spacing:.08em;padding-top:3px}
+.erwart{border-left:2px solid var(--accent);padding:4px 0 4px 18px;color:var(--muted);margin-top:28px;max-width:80ch}
 .kern>*,.hfpanel>*{min-width:0}
-@media (max-width:520px){.barrow{grid-template-columns:1fr 70px}.barrow .bar{grid-column:1/-1;grid-row:2}}
 
-/* Prinzipien */
-.prinz{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 32px;border-top:1px solid var(--line)}
-.p{display:flex;gap:16px;align-items:baseline;background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:16px 4px;cursor:pointer;text-align:left;font:inherit;color:inherit}
-.p:hover{background:var(--alt)}
-.p .n{flex:none;min-width:2.4em;font-family:var(--head);font-weight:700;font-size:.95rem;letter-spacing:.04em;color:var(--accent)}
-.p .hfs{display:block;margin-top:4px;font-size:.8rem;color:var(--soft)}
+/* Grafik: Dauer einer Anpassung */
+.flow{margin:48px 0 0;background:#fff;border:1px solid #cddbd4;padding:28px 28px 20px;box-shadow:0 2px 14px rgba(15,74,60,.06)}
+.flow-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;align-items:baseline;margin-bottom:14px}
+.flow-h h3{margin:0;font-weight:700;font-size:1.15rem;letter-spacing:.04em;color:var(--fg)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:16px;height:10px;display:inline-block}
+.frow{display:grid;grid-template-columns:190px 1fr 210px;gap:18px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}
+.frow .lbl{font-size:.9rem;font-weight:700;line-height:1.3}
+.frow .lbl small{display:block;font-weight:400;color:var(--soft);font-size:.78rem}
+.track{position:relative;display:flex;height:30px}
+.seg{height:100%;flex:none;box-shadow:inset -2px 0 0 #fff}
+.s1{background:#b9cdc4}.s2{background:var(--warn)}.s3{background:#d9827b}.s4{background:var(--ok)}.s5{background:#86a99a}
+.seg.wait,.legend i.wait{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.6) 0 3px,transparent 3px 7px)}
+.track .ref{position:absolute;top:-6px;bottom:-6px;width:0;border-left:2px dashed var(--fg)}
+.frow .note{font-size:.85rem;color:var(--muted);line-height:1.35}
+.frow .note b{display:block;color:var(--fg)}
+.frow.bad .note b{color:var(--warn)}
+.frow.good .note b{color:var(--ok)}
+.flow figcaption{margin-top:12px}
+@media (max-width:760px){.flow{padding:20px 16px 16px}.frow{grid-template-columns:1fr;gap:6px}}
+
+/* Prozessbild */
+.weg{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;align-items:stretch}
+.weg .arrow{display:flex;align-items:center;justify-content:center;color:var(--deep)}
+.weg .arrow svg{width:26px;height:26px}
+.step{display:flex;flex-direction:column;text-decoration:none;color:var(--fg);background:var(--mist);padding:24px 20px 20px;border-top:5px solid var(--deep);transition:transform .15s,box-shadow .15s}
+.rmini{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.rmini div{background:#fff;padding:6px 4px;font-size:.66rem;font-weight:700;color:var(--muted);text-align:center;line-height:1.2}
+.rmini b{display:block;font-family:var(--head);font-weight:300;font-size:1.4rem;color:var(--deep)}
+/* Startfläche unter dem Kernbefund */
+.cta-band{display:grid;grid-template-columns:1fr auto;gap:24px 40px;align-items:center;margin-top:48px;background:var(--panel);color:#fff;padding:36px 40px}
+.cta-band::before{content:"";grid-column:1/-1;display:block;width:150px;height:5px;background:var(--yellow)}
+.cta-band .mono{color:#fff}
+.cta-band h3{color:#fff;font-size:clamp(1.5rem,3vw,2rem);margin:8px 0}
+.cta-band p{color:#d5e6de;margin:0;max-width:60ch}
+.cta-btns{display:flex;flex-wrap:wrap;gap:12px}
+.cta-band .btn.primary{background:#fff;color:var(--deep);border-color:#fff}
+.cta-band .btn.primary:hover{background:#d9f2e6;border-color:#d9f2e6}
+.cta-band .btn.ghost{color:#fff;border-color:#fff}
+.cta-band .btn.ghost:hover{background:rgba(255,255,255,.12)}
+@media (max-width:760px){.cta-band{grid-template-columns:1fr;padding:28px 22px}}
+/* Roadmap */
+.rm{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:5px solid var(--deep)}
+.rmw{padding:22px 18px 18px;border-right:1px solid #cddbd4;position:relative}
+.rmw:last-child{border-right:0}
+.rmw::before{content:"";position:absolute;top:-12px;left:18px;width:14px;height:14px;border-radius:50%;background:#fff;border:4px solid var(--deep)}
+.rmw .mono{color:var(--muted)}
+.rmw h3{font-weight:700;font-size:1.25rem;letter-spacing:.04em;color:var(--fg);margin:4px 0 14px}
+.rmw ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rmw li.fix{font-size:.86rem;color:var(--muted);padding:8px 10px;border:1px dashed var(--line2)}
+.rmi{display:block;width:100%;text-align:left;font:inherit;cursor:pointer;background:var(--mist);border:0;border-left:4px solid var(--warn);padding:10px 12px;color:var(--fg)}
+.rmi.B{border-left-color:#d9b54a}
+.rmi:hover{background:var(--tile)}
+.rmi b{display:block;font-size:.92rem;line-height:1.35}
+.rmi small{display:block;margin-top:4px;font-size:.74rem;color:var(--soft)}
+.rm-foot{margin-top:18px}
+@media (max-width:900px){.rm{grid-template-columns:1fr 1fr}.rmw:nth-child(2){border-right:0}.rmw:nth-child(n+3){border-top:1px solid #cddbd4;margin-top:16px}}
+@media (max-width:560px){.rm{grid-template-columns:1fr}.rmw{border-right:0}.rmw+.rmw{border-top:1px solid #cddbd4;margin-top:16px}}
+.step:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(15,74,60,.14)}
+.step .num{font-family:var(--head);font-weight:300;font-size:3.4rem;line-height:1;color:var(--deep)}
+.step h3{font-weight:700;font-size:1.15rem;letter-spacing:.04em;margin:14px 0 6px;color:var(--fg)}
+.step p{font-size:.93rem;color:var(--muted);margin:0 0 18px;line-height:1.5}
+.step .viz{margin-top:auto}
+.step .st{font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:12px}
+.sq{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:240px}
+.sq i{aspect-ratio:1;background:#fff;border:1px solid #cddbd4}
+.sq i.A{background:var(--warn);border-color:var(--warn)}.sq i.B{background:#d9b54a;border-color:#d9b54a}.sq i.C{background:var(--ok);border-color:var(--ok)}
+.minibars{display:grid;gap:5px}
+.minibars div{display:grid;grid-template-columns:40px 1fr;gap:8px;align-items:center;font-size:.7rem;font-weight:700;color:var(--muted)}
+.minibars span{height:7px;background:#fff}
+.minibars span b{display:block;height:100%;background:var(--warn)}
+.pchips{display:flex;flex-wrap:wrap;gap:4px}
+.pchips i{font-style:normal;font-size:.72rem;font-weight:700;padding:3px 6px;background:#fff;color:var(--soft);border:1px solid #cddbd4}
+.pchips i.on{background:var(--deep);color:#fff;border-color:var(--deep)}
+.weg-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 32px;margin-top:28px;font-size:.92rem;color:var(--muted)}
+.weg-meta b{display:block;color:var(--fg);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+@media (max-width:900px){.weg{grid-template-columns:1fr}.weg .arrow{height:40px}.weg .arrow svg{transform:rotate(90deg)}}
 
 /* Standortbestimmung */
 .sb-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:18px}
@@ -160,11 +222,41 @@ th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 .tablewrap{overflow-x:auto}
 
 /* Handlungsfelder */
-.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:18px;border:1px solid var(--line);background:#fff}
-.phase{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:12px 16px;color:var(--soft)}
-.phase+.phase{border-left:1px solid var(--line)}
-.phase b{display:block;color:var(--navy);font-family:var(--head);font-weight:300;text-transform:none;letter-spacing:0;font-size:1.05rem;margin-top:2px}
-@media (max-width:720px){.phases{grid-template-columns:repeat(2,1fr)}.phase:nth-child(3){border-left:0}.phase:nth-child(n+3){border-top:1px solid var(--line)}}
+.tX{background:#fff;color:var(--soft);border-color:var(--line)}
+/* Prioritäten */
+.prio{display:grid;gap:10px}
+.prow{display:grid;grid-template-columns:56px minmax(0,1fr) 210px 150px 130px;gap:20px;align-items:center;width:100%;background:#fff;border:1px solid #cddbd4;border-left:6px solid #cddbd4;padding:16px 20px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.prow:hover{border-color:var(--accent);box-shadow:0 4px 16px rgba(15,74,60,.1)}
+.prow.top{border-left-color:var(--yellow)}
+.prow .rk{font-family:var(--head);font-weight:300;font-size:2.4rem;line-height:1;color:var(--deep)}
+.prow .tt small{display:block;color:var(--soft);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.prow .tt b{font-size:1.05rem;line-height:1.3}
+.prow .need{height:8px;background:var(--line)}
+.prow .need span{display:block;height:100%;background:var(--warn)}
+.lvl{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;text-align:center}
+.lvl.v{background:var(--fg);color:#fff}.lvl.h{background:var(--warn);color:#fff}.lvl.m{background:#f1e3b0;color:#6e5410}.lvl.g{background:#d5ebdf;color:var(--ok)}.lvl.o{background:var(--line);color:var(--muted)}
+.prio-leg{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px;font-size:.85rem;color:var(--muted)}
+.rm-h{font-weight:700;font-size:1.15rem;letter-spacing:.04em;color:var(--fg);margin:36px 0 14px}
+.prio.compact{gap:6px}
+.prio.compact .prow{padding:10px 18px;gap:16px}
+.prio.compact .rk{font-size:1.7rem}
+.prio.compact .tt b{font-size:.98rem}
+.rmw .fund{background:var(--fg);color:#fff;border-left-color:var(--yellow)}
+.rmw .fund small{color:#cddbd4}
+@media (max-width:860px){.prow{grid-template-columns:44px minmax(0,1fr) auto;gap:8px 14px;padding:14px 16px}.prow .rk{grid-column:1;grid-row:1/3;font-size:2rem}.prow .tt{grid-column:2;grid-row:1}.prow .lvl{grid-column:3;grid-row:1}.prow .ans{grid-column:2/4;grid-row:2}.prow .need{display:none}}
+/* Prinzipien im Handlungsfeld */
+.hfprinz{display:grid;gap:8px;margin:0 0 24px}
+.hfprinz div{display:grid;grid-template-columns:40px 1fr;gap:8px;background:var(--mist);padding:12px 16px;line-height:1.45}
+.hfprinz b{color:var(--accent);font-size:.85rem;letter-spacing:.06em;padding-top:2px}
+.pstrip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:20px}
+.pstrip .mono{color:var(--muted);margin-right:8px}
+.pstrip button{font:inherit;font-size:.8rem;font-weight:700;padding:6px 10px;border:1px solid #cddbd4;background:#fff;color:var(--deep);cursor:pointer}
+.pstrip button:hover{border-color:var(--accent)}
+.pstrip button.on{background:var(--deep);color:#fff;border-color:var(--deep)}
+/* Grenzen */
+.grenz{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.grenz div{border-top:5px solid var(--deep);background:var(--mist);padding:20px 22px;font-size:.95rem;line-height:1.5}
+.grenz b{display:block;margin-bottom:6px}
 .hfnav{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:16px}
 @media (max-width:860px){.hfnav{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:520px){.hfnav{grid-template-columns:repeat(2,1fr)}}
@@ -183,6 +275,29 @@ th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 .mass li:last-child{border-bottom:0}
 .mass input{flex:none;margin-top:5px;width:17px;height:17px;accent-color:var(--accent)}
 .mass li.chk span{color:var(--soft);text-decoration:line-through;text-decoration-color:var(--line2)}
+.mass label{flex:1;min-width:0}
+.mass label b{display:block}
+.mass label small{display:block;font-size:.9rem;color:var(--muted);line-height:1.45;margin-top:2px}
+.mass .tag{flex:none;align-self:flex-start;margin-top:3px}
+.mgrp{margin-bottom:22px}
+.mgrp>.mono{color:var(--fg);border-top:2px solid var(--deep);padding-top:10px}
+.mgrp>.hint{margin:2px 0 4px;font-size:.84rem}
+.eff{display:inline-block;font-style:normal;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:1px 6px;vertical-align:2px;border:1px solid var(--deep);color:var(--deep);background:#fff}
+.eff.M{background:var(--deep);color:#fff}
+.rmw li.sub{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.rmw ul li:has(.rule){margin-top:-4px}
+.rmi.rule{background:#fff;border:0;border-left:4px solid var(--warn);border-bottom:1px solid #e3ece8;padding:4px 8px;line-height:1.3}
+.rmi.rule.B{border-left-color:#d9b54a}
+.rmi.rule b{display:inline;font-size:.84rem;font-weight:600}
+.rmi.rule small{display:inline;margin:0 0 0 6px;font-size:.7rem}
+.rmi .eff{vertical-align:0}
+.eff.pk{border-color:var(--accent);color:var(--accent);cursor:pointer}
+.eff.pk:hover{background:var(--tile)}
+.rmi.rule.pkg{padding:9px 10px;border:1px solid #cddbd4;border-left:4px solid var(--warn)}
+.rmi.rule.pkg.B{border-left-color:#d9b54a}
+.rmi.rule.pkg b{display:block;font-weight:700;font-size:.92rem}
+.rmi.rule.pkg small{display:block;margin:3px 0 0}
+.rmw ul li:has(.pkg){margin-top:0}
 .side .box{border-top:1px solid var(--navy);padding:14px 0 6px;margin-bottom:14px}
 .side .box .mono{color:var(--navy);font-size:.68rem}
 .side .box.w{background:var(--warnbg);border-top-color:var(--warn);padding:14px 16px}
@@ -190,7 +305,7 @@ th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 .side .box p{margin:6px 0 0;font-size:.95rem}
 .faelle-mini{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 
-/* 90 Tage */
+/* Allgemeiner Einstieg */
 .tl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media (max-width:860px){.tl{grid-template-columns:1fr}}
 .tl .card{border-top:3px solid var(--accent)}
@@ -231,31 +346,20 @@ nav.main a.on{color:#fff;border-bottom-color:var(--yellow)}
 .btn.small{letter-spacing:.1em}
 .btn .arr{font-size:1.2em;line-height:0}
 section{padding:80px 0}
-#nutzung{padding-top:56px}
+#kern{padding-top:56px}
 .sec-head{margin-bottom:34px}
 .sec-head::before{content:"";display:block;width:150px;height:5px;background:var(--deep);margin-bottom:34px}
 .sec-head .mono{color:var(--muted);font-weight:700}
 h2{font-size:clamp(1.9rem,4vw,3rem);letter-spacing:.02em}
 .intro{font-size:1.1rem;color:var(--fg)}
 section.dark{background:#fff var(--waves-light) center top/100% 720px no-repeat}
-#prinzipien{background:#fff var(--waves-light) center 40px/100% 620px no-repeat}
 .card{background:var(--mist)}
-#nutzung .card:first-child,.tl .card:nth-child(1){background:var(--rose)}
+.tl .card:nth-child(1){background:var(--rose)}
 .tl .card:nth-child(2){background:var(--lemon)}
 .tl .card{border-top:0;padding:32px}
 .tl .card h3,.card h3{font-weight:700;font-size:1.35rem;letter-spacing:.06em;color:var(--fg)}
-.tl .card .mono,#nutzung .card .mono{color:var(--fg)!important}
-.kern .big{font-size:1.5rem;line-height:1.6;letter-spacing:.04em;color:var(--fg)}
-.kern .big b{color:var(--fg);border-bottom:0;font-weight:700}
+.tl .card .mono{color:var(--fg)!important}
 .erwart{border-left:5px solid var(--deep);padding-left:24px;color:var(--fg)}
-.stage{border-color:var(--line)}
-.prinz{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px;border-top:0}
-.p{flex-direction:column;gap:0;align-items:flex-start;background:#fff;border:1px solid #cddbd4;padding:24px 22px 26px;min-height:210px;box-shadow:0 2px 14px rgba(15,74,60,.06)}
-.p:hover{background:#fff;border-color:var(--accent)}
-.p .n{color:var(--fg);font-size:.82rem;letter-spacing:.08em}
-.p .n::after{content:"";display:block;width:48px;height:1px;background:var(--fg);margin:22px 0 18px}
-.p>span:last-child{font-size:1.02rem;line-height:1.5}
-.p .hfs{margin-top:12px;color:var(--accent);font-weight:700;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase}
 .q{border-color:#cddbd4}
 .res-start{background:var(--panel);padding:40px 36px}
 .res-start::before{content:"";display:block;width:150px;height:5px;background:var(--yellow);margin-bottom:28px}
@@ -264,7 +368,7 @@ section.dark{background:#fff var(--waves-light) center top/100% 720px no-repeat}
 .hfpanel{border-color:#cddbd4;box-shadow:0 2px 14px rgba(15,74,60,.06)}
 .hfpanel h3{font-size:1.8rem}
 .ziel{border-left:5px solid var(--deep);padding-left:20px}
-.phases,.hfnav button{border-color:#cddbd4}
+.hfnav button{border-color:#cddbd4}
 .hfnav button[aria-selected=true]{border-top-color:var(--accent)}
 .hfnav button .start{background:var(--yellow);color:var(--fg)}
 footer{background:var(--foot);border-top:70px solid var(--deep)}
@@ -306,13 +410,18 @@ dialog .dh{background:var(--panel)}
   .d-big{font-family:var(--head);font-size:12.5pt;line-height:1.5}
   .d-big b{font-weight:400;color:var(--navy);border-bottom:.5pt solid var(--accent)}
   .d-box{border-left:1.5pt solid var(--accent);padding-left:10pt;color:var(--muted);break-inside:avoid}
-  .d-steps{display:grid;grid-template-columns:repeat(5,1fr);margin:6mm 0 0;break-inside:avoid}
-  .d-steps div{border:.5pt solid var(--line2);border-top:2pt solid var(--line2);padding:6pt 7pt;font-size:8pt;color:var(--muted)}
-  .d-steps div+div{border-left:0}
-  .d-steps b{display:block;font-size:9pt;color:var(--navy);margin:1pt 0}
-  .d-steps .d-lab{font-size:6.5pt;color:var(--soft)}
-  .d-steps .slow{border-top-color:var(--warn)}.d-steps .slow .d-lab{color:var(--warn)}
-  .d-steps .fast{border-top-color:var(--ok)}.d-steps .fast .d-lab{color:var(--ok)}
+  .d-kpts{margin:3mm 0 4mm;padding-left:14pt}
+  .d-kpts li{margin-bottom:3pt}
+  #druck .flow{margin:5mm 0;padding:8pt 10pt 6pt;box-shadow:none;break-inside:avoid}
+  #druck .flow-h h3{font-size:10pt}
+  #druck .legend{font-size:7pt;gap:3pt 10pt}
+  #druck .frow{grid-template-columns:34mm 1fr 40mm;gap:8pt;padding:5pt 0}
+  #druck .frow .lbl,#druck .frow .note{font-size:7.5pt}
+  #druck .track{height:13pt}
+  #druck .flow figcaption{font-size:7pt}
+  .d-weg{display:grid;grid-template-columns:repeat(3,1fr);gap:5mm;margin-top:5mm;break-inside:avoid}
+  .d-weg div{border-top:2pt solid var(--deep);padding-top:5pt;font-size:8.5pt;color:var(--muted)}
+  .d-weg b{display:block;font-size:10.5pt;color:var(--navy);margin:1pt 0 2pt}
   /* Prinzipien */
   .d-prinz{columns:2;column-gap:9mm;margin:0;padding:0;list-style:none;border-top:.5pt solid var(--line2)}
   .d-prinz li{display:flex;gap:8pt;padding:6pt 0;border-bottom:.5pt solid var(--line2);break-inside:avoid}
@@ -340,10 +449,11 @@ dialog .dh{background:var(--panel)}
   .d-res code{font-family:var(--mono);font-size:11pt;color:var(--navy)}
   .d-warn{background:var(--warnbg);border-left:1.5pt solid var(--warn);padding:6pt 10pt;margin:6pt 0;font-size:9pt}
   /* Handlungsfelder */
-  .d-phasen{display:grid;grid-template-columns:repeat(4,1fr);border:.5pt solid var(--line2);margin:5mm 0 0}
-  .d-phasen div{padding:5pt 8pt;font-size:7pt;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
-  .d-phasen div+div{border-left:.5pt solid var(--line2)}
-  .d-phasen b{display:block;font-family:var(--head);font-weight:400;font-size:10.5pt;letter-spacing:0;text-transform:none;color:var(--navy)}
+  .d-hfp{margin:0 0 8pt}
+  .d-hfp div{display:flex;gap:6pt;font-size:9pt;padding:2pt 0}
+  .d-hfp b{flex:none;width:20pt;color:var(--accent)}
+  .d-grenz{margin:0;padding-left:14pt}
+  .d-grenz li{margin-bottom:3pt}
   .d-hf{break-inside:avoid;margin-top:9mm;padding-top:4mm;border-top:1.5pt solid var(--navy)}
   .d-hf h3{font-size:14pt;margin:2pt 0 6pt}
   .d-hf .d-start{float:right;font-size:7pt;font-weight:700;letter-spacing:.08em;background:var(--accent);color:#fff;padding:1pt 6pt}
@@ -357,8 +467,12 @@ dialog .dh{background:var(--panel)}
   .d-hf .d-two>div.w .d-lab{color:var(--warn)}
   .d-hf .d-two .d-lab{color:var(--navy)}
   .d-fr{font-size:8.5pt;color:var(--muted);margin-top:6pt!important}
-  /* 90 Tage */
+  /* Roadmap */
   .d-tl{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+  .d-tl.d-4{grid-template-columns:repeat(4,1fr);gap:4mm}
+  .d-tl .fix{color:var(--muted);font-style:italic}
+  .d-tl small,.d-mass small{color:var(--soft);font-size:7.5pt}
+  .d-mass .d-mt{margin-left:auto;padding-left:6pt;flex:none;font-size:7.5pt;font-weight:700}
   .d-tl>div{border-top:1.5pt solid var(--navy);padding-top:6pt;break-inside:avoid}
   .d-tl h3{font-size:12pt;margin:2pt 0 4pt}
   .d-tl ul{margin:0;padding-left:12pt;font-size:9pt}
@@ -373,10 +487,10 @@ dialog .dh{background:var(--panel)}
     <a class="brand" href="#start" aria-label="Zum Anfang">Reaktionsfähigkeit</a>
     <nav class="main" aria-label="Abschnitte">
       <a href="#kern">Kernbefund</a>
-      <a href="#prinzipien">Prinzipien</a>
-      <a href="#standort">Standortbestimmung</a>
-      <a href="#felder">Handlungsfelder</a>
-      <a href="#tage">90 Tage</a>
+      <a href="#weg">Vorgehen</a>
+      <a href="#standort">1 Standort</a>
+      <a href="#tage">2 Roadmap</a>
+      <a href="#felder">3 Handlungsfelder</a>
       <a href="#grenzen">Grenzen</a>
     </nav>
   </div>
@@ -387,76 +501,81 @@ dialog .dh{background:var(--panel)}
   <div class="wrap">
     <div class="mono eyebrow">Leitfaden für die Geschäftsleitung etablierter Unternehmen</div>
     <h1>Reaktionsfähig mit agentischer KI</h1>
-    <p class="lead">Wie Ihr Unternehmen veränderte Kundenbedürfnisse wiederholt schneller erfüllt, ohne mit jedem weiteren Vorhaben langsamer zu werden.</p>
+    <p class="lead">Veränderte Kundenbedürfnisse wiederholt schneller erfüllen, ohne mit jedem Vorhaben langsamer zu werden.</p>
     <div class="cta">
-      <a class="btn primary" href="#standort">Standortbestimmung starten <span class="arr" aria-hidden="true">→</span></a>
-      <a class="btn ghost" href="#kern">Kernbefund lesen</a>
+      <a class="btn primary" href="#kern">Mit dem Kernbefund beginnen <span class="arr" aria-hidden="true">↓</span></a>
       <button class="btn ghost" onclick="buildDruck();window.print()">Als PDF sichern</button>
     </div>
     <ul class="facts">
       <li><b>12</b>Prinzipien</li>
       <li><b>14</b>Fragen zur Standortbestimmung</li>
       <li><b>6</b>Handlungsfelder</li>
-      <li><b>90</b>Tage bis zu ersten Ergebnissen</li>
+      <li><b>4</b>Etappen der Roadmap</li>
     </ul>
   </div>
 </div>
 
-<section id="nutzung">
+<section id="kern" class="dark">
   <div class="wrap">
-    <div class="grid g2">
-      <div class="card">
-        <div class="mono muted">Für wen und wozu</div>
-        <p style="margin-top:8px">Für Geschäftsleitungen mittlerer und grosser etablierter Unternehmen mit informationsdichtem Geschäftsmodell. Geschäftsleitung steht für das oberste Führungsgremium, je nach Rechtsform auch Geschäftsführung oder Vorstand. Ziel ist, veränderte Kundenbedürfnisse wiederholt schneller zu bedienen, nicht dieselbe Leistung günstiger zu erbringen. Gedacht für eine moderierte Sitzung der Geschäftsleitung von rund einem halben Tag.</p>
-      </div>
-      <div class="card">
-        <div class="mono muted">So arbeiten Sie damit</div>
-        <ol style="margin:8px 0 0;padding-left:20px">
-          <li>Kernbefund und Prinzipien vor der Sitzung lesen.</li>
-          <li>Standortbestimmung von der Geschäftsleitung und mindestens einer weiteren Führungsstufe getrennt ausfüllen lassen.</li>
-          <li>In der Sitzung die Abweichungen besprechen und das Startfeld wählen.</li>
-          <li>Mit dem Plan für die ersten 90 Tage beginnen.</li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="kern">
-  <div class="wrap">
-    <div class="sec-head"><span class="mono">01 · Kernbefund</span><h2>Der Engpass wandert</h2></div>
+    <div class="sec-head"><span class="mono">Kernbefund</span><h2>Der Engpass wandert</h2></div>
     <div class="kern">
-      <div>
-        <p class="big">Reaktionsfähig ist ein Unternehmen, wenn es verschobene Kundenbedürfnisse <b>wiederholt</b> erfüllt, ohne dass jede weitere vergleichbare Anpassung länger dauert. Umfangreichere Vorhaben dürfen länger dauern. Agentische KI beschleunigt die Ausführung. Danach bestimmen in etablierten Unternehmen <b>Entscheidung, Spezifikation und Freigabe</b> die Dauer einer Anpassung.</p>
-        <p>Wächst mit der schnelleren Ausführung die Zahl der Vorhaben und bleiben diese Stellen gleich, droht das Unternehmen mit jedem weiteren Vorhaben langsamer statt schneller zu werden. Schnelle Organisationen unterscheiden sich vor allem darin, wer entscheidet, wie geprüft wird, wie der Nutzen verbucht wird und ob Anpassungen beim Kunden beginnen. Agenten selbst können zur neuen Koordinationslast werden, wenn niemand den Überblick über sie hat.</p>
-      </div>
-      <div class="erwart">
-        <div class="mono" style="color:var(--accent)">Realistische Erwartungen</div>
-        <p style="margin-top:6px">Agentische KI nimmt der Geschäftsleitung keine Grundsatzentscheide ab und ersetzt weder eine Datenbasis noch eine Strategie. Grosse Komponenten bleiben aufwendig, schnell werden vor allem kleine Anpassungen. Nur ein kleiner Teil der Pilotvorhaben erreicht nach Einschätzung von Fachleuten den Betrieb, meist nicht wegen der Technik, sondern wegen Skalierung und überzogener Erwartungen.</p>
-      </div>
+      <p class="big">Agentische KI beschleunigt die Umsetzung. Danach bestimmen <b>Entscheidung, Spezifikation und Freigabe</b>, wie schnell ein Unternehmen auf seine Kunden reagiert.</p>
+      <ol class="kpts">
+        <li><span><b>Reaktionsfähig</b> ist, wer verschobene Kundenbedürfnisse wiederholt erfüllt, ohne dass jede vergleichbare Anpassung länger dauert.</span></li>
+        <li><span><b>Mehr Vorhaben, gleiche Organisation:</b> Entscheid und Freigabe stauen sich, das Unternehmen wird mit jedem Vorhaben langsamer. Agenten ohne Überblick erzeugen zusätzliche Koordinationslast.</span></li>
+        <li><span><b>Schnelle Organisationen</b> unterscheiden sich darin, wer entscheidet, wie geprüft und wie Nutzen verbucht wird und ob Anpassungen beim Kunden beginnen.</span></li>
+      </ol>
     </div>
-    <div class="pipe" role="list" aria-label="Weg einer Anpassung">
-      <div class="stage" role="listitem"><span class="mono">Schritt 1</span><b>Signal erkennen</b><small>Kundenkontakt, Anfragen, Beschwerden</small></div>
-      <div class="stage slow" role="listitem"><span class="mono">Engpass</span><b>Entscheiden</b><small>Wer entscheidet, mit welcher Frist?</small></div>
-      <div class="stage slow" role="listitem"><span class="mono">Engpass</span><b>Spezifizieren und freigeben</b><small>Sicherheit, Recht, Datenschutz, Gremien</small></div>
-      <div class="stage fast" role="listitem"><span class="mono">Agentisch beschleunigt</span><b>Umsetzen</b><small>Tage statt Wochen, bei kleinen Anpassungen</small></div>
-      <div class="stage" role="listitem"><span class="mono">Schritt 5</span><b>Beim Kunden einführen</b><small>Kann der Kunde mithalten?</small></div>
+    <figure class="flow" aria-labelledby="flow-t">
+      <div class="flow-h">
+        <h3 id="flow-t">Dauer einer Anpassung</h3>
+        <div class="legend">
+          <span><i class="s1"></i>Signal erkennen</span><span><i class="s2"></i>Entscheiden</span><span><i class="s3"></i>Spezifizieren, freigeben</span><span><i class="s4"></i>Umsetzen</span><span><i class="s5"></i>Beim Kunden einführen</span><span><i class="s3 wait"></i>Warteschlange</span>
+        </div>
+      </div>
+      <div id="flowrows"></div>
+      <figcaption class="hint">Schematische Darstellung des Kernbefunds, keine Messwerte. Gestrichelte Linie: Dauer ohne Agenten.</figcaption>
+    </figure>
+    <div class="erwart">
+      <div class="mono" style="color:var(--accent)">Realistische Erwartungen</div>
+      <p style="margin-top:6px">Agentische KI ersetzt weder Grundsatzentscheide noch Datenbasis oder Strategie. Schnell werden vor allem kleine Anpassungen. Nur wenige Pilotvorhaben erreichen den Betrieb, meist wegen Skalierung und überzogener Erwartungen, nicht wegen der Technik.</p>
+    </div>
+    <div class="cta-band">
+      <div>
+        <div class="mono">Nächster Schritt</div>
+        <h3>Wo steht Ihr Unternehmen?</h3>
+        <p>14 Fragen, getrennt je Führungsstufe. Daraus entstehen die Prioritäten, die Massnahmen und eine Roadmap für Ihr Unternehmen.</p>
+      </div>
+      <div class="cta-btns">
+        <a class="btn primary" href="#standort">Standortbestimmung starten <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="#weg">Vorgehen ansehen</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="prinzipien">
+<section id="weg">
   <div class="wrap">
-    <div class="sec-head"><span class="mono">02 · Prinzipien</span><h2>Zwölf Prinzipien</h2></div>
-    <p class="intro">Ein Klick auf ein Prinzip führt zum Handlungsfeld, in dem es umgesetzt wird.</p>
-    <div class="prinz" id="prinzliste"></div>
+    <div class="sec-head"><span class="mono">Vorgehen</span><h2>In drei Schritten zur Roadmap</h2></div>
+    <div class="weg">
+      <a class="step" href="#standort"><span class="num">1</span><h3>Standort bestimmen</h3><p>14 Fragen, je Führungsstufe getrennt beantwortet. Abweichungen zwischen den Stufen sind ein Befund.</p><div class="viz sq" id="viz1" aria-hidden="true"></div><div class="st" id="st1"></div></a>
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h17m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+      <a class="step" href="#tage"><span class="num">2</span><h3>Roadmap</h3><p>Die Antworten ordnen die Handlungsfelder und verteilen Beschlusspakete und Vorhaben auf vier Etappen.</p><div class="viz rmini" id="viz2" aria-hidden="true"></div><div class="st" id="st2"></div></a>
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h17m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+      <a class="step" href="#felder"><span class="num">3</span><h3>Handlungsfelder</h3><p>Nachschlagewerk: Prinzipien, Massnahmen, Indikator und Warnsignal je Feld.</p><div class="viz pchips" id="viz3" aria-hidden="true"></div><div class="st" id="st3"></div></a>
+    </div>
+    <div class="weg-meta">
+      <div><b>Für wen</b>Geschäftsleitungen etablierter Unternehmen mit informationsdichtem Geschäftsmodell</div>
+      <div><b>Vor der Sitzung</b>Kernbefund lesen, Schritt 1 je Führungsstufe getrennt ausfüllen</div>
+      <div><b>In der Sitzung, rund ein halber Tag</b>Abweichungen besprechen, Startfeld wählen, Roadmap beschliessen</div>
+    </div>
   </div>
 </section>
 
 <section id="standort">
   <div class="wrap">
-    <div class="sec-head"><span class="mono">03 · Standortbestimmung</span><h2>Wo steht Ihr Unternehmen heute?</h2></div>
-    <p class="intro">Vierzehn Fragen, getrennt beantwortet von der Geschäftsleitung und mindestens einer weiteren Führungsstufe. Abweichungen zwischen den Stufen sind ein Befund. Massgeblich ist der heutige Zustand, nicht die Absicht. Wer eine Frage nur mit einer Einschätzung statt mit einem Fall oder einer Zahl beantworten kann, wählt die tiefere Stufe.</p>
+    <div class="sec-head"><span class="mono">Schritt 1 · Standortbestimmung</span><h2>Wo steht Ihr Unternehmen heute?</h2></div>
+    <p class="intro">Massgeblich ist der heutige Zustand, nicht die Absicht. Wer statt eines Falls oder einer Zahl nur eine Einschätzung hat, wählt die tiefere Stufe.</p>
     <div class="tabs" role="tablist">
       <button role="tab" data-v="fragen" aria-selected="true">1 · Fragen</button>
       <button role="tab" data-v="ergebnis" aria-selected="false">2 · Ergebnis</button>
@@ -495,50 +614,57 @@ dialog .dh{background:var(--panel)}
   </div>
 </section>
 
-<section class="dark" id="felder">
+<section class="dark" id="tage">
   <div class="wrap">
-    <div class="sec-head"><span class="mono">04 · Handlungsfelder</span><h2>Sechs Handlungsfelder</h2></div>
-    <p class="intro">Die Felder folgen den vier Phasen Initiierung, Ideenfindung, Integration und Implementierung. Jedes nennt Ziel, Massnahmen, einen Indikator und ein Warnsignal.<span class="no-print"> Erledigte Massnahmen können Sie abhaken, der Stand bleibt in diesem Browser.</span></p>
-    <div class="phases">
-      <div class="phase">Phase 1<b>Initiierung</b></div>
-      <div class="phase">Phase 2<b>Ideenfindung</b></div>
-      <div class="phase">Phase 3<b>Integration</b></div>
-      <div class="phase">Phase 4<b>Implementierung</b></div>
-    </div>
-    <div class="hfnav" role="tablist" id="hfnav"></div>
-    <div id="hfpanel"></div>
-  </div>
-</section>
-
-<section id="tage">
-  <div class="wrap">
-    <div class="sec-head"><span class="mono">05 · Vorgehen</span><h2>Die ersten 90 Tage</h2></div>
-    <div class="tl">
-      <div class="card"><div class="mono" style="color:var(--accent)">Tage 1 bis 30</div><h3>Standort</h3><ul>
+    <div class="sec-head"><span class="mono">Schritt 2 · Roadmap</span><h2>Ihre Roadmap</h2></div>
+    <p class="intro">Die Roadmap folgt aus Ihren Antworten in Schritt 1 und aktualisiert sich laufend. Ein Klick auf ein Feld, ein Paket oder ein Vorhaben öffnet die Details.</p>
+    <h3 class="rm-h">Rangfolge der Handlungsfelder</h3>
+    <div class="prio compact" id="prioliste"></div>
+    <div class="prio-leg"><span><span class="lvl v">Voraussetzung</span> F1 oder F2 auf A</span><span><span class="lvl h">Hoch</span> mindestens eine A-Antwort</span><span><span class="lvl m">Mittel</span> nur B und C</span><span><span class="lvl g">Gering</span> nur C</span></div>
+    <h3 class="rm-h">Etappen</h3>
+    <p class="hint" id="rm-intro"></p>
+    <div id="roadmap"></div>
+    <div class="tl" id="tl-generic">
+      <div class="card"><div class="mono" style="color:var(--accent)">Etappe 1</div><h3>Standort</h3><ul>
         <li>Lernsitzung der Geschäftsleitung im geschützten Rahmen</li>
         <li>Standortbestimmung über mindestens zwei Führungsstufen</li>
         <li>Verantwortung einem GL-Mitglied zuordnen</li>
         <li>Zahlen zu F8 und F10 beschaffen</li></ul></div>
-      <div class="card"><div class="mono" style="color:var(--accent)">Tage 31 bis 60</div><h3>Zielbild</h3><ul>
+      <div class="card"><div class="mono" style="color:var(--accent)">Etappe 2</div><h3>Zielbild</h3><ul>
         <li>Festlegen, was agentische KI bewirken soll und was nicht</li>
         <li>Entscheidungsmatrix für die drei häufigsten Anpassungstypen</li>
         <li>Durchsatz der Freigabestellen messen</li>
         <li>Erprobungsteam mit GL-Auftrag bilden</li>
         <li>Agentenregister anlegen</li>
         <li>Zwischenrunde der Standortbestimmung in der Geschäftsleitung mit Vergleich zur ersten Runde</li></ul></div>
-      <div class="card"><div class="mono" style="color:var(--accent)">Tage 61 bis 90</div><h3>Erste Ergebnisse</h3><ul>
+      <div class="card"><div class="mono" style="color:var(--accent)">Etappe 3</div><h3>Erste Ergebnisse</h3><ul>
         <li>Zwei kleine, messbare Vorhaben mit Enddatum und Abbruchkriterium starten, ausgehend von einem Kundensignal</li>
         <li>Erstes geklärtes Thema an die Linie übergeben</li>
         <li>Portfolio mit Liste der nicht verfolgten Vorhaben beschliessen</li>
-        <li>Zweite vollständige Runde der Standortbestimmung über alle Führungsstufen, danach quartalsweise</li></ul></div>
+        <li>Zweite vollständige Runde der Standortbestimmung über alle Führungsstufen, danach regelmässig</li></ul></div>
     </div>
+  </div>
+</section>
+
+<section id="felder">
+  <div class="wrap">
+    <div class="sec-head"><span class="mono">Schritt 3 · Handlungsfelder</span><h2>Prinzipien und Massnahmen im Detail</h2></div>
+    <p class="intro">Nachschlagewerk zur Roadmap: je Feld Prinzipien, Ziel, alle Massnahmen mit Ihrer Antwortstufe, Indikator und Warnsignal.<span class="no-print"> Erledigte Massnahmen lassen sich abhaken; die Roadmap passt sich an.</span></p>
+    <div class="hfnav" role="tablist" id="hfnav"></div>
+    <div id="hfpanel"></div>
+    <div class="pstrip" id="pstrip"></div>
   </div>
 </section>
 
 <section id="grenzen">
   <div class="wrap">
-    <div class="sec-head"><span class="mono">06 · Grenzen</span><h2>Wofür der Leitfaden nicht gilt</h2></div>
-    <p class="intro" style="color:var(--fg)">Der Leitfaden gilt nicht für sicherheitskritische Systeme, deren Korrektheit garantiert sein muss, und nicht für Branchen, deren Produktentwicklung einer Zulassungspflicht unterliegt. Er beruht auf der Literatur und auf elf Experteninterviews, davon zwei mit AI-First Firms. Für Dienstleister, die nach Aufwand abrechnen, begrenzt das Ertragsmodell, wie weit sich die Empfehlungen umsetzen lassen. Die Wirkung des Leitfadens ist nicht gemessen, die Nutzenerwartung wird in der Validierung erhoben. Die Kosten agentischer Systeme werden nicht bewertet.</p>
+    <div class="sec-head"><span class="mono">Grenzen</span><h2>Wofür der Leitfaden nicht gilt</h2></div>
+    <div class="grenz">
+      <div><b>Geltungsbereich</b>Nicht für sicherheitskritische Systeme mit garantierter Korrektheit und nicht für zulassungspflichtige Produktentwicklung.</div>
+      <div><b>Grundlage</b>Literatur und elf Experteninterviews, davon zwei mit AI-First Firms.</div>
+      <div><b>Ertragsmodell</b>Wer nach Aufwand abrechnet, kann die Empfehlungen nur begrenzt umsetzen.</div>
+      <div><b>Wirkung und Kosten</b>Wirkung nicht gemessen, die Nutzenerwartung wird in der Validierung erhoben. Kosten agentischer Systeme nicht bewertet.</div>
+    </div>
   </div>
 </section>
 
@@ -554,7 +680,7 @@ dialog .dh{background:var(--panel)}
 
 <dialog id="dlg">
   <div class="dh"><div class="mono" id="dlg-n"></div><h3 id="dlg-t" style="margin:6px 0 0"></h3></div>
-  <div class="db"><p id="dlg-b" class="muted"></p><div class="row" id="dlg-r"></div></div>
+  <div class="db"><div id="dlg-b" class="muted"></div><div class="row" id="dlg-r"></div></div>
 </dialog>
 
 <script>
@@ -668,6 +794,26 @@ const Q=[
  {g:"Umbauen",id:"F12",t:"Wo wird Neues erprobt, und wie gelangt es in die Linie?",o:["in einzelnen Initiativen","in einem zentralen Team ohne Übergabe","in einem Team mit GL-Auftrag und festgelegter Übergabe"],hf:5},
  {g:"Umbauen",id:"F13",t:"Könnten Sie die Aufgaben Ihrer Agenten bei Bedarf auch ohne Agent selbst erledigen, und vergleichen Sie Ergebnisse stichprobenweise?",o:["nein","teilweise","ja, regelmässig geübt"],hf:6},
  {g:"Umbauen",id:"F14",t:"Woran wird der Nutzen eines Vorhabens gemessen?",o:["an wegfallenden Stellen oder gar nicht","an gesparter Zeit, ohne Entscheid über frei werdende Kapazität","an Ergebnissen für Kunden, mit vorab vereinbarter Verwendung der Kapazität"],hf:6}];
+/* Massnahme -> Fragen der Standortbestimmung (leerzeichengetrennt), Kurztitel, [alt = Alternative, nicht in die Roadmap] */
+const MQ={
+ 1:[["F1","GL nutzt selbst Agenten"],["F1","Geschützte Weiterbildung der GL"],["F1","Grundkompetenz im Aufsichtsgremium"],["F2","Verantwortung bei einem GL-Mitglied"],["F1","Erwartungen schriftlich festhalten"]],
+ 2:[["F4","Kundensignale wöchentlich zusammenführen"],["F4 F6","Kundenwissen ins System"],["F3","Portfolio quartalsweise, mit Liste des Nicht-Verfolgten"],["F3","Früher, günstiger Prototyp"],["F3","Experimente mit Enddatum und Abbruchkriterium"],["F5","Reaktionsschwelle je Angebot"]],
+ 3:[["F7","Entscheidungsmatrix mit Fristen"],["F7","Stellungnahmen auf Betroffene beschränken"],["F7 F10","Einführung ohne Warten auf Sitzungen"],["F8","Warteschlange und Durchsatz der Freigabestellen messen"],["F8","Freigabestellen agentisch unterstützen"],["F8","Prüftiefe festlegen und Prüfschwelle überprüfen"],["F10","Produktverantwortung mitwachsen lassen"],["F10","Schnittstellen einmal bauen, wiederverwenden"],["F9","Betriebsbudget beim Prozessbereich"],["F10","Einführung beim Kunden mitplanen"],["F7","Kundennahe Rollen setzen Kleineres selbst um"]],
+ 4:[["F11","Governance-Prüfung zu Beginn"],["F11","Datenprodukte mit verantwortlicher Stelle"],["F11","Schutzklassen für Daten"],["F11","Agentenregister mit Eigner und Stilllegungsregel"],["F11","Dashboards, Alerts und Protokolle"],["F11","Zugriffsregeln für Agenten neu fassen"],["F11 F9","Wenige Plattformen"],["F11","Prozesse vom Agenten her entwerfen"]],
+ 5:[["F12","Erprobungsteam mit GL-Auftrag"],["F12","Alternativ: virtuelles Team",1],["F12","Geschützte Testumgebungen"],["F12","Geklärtes an die Linie übergeben"],["F12","Skalierung als GL-Entscheid"],["F12","Champions in den Bereichen"],["F12","Kompetenzentwicklung messen"]],
+ 6:[["F13","Autonomie nach Schadenspotenzial"],["F13","Keine Zusagen durch Agenten"],["F13","Widerspruch der Prüfenden auswerten"],["F13","Aufgaben auch ohne Agent beherrschen"],["F13","Nachwuchs führt Aufgaben selbst aus"],["F14","Betroffene als Lehrende einbinden"],["F14","Verwendung frei werdender Kapazität vereinbaren"],["F14","Neue Aufgabe und Anerkennung"],["F14","Nutzen an Kundenergebnissen messen"],["F14","Abrechnung nach Ergebnis prüfen"]]};
+/* Art je Massnahme: R = Regel oder Standard (beschliessen), W = Vorhaben mit kleinem Aufwand, M = Vorhaben mit grossem Aufwand */
+const TYP={1:"WWWRR",2:"MMRRRW",3:"RRRWMRMMRRR",4:"RMRWMRRR",5:"WWMRRWW",6:"RRRMRRRRRM"};
+const mtyp=(k,i)=>TYP[k][i], EFF={W:"Aufwand klein",M:"Aufwand gross"}, COST={W:1,M:2};
+/* Beschlusspakete: bündeln alle Regeln (R) zu sechs Beschlüssen der Geschäftsleitung, [Handlungsfeld, Massnahme] */
+const PAK=[
+ {n:1,t:"Mandat der Geschäftsleitung",d:"Wer in der Geschäftsleitung verantwortet agentische KI und was die Geschäftsleitung von Vorhaben erwartet.",m:[[1,3],[1,4]]},
+ {n:2,t:"Lebenszyklus der Vorhaben",d:"Wie Vorhaben aufgenommen, erprobt, beendet, skaliert und an die Linie übergeben werden.",m:[[2,2],[2,3],[2,4],[5,4],[5,3]]},
+ {n:3,t:"Entscheidungs- und Freigabeordnung",d:"Wer mit welcher Frist entscheidet, wer angehört wird, wie tief geprüft wird und wie der Weg bis zum Kunden aussieht.",m:[[3,0],[3,1],[3,2],[3,5],[3,9],[3,10]]},
+ {n:4,t:"Policy für Agenten und Daten",d:"Governance ab Projektbeginn, Schutzklassen, Zugriffsregeln, Plattformen und agentengerechter Prozessentwurf.",m:[[4,0],[4,2],[4,5],[4,6],[4,7]]},
+ {n:5,t:"Autonomie und Kontrolle",d:"Wie viel Agenten selbst entscheiden dürfen und wie die menschliche Kontrolle echt bleibt.",m:[[6,0],[6,1],[6,2],[6,4]]},
+ {n:6,t:"Nutzen, Kapazität und Menschen",d:"Wo Kosten und Nutzen verbucht werden, wofür frei werdende Kapazität eingesetzt wird und wie Betroffene mitwirken.",m:[[3,8],[6,8],[6,6],[6,7],[6,5]]}];
+const PKOF={};PAK.forEach(p=>p.m.forEach(([k,i])=>PKOF[k+"-"+i]=p.n));
 const L="ABC", STUFE={GL:"Geschäftsleitung",F2:"Zweite Führungsstufe",F3:"Dritte Führungsstufe"};
 
 /* ---------- Speicher (nur dieser Browser) ---------- */
@@ -678,12 +824,99 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-/* ---------- Prinzipien ---------- */
-function renderPrinzipien(){
- $("#prinzliste").innerHTML=P.map((t,i)=>`<button class="p" data-p="${i+1}"><span class="n">P${i+1}</span><span>${esc(t)}<span class="hfs">→ Handlungsfeld ${PHF[i].join(", ")}</span></span></button>`).join("");
- $("#prinzliste").querySelectorAll(".p").forEach(b=>b.onclick=()=>{const i=+b.dataset.p;openHF(PHF[i-1][0]);});
+/* ---------- Kernbefund-Grafik (schematisch) ---------- */
+const STG=["","Signal erkennen","Entscheiden","Spezifizieren, freigeben","Umsetzen","Beim Kunden einführen"];
+const FLOW=[
+ {l:"Ohne Agenten",s:"Ausgangslage",seg:[[1,8],[2,14],[3,18],[4,42],[5,10]],n:"Umsetzen ist der Engpass",d:""},
+ {l:"Mit Agenten",s:"Organisation unverändert",seg:[[1,8],[2,14],[3,18],[4,8],[5,10]],n:"Engpass wandert",d:"zu Entscheid und Freigabe"},
+ {l:"Mit Agenten, mehr Vorhaben",s:"Organisation unverändert",seg:[[1,8],[2,14],[2,12,1],[3,18],[3,24,1],[4,8],[5,10]],n:"Langsamer als ohne Agenten",d:"Warteschlangen an Entscheid und Freigabe",c:"bad"},
+ {l:"Mit Agenten, mehr Vorhaben",s:"Organisation wächst mit",seg:[[1,5],[2,5],[3,9],[4,8],[5,8]],n:"Wiederholt schneller",d:"Entscheidungsrechte, Prüfkapazität, Kundensignale",c:"good"}];
+const REF=FLOW[0].seg.reduce((s,x)=>s+x[1],0);
+function renderFlow(){
+ $("#flowrows").innerHTML=FLOW.map(r=>`<div class="frow ${r.c||""}"><div class="lbl">${r.l}<small>${r.s}</small></div><div class="track">${r.seg.map(([k,w,q])=>`<span class="seg s${k}${q?" wait":""}" style="width:${w}%" title="${STG[k]}${q?", Warteschlange":""}"></span>`).join("")}<i class="ref" style="left:${REF}%"></i></div><div class="note"><b>${r.n}</b>${r.d}</div></div>`).join("");
 }
 
+/* ---------- Priorisierung ---------- */
+const VAL={A:2,B:1,C:0}, LVL={v:"Voraussetzung",h:"Hoch",m:"Mittel",g:"Gering",o:"Offen"};
+function rang(a){
+ const pre=a.F1==="A"||a.F2==="A";
+ const r=Object.keys(HF).map(Number).map(k=>{const qs=Q.filter(q=>q.hf===k),an=qs.filter(q=>a[q.id]),nA=an.filter(q=>a[q.id]==="A").length;
+  return{k,nA,sA:nA/qs.length,need:an.length?an.reduce((s,q)=>s+VAL[a[q.id]],0)/(2*an.length):null,pre:pre&&k===1};});
+ r.sort((x,y)=>(y.pre-x.pre)||((y.need!==null)-(x.need!==null))||(y.nA-x.nA)||(y.sA-x.sA)||((y.need||0)-(x.need||0))||(x.k-y.k));
+ r.forEach(x=>x.lvl=x.pre?"v":x.need===null?"o":x.nA?"h":x.need>0?"m":"g");
+ return r;}
+const nAns=()=>Q.filter(q=>S.ans[q.id]).length;
+const vollst=()=>nAns()===Q.length;
+const order=()=>rang(S.ans).map(x=>x.k);
+const startHF=()=>vollst()?startfeld(S.ans).hf:null;
+function renderPrio(){
+ const r=rang(S.ans),n=nAns(),st=startHF();
+ let h=n?(n<Q.length?`<p class="hint" style="margin:0 0 6px">Vorläufig, ${n} von ${Q.length} Fragen beantwortet.</p>`:""):`<div class="warnbox" style="margin:0 0 6px">Noch keine Antworten. Die Reihenfolge entsteht aus <a href="#standort">Schritt 1</a>, bis dahin gilt die Grundreihenfolge.</div>`;
+ h+=r.map((x,i)=>{const f=HF[x.k],qs=Q.filter(q=>q.hf===x.k);
+  return `<button class="prow${st===x.k?" top":""}" data-h="${x.k}"><span class="rk">${i+1}</span><span class="tt"><small>HF ${x.k} · ${f.ph}${st===x.k?" · Startfeld":""}</small><b>${esc(f.t)}</b></span><span class="ans">${qs.map(q=>{const a=S.ans[q.id];return `<span class="tag t${a||"X"}">${q.id} ${a||"·"}</span>`;}).join(" ")}</span><span class="need" title="Handlungsbedarf"><span style="width:${Math.round(100*(x.need||0))}%"></span></span><span class="lvl ${x.lvl}">${LVL[x.lvl]}</span></button>`;}).join("");
+ $("#prioliste").innerHTML=h;
+ $("#prioliste").querySelectorAll(".prow").forEach(b=>b.onclick=()=>openHF(+b.dataset.h));
+}
+function renderWeg(){
+ const n=nAns(),r=rang(S.ans),st=startHF();
+ $("#viz1").innerHTML=Q.map(q=>`<i class="${S.ans[q.id]||""}"></i>`).join("");
+ $("#st1").textContent=`${n} von ${Q.length} beantwortet`;
+ if(n){const R=roadmap();$("#viz2").innerHTML=R.w.map(W=>`<div><b>${W.fund.length+W.rules.length+W.it.length}</b>${W.n}</div>`).join("");$("#st2").textContent=(st?`Startfeld HF ${st} · `:"")+`${R.nr} ${R.nr===1?"Paket":"Pakete"}, ${R.plan} Vorhaben`;}
+ else{$("#viz2").innerHTML=WAVES.map(W=>`<div><b>·</b>${W.n}</div>`).join("");$("#st2").textContent="Entsteht aus Schritt 1";}
+ const fk=st||S.hf;$("#viz3").innerHTML=P.map((_,i)=>`<i class="${HF[fk].p.includes(i+1)?"on":""}">P${i+1}</i>`).join("");
+ const tot=Object.values(HF).reduce((s,f)=>s+f.m.length,0),done=Object.keys(S.chk).filter(k=>S.chk[k]).length;
+ $("#st3").textContent=`${done} von ${tot} Massnahmen erledigt`;
+}
+/* ---------- Massnahmen nach Fragen priorisieren ---------- */
+// ungünstigste Antwort unter den verknüpften Fragen: {q,a} oder null
+function mworst(k,i){let w=null;MQ[k][i][0].split(" ").forEach(q=>{const a=S.ans[q];if(a&&(!w||a<w.a))w={q,a};});return w;}
+const mlv=(k,i)=>{const w=mworst(k,i);return w?"ABC".indexOf(w.a):3;};
+function mtag(k,i){const w=mworst(k,i);return w?`<span class="tag t${w.a}">${w.q} ${w.a}</span>`:`<span class="tag tX">${MQ[k][i][0].split(" ")[0]} ·</span>`;}
+
+/* ---------- Roadmap ---------- */
+const WAVES=[
+ {t:"Etappe 1",n:"Klären",cap:3,fix:a=>["Abweichungen zwischen den Führungsstufen besprechen, Startfeld beschliessen"].concat(a.F8==="A"||a.F10==="A"?["Fehlende Zahlen zu "+["F8","F10"].filter(q=>a[q]==="A").join(" und ")+" beschaffen"]:[])},
+ {t:"Etappe 2",n:"Starten",cap:5,fix:()=>["Zwei kleine, messbare Vorhaben ab einem Kundensignal starten, mit Enddatum und Abbruchkriterium","Zwischenrunde der Standortbestimmung in der Geschäftsleitung"]},
+ {t:"Etappe 3",n:"Ausweiten",cap:6,fix:()=>["Zweite vollständige Runde der Standortbestimmung über alle Führungsstufen"]},
+ {t:"Etappe 4",n:"Verankern",cap:6,fix:()=>["Standortbestimmung regelmässig wiederholen, Roadmap an den Indikatoren überprüfen"]}];
+function roadmap(){
+ const rf=rang(S.ans).map(x=>x.k),rk=k=>rf.indexOf(k);
+ const all=[];Object.keys(HF).map(Number).forEach(k=>MQ[k].forEach((m,i)=>{if(!m[2])all.push({k,i,t:mtyp(k,i),lv:mlv(k,i),done:!!S.chk[k+"-"+i]});}));
+ // Fundament (Phase Initiierung): Befähigung der GL immer in Etappe 1, solange F1 nicht auf C steht; ausserhalb der Kapazität
+ const fund=all.filter(x=>x.k===1&&x.t!=="R"&&x.lv<=1&&!x.done);
+ // Regeln: Paket 1 (Mandat der GL) immer in Etappe 1, übrige Pakete mit A in Etappe 1, mit B in Etappe 2
+ const pk=PAK.map(pakStand), rules=pk.filter(p=>p.lv<=1&&!p.done);
+ // Vorhaben: je Stufe (A, dann B) reihum über die Felder in Prioritätsreihenfolge, verteilt nach Aufwandspunkten
+ const proj=[0,1].flatMap(lv=>{const g=rf.filter(k=>k!==1).map(k=>all.filter(x=>x.k===k&&x.t!=="R"&&x.lv===lv&&!x.done));const out=[];while(g.some(a=>a.length))g.forEach(a=>{if(a.length)out.push(a.shift());});return out;});
+ let p=0;const w=WAVES.map((W,j)=>{const it=[];let pts=0;while(p<proj.length&&pts+COST[proj[p].t]<=W.cap){pts+=COST[proj[p].t];it.push(proj[p++]);}
+  return{t:W.t,n:W.n,fix:W.fix(S.ans),fund:j===0?fund:[],rules:j===0?rules.filter(x=>x.n===1||x.lv===0):j===1?rules.filter(x=>x.n!==1&&x.lv===1):[],it};});
+ return{w,rest:proj.length-p,keep:all.filter(x=>x.t!=="R"&&x.lv===2&&!x.done).length,done:all.filter(x=>x.done).length,plan:p+fund.length,nr:rules.length,pkC:pk.filter(p=>p.lv===2&&!p.done).length,pkD:pk.filter(p=>p.done).length};
+}
+// Stand eines Pakets: ungünstigste Antwort unter den offenen Regeln, erledigt wenn alle Regeln abgehakt
+function pakStand(p){const off=p.m.filter(([k,i])=>!S.chk[k+"-"+i]);let w=null;off.forEach(([k,i])=>{const x=mworst(k,i);if(x&&(!w||x.a<w.a))w=x;});
+ const qs=[...new Set(p.m.flatMap(([k,i])=>MQ[k][i][0].split(" ")))].sort((a,b)=>+a.slice(1)-+b.slice(1));
+ return{...p,done:!off.length,w,lv:w?"ABC".indexOf(w.a):3,qs,off:off.length};}
+function openPaket(n){const p=pakStand(PAK[n-1]),d=$("#dlg");
+ $("#dlg-n").textContent=`Beschlusspaket ${p.n} · ${p.qs.join(", ")}`;$("#dlg-t").textContent=p.t;
+ $("#dlg-b").innerHTML=`<p>${esc(p.d)}</p><ul class="mass">${p.m.map(([k,i])=>`<li class="${S.chk[k+"-"+i]?"chk":""}"><span style="flex:1"><b style="color:var(--fg)">${esc(MQ[k][i][1])}</b> <small class="hint">HF ${k}</small></span>${mtag(k,i)}</li>`).join("")}</ul><p class="hint" style="margin-top:10px">Die Regeln sind in den Handlungsfeldern einzeln abhakbar. Das Paket gilt als erledigt, wenn alle abgehakt sind.</p>`;
+ $("#dlg-r").innerHTML=[...new Set(p.m.map(([k])=>k))].map(k=>`<button class="btn small primary" data-h="${k}">HF ${k}</button>`).join("")+`<button class="btn small">Schliessen</button>`;
+ $("#dlg-r").querySelectorAll("button").forEach(b=>b.onclick=()=>{d.close();if(b.dataset.h)openHF(+b.dataset.h);});
+ if(d.showModal)d.showModal();}
+function renderRoadmap(){
+ const n=nAns();$("#tl-generic").hidden=n>0;
+ if(!n){$("#rm-intro").innerHTML=`Noch keine Antworten. Bis zur <a href="#standort">Standortbestimmung</a> gilt der allgemeine Plan für den Einstieg.`;$("#roadmap").innerHTML="";return;}
+ const R=roadmap();
+ $("#rm-intro").textContent=(n<Q.length?`Vorläufig, ${n} von ${Q.length} Fragen beantwortet. `:"")+"Die Befähigung der Geschäftsleitung ist Fundament und steht immer in Etappe 1, ebenso das Mandat der Geschäftsleitung. Die übrigen Beschlusspakete folgen mit einer A-Antwort in Etappe 1, mit B-Antworten in Etappe 2. Vorhaben folgen nach Aufwand, zuerst A, dann B, abwechselnd über die Handlungsfelder ab dem Startfeld. Erledigtes fällt heraus.";
+ const pak=p=>`<li><button class="rmi rule pkg ${p.w.a}" data-p="${p.n}" title="${esc(p.d)}"><b>${p.n} · ${esc(p.t)}</b><small>${p.off} ${p.off>1?"offene Regeln":"offene Regel"} · ${p.qs.join(", ")} · ungünstigste ${p.w.q} ${p.w.a}</small></button></li>`;
+ const it=(x,cls)=>`<li><button class="rmi ${cls} ${"ABC"[x.lv]}" data-h="${x.k}" title="${esc(HF[x.k].m[x.i])}"><b>${esc(MQ[x.k][x.i][1])}</b><small>HF ${x.k} · ${mworst(x.k,x.i).q} ${"ABC"[x.lv]}${x.t!=="R"?` · <em class="eff ${x.t}">${EFF[x.t]}</em>`:""}</small></button></li>`;
+ $("#roadmap").innerHTML=`<div class="rm">${R.w.map(W=>`<div class="rmw"><div class="mono">${W.t}</div><h3>${W.n}</h3><ul>${W.fix.map(t=>`<li class="fix">${esc(t)}</li>`).join("")}
+   ${W.fund.length?`<li class="sub">Fundament · Geschäftsleitung befähigen</li>${W.fund.map(x=>it(x,"fund")).join("")}`:""}
+   ${W.rules.length?`<li class="sub">Beschliessen · ${W.rules.length} ${W.rules.length>1?"Pakete":"Paket"}</li>${W.rules.map(pak).join("")}`:""}
+   ${W.it.length?`<li class="sub">Umsetzen · ${W.it.length} Vorhaben</li>${W.it.map(x=>it(x,"")).join("")}`:""}</ul></div>`).join("")}</div>
+  <p class="hint rm-foot">Kapazität je Etappe in Aufwandspunkten 3, 5, 6, 6; ein Vorhaben mit grossem Aufwand zählt doppelt. ${R.rest?`${R.rest} weitere Vorhaben mittlerer Priorität folgen nach Etappe 4. `:""}${R.pkC?`${R.pkC} ${R.pkC>1?"Pakete sind":"Paket ist"} bereits geregelt (Stufe C). `:""}${R.keep} Vorhaben sind bereits auf Stufe C: halten und stichprobenweise prüfen.${R.done?` ${R.done} ${R.done>1?"Massnahmen":"Massnahme"} erledigt.`:""} Gestrichelt: fester Rhythmus der Standortbestimmung.</p>`;
+ $("#roadmap").querySelectorAll(".rmi").forEach(b=>b.onclick=()=>b.dataset.p?openPaket(+b.dataset.p):openHF(+b.dataset.h));
+}
+function update(){renderWeg();renderPrio();renderHFNav();renderHF();renderRoadmap();}
 /* ---------- Standortbestimmung ---------- */
 function renderFragen(){
  const box=$("#fragen");let g="",h="";
@@ -692,30 +925,27 @@ function renderFragen(){
   h+=`<fieldset class="q${S.ans[q.id]?" done":""}" style="border:1px solid var(--line)"><legend class="qt" style="padding:0"><span class="id">${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></legend><div class="opts">${q.o.map((o,k)=>`<label class="opt"><input type="radio" name="${q.id}" value="${L[k]}" ${S.ans[q.id]===L[k]?"checked":""}><span><i>${L[k]}</i>${esc(o)}</span></label>`).join("")}</div></fieldset>`;
  });
  box.innerHTML=h;
- box.querySelectorAll("input").forEach(el=>el.addEventListener("change",e=>{S.ans[e.target.name]=e.target.value;e.target.closest(".q").classList.add("done");save();stand();}));
+ box.querySelectorAll("input").forEach(el=>el.addEventListener("change",e=>{S.ans[e.target.name]=e.target.value;e.target.closest(".q").classList.add("done");save();stand();update();}));
  $("#stufe").value=S.stufe;stand();
 }
 function stand(){const n=Q.filter(q=>S.ans[q.id]).length;$("#stand").textContent=`${n} von ${Q.length} beantwortet`;$("#meter").style.width=(100*n/Q.length)+"%";}
 function code(stufe,a){return "RF1-"+stufe+"-"+Q.map(q=>a[q.id]||"-").join("");}
 function parse(c){const m=c.trim().toUpperCase().match(/^RF1-(GL|F2|F3)-([ABC-]{14})$/);if(!m)return null;const a={};Q.forEach((q,i)=>{if(m[2][i]!=="-")a[q.id]=m[2][i];});return{stufe:m[1],a};}
 function startfeld(a){
- if(a.F1==="A"||a.F2==="A")return{hf:1,grund:"F1 oder F2 ist mit A beantwortet. Alle übrigen Felder setzen Entscheide der Geschäftsleitung voraus."};
- let best=null,bn=-1,bs=-1;
- for(let h=1;h<=6;h++){const qs=Q.filter(q=>q.hf===h);const n=qs.filter(q=>a[q.id]==="A").length;const s=n/qs.length;if(n>bn||(n===bn&&s>bs)){bn=n;bs=s;best=h;}}
- if(bn<=0)return{hf:null,grund:"Keine Antwort auf Stufe A. Das Startfeld wird in der Sitzung anhand der B-Antworten festgelegt."};
- return{hf:best,grund:"Meiste A-Antworten. Bei Gleichstand entscheidet der Anteil an A-Antworten im Feld, danach die Reihenfolge der Felder."};
+ const r=rang(a)[0];
+ if(r.pre)return{hf:1,grund:"F1 oder F2 ist mit A beantwortet. Alle übrigen Felder setzen Entscheide der Geschäftsleitung voraus."};
+ if(r.nA)return{hf:r.k,grund:"Meiste A-Antworten. Bei Gleichstand entscheidet der Anteil an A-Antworten im Feld, danach der Anteil an B-Antworten."};
+ if(r.need>0)return{hf:r.k,grund:"Keine Antwort auf Stufe A. Vorschlag nach dem Anteil an B-Antworten, in der Sitzung zu bestätigen."};
+ return{hf:null,grund:"Alle Antworten auf Stufe C. Das Startfeld wird in der Sitzung festgelegt."};
 }
 function ergebnis(){
  const n=Q.filter(q=>S.ans[q.id]).length, el=$("#v-ergebnis");
  if(n<Q.length){const off=Q.filter(q=>!S.ans[q.id]).map(q=>q.id).join(", ");el.innerHTML=`<div class="warnbox"><b>${Q.length-n} Fragen sind noch offen</b> (${off}). Die Auswertung setzt alle vierzehn Antworten voraus.</div>`;return;}
- const s=startfeld(S.ans);S.start=s.hf;save();renderHFNav();
- let h=`<div class="card res-start"><div class="mono">Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+HF[s.hf].t:"In der Sitzung festlegen"}</h3><p>${s.grund}</p>${s.hf?`<p style="margin-top:14px"><button class="btn primary small" id="goStart">Zum Handlungsfeld ${s.hf} →</button></p>`:""}</div>`;
+ const s=startfeld(S.ans);
+ let h=`<div class="card res-start"><div class="mono">Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+HF[s.hf].t:"In der Sitzung festlegen"}</h3><p>${s.grund}</p><p style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn primary small" href="#tage">Schritt 2: Roadmap →</a>${s.hf?`<button class="btn ghost small" id="goStart">Massnahmen im Handlungsfeld ${s.hf}</button>`:""}</p></div>`;
  const w=[];if(S.ans.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(S.ans.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
  if(w.length)h+=`<div class="warnbox"><b>Zahlen innerhalb von vier Wochen beschaffen.</b> Ohne sie lässt sich die Reaktionsfähigkeit nicht beurteilen.<br>${w.join("<br>")}</div>`;
- h+=`<div class="card" style="margin-top:14px"><div class="mono muted" style="margin-bottom:12px">Anteil A-Antworten je Handlungsfeld</div><div class="bars">`;
- for(let k=1;k<=6;k++){const qs=Q.filter(q=>q.hf===k);const nA=qs.filter(q=>S.ans[q.id]==="A").length;const p=Math.round(100*nA/qs.length);
-  h+=`<div class="barrow"><span>${k} · ${HF[k].t}</span><div class="bar"><span style="width:${p}%"></span></div><span class="hint">${nA} von ${qs.length}</span></div>`;}
- h+=`</div></div><div class="card" style="margin-top:14px"><div class="mono muted">Ihr Ergebniscode</div><p style="margin:8px 0 0">Geben Sie diesen Code der Person, die die Sitzung vorbereitet. Er enthält Ihre Stufe und die vierzehn Antworten, keinen Namen.</p><code class="res" id="rc">${code(S.stufe,S.ans)}</code><button class="btn small" id="kopie">Code kopieren</button> <span class="hint" id="km"></span></div>`;
+ h+=`<div class="card" style="margin-top:14px"><div class="mono muted">Ihr Ergebniscode</div><p style="margin:8px 0 0">Geben Sie diesen Code der Person, die die Sitzung vorbereitet. Er enthält Ihre Stufe und die vierzehn Antworten, keinen Namen.</p><code class="res" id="rc">${code(S.stufe,S.ans)}</code><button class="btn small" id="kopie">Code kopieren</button> <span class="hint" id="km"></span></div>`;
  el.innerHTML=h;
  const g=$("#goStart");if(g)g.onclick=()=>openHF(s.hf);
  $("#kopie").onclick=async()=>{try{await navigator.clipboard.writeText(code(S.stufe,S.ans));$("#km").textContent="kopiert";}catch(e){$("#km").textContent="Bitte den Code markieren und kopieren";}};
@@ -748,30 +978,44 @@ function show(v){document.querySelectorAll(".tabs button").forEach(b=>b.setAttri
 
 /* ---------- Handlungsfelder ---------- */
 function renderHFNav(){
- $("#hfnav").innerHTML=Object.keys(HF).map(k=>{const f=HF[k];const done=f.m.filter((_,i)=>S.chk[k+"-"+i]).length;
-  return `<button role="tab" data-h="${k}" aria-selected="${+k===S.hf}">${S.start==k?'<span class="start">START</span>':""}<span class="mono">HF ${k} · ${f.ph}</span>${f.t}${done?`<span class="done">${done} von ${f.m.length} erledigt</span>`:""}</button>`;}).join("");
- $("#hfnav").querySelectorAll("button").forEach(b=>b.onclick=()=>{S.hf=+b.dataset.h;save();renderHFNav();renderHF();});
+ const st=startHF();
+ const ok=order();
+ $("#hfnav").innerHTML=Object.keys(HF).map(Number).map(k=>{const f=HF[k],i=ok.indexOf(k);const done=f.m.filter((_,j)=>S.chk[k+"-"+j]).length;
+  return `<button role="tab" data-h="${k}" aria-selected="${k===S.hf}">${st===k?'<span class="start">START</span>':""}<span class="mono">HF ${k}${nAns()?` · Rang ${i+1}`:""}</span>${f.t}${done?`<span class="done">${done} von ${f.m.length} erledigt</span>`:""}</button>`;}).join("");
+ $("#hfnav").querySelectorAll("button").forEach(b=>b.onclick=()=>{S.hf=+b.dataset.h;save();renderHFNav();renderHF();renderWeg();});
 }
 function renderHF(){
  const k=S.hf,f=HF[k];
  const fl=FAELLE.filter(x=>x.p.some(p=>f.p.includes(p)));
  const fr=Q.filter(q=>q.hf===k).map(q=>q.id);
  $("#hfpanel").innerHTML=`<div class="hfpanel"><div>
-  <div class="mono" style="color:var(--accent)">${f.ph} · ${f.eb} · ${f.p.map(p=>"P"+p).join(", ")}</div>
+  <div class="mono" style="color:var(--accent)">${f.ph} · ${f.eb}${nAns()?` · Rang ${order().indexOf(k)+1} von 6`:""}</div>
   <h3>Handlungsfeld ${k}, ${f.t}</h3>
   <p class="ziel">${f.ziel}</p>
-  <div class="mono muted" style="margin-bottom:6px">Massnahmen</div>
-  <ul class="mass">${f.m.map((m,i)=>`<li class="${S.chk[k+"-"+i]?"chk":""}"><input type="checkbox" id="m${k}-${i}" ${S.chk[k+"-"+i]?"checked":""}><label for="m${k}-${i}"><span>${esc(m)}</span></label></li>`).join("")}</ul>
+  <div class="mono muted" style="margin-bottom:8px">Prinzipien</div>
+  <div class="hfprinz">${f.p.map(p=>`<div><b>P${p}</b><span>${esc(P[p-1])}</span></div>`).join("")}</div>
+  ${(()=>{const ord=HF[k].m.map((_,i)=>i),li=i=>{const on=S.chk[k+"-"+i],t=mtyp(k,i);return `<li class="${on?"chk":""}"><input type="checkbox" id="m${k}-${i}" ${on?"checked":""}><label for="m${k}-${i}"><span><b>${esc(MQ[k][i][1])}${t!=="R"?` <em class="eff ${t}">${EFF[t]}</em>`:` <em class="eff pk" data-p="${PKOF[k+"-"+i]}" title="${esc(PAK[PKOF[k+"-"+i]-1].t)}">Paket ${PKOF[k+"-"+i]}</em>`}</b><small>${esc(f.m[i])}</small></span></label>${mtag(k,i)}</li>`;};
+   const pr="";
+   return `<div class="mgrp"><div class="mono">Regeln und Standards festlegen${pr}</div><p class="hint">Beschluss und Durchsetzung, keine Entwicklung. Gebündelt in sechs Beschlusspaketen der Geschäftsleitung.</p><ul class="mass">${ord.filter(i=>mtyp(k,i)==="R").map(li).join("")}</ul></div>
+   <div class="mgrp"><div class="mono">Vorhaben umsetzen${pr}</div><p class="hint">Brauchen Umsetzungszeit und Kapazität, Aufwand klein oder gross.</p><ul class="mass">${ord.filter(i=>mtyp(k,i)!=="R").map(li).join("")}</ul></div>`;})()}
  </div><div class="side">
   <div class="box"><div class="mono">Indikator</div><p>${f.ind}</p></div>
   <div class="box w"><div class="mono">Warnsignal</div><p>${f.warn}</p></div>
   <div class="box"><div class="mono">Fragen der Standortbestimmung</div><p>${fr.map(id=>{const a=S.ans[id];return `${id} ${a?`<span class="tag t${a}">${a}</span>`:'<span class="hint">offen</span>'}`;}).join(" · ")}</p></div>
   ${fl.length?`<div class="box"><div class="mono">Fälle dazu</div><div class="faelle-mini">${fl.map(x=>`<button class="chip" data-f="${x.n}">Fall ${x.n}, ${esc(x.t)}</button>`).join("")}</div></div>`:""}
  </div></div>`;
- $("#hfpanel").querySelectorAll(".mass input").forEach(c=>c.onchange=()=>{const id=c.id.slice(1);S.chk[id]=c.checked;if(!c.checked)delete S.chk[id];c.closest("li").classList.toggle("chk",c.checked);save();renderHFNav();});
+ $("#hfpanel").querySelectorAll(".mass input").forEach(c=>c.onchange=()=>{const id=c.id.slice(1);S.chk[id]=c.checked;if(!c.checked)delete S.chk[id];c.closest("li").classList.toggle("chk",c.checked);save();renderHFNav();renderWeg();renderRoadmap();});
+ $("#hfpanel").querySelectorAll(".eff.pk").forEach(e=>e.onclick=ev=>{ev.preventDefault();ev.stopPropagation();openPaket(+e.dataset.p);});
  $("#hfpanel").querySelectorAll("[data-f]").forEach(b=>{b.style.cursor="pointer";b.onclick=()=>openFall(+b.dataset.f);});
+ $("#pstrip").innerHTML=`<span class="mono">Alle zwölf Prinzipien</span>`+P.map((_,i)=>`<button class="${f.p.includes(i+1)?"on":""}" data-p="${i+1}" title="${esc(P[i])}">P${i+1}</button>`).join("");
+ $("#pstrip").querySelectorAll("button").forEach(b=>b.onclick=()=>openPrinzip(+b.dataset.p));
 }
-function openHF(k){S.hf=k;save();renderHFNav();renderHF();$("#felder").scrollIntoView();}
+function openHF(k){S.hf=k;save();renderHFNav();renderHF();renderWeg();$("#felder").scrollIntoView();}
+function openPrinzip(i){const d=$("#dlg");
+ $("#dlg-n").textContent=`Prinzip P${i}`;$("#dlg-t").textContent=P[i-1];$("#dlg-b").textContent="Umgesetzt in:";
+ $("#dlg-r").innerHTML=PHF[i-1].map(k=>`<button class="btn small primary" data-h="${k}">HF ${k}, ${esc(HF[k].t)}</button>`).join("")+`<button class="btn small" data-x="1">Schliessen</button>`;
+ $("#dlg-r").querySelectorAll("button").forEach(b=>b.onclick=()=>{d.close();if(b.dataset.h)openHF(+b.dataset.h);});
+ if(d.showModal)d.showModal();}
 
 /* ---------- Fälle ---------- */
 function openFall(n){const f=FAELLE.find(x=>x.n===n);const d=$("#dlg");
@@ -786,17 +1030,16 @@ function buildDruck(){
  const sec=(n,lab,tit,body,neu)=>`<div class="d-sec${neu?" d-new":""}"><div class="d-lab">${n} · ${lab}</div><h2>${tit}</h2>${body}</div>`;
  const ck=on=>`<span class="d-ck${on?" on":""}"></span>`;
  const n=Q.filter(q=>S.ans[q.id]).length, voll=n===Q.length;
- const nutz=document.querySelectorAll("#nutzung .card"), imp=[...document.querySelectorAll("footer p:not(.no-print)")].map(p=>`<p>${p.innerHTML}</p>`).join("");
+ const imp=[...document.querySelectorAll("footer p:not(.no-print)")].map(p=>`<p>${p.innerHTML}</p>`).join("");
+ const rg=rang(S.ans), st=voll?startfeld(S.ans).hf:null;
  let h=`<div class="d-cover"><div class="d-top d-lab">${H(".hero .eyebrow")}</div><h1>${H(".hero h1")}</h1><p class="d-lead">${H(".hero .lead")}</p>
   <div class="d-foot"><ul class="d-facts">${H(".facts")}</ul><div class="d-imp">${imp}</div></div></div>`;
- // Einstieg und Kernbefund
- h+=`<div class="d-two">${[...nutz].map(c=>{const k=c.cloneNode(true),l=k.querySelector(".mono");l.remove();k.querySelectorAll("[style]").forEach(e=>e.removeAttribute("style"));return `<div><div class="d-lab">${l.textContent}</div>${k.innerHTML}</div>`;}).join("")}</div>`;
- const kp=document.querySelectorAll("#kern .kern>div:first-child p");
- h+=sec("01","Kernbefund",H("#kern h2"),`<p class="d-big">${kp[0].innerHTML}</p><p>${kp[1].innerHTML}</p>
-  <div class="d-box"><div class="d-lab">${H("#kern .erwart .mono")}</div><p>${H("#kern .erwart p")}</p></div>
-  <div class="d-steps">${[...document.querySelectorAll("#kern .stage")].map(s=>`<div class="${s.classList.contains("slow")?"slow":s.classList.contains("fast")?"fast":""}"><span class="d-lab">${s.querySelector(".mono").textContent}</span><b>${s.querySelector("b").textContent}</b>${s.querySelector("small").textContent}</div>`).join("")}</div>`);
- // Prinzipien
- h+=sec("02","Prinzipien",H("#prinzipien h2"),`<ol class="d-prinz">${P.map((t,i)=>`<li><span class="n">P${i+1}</span><span>${esc(t)}<small>Handlungsfeld ${PHF[i].join(", ")}</small></span></li>`).join("")}</ol>`,true);
+ // Kernbefund und Vorgehen
+ h+=sec("01","Kernbefund",H("#kern h2"),`<p class="d-big">${H("#kern .big")}</p><ol class="d-kpts">${[...document.querySelectorAll("#kern .kpts li")].map(l=>`<li>${l.innerHTML}</li>`).join("")}</ol>
+  ${$("#kern .flow").outerHTML}
+  <div class="d-box"><div class="d-lab">${H("#kern .erwart .mono")}</div><p>${H("#kern .erwart p")}</p></div>`);
+ h+=sec("02","Vorgehen",H("#weg h2"),`<div class="d-weg">${[...document.querySelectorAll("#weg .step")].map(s=>`<div><span class="d-lab">Schritt ${s.querySelector(".num").textContent}</span><b>${s.querySelector("h3").textContent}</b>${s.querySelector("p").textContent}</div>`).join("")}</div>
+  <div class="d-weg">${[...document.querySelectorAll("#weg .weg-meta>div")].map(d=>`<div>${d.innerHTML}</div>`).join("")}</div>`);
  // Standortbestimmung
  let b=`<p class="d-intro">${H("#standort .intro")}</p><div class="d-stufe"><b>Führungsstufe</b>${Object.keys(STUFE).map(s=>`<span>${ck(n>0&&S.stufe===s)}${STUFE[s]}</span>`).join("")}</div>`;
  let g="";Q.forEach(q=>{if(q.g!==g){g=q.g;b+=`<div class="d-grp d-lab">${esc(g)}</div>`;}
@@ -805,27 +1048,31 @@ function buildDruck(){
   if(S.ans.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(S.ans.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
   b+=`<div class="d-res"><div class="d-lab">Auswertung · ${STUFE[S.stufe]} · Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+esc(HF[s.hf].t):"In der Sitzung festlegen"}</h3><p>${s.grund}</p>
    ${w.length?`<div class="d-warn"><b>Zahlen innerhalb von vier Wochen beschaffen.</b> Ohne sie lässt sich die Reaktionsfähigkeit nicht beurteilen.<br>${w.join("<br>")}</div>`:""}
-   <table><tr><th>Handlungsfeld</th><th colspan="2">Anteil A-Antworten</th></tr>${[1,2,3,4,5,6].map(k=>{const qs=Q.filter(q=>q.hf===k),nA=qs.filter(q=>S.ans[q.id]==="A").length;return `<tr><td>${k} · ${esc(HF[k].t)}</td><td><div class="bar"><span style="width:${Math.round(100*nA/qs.length)}%"></span></div></td><td>${nA} von ${qs.length}</td></tr>`;}).join("")}</table>
    <div class="d-lab">Ergebniscode</div><code>${code(S.stufe,S.ans)}</code></div>`;}
- h+=sec("03","Standortbestimmung",H("#standort h2"),b,true);
- // Handlungsfelder
- const fi=$("#felder .intro").cloneNode(true);fi.querySelectorAll(".no-print").forEach(e=>e.remove());
- b=`<p class="d-intro">${fi.innerHTML}</p><div class="d-phasen">${[...document.querySelectorAll("#felder .phase")].map(p=>`<div>${p.innerHTML}</div>`).join("")}</div>`;
- Object.keys(HF).forEach(k=>{const f=HF[k],fr=Q.filter(q=>q.hf===+k);
-  b+=`<div class="d-hf">${voll&&S.start==k?'<span class="d-start">EMPFOHLENES STARTFELD</span>':""}<div class="d-lab">Handlungsfeld ${k} · ${f.ph} · ${f.eb} · ${f.p.map(p=>"P"+p).join(", ")}</div><h3>${esc(f.t)}</h3>
-   <p class="d-ziel">${f.ziel}</p><div class="d-lab">Massnahmen</div><ul class="d-mass">${f.m.map((m,i)=>`<li>${ck(S.chk[k+"-"+i])}<span>${esc(m)}</span></li>`).join("")}</ul>
+ h+=sec("Schritt 1","Standortbestimmung",H("#standort h2"),b,true);
+ // Schritt 2: Roadmap mit Rangfolge der Felder
+ if(n){const R=roadmap();
+  b=`<p class="d-intro">${voll?"Rangfolge":"Vorläufige Rangfolge, "+n+" von "+Q.length+" Fragen beantwortet,"} nach den Antworten in Schritt 1.</p>`;
+  b+=`<table><tr><th>Rang</th><th>Handlungsfeld</th><th>Antworten</th><th>Priorität</th></tr>${rg.map((x,i)=>`<tr><td>${i+1}</td><td>${x.k} · ${esc(HF[x.k].t)}${st===x.k?" <b>(Startfeld)</b>":""}</td><td>${Q.filter(q=>q.hf===x.k).map(q=>q.id+" "+(S.ans[q.id]||"·")).join(", ")}</td><td>${LVL[x.lvl]}</td></tr>`).join("")}</table>`;
+  b+=`<p class="d-intro" style="margin-top:6mm">${esc($("#rm-intro").textContent)}</p><div class="d-tl d-4">${R.w.map(W=>`<div><div class="d-lab">${W.t}</div><h3>${W.n}</h3><ul>${W.fix.map(t=>`<li class="fix">${esc(t)}</li>`).join("")}${W.fund.map(x=>`<li>Fundament: ${esc(MQ[x.k][x.i][1])} <small>HF 1, ${mworst(x.k,x.i).q} ${"ABC"[x.lv]}</small></li>`).join("")}${W.rules.map(p=>`<li>Beschliessen: Paket ${p.n}, ${esc(p.t)} <small>${p.off} Regeln, ${p.qs.join(", ")}</small></li>`).join("")}${W.it.map(x=>`<li>Umsetzen: ${esc(MQ[x.k][x.i][1])} <small>HF ${x.k}, ${mworst(x.k,x.i).q} ${"ABC"[x.lv]}, ${EFF[x.t]}</small></li>`).join("")}</ul></div>`).join("")}</div><p class="d-fr">${esc($("#roadmap .rm-foot").textContent)}</p>`;
+  h+=sec("Schritt 2","Roadmap",H("#tage h2"),b,true);}
+ else h+=sec("Schritt 2","Roadmap","Allgemeiner Einstieg",`<p class="d-intro">Allgemeiner Plan, bis die Standortbestimmung vorliegt.</p><div class="d-tl">${[...document.querySelectorAll("#tl-generic .card")].map(c=>`<div><div class="d-lab">${c.querySelector(".mono").textContent}</div><h3>${c.querySelector("h3").textContent}</h3><ul>${c.querySelector("ul").innerHTML}</ul></div>`).join("")}</div>`,true);
+ // Schritt 3: Handlungsfelder als Nachschlagewerk
+ b=`<p class="d-intro">Nachschlagewerk zur Roadmap: je Feld Prinzipien, Ziel, alle Massnahmen mit Antwortstufe, Indikator und Warnsignal.</p>`;
+ Object.keys(HF).map(Number).forEach(k=>{const f=HF[k],fr=Q.filter(q=>q.hf===k);
+  b+=`<div class="d-hf">${st===k?'<span class="d-start">EMPFOHLENES STARTFELD</span>':""}<div class="d-lab">Handlungsfeld ${k} · ${f.ph} · ${f.eb}${n?" · Rang "+(rg.findIndex(x=>x.k===k)+1)+" von 6":""}</div><h3>${esc(f.t)}</h3>
+   <p class="d-ziel">${f.ziel}</p><div class="d-lab">Prinzipien</div><div class="d-hfp">${f.p.map(p=>`<div><b>P${p}</b><span>${esc(P[p-1])}</span></div>`).join("")}</div><div class="d-lab">Massnahmen</div><ul class="d-mass">${f.m.map((_,i)=>{const w=mworst(k,i);return `<li>${ck(S.chk[k+"-"+i])}<span><b>${esc(MQ[k][i][1])}.</b> ${esc(f.m[i])}</span><span class="d-mt">${mtyp(k,i)==="R"?"Regel, Paket "+PKOF[k+"-"+i]:"Vorhaben, "+EFF[mtyp(k,i)]} · ${w?w.q+" "+w.a:MQ[k][i][0].split(" ")[0]}</span></li>`;}).join("")}</ul>
    <div class="d-two"><div><div class="d-lab">Indikator</div>${f.ind}</div><div class="w"><div class="d-lab">Warnsignal</div>${f.warn}</div></div>
    <p class="d-fr">Fragen der Standortbestimmung: ${fr.map(q=>q.id+(S.ans[q.id]?" ("+S.ans[q.id]+")":"")).join(", ")}</p></div>`;});
- h+=sec("04","Handlungsfelder",H("#felder h2"),b,true);
- // 90 Tage und Grenzen
- h+=sec("05","Vorgehen",H("#tage h2"),`<div class="d-tl">${[...document.querySelectorAll("#tage .tl .card")].map(c=>`<div><div class="d-lab">${c.querySelector(".mono").textContent}</div><h3>${c.querySelector("h3").textContent}</h3><ul>${c.querySelector("ul").innerHTML}</ul></div>`).join("")}</div>`,true);
- h+=sec("06","Grenzen",H("#grenzen h2"),`<p>${H("#grenzen .intro")}</p>`);
+ h+=sec("Schritt 3","Handlungsfelder",H("#felder h2"),b,true);
+ h+=sec("Übersicht","Prinzipien","Zwölf Prinzipien",`<ol class="d-prinz">${P.map((t,i)=>`<li><span class="n">P${i+1}</span><span>${esc(t)}<small>Handlungsfeld ${PHF[i].join(", ")}</small></span></li>`).join("")}</ol>`);
+ h+=sec("Grenzen","Geltung",H("#grenzen h2"),`<ul class="d-grenz">${[...document.querySelectorAll("#grenzen .grenz>div")].map(d=>`<li><b>${d.querySelector("b").textContent}.</b> ${d.lastChild.textContent}</li>`).join("")}</ul>`);
  $("#druck").innerHTML=h;
 }
 addEventListener("beforeprint",buildDruck);
 
 /* ---------- Navigation ---------- */
-const secs=["kern","prinzipien","standort","felder","tage","grenzen"].map(id=>document.getElementById(id));
+const secs=["kern","weg","standort","tage","felder","grenzen"].map(id=>document.getElementById(id));
 addEventListener("scroll",()=>{const h=document.documentElement;$("#prog").style.width=(100*h.scrollTop/(h.scrollHeight-h.clientHeight))+"%";
  let cur="";for(const s of secs)if(s.getBoundingClientRect().top<120)cur=s.id;
  document.querySelectorAll("nav.main a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+cur));},{passive:true});
@@ -834,10 +1081,11 @@ addEventListener("scroll",()=>{const h=document.documentElement;$("#prog").style
 load();
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>show(b.dataset.v));
 $("#zumErgebnis").onclick=()=>{show("ergebnis");$("#standort").scrollIntoView();};
-$("#leeren").onclick=()=>{if(confirm("Alle Antworten löschen?")){S.ans={};S.start=null;save();renderFragen();renderHFNav();renderHF();}};
+$("#leeren").onclick=()=>{if(confirm("Alle Antworten löschen?")){S.ans={};save();renderFragen();update();renderHF();}};
 $("#stufe").onchange=e=>{S.stufe=e.target.value;save();};
 $("#vergleichen").onclick=vergleich;
-renderPrinzipien();renderFragen();renderHFNav();renderHF();
+delete S.start;
+renderFlow();renderFragen();update();renderHF();
 </script>
 </body>
 </html>
