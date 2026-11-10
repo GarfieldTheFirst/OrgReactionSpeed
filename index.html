@@ -246,13 +246,49 @@ th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 @media (max-width:860px){.prow{grid-template-columns:44px minmax(0,1fr) auto;gap:8px 14px;padding:14px 16px}.prow .rk{grid-column:1;grid-row:1/3;font-size:2rem}.prow .tt{grid-column:2;grid-row:1}.prow .lvl{grid-column:3;grid-row:1}.prow .ans{grid-column:2/4;grid-row:2}.prow .need{display:none}}
 /* Prinzipien im Handlungsfeld */
 .hfprinz{display:grid;gap:8px;margin:0 0 24px}
-.hfprinz div{display:grid;grid-template-columns:40px 1fr;gap:8px;background:var(--mist);padding:12px 16px;line-height:1.45}
+.hfprinz>div{display:grid;grid-template-columns:40px 1fr;gap:8px;background:var(--mist);padding:12px 16px;line-height:1.45}
 .hfprinz b{color:var(--accent);font-size:.85rem;letter-spacing:.06em;padding-top:2px}
 .pstrip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:20px}
 .pstrip .mono{color:var(--muted);margin-right:8px}
 .pstrip button{font:inherit;font-size:.8rem;font-weight:700;padding:6px 10px;border:1px solid #cddbd4;background:#fff;color:var(--deep);cursor:pointer}
 .pstrip button:hover{border-color:var(--accent)}
 .pstrip button.on{background:var(--deep);color:#fff;border-color:var(--deep)}
+/* Evidenz */
+.evbar{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:0;margin-top:36px;background:#fff;border:1px solid #cddbd4;border-top:3px solid var(--accent)}
+.evbar>div{padding:16px 18px;font-size:.88rem;color:var(--muted);line-height:1.45;border-right:1px solid #e3ece8}
+.evbar b{display:block;font-family:var(--head);font-weight:300;font-size:1.6rem;line-height:1.15;color:var(--fg);margin-bottom:4px}
+.evbar>a{align-self:center;padding:0 20px;font-weight:700;font-size:.85rem;white-space:nowrap}
+@media (max-width:860px){.evbar{grid-template-columns:1fr}.evbar>div{border-right:0;border-bottom:1px solid #e3ece8}.evbar>a{padding:14px 18px}}
+.evnote{margin-top:-8px}
+.evb{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;margin-right:4px;white-space:nowrap}
+.evb.z{background:var(--deep);color:#fff}.evb.f{background:#d5ebdf;color:var(--ok)}.evb.e{background:#f1e3b0;color:#6e5410}.evb.n{background:var(--warnbg);color:var(--warn);border:1px solid var(--warnline)}
+details.ev{margin-top:8px;font-size:.84rem;color:var(--muted)}
+details.ev summary{cursor:pointer;list-style:none;line-height:1.5}
+details.ev summary::-webkit-details-marker{display:none}
+details.ev summary::after{content:" Evidenz ▾";font-weight:700;color:var(--accent);font-size:.78rem}
+details.ev[open] summary::after{content:" ▴"}
+details.ev p{margin:6px 0 0}
+details.ev .faelle-mini{margin-top:8px}
+.evline{font-size:.86rem;color:var(--muted)}
+.chain{display:grid;grid-template-columns:1fr 32px 1fr 32px 1fr 32px 1fr;margin-top:8px}
+.chain .arrow{display:flex;align-items:center;justify-content:center;color:var(--deep)}
+.chain .arrow svg{width:24px;height:24px}
+.cstep{background:#fff;border:1px solid #cddbd4;border-top:5px solid var(--deep);padding:20px 18px}
+.cstep .mono{color:var(--muted)}
+.cstep h3{font-weight:700;font-size:1.1rem;letter-spacing:.03em;color:var(--fg);margin:6px 0 10px}
+.cstep ul{margin:0;padding-left:16px;font-size:.88rem;color:var(--muted)}
+.cstep li{margin-bottom:4px}
+@media (max-width:900px){.chain{grid-template-columns:1fr}.chain .arrow{height:36px}.chain .arrow svg{transform:rotate(90deg)}}
+.zus{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.zcard{background:#fff;border:1px solid #cddbd4;padding:20px 22px}
+.zcard .mono{color:var(--accent)}
+.zcard h3{font-weight:700;font-size:1.1rem;color:var(--fg);margin:6px 0 8px}
+.zcard p{font-size:.93rem;margin:0 0 8px}
+table.bartab{background:#fff}
+table.bartab td:first-child{white-space:nowrap}
+#evtab td:first-child{white-space:normal;min-width:260px}
+.litlist{padding-left:20px;font-size:.9rem;color:var(--muted)}
+.litlist li{margin-bottom:6px}
 /* Grenzen */
 .grenz{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
 .grenz div{border-top:5px solid var(--deep);background:var(--mist);padding:20px 22px;font-size:.95rem;line-height:1.5}
@@ -453,6 +489,15 @@ dialog .dh{background:var(--panel)}
   .d-hfp div{display:flex;gap:6pt;font-size:9pt;padding:2pt 0}
   .d-hfp b{flex:none;width:20pt;color:var(--accent)}
   .d-grenz{margin:0;padding-left:14pt}
+  .d-ev{display:block;font-size:7.5pt;color:var(--soft);margin-top:1pt}
+  .d-chain{grid-template-columns:repeat(4,1fr)}
+  .d-chain ul{margin:2pt 0 0;padding-left:10pt}
+  .d-h3{font-size:11pt;margin:6mm 0 2mm}
+  .d-zus{font-size:9pt;margin-bottom:3pt;break-inside:avoid}
+  .d-zus small{color:var(--soft)}
+  #druck .evb{font-size:6.5pt;padding:0 4pt}
+  #druck table{font-size:8.5pt}
+  .d-lit{font-size:8.5pt;padding-left:14pt}
   .d-grenz li{margin-bottom:3pt}
   .d-hf{break-inside:avoid;margin-top:9mm;padding-top:4mm;border-top:1.5pt solid var(--navy)}
   .d-hf h3{font-size:14pt;margin:2pt 0 6pt}
@@ -491,6 +536,7 @@ dialog .dh{background:var(--panel)}
       <a href="#standort">1 Standort</a>
       <a href="#tage">2 Roadmap</a>
       <a href="#felder">3 Handlungsfelder</a>
+      <a href="#evidenz">Evidenz</a>
       <a href="#grenzen">Grenzen</a>
     </nav>
   </div>
@@ -507,10 +553,10 @@ dialog .dh{background:var(--panel)}
       <button class="btn ghost" onclick="buildDruck();window.print()">Als PDF sichern</button>
     </div>
     <ul class="facts">
+      <li><b>11</b>ausgewertete Experteninterviews</li>
       <li><b>12</b>Prinzipien</li>
       <li><b>14</b>Fragen zur Standortbestimmung</li>
       <li><b>6</b>Handlungsfelder</li>
-      <li><b>4</b>Etappen der Roadmap</li>
     </ul>
   </div>
 </div>
@@ -526,6 +572,12 @@ dialog .dh{background:var(--panel)}
         <li><span><b>Schnelle Organisationen</b> unterscheiden sich darin, wer entscheidet, wie geprüft und wie Nutzen verbucht wird und ob Anpassungen beim Kunden beginnen.</span></li>
       </ol>
     </div>
+    <div class="evbar" id="kern-ev">
+      <div><b>8 von 11</b>Gesprächen belegen den Engpass, aus allen drei Gruppen: etablierte Unternehmen, Fachleute, AI-First Firms</div>
+      <div><b>bestätigt</b>Koordinationskosten wachsen mit der Grösse (Williamson 1981), durch agentische KI verschärft</div>
+      <div><b>neu</b>Kapazität der Prüf- und Freigabestellen als Barriere, die die Literatur bisher nicht führt</div>
+      <a href="#evidenz">Zur Herleitung →</a>
+    </div>
     <figure class="flow" aria-labelledby="flow-t">
       <div class="flow-h">
         <h3 id="flow-t">Dauer einer Anpassung</h3>
@@ -534,7 +586,7 @@ dialog .dh{background:var(--panel)}
         </div>
       </div>
       <div id="flowrows"></div>
-      <figcaption class="hint">Schematische Darstellung des Kernbefunds, keine Messwerte. Gestrichelte Linie: Dauer ohne Agenten.</figcaption>
+      <figcaption class="hint">Schematische Darstellung von Zusammenhang 1 der Auswertung, keine Messwerte. Gestrichelte Linie: Dauer ohne Agenten.</figcaption>
     </figure>
     <div class="erwart">
       <div class="mono" style="color:var(--accent)">Realistische Erwartungen</div>
@@ -576,6 +628,7 @@ dialog .dh{background:var(--panel)}
   <div class="wrap">
     <div class="sec-head"><span class="mono">Schritt 1 · Standortbestimmung</span><h2>Wo steht Ihr Unternehmen heute?</h2></div>
     <p class="intro">Massgeblich ist der heutige Zustand, nicht die Absicht. Wer statt eines Falls oder einer Zahl nur eine Einschätzung hat, wählt die tiefere Stufe.</p>
+    <p class="hint evnote">Die Fragen übersetzen die Kategorien, nach denen die Gespräche ausgewertet wurden, in beobachtbare Stufen. Die Regel für das Startfeld war vor der Erhebung festgelegt. <a href="#evidenz">Herleitung</a></p>
     <div class="tabs" role="tablist">
       <button role="tab" data-v="fragen" aria-selected="true">1 · Fragen</button>
       <button role="tab" data-v="ergebnis" aria-selected="false">2 · Ergebnis</button>
@@ -656,12 +709,47 @@ dialog .dh{background:var(--panel)}
   </div>
 </section>
 
+<section class="dark" id="evidenz">
+  <div class="wrap">
+    <div class="sec-head"><span class="mono">Evidenz · Methodik und Quellen</span><h2>Worauf der Leitfaden beruht</h2></div>
+    <p class="intro">Jede Empfehlung ist auf Literatur oder auf ausgewertete Gespräche zurückgeführt. Die Gesprächsbelege sind hier nur zusammengefasst ausgewiesen, ohne Rückschluss auf Personen oder Unternehmen. Einzelbelege mit Fundstellen dokumentiert die Masterarbeit.</p>
+    <div class="chain">
+      <div class="cstep"><span class="mono">Grundlagen</span><h3>Literatur</h3><ul><li>3 Mikrofundamente dynamischer Fähigkeiten: Sensing, Seizing, Transforming</li><li>5 Handlungsprinzipien und 4 Leistungsmerkmale von AI-First Firms</li><li>7 Barrieren etablierter Unternehmen</li><li>3 Hypothesen, vor der Erhebung festgelegt</li></ul></div>
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h17m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+      <div class="cstep"><span class="mono">Erhebung</span><h3>11 Experteninterviews</h3><ul><li>5 etablierte Unternehmen, 4 Fachleute, 2 AI-First Firms</li><li>551 kodierte Sinneinheiten in 25 Kategorien</li><li>311 Betriebswissen, 153 Deutungswissen, 79 Kontextwissen</li></ul></div>
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h17m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+      <div class="cstep"><span class="mono">Modell</span><h3>5 Zusammenhänge</h3><ul><li>verdichtet aus Kategorien und Barrieren</li><li>gewichtet nach Relevanz und Kontrast, nicht nach Häufigkeit</li><li>daraus 12 Prinzipien mit Ziel und Herkunft</li></ul></div>
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h17m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+      <div class="cstep"><span class="mono">Leitfaden</span><h3>Artefakt</h3><ul><li>14 Fragen zur Standortbestimmung</li><li>6 Handlungsfelder entlang der vier Phasen nach Gassmann et al.</li><li>35 Empfehlungen einzeln auf Prinzip, Literatur und Gesprächsstellen zurückgeführt</li></ul></div>
+    </div>
+    <p class="hint" style="margin-top:12px">Branchen der Gespräche: Sensorik und Messtechnik, Detailhandel, Telekommunikation und IT-Dienstleistungen, Wirtschaftsprüfung und Beratung, Management- und IT-Beratung, Softwareentwicklung, Unternehmenssoftware, KI-Software, Bankwesen.</p>
+
+    <h3 class="rm-h">Fünf Zusammenhänge aus der Auswertung</h3>
+    <div class="zus" id="zusliste"></div>
+
+    <h3 class="rm-h">Barrieren: Literatur und Befund</h3>
+    <p class="hint">Sechs der sieben Barrieren aus der Literatur finden sich im Material wieder. Fünf kommen neu hinzu, vier davon hängen unmittelbar mit agentischer KI zusammen. Die bekannten Barrieren wirken fort, die Technologie fügt eigene hinzu.</p>
+    <div class="tablewrap"><table class="bartab" id="bartab"></table></div>
+
+    <h3 class="rm-h">Stärke der Belege je Prinzip</h3>
+    <div class="tablewrap"><table class="bartab" id="evtab"></table></div>
+
+    <div class="grid g2" style="margin-top:36px">
+      <div class="card"><div class="mono muted">Stand der Prüfung</div><p style="margin:8px 0 0">Stufe 1, die Prüfung auf Vollständigkeit und Konsistenz gegen das Analyseraster, ist abgeschlossen. Stufe 2 mit unabhängigen Fachleuten und Stufe 3 in einer moderierten Sitzung einer Geschäftsleitung stehen aus. Die drei Hypothesen lassen sich mit Gesprächsdaten weder bestätigen noch verwerfen; dafür braucht es gemessene Durchlaufzeiten und Vergleichspaare.</p></div>
+      <div class="card"><div class="mono muted">Lesart</div><p style="margin:8px 0 0">Validierungsfassung, Stand der Auswertung November 2026; die Kodierung ist im Team noch nicht konsolidiert. Die Gewichtung zugunsten der Organisation ist als Tendenz zu lesen, nicht als Befund. Die Seite der AI-First Firms ist mit zwei Gesprächen noch dünn.</p></div>
+    </div>
+
+    <h3 class="rm-h">Literatur</h3>
+    <ol class="litlist" id="litliste"></ol>
+  </div>
+</section>
+
 <section id="grenzen">
   <div class="wrap">
     <div class="sec-head"><span class="mono">Grenzen</span><h2>Wofür der Leitfaden nicht gilt</h2></div>
     <div class="grenz">
       <div><b>Geltungsbereich</b>Nicht für sicherheitskritische Systeme mit garantierter Korrektheit und nicht für zulassungspflichtige Produktentwicklung.</div>
-      <div><b>Grundlage</b>Literatur und elf Experteninterviews, davon zwei mit AI-First Firms.</div>
+      <div><b>Grundlage</b>Literatur und elf Experteninterviews, davon zwei mit AI-First Firms. <a href="#evidenz">Methodik und Quellen</a></div>
       <div><b>Ertragsmodell</b>Wer nach Aufwand abrechnet, kann die Empfehlungen nur begrenzt umsetzen.</div>
       <div><b>Wirkung und Kosten</b>Wirkung nicht gemessen, die Nutzenerwartung wird in der Validierung erhoben. Kosten agentischer Systeme nicht bewertet.</div>
     </div>
@@ -772,6 +860,70 @@ const P=[
  "Der Nutzen wird als Ergebnis für die eigenen Kunden verbucht, nicht als Stellenabbau oder Aufwand.",
  "Anpassungen beginnen beim Bedürfnis des Kunden, nicht beim internen Verkaufsplan."];
 const PHF=P.map((_,i)=>Object.keys(HF).map(Number).filter(h=>HF[h].p.includes(i+1)));
+
+/* ---------- Evidenz (aus «Leitfaden und Herleitung», Stand 8.11.2026; nur aggregiert, ohne Gesprächs-IDs) ---------- */
+// Literatur: f = vollständige Angabe; ohne f nur Kurzzitat (vollständige Angabe in der Arbeit)
+const LIT={
+ bai:{k:"Bainbridge 1983",f:"Bainbridge, L. (1983). Ironies of automation. Automatica, 19(6), 775–779."},
+ coh:{k:"Cohen & Levinthal 1990",f:"Cohen, W. M., & Levinthal, D. A. (1990). Absorptive capacity: A new perspective on learning and innovation. Administrative Science Quarterly, 35(1), 128–152."},
+ eis:{k:"Eisenhardt & Martin 2000",f:"Eisenhardt, K. M., & Martin, J. A. (2000). Dynamic capabilities: What are they? Strategic Management Journal, 21(10–11), 1105–1121."},
+ han:{k:"Hannan & Freeman 1984",f:"Hannan, M. T., & Freeman, J. (1984). Structural inertia and organizational change. American Sociological Review, 49(2), 149–164."},
+ hen:{k:"Henderson & Clark 1990",f:"Henderson, R. M., & Clark, K. B. (1990). Architectural innovation: The reconfiguration of existing product technologies and the failure of established firms. Administrative Science Quarterly, 35(1), 9–30."},
+ jaw:{k:"Jaworski & Kohli 1993",f:"Jaworski, B. J., & Kohli, A. K. (1993). Market orientation: Antecedents and consequences. Journal of Marketing, 57(3), 53–70."},
+ ore:{k:"O'Reilly & Tushman 2004",f:"O'Reilly, C. A., & Tushman, M. L. (2004). The ambidextrous organization. Harvard Business Review, 82(4), 74–81."},
+ par:{k:"Parasuraman et al. 2000",f:"Parasuraman, R., Sheridan, T. B., & Wickens, C. D. (2000). A model for types and levels of human interaction with automation. IEEE Transactions on Systems, Man, and Cybernetics, Part A, 30(3), 286–297."},
+ wil:{k:"Williamson 1981",f:"Williamson, O. E. (1981). The economics of organization: The transaction cost approach. American Journal of Sociology, 87(3), 548–577."},
+ // OFFEN: vollständige Angaben in der Arbeit prüfen
+ gas:{k:"Gassmann et al. 2017"},
+ bah:{k:"Bahrami & Evans 2010"},
+ kle:{k:"Klein & Wieczorek 2026"},
+ win:{k:"Winter et al."},
+ cap:{k:"Capon & Mintzberg 1996"}};
+// Fünf Zusammenhänge aus der Auswertung; g = Gespräche (null = wegen Zuschnitt der Unterlage nicht sicher zählbar), gr = Gruppen
+const ZUS=[
+ {n:1,t:"Der Engpass liegt im Entscheid",a:"Agentische KI beschleunigt die Umsetzung, während Entscheid, Spezifikation und Freigabe mit fester Kapazität arbeiten. Mehr Vorhaben verlängern so die Wartezeit; im Einzelfall verschiebt sich der Engpass bis zum Kunden.",g:8,gr:3,lit:["wil","kle","coh"],s:"tragfähigster Befund"},
+ {n:2,t:"Die Führungskette",a:"Fehlt der Geschäftsleitung das Verständnis für Möglichkeiten und Grenzen agentischer Systeme, wird das Thema an Einheiten delegiert, die Struktur und Zuständigkeiten nicht verändern können.",g:null,gr:3,lit:["coh","bah"]},
+ {n:3,t:"Das Kontrollparadox",a:"Mehr Autonomie setzt wirksame menschliche Kontrolle voraus. Gerade sie baut jedoch die Fähigkeit ab, auf der die Kontrolle beruht, weil Prüfende die Aufgabe nicht mehr selbst ausführen.",g:6,gr:3,lit:["bai","par"]},
+ {n:4,t:"Anreize und Ertragslogik",a:"Wie der Nutzen verbucht wird, bestimmt, ob die Beteiligten die Anpassung mittragen. Bewilligung nur bei Stellenabbau oder Abrechnung nach Aufwand bremst sie.",g:null,gr:3,lit:["win"]},
+ {n:5,t:"Agenten koordinieren",a:"Agenten können Koordinationskosten senken oder selbst erhöhen. Welche Richtung eintritt, hängt davon ab, ob Identität, Berechtigung, Eigner und Übersicht der Agenten geregelt sind.",g:3,gr:3,lit:["kle"]}];
+// Je Prinzip: Gespräche mit Belegen (aus der Spalte Good Practice gezählt), Gruppen, Stärke, Zusammenhänge, Literatur, Befund
+const EV={
+ 1:{g:6,gr:3,st:"z",z:[2],lit:["coh"],k:"Wo die Geschäftsleitung selbst ausprobiert, Lernräume nutzt und Fachwissen ins Gremium holt, fallen Grundsatzentscheide in der Geschäftsleitung statt im IT-Betrieb."},
+ 2:{g:5,gr:3,st:"z",z:[1],lit:["han"],k:"Ein Entscheid durch eine benannte Person fällt innerhalb von Stunden; dieselbe Frage über viele Fachabteilungen bleibt Monate offen.",f:[1,5]},
+ 3:{g:4,gr:2,st:"z",z:[1],lit:["wil","kle"],k:"Prüfteams fester Grösse und zusätzliche Bestätigungsebenen werden bei steigender Zahl von Vorhaben zum Engpass, auch Prüfagenten mit offener Prüfschwelle.",f:[2,3]},
+ 4:{g:5,gr:3,st:"z",z:[5],lit:["kle"],k:"Governance-Prüfung zu Beginn, Berechtigung je Datenklasse, benannte Eigner sowie Dashboards und Alerts nach Vorfällen; Kunden verlangen Souveränität und Datenstandort.",f:[4]},
+ 5:{g:3,gr:3,st:"f",z:[],lit:["ore"],k:"Erprobungsteams mit Auftrag der Geschäftsleitung oder virtuelle Teams in der Linie; geklärte Themen gehen über Beta-Programme und die Linie in den Betrieb."},
+ 6:{g:4,gr:2,st:"f",z:[],lit:["hen"],k:"Prozesse werden mit dem Agenten als Basis entworfen und eine Datenstrategie geht voraus, statt bestehende Abläufe unverändert zu automatisieren."},
+ 7:{g:4,gr:3,st:"z",z:[3],lit:["par","bai"],k:"Kundenprodukte bleiben durchgehend unter menschlicher Prüfung, Selbstoptimierung wurde nach Vorfällen zurückgenommen, Autonomie folgt erst nach Ende-zu-Ende-Erprobung.",f:[4]},
+ 8:{g:5,gr:3,st:"f",z:[],lit:["eis"],k:"Ideen werden in kleinste, messbare Fälle zerlegt und früh als Prototyp geprüft; ohne festes Ende scheitert der Abbruch an versunkenen Kosten."},
+ 9:{g:1,gr:1,st:"e",z:[],lit:[],lt:"keine, Einzelbefund",k:"Empfehlung aus einem Gespräch, kein berichteter Fall. In der Validierung gezielt zu prüfen."},
+ 10:{g:4,gr:1,st:"f",z:[4],lit:["win"],k:"Betroffene als Supervisoren neuer Systeme und eine Rahmung über Entlastung; Widerstand bei Stellenwirkung und Überforderung durch zu viele Werkzeuge. Belege bisher nur aus etablierten Unternehmen."},
+ 11:{g:3,gr:2,st:"z",z:[4],lit:[],lt:"Leistungsmerkmal 4 von AI-First Firms (Kapitel 2)",k:"Fixpreisprojekte statt Stundenabrechnung; Bewilligung nur bei wegfallenden Stellen und gewollt umständliche Prozesse bremsen die Anpassung."},
+ 12:{g:3,gr:2,st:"f",z:[],lit:["jaw"],k:"Alle Mitarbeitenden im Kundenkontakt liefern Inputs, die wöchentlich zusammengeführt werden; Jahreskampagnen ordnen Kunden nachträglich zu und Wissen bleibt bei Betreuenden.",f:[1,6]}};
+const STK={z:"Zusammenhang",f:"mehrere Fälle",e:"Einzelbefund"};
+const GRP=n=>n===3?"alle drei Gruppen":n===1?"eine Gruppe":"zwei Gruppen";
+const litK=a=>a.map(x=>LIT[x].k).join("; ");
+function evLine(p){const e=EV[p];return `<span class="evb ${e.st}">${e.st==="z"?"Zusammenhang "+e.z.join(", "):STK[e.st]}</span> ${e.g} ${e.g===1?"Gespräch":"Gespräche"}, ${GRP(e.gr)}${e.lit.length?" · "+esc(litK(e.lit)):""}`;}
+const BAR=[
+ ["Sensing","Dominante Branchenlogik","gas","bestätigt"],
+ ["Sensing","Fehlende Aufnahmefähigkeit für neues Wissen (Absorptive Capacity)","coh","präzisiert"],
+ ["Seizing","Planungszyklen gegen emergente Strategie","cap","bestätigt"],
+ ["Seizing","Strukturelle Trägheit","han","bestätigt"],
+ ["Transforming","Koordinationskosten wachsen mit der Grösse","wil","verschärft"],
+ ["Transforming","Silostrukturen","bah","bestätigt"],
+ ["Transforming","Architekturwissen lenkt die Rekonfiguration","hen","mittelbar"],
+ ["Seizing","Kapazität der Prüf- und Freigabestellen","","neu"],
+ ["Seizing","Anreiz- und Ertragslogik, Machtstruktur","","neu"],
+ ["Transforming","Kontrollparadox","","neu"],
+ ["Transforming","Aufnahmefähigkeit der Kunden","","neu, Einzelfall"],
+ ["Transforming","Agenten als Koordinationslast","","neu"]];
+function renderEvidenz(){
+ $("#zusliste").innerHTML=ZUS.map(z=>`<div class="zcard"><span class="mono">Zusammenhang ${z.n}${z.s?" · "+z.s:""}</span><h3>${esc(z.t)}</h3><p>${esc(z.a)}</p><p class="hint">${z.g?z.g+" Gespräche, "+GRP(z.gr):"Gespräche aus "+GRP(z.gr).replace("alle ","allen ")} · ${esc(litK(z.lit))} · Prinzipien ${Object.keys(EV).filter(p=>EV[p].z.includes(z.n)).map(p=>"P"+p).join(", ")}</p></div>`).join("");
+ $("#bartab").innerHTML=`<tr><th>Mikrofundament</th><th>Barriere</th><th>Quelle</th><th>Befund</th></tr>`+BAR.map(b=>`<tr><td>${b[0]}</td><td>${esc(b[1])}</td><td>${b[2]?esc(LIT[b[2]].k):"<span class='hint'>Erhebung</span>"}</td><td><span class="evb ${b[3].startsWith("neu")?"n":b[3]==="mittelbar"?"e":"z"}">${b[3]}</span></td></tr>`).join("");
+ $("#evtab").innerHTML=`<tr><th>Prinzip</th><th>Stärke</th><th>Gespräche</th><th>Literatur</th><th>Handlungsfeld</th></tr>`+P.map((t,i)=>{const e=EV[i+1];return `<tr><td><b>P${i+1}</b> ${esc(t)}</td><td><span class="evb ${e.st}">${e.st==="z"?"Zusammenhang "+e.z.join(", "):STK[e.st]}</span></td><td>${e.g}, ${GRP(e.gr)}</td><td>${e.lit.length?esc(litK(e.lit)):`<span class='hint'>${esc(e.lt||"")}</span>`}</td><td>${PHF[i].join(", ")}</td></tr>`;}).join("");
+ $("#litliste").innerHTML=Object.values(LIT).sort((a,b)=>a.k.localeCompare(b.k)).map(l=>`<li>${l.f?esc(l.f):esc(l.k)+" <span class='hint'>(vollständige Angabe in der Masterarbeit)</span>"}</li>`).join("");
+}
+function evDetails(p){const e=EV[p];return `<details class="ev"><summary>${evLine(p)}</summary><p>${esc(e.k)}</p>${e.z.length&&e.st==="z"?`<p class="hint">${e.z.map(z=>`Zusammenhang ${z}: ${esc(ZUS[z-1].t)}`).join(" · ")} · <a href="#evidenz">Herleitung</a></p>`:`<p class="hint"><a href="#evidenz">Herleitung</a></p>`}${(e.f||[]).length?`<div class="faelle-mini">${e.f.map(n=>`<button class="chip" data-f="${n}">Fall: ${esc(FAELLE[n-1].t)}</button>`).join("")}</div>`:""}</details>`;}
 const FAELLE=[
  {n:1,t:"Entscheid in Stunden",m:"Stunden",p:[2,12],b:"In einem kleinen Software-Unternehmen sammelt das Team Produktinputs aus dem Kundenkontakt einmal pro Woche. Eine Person entscheidet innerhalb von Stunden, was gebaut wird. Aus einer Kundenidee kann am Abend ein Prototyp entstehen, der in derselben Woche gezeigt wird. Grössere Komponenten bleiben aufwendig."},
  {n:2,t:"Fertig nach 48 Stunden, eingeführt nach sechs Wochen",m:"48 h → 6 Wo.",p:[3],b:"In einem Industrieunternehmen stand ein Chatbot für Anfragen nach 48 Stunden bereit. Eingeführt war er nach rund sechs Wochen, vier davon entfielen auf das Warten bis zur nächsten regulären Sitzung."},
@@ -993,7 +1145,7 @@ function renderHF(){
   <h3>Handlungsfeld ${k}, ${f.t}</h3>
   <p class="ziel">${f.ziel}</p>
   <div class="mono muted" style="margin-bottom:8px">Prinzipien</div>
-  <div class="hfprinz">${f.p.map(p=>`<div><b>P${p}</b><span>${esc(P[p-1])}</span></div>`).join("")}</div>
+  <div class="hfprinz">${f.p.map(p=>`<div><b>P${p}</b><span>${esc(P[p-1])}${evDetails(p)}</span></div>`).join("")}</div>
   ${(()=>{const ord=HF[k].m.map((_,i)=>i),li=i=>{const on=S.chk[k+"-"+i],t=mtyp(k,i);return `<li class="${on?"chk":""}"><input type="checkbox" id="m${k}-${i}" ${on?"checked":""}><label for="m${k}-${i}"><span><b>${esc(MQ[k][i][1])}${t!=="R"?` <em class="eff ${t}">${EFF[t]}</em>`:` <em class="eff pk" data-p="${PKOF[k+"-"+i]}" title="${esc(PAK[PKOF[k+"-"+i]-1].t)}">Paket ${PKOF[k+"-"+i]}</em>`}</b><small>${esc(f.m[i])}</small></span></label>${mtag(k,i)}</li>`;};
    const pr="";
    return `<div class="mgrp"><div class="mono">Regeln und Standards festlegen${pr}</div><p class="hint">Beschluss und Durchsetzung, keine Entwicklung. Gebündelt in sechs Beschlusspaketen der Geschäftsleitung.</p><ul class="mass">${ord.filter(i=>mtyp(k,i)==="R").map(li).join("")}</ul></div>
@@ -1012,7 +1164,7 @@ function renderHF(){
 }
 function openHF(k){S.hf=k;save();renderHFNav();renderHF();renderWeg();$("#felder").scrollIntoView();}
 function openPrinzip(i){const d=$("#dlg");
- $("#dlg-n").textContent=`Prinzip P${i}`;$("#dlg-t").textContent=P[i-1];$("#dlg-b").textContent="Umgesetzt in:";
+ $("#dlg-n").textContent=`Prinzip P${i}`;$("#dlg-t").textContent=P[i-1];$("#dlg-b").innerHTML=`<p class="evline">${evLine(i)}</p><p>${esc(EV[i].k)}</p><p class="hint">Umgesetzt in:</p>`;
  $("#dlg-r").innerHTML=PHF[i-1].map(k=>`<button class="btn small primary" data-h="${k}">HF ${k}, ${esc(HF[k].t)}</button>`).join("")+`<button class="btn small" data-x="1">Schliessen</button>`;
  $("#dlg-r").querySelectorAll("button").forEach(b=>b.onclick=()=>{d.close();if(b.dataset.h)openHF(+b.dataset.h);});
  if(d.showModal)d.showModal();}
@@ -1026,6 +1178,7 @@ $("#dlg").addEventListener("click",e=>{if(e.target.id==="dlg")e.target.close();}
 
 /* ---------- Druckfassung ---------- */
 function buildDruck(){
+ const evP=p=>{const e=EV[p];return `${e.st==="z"?"Zusammenhang "+e.z.join(", "):STK[e.st]} · ${e.g} ${e.g===1?"Gespräch":"Gespräche"}, ${GRP(e.gr)}${e.lit.length?" · "+esc(litK(e.lit)):""}`;};
  const H=s=>{const e=$(s);return e?e.innerHTML:"";};
  const sec=(n,lab,tit,body,neu)=>`<div class="d-sec${neu?" d-new":""}"><div class="d-lab">${n} · ${lab}</div><h2>${tit}</h2>${body}</div>`;
  const ck=on=>`<span class="d-ck${on?" on":""}"></span>`;
@@ -1061,18 +1214,25 @@ function buildDruck(){
  b=`<p class="d-intro">Nachschlagewerk zur Roadmap: je Feld Prinzipien, Ziel, alle Massnahmen mit Antwortstufe, Indikator und Warnsignal.</p>`;
  Object.keys(HF).map(Number).forEach(k=>{const f=HF[k],fr=Q.filter(q=>q.hf===k);
   b+=`<div class="d-hf">${st===k?'<span class="d-start">EMPFOHLENES STARTFELD</span>':""}<div class="d-lab">Handlungsfeld ${k} · ${f.ph} · ${f.eb}${n?" · Rang "+(rg.findIndex(x=>x.k===k)+1)+" von 6":""}</div><h3>${esc(f.t)}</h3>
-   <p class="d-ziel">${f.ziel}</p><div class="d-lab">Prinzipien</div><div class="d-hfp">${f.p.map(p=>`<div><b>P${p}</b><span>${esc(P[p-1])}</span></div>`).join("")}</div><div class="d-lab">Massnahmen</div><ul class="d-mass">${f.m.map((_,i)=>{const w=mworst(k,i);return `<li>${ck(S.chk[k+"-"+i])}<span><b>${esc(MQ[k][i][1])}.</b> ${esc(f.m[i])}</span><span class="d-mt">${mtyp(k,i)==="R"?"Regel, Paket "+PKOF[k+"-"+i]:"Vorhaben, "+EFF[mtyp(k,i)]} · ${w?w.q+" "+w.a:MQ[k][i][0].split(" ")[0]}</span></li>`;}).join("")}</ul>
+   <p class="d-ziel">${f.ziel}</p><div class="d-lab">Prinzipien</div><div class="d-hfp">${f.p.map(p=>`<div><b>P${p}</b><span>${esc(P[p-1])}<small class="d-ev">Evidenz: ${evP(p)}</small></span></div>`).join("")}</div><div class="d-lab">Massnahmen</div><ul class="d-mass">${f.m.map((_,i)=>{const w=mworst(k,i);return `<li>${ck(S.chk[k+"-"+i])}<span><b>${esc(MQ[k][i][1])}.</b> ${esc(f.m[i])}</span><span class="d-mt">${mtyp(k,i)==="R"?"Regel, Paket "+PKOF[k+"-"+i]:"Vorhaben, "+EFF[mtyp(k,i)]} · ${w?w.q+" "+w.a:MQ[k][i][0].split(" ")[0]}</span></li>`;}).join("")}</ul>
    <div class="d-two"><div><div class="d-lab">Indikator</div>${f.ind}</div><div class="w"><div class="d-lab">Warnsignal</div>${f.warn}</div></div>
    <p class="d-fr">Fragen der Standortbestimmung: ${fr.map(q=>q.id+(S.ans[q.id]?" ("+S.ans[q.id]+")":"")).join(", ")}</p></div>`;});
  h+=sec("Schritt 3","Handlungsfelder",H("#felder h2"),b,true);
  h+=sec("Übersicht","Prinzipien","Zwölf Prinzipien",`<ol class="d-prinz">${P.map((t,i)=>`<li><span class="n">P${i+1}</span><span>${esc(t)}<small>Handlungsfeld ${PHF[i].join(", ")}</small></span></li>`).join("")}</ol>`);
- h+=sec("Grenzen","Geltung",H("#grenzen h2"),`<ul class="d-grenz">${[...document.querySelectorAll("#grenzen .grenz>div")].map(d=>`<li><b>${d.querySelector("b").textContent}.</b> ${d.lastChild.textContent}</li>`).join("")}</ul>`);
+ h+=sec("Evidenz","Methodik und Quellen",H("#evidenz h2"),`<p class="d-intro">${H("#evidenz .intro")}</p>
+  <div class="d-weg d-chain">${[...document.querySelectorAll("#evidenz .cstep")].map(c=>`<div><span class="d-lab">${c.querySelector(".mono").textContent}</span><b>${c.querySelector("h3").textContent}</b><ul>${c.querySelector("ul").innerHTML}</ul></div>`).join("")}</div>
+  <h3 class="d-h3">Fünf Zusammenhänge</h3>${ZUS.map(z=>`<div class="d-zus"><b>${z.n} · ${esc(z.t)}.</b> ${esc(z.a)} <small>${z.g?z.g+" Gespräche, "+GRP(z.gr):"Gespräche aus "+GRP(z.gr).replace("alle ","allen ")}; ${esc(litK(z.lit))}</small></div>`).join("")}
+  <h3 class="d-h3">Barrieren: Literatur und Befund</h3><table>${H("#bartab")}</table>
+  <h3 class="d-h3">Stärke der Belege je Prinzip</h3><table>${H("#evtab")}</table>
+  <div class="d-two" style="margin-top:5mm">${[...document.querySelectorAll("#evidenz .card")].map(c=>`<div><div class="d-lab">${c.querySelector(".mono").textContent}</div><p>${c.querySelector("p").innerHTML}</p></div>`).join("")}</div>
+  <h3 class="d-h3">Literatur</h3><ol class="d-lit">${H("#litliste")}</ol>`,true);
+ h+=sec("Grenzen","Geltung",H("#grenzen h2"),`<ul class="d-grenz">${[...document.querySelectorAll("#grenzen .grenz>div")].map(d=>`<li><b>${d.querySelector("b").textContent}.</b> ${[...d.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join("").trim()}</li>`).join("")}</ul>`);
  $("#druck").innerHTML=h;
 }
 addEventListener("beforeprint",buildDruck);
 
 /* ---------- Navigation ---------- */
-const secs=["kern","weg","standort","tage","felder","grenzen"].map(id=>document.getElementById(id));
+const secs=["kern","weg","standort","tage","felder","evidenz","grenzen"].map(id=>document.getElementById(id));
 addEventListener("scroll",()=>{const h=document.documentElement;$("#prog").style.width=(100*h.scrollTop/(h.scrollHeight-h.clientHeight))+"%";
  let cur="";for(const s of secs)if(s.getBoundingClientRect().top<120)cur=s.id;
  document.querySelectorAll("nav.main a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+cur));},{passive:true});
@@ -1085,7 +1245,7 @@ $("#leeren").onclick=()=>{if(confirm("Alle Antworten löschen?")){S.ans={};save(
 $("#stufe").onchange=e=>{S.stufe=e.target.value;save();};
 $("#vergleichen").onclick=vergleich;
 delete S.start;
-renderFlow();renderFragen();update();renderHF();
+renderFlow();renderEvidenz();renderFragen();update();renderHF();
 </script>
 </body>
 </html>
