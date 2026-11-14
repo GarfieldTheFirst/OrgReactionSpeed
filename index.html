@@ -102,12 +102,12 @@ section.dark{background:var(--alt)}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .legend i{width:16px;height:10px;display:inline-block}
-.frow{display:grid;grid-template-columns:190px 1fr 210px;gap:18px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}
+.frow{display:grid;grid-template-columns:210px 1fr 210px;gap:18px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}
 .frow .lbl{font-size:.9rem;font-weight:700;line-height:1.3}
 .frow .lbl small{display:block;font-weight:400;color:var(--soft);font-size:.78rem}
 .track{position:relative;display:flex;height:30px}
 .seg{height:100%;flex:none;box-shadow:inset -2px 0 0 #fff}
-.s1{background:#b9cdc4}.s2{background:var(--warn)}.s3{background:#d9827b}.s4{background:var(--ok)}.s5{background:#86a99a}
+.s0{background:#c9cfcc repeating-linear-gradient(135deg,rgba(255,255,255,.75) 0 3px,transparent 3px 7px)}.s1{background:#b9cdc4}.s2{background:var(--warn)}.s3{background:#d9827b}.s4{background:var(--ok)}.s5{background:#86a99a}
 .seg.wait,.legend i.wait{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.6) 0 3px,transparent 3px 7px)}
 .track .ref{position:absolute;top:-6px;bottom:-6px;width:0;border-left:2px dashed var(--fg)}
 .frow .note{font-size:.85rem;color:var(--muted);line-height:1.35}
@@ -258,6 +258,9 @@ th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 .evbar>a{align-self:center;padding:0 20px;font-weight:700;font-size:.85rem;white-space:nowrap}
 @media (max-width:860px){.evbar{grid-template-columns:1fr}.evbar>div{border-right:0;border-bottom:1px solid #e3ece8}.evbar>a{padding:14px 18px}}
 .evnote{margin-top:-8px}
+.frame{margin:14px 0 0;max-width:62ch;color:var(--muted)}
+.vorab{margin:22px 0 26px;padding:20px 22px;background:var(--mist);border-top:5px solid var(--deep)}
+.q .qh{clear:both;margin:-4px 0 12px;max-width:80ch}
 .evb{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;margin-right:4px;white-space:nowrap}
 .evb.z{background:var(--deep);color:#fff}.evb.f{background:#d5ebdf;color:var(--ok)}.evb.e{background:#f1e3b0;color:#6e5410}.evb.n{background:var(--warnbg);color:var(--warn);border:1px solid var(--warnline)}
 details.ev{margin-top:8px;font-size:.84rem;color:var(--muted)}
@@ -288,7 +291,7 @@ table.bartab td:first-child{white-space:nowrap}
 .litlist{padding-left:20px;font-size:.9rem;color:var(--muted)}
 .litlist li{margin-bottom:6px}
 /* Grenzen */
-.grenz{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.grenz{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
 .grenz div{border-top:5px solid var(--deep);background:var(--mist);padding:20px 22px;font-size:.95rem;line-height:1.5}
 .grenz b{display:block;margin-bottom:6px}
 .hfnav{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:16px}
@@ -475,6 +478,7 @@ dialog .dh{background:var(--panel)}
   .d-grp{margin:6mm 0 2mm;break-after:avoid}
   .d-q{break-inside:avoid;padding:5pt 0 7pt;border-top:.5pt solid var(--line2)}
   .d-q .t{font-weight:600;margin-bottom:4pt}
+  #druck .d-qh{font-size:8pt;color:var(--muted);margin:-2pt 0 4pt}
   .d-q .t span{color:var(--accent);margin-right:5pt}
   .d-q .t small{font-weight:400;color:var(--soft);font-size:7.5pt;margin-left:5pt}
   .d-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8pt;font-size:9pt}
@@ -568,9 +572,9 @@ dialog .dh{background:var(--panel)}
 
 <section id="kern" class="dark">
   <div class="wrap">
-    <div class="sec-head"><span class="mono">Kernbefund</span><h2>Der Engpass wandert</h2></div>
+    <div class="sec-head"><span class="mono">Kernbefund</span><h2>Der Engpass wandert</h2><p class="frame">Der Leitfaden blickt von aussen nach innen. Er fragt, wie schnell ein Unternehmen auf seine Kunden reagiert. Interne Effizienz ist nicht sein Thema.</p></div>
     <div class="kern">
-      <p class="big">Agentische KI beschleunigt die Umsetzung. Danach bestimmen <b>Entscheidung, Spezifikation und Freigabe</b>, wie schnell ein Unternehmen auf seine Kunden reagiert.</p>
+      <p class="big">Agentische KI verkürzt die Arbeit in jedem Schritt, am stärksten in der Umsetzung. Danach bestimmen die <b>Wartezeiten vor Entscheidung und Freigabe</b>, wie schnell ein Unternehmen auf seine Kunden reagiert.</p>
       <ol class="kpts">
         <li><span><b>Reaktionsfähig</b> ist, wer verschobene Kundenbedürfnisse wiederholt erfüllt, ohne dass jede vergleichbare Anpassung länger dauert.</span></li>
         <li><span><b>Mehr Vorhaben, gleiche Organisation:</b> Entscheid und Freigabe stauen sich, das Unternehmen wird mit jedem Vorhaben langsamer. Agenten ohne Überblick erzeugen zusätzliche Koordinationslast.</span></li>
@@ -587,11 +591,11 @@ dialog .dh{background:var(--panel)}
       <div class="flow-h">
         <h3 id="flow-t">Dauer einer Anpassung</h3>
         <div class="legend">
-          <span><i class="s1"></i>Signal erkennen</span><span><i class="s2"></i>Entscheiden</span><span><i class="s3"></i>Spezifizieren, freigeben</span><span><i class="s4"></i>Umsetzen</span><span><i class="s5"></i>Beim Kunden einführen</span><span><i class="s3 wait"></i>Warteschlange</span>
+          <span><i class="s1"></i>Signal erkennen</span><span><i class="s2"></i>Entscheiden</span><span><i class="s3"></i>Spezifizieren, freigeben</span><span><i class="s4"></i>Umsetzen</span><span><i class="s5"></i>Beim Kunden einführen</span><span><i class="s0"></i>Warten</span>
         </div>
       </div>
       <div id="flowrows"></div>
-      <figcaption class="hint">Schematische Darstellung von Zusammenhang 1 der Auswertung, keine Messwerte. Gestrichelte Linie: Dauer ohne Agenten.</figcaption>
+      <figcaption class="hint">Schematische Darstellung von Zusammenhang 1 der Auswertung, keine Messwerte. Jede Zeile ändert eine Grösse gegenüber der Zeile darüber. Gestrichelte Linie: Dauer ohne Agenten.</figcaption>
     </figure>
     <div class="erwart">
       <div class="mono" style="color:var(--accent)">Realistische Erwartungen</div>
@@ -623,7 +627,7 @@ dialog .dh{background:var(--panel)}
     </div>
     <div class="weg-meta">
       <div><b>Für wen</b>Geschäftsleitungen etablierter Unternehmen mit informationsdichtem Geschäftsmodell</div>
-      <div><b>Vor der Sitzung</b>Kernbefund lesen, Schritt 1 je Führungsstufe getrennt ausfüllen</div>
+      <div><b>Vor der Sitzung</b>Kernbefund lesen, Schritt 1 je Führungsstufe getrennt ausfüllen, Zahlen zu F8 bei Sicherheit, Recht und Datenschutz einholen</div>
       <div><b>In der Sitzung, rund ein halber Tag</b>Abweichungen besprechen, Startfeld wählen, Roadmap beschliessen</div>
     </div>
   </div>
@@ -634,6 +638,11 @@ dialog .dh{background:var(--panel)}
     <div class="sec-head"><span class="mono">Schritt 1 · Standortbestimmung</span><h2>Wo steht Ihr Unternehmen heute?</h2></div>
     <p class="intro">Massgeblich ist der heutige Zustand, nicht die Absicht. Wer statt eines Falls oder einer Zahl nur eine Einschätzung hat, wählt die tiefere Stufe.</p>
     <p class="hint evnote">Die Fragen übersetzen die Kategorien, nach denen die Gespräche ausgewertet wurden, in beobachtbare Stufen. Die Regel für das Startfeld war vor der Erhebung festgelegt. <a href="#evidenz">Herleitung</a></p>
+    <div class="weg-meta vorab" id="vorab">
+      <div><b>Was ein Agent ist</b>Ein KI-System, das ein Ziel selbstständig in Schritte zerlegt, dafür auf Daten und Werkzeuge zugreift und die Schritte ohne Einzelanweisung ausführt. Ein Chatbot beantwortet eine Frage, ein Agent erledigt eine Aufgabe.</div>
+      <div><b>Worauf sich die Fragen beziehen</b>Auf die Tätigkeiten, mit denen Ihr Unternehmen Angebote an veränderte Kundenbedürfnisse anpasst.</div>
+      <div><b>Mehrere Geschäftsbereiche</b>Unterscheiden sich Ihre Geschäftsbereiche deutlich, etwa Projektgeschäft und Standardprodukte, füllen Sie die Standortbestimmung je Bereich aus.</div>
+    </div>
     <div class="tabs" role="tablist">
       <button role="tab" data-v="fragen" aria-selected="true">1 · Fragen</button>
       <button role="tab" data-v="ergebnis" aria-selected="false">2 · Ergebnis</button>
@@ -740,7 +749,7 @@ dialog .dh{background:var(--panel)}
     <div class="tablewrap"><table class="bartab" id="evtab"></table></div>
 
     <div class="grid g2" style="margin-top:36px">
-      <div class="card"><div class="mono muted">Stand der Prüfung</div><p style="margin:8px 0 0">Stufe 1, die Prüfung auf Vollständigkeit und Konsistenz gegen das Analyseraster, ist abgeschlossen. Stufe 2 mit unabhängigen Experten und Stufe 3 in einer moderierten Sitzung einer Geschäftsleitung stehen aus. Die drei Hypothesen lassen sich mit Gesprächsdaten weder bestätigen noch verwerfen; dafür braucht es gemessene Durchlaufzeiten und Vergleichspaare.</p></div>
+      <div class="card"><div class="mono muted">Stand der Prüfung</div><p style="margin:8px 0 0">Stufe 1, die Prüfung auf Vollständigkeit und Konsistenz gegen das Analyseraster, ist abgeschlossen. Stufe 2 mit unabhängigen Experten hat mit einem Gespräch in einem Industrieunternehmen begonnen. Stufe 3 in einer moderierten Sitzung einer Geschäftsleitung steht aus. Die drei Hypothesen lassen sich mit Gesprächsdaten weder bestätigen noch verwerfen; dafür braucht es gemessene Durchlaufzeiten und Vergleichspaare.</p></div>
       <div class="card"><div class="mono muted">Lesart</div><p style="margin:8px 0 0">Validierungsfassung, Stand der Auswertung November 2026; die Kodierung ist im Team noch nicht konsolidiert. Die Gewichtung zugunsten der Organisation ist als Tendenz zu lesen, nicht als Befund. Die Seite der AI-First Firms ist mit zwei Gesprächen noch dünn.</p></div>
     </div>
 
@@ -753,7 +762,8 @@ dialog .dh{background:var(--panel)}
   <div class="wrap">
     <div class="sec-head"><span class="mono">Grenzen</span><h2>Wofür der Leitfaden nicht gilt</h2></div>
     <div class="grenz">
-      <div><b>Geltungsbereich</b>Nicht für sicherheitskritische Systeme mit garantierter Korrektheit und nicht für zulassungspflichtige Produktentwicklung.</div>
+      <div><b>Geltungsbereich</b>Nicht für sicherheitskritische Systeme mit garantierter Korrektheit und nicht für zulassungspflichtige Produktentwicklung. Für Anbieter reiner Standardprodukte gilt Handlungsfeld 2 für die Produktentwicklung, nicht für den einzelnen Verkauf.</div>
+      <div><b>Nicht behandelt</b>Die Sicht von innen: wo intern Zeit und Kosten anfallen, ob sich ein Vorhaben rechnet und wie Agenten gebaut werden. Der Leitfaden setzt die schnellere Umsetzung voraus und behandelt die Schnittstelle zum Kunden.</div>
       <div><b>Grundlage</b>Literatur und elf Experteninterviews, davon zwei mit AI-First Firms. <a href="#evidenz">Methodik und Quellen</a></div>
       <div><b>Ertragsmodell</b>Wer nach Aufwand abrechnet, kann die Empfehlungen nur begrenzt umsetzen.</div>
       <div><b>Wirkung und Kosten</b>Wirkung nicht gemessen, die Nutzenerwartung wird in der Validierung erhoben. Kosten agentischer Systeme nicht bewertet.</div>
@@ -787,10 +797,10 @@ const HF={
      "Die Verantwortung liegt bei einem GL-Mitglied mit Budget- und Ergebnisverantwortung, nicht im IT-Betrieb.",
      "Vor jedem grösseren Vorhaben hält die Geschäftsleitung schriftlich fest, was sie erwartet und was nicht."],
   ind:"Anteil der GL-Mitglieder mit eigener Nutzung, Verortung der Verantwortung.",
-  warn:"Die Einführung liegt beim IT-Betrieb, die KI-Strategie besteht aus einer Werkzeuglizenz, Fragen nach Möglichkeiten werden an Experten weitergereicht."},
+  warn:"Die Einführung liegt beim IT-Betrieb, die KI-Strategie besteht aus einer Werkzeuglizenz, Fragen nach Möglichkeiten werden an Experten weitergereicht, die Geschäftsleitung hält das Thema für einen Hype und wartet ab."},
  2:{t:"Kundensignale, Vorhabenliste und Reaktionsschwelle",ph:"Ideenfindung",eb:"Strategie und Prozess",p:[2,8,9,12],
   ziel:"Anstösse zu Anpassungen kommen aus dem Kundenkontakt, wenige ausgerichtete Vorhaben werden verfolgt, und Signale lösen nach festen Regeln Anpassungen aus.",
-  m:["Signale aus Kundengesprächen, Anfragen und Beschwerden werden erfasst und mindestens wöchentlich zusammengeführt, auch für Kunden ohne persönliche Betreuung.",
+  m:["Signale aus Kundengesprächen, Anfragen und Beschwerden sowie aus der Marktbeobachtung werden erfasst und mindestens wöchentlich zusammengeführt, auch für Kunden ohne persönliche Betreuung.",
      "Wissen über Kunden gehört ins System, nicht allein zu den Betreuenden.",
      "Die Geschäftsleitung überprüft die Vorhabenliste quartalsweise, also alle geplanten und laufenden Anpassungen an Angeboten und Abläufen einschliesslich der Anwendungsfälle für Agenten, und beschliesst eine Liste der nicht verfolgten Vorhaben.",
      "Ideen durchlaufen früh einen günstigen Prototyp, damit schwache Ideen ausscheiden, bevor Freigabestellen belastet werden.",
@@ -942,16 +952,16 @@ const Q=[
  {g:"Führung",id:"F1",t:"Hat jedes Mitglied der Geschäftsleitung in den letzten drei Monaten selbst mit einem Agenten gearbeitet?",o:["nein oder vereinzelt","ja, in einer Schulung","ja, im eigenen Arbeitsalltag"],hf:1},
  {g:"Führung",id:"F2",t:"Wo liegt die Verantwortung für agentische KI?",o:["im IT-Betrieb","in einer zentralen Digital- oder KI-Einheit","bei einem GL-Mitglied mit Budget- und Ergebnisverantwortung"],hf:1},
  {g:"Führung",id:"F3",t:"Gibt es eine Vorhabenliste, die auch festhält, was bewusst nicht verfolgt wird?",o:["nein","ja, jährlich","ja, quartalsweise überprüft"],hf:2},
- {g:"Erkennen",id:"F4",t:"Wie wird das Bild vom Kunden nachgeführt?",o:["über einzelne Kontakte, ohne Rhythmus","zyklisch, etwa quartalsweise oder entlang des Verkaufsplans","laufend, aus erfassten Signalen"],hf:2},
- {g:"Erkennen",id:"F5",t:"Ist festgelegt, ab welcher Signalstärke eine Anpassung geprüft wird?",o:["nein","informell","ja, je Angebot"],hf:2},
- {g:"Erkennen",id:"F6",t:"Woher kam der Anstoss zu den letzten drei Angebotsanpassungen?",o:["aus dem Verkaufsplan oder anderer interner Planung","aus einzelnen Kundenanfragen","aus systematisch erfassten Signalen des Kundenkontakts"],hf:2},
- {g:"Entscheiden und Freigeben",id:"F7",t:"Wer entscheidet bei einer typischen Angebotsanpassung abschliessend?",o:["unklar oder mehrere Gremien","klar, aber mehr als drei Freigaben","eine benannte Person mit Frist"],hf:3},
+ {g:"Erkennen",id:"F4",t:"Wie wird das Bild vom Kunden und vom Markt nachgeführt?",o:["über einzelne Kontakte, ohne Rhythmus","zyklisch, etwa quartalsweise oder entlang des Verkaufsplans","laufend, aus erfassten Signalen"],hf:2},
+ {g:"Erkennen",id:"F5",t:"Ist festgelegt, ab welcher Signalstärke eine Anpassung geprüft wird?",o:["nein","informell","ja, je Angebot oder Marktsegment"],h:"Die Schwelle ist ein Führungsentscheid. Sie legt fest, welche Signale eine Prüfung auslösen, auch wenn Agenten sie laufend liefern.",hf:2},
+ {g:"Erkennen",id:"F6",t:"Woher kam der Anstoss zu den letzten drei Angebotsanpassungen?",o:["aus dem Verkaufsplan oder anderer interner Planung","aus einzelnen Kundenanfragen","aus systematisch erfassten Signalen aus Kundenkontakt oder Markt"],hf:2},
+ {g:"Entscheiden und Freigeben",id:"F7",t:"Wer entscheidet bei einer typischen Angebotsanpassung abschliessend?",o:["unklar oder mehrere Gremien","klar, aber mehr als drei Freigaben","eine benannte Person mit Frist, Eskalation nach Risiko geregelt"],hf:3},
  {g:"Entscheiden und Freigeben",id:"F8",t:"Wie viele Vorhaben warten auf eine Freigabe durch Sicherheit, Recht oder Datenschutz, und wie viele schafft diese Stelle pro Woche?",o:["unbekannt","bekannt, die Warteschlange wächst","bekannt, der Durchsatz wächst mit"],hf:3},
  {g:"Entscheiden und Freigeben",id:"F9",t:"Aus welchem Budget wird der Betrieb agentischer Systeme bezahlt?",o:["ungeklärt","IT-Budget","Budget des prozessverantwortlichen Bereichs, Kosten je Vorhaben sichtbar"],hf:3},
- {g:"Entscheiden und Freigeben",id:"F10",t:"Wie lange dauerte die letzte Anpassung vom erkannten Bedarf bis zum produktiven Einsatz, und ging sie schneller als eine vergleichbare frühere Anpassung?",o:["unbekannt","bekannt, gleich schnell oder langsamer","bekannt, schneller"],hf:3},
- {g:"Umbauen",id:"F11",t:"Haben Agenten eine eigene Identität, einen fachlichen Eigner, eine Berechtigung nach Schutzklasse der Daten und einen festgelegten Ort der Datenverarbeitung?",o:["nein","teilweise","ja, mit Register und Stilllegungsregel"],hf:4},
+ {g:"Entscheiden und Freigeben",id:"F10",t:"Wie lange dauerte die letzte Anpassung vom erkannten Bedarf bis zum produktiven Einsatz, mit oder ohne Agenten, und ging sie schneller als eine vergleichbare frühere Anpassung?",o:["unbekannt","bekannt, gleich schnell oder langsamer","bekannt, schneller"],hf:3},
+ {g:"Umbauen",id:"F11",t:"Haben Agenten eine eigene Identität, einen fachlichen Eigner, eine Berechtigung nach Schutzklasse der Daten und einen festgelegten Ort der Datenverarbeitung?",o:["nein","teilweise","ja, mit Register und Stilllegungsregel"],hf:4,h:"Sind noch keine Agenten im Einsatz, wählen Sie A."},
  {g:"Umbauen",id:"F12",t:"Wo wird Neues erprobt, und wie gelangt es in die Linie?",o:["in einzelnen Initiativen","in einem zentralen Team ohne Übergabe","in einem Team mit GL-Auftrag und festgelegter Übergabe"],hf:5},
- {g:"Umbauen",id:"F13",t:"Könnten Sie die Aufgaben Ihrer Agenten bei Bedarf auch ohne Agent selbst erledigen, und vergleichen Sie Ergebnisse stichprobenweise?",o:["nein","teilweise","ja, regelmässig geübt"],hf:6},
+ {g:"Umbauen",id:"F13",t:"Könnten Sie die Aufgaben Ihrer Agenten bei Bedarf auch ohne Agent selbst erledigen, und vergleichen Sie Ergebnisse stichprobenweise?",o:["nein","teilweise","ja, regelmässig geübt"],hf:6,h:"Sind noch keine Agenten im Einsatz, wählen Sie B."},
  {g:"Umbauen",id:"F14",t:"Woran wird der Nutzen eines Vorhabens gemessen?",o:["an wegfallenden Stellen oder gar nicht","an gesparter Zeit, ohne Entscheid über frei werdende Kapazität","an Ergebnissen für Kunden, mit vorab vereinbarter Verwendung der Kapazität"],hf:6}];
 /* Massnahme -> Fragen der Standortbestimmung (leerzeichengetrennt), Kurztitel, [alt = Alternative, nicht in die Roadmap] */
 const MQ={
@@ -984,15 +994,15 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 /* ---------- Kernbefund-Grafik (schematisch) ---------- */
-const STG=["","Signal erkennen","Entscheiden","Spezifizieren, freigeben","Umsetzen","Beim Kunden einführen"];
+const STG=["Warten","Signal erkennen","Entscheiden","Spezifizieren, freigeben","Umsetzen","Beim Kunden einführen"];
 const FLOW=[
- {l:"Ohne Agenten",s:"Ausgangslage",seg:[[1,8],[2,14],[3,18],[4,42],[5,10]],n:"Umsetzen ist der Engpass",d:""},
- {l:"Mit Agenten",s:"Organisation unverändert",seg:[[1,8],[2,14],[3,18],[4,8],[5,10]],n:"Engpass wandert",d:"zu Entscheid und Freigabe"},
- {l:"Mit Agenten, mehr Vorhaben",s:"Organisation unverändert",seg:[[1,8],[2,14],[2,12,1],[3,18],[3,24,1],[4,8],[5,10]],n:"Langsamer als ohne Agenten",d:"Warteschlangen an Entscheid und Freigabe",c:"bad"},
- {l:"Mit Agenten, mehr Vorhaben",s:"Organisation wächst mit",seg:[[1,5],[2,5],[3,9],[4,8],[5,8]],n:"Wiederholt schneller",d:"Entscheidungsrechte, Prüfkapazität, Kundensignale",c:"good"}];
+ {l:"1 · Ohne Agenten",s:"Ausgangslage",seg:[[1,7],[0,6],[2,8],[0,8],[3,10],[4,40],[5,9]],n:"Umsetzen ist der Engpass",d:""},
+ {l:"2 · Neu: Agenten",s:"Arbeit in jedem Schritt kürzer, Warten unverändert",seg:[[1,4],[0,6],[2,5],[0,8],[3,6],[4,8],[5,6]],n:"Engpass wandert",d:"Warten vor Entscheid und Freigabe bestimmt die Dauer"},
+ {l:"3 · Neu: mehr Vorhaben",s:"Organisation unverändert",seg:[[1,4],[0,22],[2,5],[0,40],[3,6],[4,8],[5,6]],n:"Langsamer als ohne Agenten",d:"Warteschlangen vor Entscheid und Freigabe wachsen",c:"bad"},
+ {l:"4 · Neu: Organisation wächst mit",s:"Entscheidungsrechte, Prüfkapazität, Signale",seg:[[1,4],[0,2],[2,5],[0,3],[3,6],[4,8],[5,6]],n:"Wiederholt schneller",d:"Warten fällt weitgehend weg",c:"good"}];
 const REF=FLOW[0].seg.reduce((s,x)=>s+x[1],0);
 function renderFlow(){
- $("#flowrows").innerHTML=FLOW.map(r=>`<div class="frow ${r.c||""}"><div class="lbl">${r.l}<small>${r.s}</small></div><div class="track">${r.seg.map(([k,w,q])=>`<span class="seg s${k}${q?" wait":""}" style="width:${w}%" title="${STG[k]}${q?", Warteschlange":""}"></span>`).join("")}<i class="ref" style="left:${REF}%"></i></div><div class="note"><b>${r.n}</b>${r.d}</div></div>`).join("");
+ $("#flowrows").innerHTML=FLOW.map(r=>`<div class="frow ${r.c||""}"><div class="lbl">${r.l}<small>${r.s}</small></div><div class="track">${r.seg.map(([k,w])=>`<span class="seg s${k}" style="width:${w}%" title="${STG[k]}"></span>`).join("")}<i class="ref" style="left:${REF}%"></i></div><div class="note"><b>${r.n}</b>${r.d}</div></div>`).join("");
 }
 
 /* ---------- Priorisierung ---------- */
@@ -1084,7 +1094,7 @@ function renderFragen(){
  const box=$("#fragen");let g="",h="";
  Q.forEach(q=>{
   if(q.g!==g){g=q.g;h+=`<div class="grp">${g}</div>`;}
-  h+=`<fieldset class="q${S.ans[q.id]?" done":""}" style="border:1px solid var(--line)"><legend class="qt" style="padding:0"><span class="id">${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></legend><div class="opts">${q.o.map((o,k)=>`<label class="opt"><input type="radio" name="${q.id}" value="${L[k]}" ${S.ans[q.id]===L[k]?"checked":""}><span><i>${L[k]}</i>${esc(o)}</span></label>`).join("")}</div></fieldset>`;
+  h+=`<fieldset class="q${S.ans[q.id]?" done":""}" style="border:1px solid var(--line)"><legend class="qt" style="padding:0"><span class="id">${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></legend>${q.h?`<p class="hint qh">${esc(q.h)}</p>`:""}<div class="opts">${q.o.map((o,k)=>`<label class="opt"><input type="radio" name="${q.id}" value="${L[k]}" ${S.ans[q.id]===L[k]?"checked":""}><span><i>${L[k]}</i>${esc(o)}</span></label>`).join("")}</div></fieldset>`;
  });
  box.innerHTML=h;
  box.querySelectorAll("input").forEach(el=>el.addEventListener("change",e=>{S.ans[e.target.name]=e.target.value;e.target.closest(".q").classList.add("done");save();stand();update();}));
@@ -1198,15 +1208,15 @@ function buildDruck(){
  let h=`<div class="d-cover"><div class="d-top d-lab">${H(".hero .eyebrow")}</div><h1>${H(".hero h1")}</h1><p class="d-lead">${H(".hero .lead")}</p>
   <div class="d-foot"><ul class="d-facts">${H(".facts")}</ul><div class="d-imp">${imp}</div></div></div>`;
  // Kernbefund und Vorgehen
- h+=sec("01","Kernbefund",H("#kern h2"),`<p class="d-big">${H("#kern .big")}</p><ol class="d-kpts">${[...document.querySelectorAll("#kern .kpts li")].map(l=>`<li>${l.innerHTML}</li>`).join("")}</ol>
+ h+=sec("01","Kernbefund",H("#kern h2"),`<p class="d-intro">${H("#kern .frame")}</p><p class="d-big">${H("#kern .big")}</p><ol class="d-kpts">${[...document.querySelectorAll("#kern .kpts li")].map(l=>`<li>${l.innerHTML}</li>`).join("")}</ol>
   ${$("#kern .flow").outerHTML}
   <div class="d-box"><div class="d-lab">${H("#kern .erwart .mono")}</div><p>${H("#kern .erwart p")}</p></div>`);
  h+=sec("02","Vorgehen",H("#weg h2"),`<div class="d-weg">${[...document.querySelectorAll("#weg .step")].map(s=>`<div><span class="d-lab">Schritt ${s.querySelector(".num").textContent}</span><b>${s.querySelector("h3").textContent}</b>${s.querySelector("p").textContent}</div>`).join("")}</div>
   <div class="d-weg">${[...document.querySelectorAll("#weg .weg-meta>div")].map(d=>`<div>${d.innerHTML}</div>`).join("")}</div>`);
  // Standortbestimmung
- let b=`<p class="d-intro">${H("#standort .intro")}</p><div class="d-stufe"><b>Führungsstufe</b>${Object.keys(STUFE).map(s=>`<span>${ck(n>0&&S.stufe===s)}${STUFE[s]}</span>`).join("")}</div>`;
+ let b=`<p class="d-intro">${H("#standort .intro")}</p><div class="d-weg">${[...document.querySelectorAll("#vorab>div")].map(d=>`<div>${d.innerHTML}</div>`).join("")}</div><div class="d-stufe"><b>Führungsstufe</b>${Object.keys(STUFE).map(s=>`<span>${ck(n>0&&S.stufe===s)}${STUFE[s]}</span>`).join("")}</div>`;
  let g="";Q.forEach(q=>{if(q.g!==g){g=q.g;b+=`<div class="d-grp d-lab">${esc(g)}</div>`;}
-  b+=`<div class="d-q"><div class="t"><span>${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></div><div class="d-opts">${q.o.map((o,k)=>{const on=S.ans[q.id]===L[k];return `<div class="${on?"on":""}">${ck(on)}<i>${L[k]}</i><span>${esc(o)}</span></div>`;}).join("")}</div></div>`;});
+  b+=`<div class="d-q"><div class="t"><span>${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></div>${q.h?`<p class="d-qh">${esc(q.h)}</p>`:""}<div class="d-opts">${q.o.map((o,k)=>{const on=S.ans[q.id]===L[k];return `<div class="${on?"on":""}">${ck(on)}<i>${L[k]}</i><span>${esc(o)}</span></div>`;}).join("")}</div></div>`;});
  if(voll){const s=startfeld(S.ans),w=[];
   if(S.ans.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(S.ans.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
   b+=`<div class="d-res"><div class="d-lab">Auswertung · ${STUFE[S.stufe]} · Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+esc(HF[s.hf].t):"In der Sitzung festlegen"}</h3><p>${s.grund}</p>
