@@ -170,7 +170,7 @@ section.dark{background:var(--alt)}
 .pchips{display:flex;flex-wrap:wrap;gap:4px}
 .pchips i{font-style:normal;font-size:.72rem;font-weight:700;padding:3px 6px;background:#fff;color:var(--soft);border:1px solid #cddbd4}
 .pchips i.on{background:var(--deep);color:#fff;border-color:var(--deep)}
-.weg-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 32px;margin-top:28px;font-size:.92rem;color:var(--muted)}
+.weg-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px 32px;margin-top:28px;font-size:.92rem;color:var(--muted)}
 .weg-meta b{display:block;color:var(--fg);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
 @media (max-width:900px){.weg{grid-template-columns:1fr}.weg .arrow{height:40px}.weg .arrow svg{transform:rotate(90deg)}}
 
@@ -260,6 +260,17 @@ th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 .evnote{margin-top:-8px}
 .frame{margin:14px 0 0;max-width:62ch;color:var(--muted)}
 .vorab{margin:22px 0 26px;padding:20px 22px;background:var(--mist);border-top:5px solid var(--deep)}
+.blick{margin-top:14px;background:#fff;border:1px solid #cddbd4;padding:24px 26px}
+.bl-rows{margin:12px 0 8px;border-top:1px solid var(--line)}
+.bl-row{display:grid;grid-template-columns:30px minmax(0,1fr) auto 130px;gap:16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.bl-row .hb{width:26px;height:26px;color:var(--deep)}
+.bl-row .tt small{display:block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.bl-row.top .tt small{color:var(--accent)}
+.bl-row .ans{text-align:right}
+.bl-leg{margin:0 0 20px}
+.bl-next{margin:8px 0 0;padding-left:22px}
+.bl-next li{margin-bottom:4px}
+@media (max-width:760px){.blick{padding:18px 16px}.bl-row{grid-template-columns:30px minmax(0,1fr) auto;gap:6px 12px}.bl-row .ans{grid-column:2/4;text-align:left}.bl-row .lvl{grid-column:3;grid-row:1}}
 .q .qh{clear:both;margin:-4px 0 12px;max-width:80ch}
 .evb{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;margin-right:4px;white-space:nowrap}
 .evb.z{background:var(--deep);color:#fff}.evb.f{background:#d5ebdf;color:var(--ok)}.evb.e{background:#f1e3b0;color:#6e5410}.evb.n{background:var(--warnbg);color:var(--warn);border:1px solid var(--warnline)}
@@ -478,6 +489,13 @@ dialog .dh{background:var(--panel)}
   .d-grp{margin:6mm 0 2mm;break-after:avoid}
   .d-q{break-inside:avoid;padding:5pt 0 7pt;border-top:.5pt solid var(--line2)}
   .d-q .t{font-weight:600;margin-bottom:4pt}
+  #druck .blick{border:0;padding:0;margin:0}
+  #druck .blick>.mono:first-child{display:none}
+  #druck .bl-row{grid-template-columns:20pt minmax(0,1fr) auto 28mm;gap:8pt;padding:5pt 0;font-size:9.5pt;break-inside:avoid}
+  #druck .bl-row .hb{width:15pt;height:15pt}
+  #druck .bl-row .tt small,#druck .lvl,#druck .tag{font-size:7pt}
+  #druck .bl-leg{font-size:8pt}
+  #druck .bl-next{font-size:10pt}
   #druck .d-qh{font-size:8pt;color:var(--muted);margin:-2pt 0 4pt}
   .d-q .t span{color:var(--accent);margin-right:5pt}
   .d-q .t small{font-weight:400;color:var(--soft);font-size:7.5pt;margin-left:5pt}
@@ -639,6 +657,7 @@ dialog .dh{background:var(--panel)}
     <p class="intro">Massgeblich ist der heutige Zustand, nicht die Absicht. Wer statt eines Falls oder einer Zahl nur eine Einschätzung hat, wählt die tiefere Stufe.</p>
     <p class="hint evnote">Die Fragen übersetzen die Kategorien, nach denen die Gespräche ausgewertet wurden, in beobachtbare Stufen. Die Regel für das Startfeld war vor der Erhebung festgelegt. <a href="#evidenz">Herleitung</a></p>
     <div class="weg-meta vorab" id="vorab">
+      <div><b>Getrennt ausfüllen, gemeinsam vergleichen</b>Mehrere Personen aus der Geschäftsleitung und aus weiteren Führungsstufen füllen getrennt aus. Jede erhält einen Ergebniscode. Die Abweichungen zwischen den Codes eröffnen die Sitzung.</div>
       <div><b>Was ein Agent ist</b>Ein KI-System, das ein Ziel selbstständig in Schritte zerlegt, dafür auf Daten und Werkzeuge zugreift und die Schritte ohne Einzelanweisung ausführt. Ein Chatbot beantwortet eine Frage, ein Agent erledigt eine Aufgabe.</div>
       <div><b>Worauf sich die Fragen beziehen</b>Auf die Tätigkeiten, mit denen Ihr Unternehmen Angebote an veränderte Kundenbedürfnisse anpasst.</div>
       <div><b>Mehrere Geschäftsbereiche</b>Unterscheiden sich Ihre Geschäftsbereiche deutlich, etwa Projektgeschäft und Standardprodukte, füllen Sie die Standortbestimmung je Bereich aus.</div>
@@ -749,7 +768,7 @@ dialog .dh{background:var(--panel)}
     <div class="tablewrap"><table class="bartab" id="evtab"></table></div>
 
     <div class="grid g2" style="margin-top:36px">
-      <div class="card"><div class="mono muted">Stand der Prüfung</div><p style="margin:8px 0 0">Stufe 1, die Prüfung auf Vollständigkeit und Konsistenz gegen das Analyseraster, ist abgeschlossen. Stufe 2 mit unabhängigen Experten hat mit einem Gespräch in einem Industrieunternehmen begonnen. Stufe 3 in einer moderierten Sitzung einer Geschäftsleitung steht aus. Die drei Hypothesen lassen sich mit Gesprächsdaten weder bestätigen noch verwerfen; dafür braucht es gemessene Durchlaufzeiten und Vergleichspaare.</p></div>
+      <div class="card"><div class="mono muted">Stand der Prüfung</div><p style="margin:8px 0 0">Stufe 1, die Prüfung auf Vollständigkeit und Konsistenz gegen das Analyseraster, ist abgeschlossen. Stufe 2 mit unabhängigen Experten läuft, bisher mit zwei Gesprächen in einem Industrieunternehmen und einem Beratungsunternehmen. Stufe 3 in einer moderierten Sitzung einer Geschäftsleitung steht aus. Die drei Hypothesen lassen sich mit Gesprächsdaten weder bestätigen noch verwerfen; dafür braucht es gemessene Durchlaufzeiten und Vergleichspaare.</p></div>
       <div class="card"><div class="mono muted">Lesart</div><p style="margin:8px 0 0">Validierungsfassung, Stand der Auswertung November 2026; die Kodierung ist im Team noch nicht konsolidiert. Die Gewichtung zugunsten der Organisation ist als Tendenz zu lesen, nicht als Befund. Die Seite der AI-First Firms ist mit zwei Gesprächen noch dünn.</p></div>
     </div>
 
@@ -953,13 +972,13 @@ const Q=[
  {g:"Führung",id:"F2",t:"Wo liegt die Verantwortung für agentische KI?",o:["im IT-Betrieb","in einer zentralen Digital- oder KI-Einheit","bei einem GL-Mitglied mit Budget- und Ergebnisverantwortung"],hf:1},
  {g:"Führung",id:"F3",t:"Gibt es eine Vorhabenliste, die auch festhält, was bewusst nicht verfolgt wird?",o:["nein","ja, jährlich","ja, quartalsweise überprüft"],hf:2},
  {g:"Erkennen",id:"F4",t:"Wie wird das Bild vom Kunden und vom Markt nachgeführt?",o:["über einzelne Kontakte, ohne Rhythmus","zyklisch, etwa quartalsweise oder entlang des Verkaufsplans","laufend, aus erfassten Signalen"],hf:2},
- {g:"Erkennen",id:"F5",t:"Ist festgelegt, ab welcher Signalstärke eine Anpassung geprüft wird?",o:["nein","informell","ja, je Angebot oder Marktsegment"],h:"Die Schwelle ist ein Führungsentscheid. Sie legt fest, welche Signale eine Prüfung auslösen, auch wenn Agenten sie laufend liefern.",hf:2},
+ {g:"Erkennen",id:"F5",t:"Ist festgelegt, ab welcher Signalstärke eine Anpassung geprüft wird?",o:["nein","informell","ja, je Angebot oder Marktsegment"],h:"Signalstärke meint, wie oft und wie deutlich ein Bedürfnis auftaucht, etwa die Zahl gleichlautender Anfragen oder Beschwerden. Die Schwelle ist ein Führungsentscheid. Sie legt fest, ab wann eine Anpassung geprüft wird, auch wenn Agenten Signale laufend liefern.",hf:2},
  {g:"Erkennen",id:"F6",t:"Woher kam der Anstoss zu den letzten drei Angebotsanpassungen?",o:["aus dem Verkaufsplan oder anderer interner Planung","aus einzelnen Kundenanfragen","aus systematisch erfassten Signalen aus Kundenkontakt oder Markt"],hf:2},
  {g:"Entscheiden und Freigeben",id:"F7",t:"Wer entscheidet bei einer typischen Angebotsanpassung abschliessend?",o:["unklar oder mehrere Gremien","klar, aber mehr als drei Freigaben","eine benannte Person mit Frist, Eskalation nach Risiko geregelt"],hf:3},
  {g:"Entscheiden und Freigeben",id:"F8",t:"Wie viele Vorhaben warten auf eine Freigabe durch Sicherheit, Recht oder Datenschutz, und wie viele schafft diese Stelle pro Woche?",o:["unbekannt","bekannt, die Warteschlange wächst","bekannt, der Durchsatz wächst mit"],hf:3},
  {g:"Entscheiden und Freigeben",id:"F9",t:"Aus welchem Budget wird der Betrieb agentischer Systeme bezahlt?",o:["ungeklärt","IT-Budget","Budget des prozessverantwortlichen Bereichs, Kosten je Vorhaben sichtbar"],hf:3},
  {g:"Entscheiden und Freigeben",id:"F10",t:"Wie lange dauerte die letzte Anpassung vom erkannten Bedarf bis zum produktiven Einsatz, mit oder ohne Agenten, und ging sie schneller als eine vergleichbare frühere Anpassung?",o:["unbekannt","bekannt, gleich schnell oder langsamer","bekannt, schneller"],hf:3},
- {g:"Umbauen",id:"F11",t:"Haben Agenten eine eigene Identität, einen fachlichen Eigner, eine Berechtigung nach Schutzklasse der Daten und einen festgelegten Ort der Datenverarbeitung?",o:["nein","teilweise","ja, mit Register und Stilllegungsregel"],hf:4,h:"Sind noch keine Agenten im Einsatz, wählen Sie A."},
+ {g:"Umbauen",id:"F11",t:"Haben Agenten eine eigene Identität, einen fachlichen Eigner, eine Berechtigung nach Schutzklasse der Daten, einen festgelegten Ort der Datenverarbeitung und eine Regel für ihre Stilllegung?",o:["nein","teilweise","ja, alles in einem Register geführt"],hf:4,h:"Sind noch keine Agenten im Einsatz, wählen Sie A."},
  {g:"Umbauen",id:"F12",t:"Wo wird Neues erprobt, und wie gelangt es in die Linie?",o:["in einzelnen Initiativen","in einem zentralen Team ohne Übergabe","in einem Team mit GL-Auftrag und festgelegter Übergabe"],hf:5},
  {g:"Umbauen",id:"F13",t:"Könnten Sie die Aufgaben Ihrer Agenten bei Bedarf auch ohne Agent selbst erledigen, und vergleichen Sie Ergebnisse stichprobenweise?",o:["nein","teilweise","ja, regelmässig geübt"],hf:6,h:"Sind noch keine Agenten im Einsatz, wählen Sie B."},
  {g:"Umbauen",id:"F14",t:"Woran wird der Nutzen eines Vorhabens gemessen?",o:["an wegfallenden Stellen oder gar nicht","an gesparter Zeit, ohne Entscheid über frei werdende Kapazität","an Ergebnissen für Kunden, mit vorab vereinbarter Verwendung der Kapazität"],hf:6}];
@@ -1088,6 +1107,16 @@ function renderRoadmap(){
   <p class="hint rm-foot">Kapazität je Etappe in Aufwandspunkten 3, 5, 6, 6; ein Vorhaben mit grossem Aufwand zählt doppelt. ${R.rest?`${R.rest} weitere Vorhaben mittlerer Priorität folgen nach Etappe 4. `:""}${R.pkC?`${R.pkC} ${R.pkC>1?"Pakete sind":"Paket ist"} bereits geregelt (Stufe C). `:""}${R.keep} Vorhaben sind bereits auf Stufe C: halten und stichprobenweise prüfen.${R.done?` ${R.done} ${R.done>1?"Massnahmen":"Massnahme"} erledigt.`:""} Gestrichelt: fester Rhythmus der Standortbestimmung.</p>`;
  $("#roadmap").querySelectorAll(".rmi").forEach(b=>b.onclick=()=>b.dataset.p?openPaket(+b.dataset.p):openHF(+b.dataset.h));
 }
+/* ---------- Übersicht auf einen Blick ---------- */
+function ball(v){const q=Math.round(v*4),r=9,c=11,w=q*Math.PI/2;
+ const f=q===0?"":q===4?`<circle cx="${c}" cy="${c}" r="${r}" fill="currentColor"/>`:`<path d="M${c} ${c}V${c-r}A${r} ${r} 0 ${q>2?1:0} 1 ${(c+r*Math.sin(w)).toFixed(2)} ${(c-r*Math.cos(w)).toFixed(2)}Z" fill="currentColor"/>`;
+ return `<svg class="hb" viewBox="0 0 22 22" role="img" aria-label="Stand ${q} von 4"><circle cx="${c}" cy="${c}" r="${r}" fill="#fff" stroke="currentColor" stroke-width="1.5"/>${f}</svg>`;}
+function blick(){
+ const r=rang(S.ans),st=startHF(),R=roadmap();
+ const rows=Object.keys(HF).map(Number).map(k=>{const x=r.find(y=>y.k===k),qs=Q.filter(q=>q.hf===k);
+  return `<div class="bl-row${st===k?" top":""}">${ball(1-(x.need||0))}<span class="tt"><small>Handlungsfeld ${k}${st===k?" · Startfeld":""}</small><b>${esc(HF[k].t)}</b></span><span class="ans">${qs.map(q=>`<span class="tag t${S.ans[q.id]}">${q.id} ${S.ans[q.id]}</span>`).join(" ")}</span><span class="lvl ${x.lvl}">${LVL[x.lvl]}</span></div>`;}).join("");
+ const next=R.w.flatMap(W=>[...W.fix,...W.fund.map(x=>MQ[x.k][x.i][1]),...W.rules.map(p=>"Beschlusspaket "+p.n+" beschliessen: "+p.t),...W.it.map(x=>MQ[x.k][x.i][1])]).slice(0,3);
+ return `<div class="blick"><div class="mono muted">Auf einen Blick</div><div class="bl-rows">${rows}</div><p class="hint bl-leg">Kreis: Stand je Handlungsfeld nach Ihren Antworten, von leer (alle A) bis voll (alle C). Rechts die Dringlichkeit.</p><div class="mono muted">Die nächsten drei Schritte</div><ol class="bl-next">${next.map(t=>`<li>${esc(t)}</li>`).join("")}</ol></div>`;}
 function update(){renderWeg();renderPrio();renderHFNav();renderHF();renderRoadmap();}
 /* ---------- Standortbestimmung ---------- */
 function renderFragen(){
@@ -1114,10 +1143,10 @@ function ergebnis(){
  const n=Q.filter(q=>S.ans[q.id]).length, el=$("#v-ergebnis");
  if(n<Q.length){const off=Q.filter(q=>!S.ans[q.id]).map(q=>q.id).join(", ");el.innerHTML=`<div class="warnbox"><b>${Q.length-n} Fragen sind noch offen</b> (${off}). Die Auswertung setzt alle vierzehn Antworten voraus.</div>`;return;}
  const s=startfeld(S.ans);
- let h=`<div class="card res-start"><div class="mono">Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+HF[s.hf].t:"In der Sitzung festlegen"}</h3><p>${s.grund}</p><p style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn primary small" href="#tage">Schritt 2: Roadmap →</a>${s.hf?`<button class="btn ghost small" id="goStart">Massnahmen im Handlungsfeld ${s.hf}</button>`:""}</p></div>`;
+ let h=`<div class="card res-start"><div class="mono">Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+HF[s.hf].t:"In der Sitzung festlegen"}</h3><p>${s.grund}</p><p style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn primary small" href="#tage">Schritt 2: Roadmap →</a>${s.hf?`<button class="btn ghost small" id="goStart">Massnahmen im Handlungsfeld ${s.hf}</button>`:""}</p></div>`+blick();
  const w=[];if(S.ans.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(S.ans.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
  if(w.length)h+=`<div class="warnbox"><b>Zahlen innerhalb von vier Wochen beschaffen.</b> Ohne sie lässt sich die Reaktionsfähigkeit nicht beurteilen.<br>${w.join("<br>")}</div>`;
- h+=`<div class="card" style="margin-top:14px"><div class="mono muted">Ihr Ergebniscode</div><p style="margin:8px 0 0">Geben Sie diesen Code der Person, die die Sitzung vorbereitet. Er enthält Ihre Stufe und die vierzehn Antworten, keinen Namen.</p><code class="res" id="rc">${code(S.stufe,S.ans)}</code><button class="btn small" id="kopie">Code kopieren</button> <span class="hint" id="km"></span></div>`;
+ h+=`<div class="card" style="margin-top:14px"><div class="mono muted">Ihr Ergebniscode</div><p style="margin:8px 0 0">Der Code enthält Ihre Stufe und die vierzehn Antworten, keinen Namen. Geben Sie ihn der Person, die die Sitzung vorbereitet. Sie legt die Codes aller Beteiligten unter «Stufen vergleichen» nebeneinander. Wo die Antworten auseinanderliegen, beginnt das Gespräch.</p><code class="res" id="rc">${code(S.stufe,S.ans)}</code><button class="btn small" id="kopie">Code kopieren</button> <span class="hint" id="km"></span></div>`;
  el.innerHTML=h;
  const g=$("#goStart");if(g)g.onclick=()=>openHF(s.hf);
  $("#kopie").onclick=async()=>{try{await navigator.clipboard.writeText(code(S.stufe,S.ans));$("#km").textContent="kopiert";}catch(e){$("#km").textContent="Bitte den Code markieren und kopieren";}};
@@ -1208,6 +1237,7 @@ function buildDruck(){
  let h=`<div class="d-cover"><div class="d-top d-lab">${H(".hero .eyebrow")}</div><h1>${H(".hero h1")}</h1><p class="d-lead">${H(".hero .lead")}</p>
   <div class="d-foot"><ul class="d-facts">${H(".facts")}</ul><div class="d-imp">${imp}</div></div></div>`;
  // Kernbefund und Vorgehen
+ if(voll)h+=sec("Übersicht","Ihr Ergebnis","Auf einen Blick",`<p class="d-intro">${STUFE[S.stufe]}, Ergebniscode ${code(S.stufe,S.ans)}. Empfohlenes Startfeld: ${st?"Handlungsfeld "+st+", "+esc(HF[st].t):"in der Sitzung festlegen"}.</p>${blick()}`)+`<div style="break-after:page"></div>`;
  h+=sec("01","Kernbefund",H("#kern h2"),`<p class="d-intro">${H("#kern .frame")}</p><p class="d-big">${H("#kern .big")}</p><ol class="d-kpts">${[...document.querySelectorAll("#kern .kpts li")].map(l=>`<li>${l.innerHTML}</li>`).join("")}</ol>
   ${$("#kern .flow").outerHTML}
   <div class="d-box"><div class="d-lab">${H("#kern .erwart .mono")}</div><p>${H("#kern .erwart p")}</p></div>`);
