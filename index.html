@@ -271,6 +271,11 @@ th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 .bl-next{margin:8px 0 0;padding-left:22px}
 .bl-next li{margin-bottom:4px}
 @media (max-width:760px){.blick{padding:18px 16px}.bl-row{grid-template-columns:30px minmax(0,1fr) auto;gap:6px 12px}.bl-row .ans{grid-column:2/4;text-align:left}.bl-row .lvl{grid-column:3;grid-row:1}}
+.tag.nb{border-style:dashed}
+.bel{display:none;align-items:center;gap:8px;margin-top:12px;font-size:.9rem;cursor:pointer}
+.q.needb .bel{display:inline-flex}
+.bel input{width:17px;height:17px;accent-color:var(--accent)}
+.belst{margin-left:14px;color:var(--warn)}
 .q .qh{clear:both;margin:-4px 0 12px;max-width:80ch}
 .evb{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;margin-right:4px;white-space:nowrap}
 .evb.z{background:var(--deep);color:#fff}.evb.f{background:#d5ebdf;color:var(--ok)}.evb.e{background:#f1e3b0;color:#6e5410}.evb.n{background:var(--warnbg);color:var(--warn);border:1px solid var(--warnline)}
@@ -496,6 +501,7 @@ dialog .dh{background:var(--panel)}
   #druck .bl-row .tt small,#druck .lvl,#druck .tag{font-size:7pt}
   #druck .bl-leg{font-size:8pt}
   #druck .bl-next{font-size:10pt}
+  #druck .d-bel{font-size:8pt;color:var(--muted);margin-top:3pt}
   #druck .d-qh{font-size:8pt;color:var(--muted);margin:-2pt 0 4pt}
   .d-q .t span{color:var(--accent);margin-right:5pt}
   .d-q .t small{font-weight:400;color:var(--soft);font-size:7.5pt;margin-left:5pt}
@@ -654,7 +660,7 @@ dialog .dh{background:var(--panel)}
 <section id="standort">
   <div class="wrap">
     <div class="sec-head"><span class="mono">Schritt 1 · Standortbestimmung</span><h2>Wo steht Ihr Unternehmen heute?</h2></div>
-    <p class="intro">Massgeblich ist der heutige Zustand, nicht die Absicht. Wer statt eines Falls oder einer Zahl nur eine Einschätzung hat, wählt die tiefere Stufe.</p>
+    <p class="intro">Massgeblich ist der heutige Zustand, nicht die Absicht. Die Antworten B und C zählen nur mit Beleg. Wer keinen Fall und keine Zahl nennen kann, wird eine Stufe tiefer gewertet.</p>
     <p class="hint evnote">Die Fragen übersetzen die Kategorien, nach denen die Gespräche ausgewertet wurden, in beobachtbare Stufen. Die Regel für das Startfeld war vor der Erhebung festgelegt. <a href="#evidenz">Herleitung</a></p>
     <div class="weg-meta vorab" id="vorab">
       <div><b>Getrennt ausfüllen, gemeinsam vergleichen</b>Mehrere Personen aus der Geschäftsleitung und aus weiteren Führungsstufen füllen getrennt aus. Jede erhält einen Ergebniscode. Die Abweichungen zwischen den Codes eröffnen die Sitzung.</div>
@@ -980,7 +986,7 @@ const Q=[
  {g:"Entscheiden und Freigeben",id:"F10",t:"Wie lange dauerte die letzte Anpassung vom erkannten Bedarf bis zum produktiven Einsatz, mit oder ohne Agenten, und ging sie schneller als eine vergleichbare frühere Anpassung?",o:["unbekannt","bekannt, gleich schnell oder langsamer","bekannt, schneller"],hf:3},
  {g:"Umbauen",id:"F11",t:"Haben Agenten eine eigene Identität, einen fachlichen Eigner, eine Berechtigung nach Schutzklasse der Daten, einen festgelegten Ort der Datenverarbeitung und eine Regel für ihre Stilllegung?",o:["nein","teilweise","ja, alles in einem Register geführt"],hf:4,h:"Sind noch keine Agenten im Einsatz, wählen Sie A."},
  {g:"Umbauen",id:"F12",t:"Wo wird Neues erprobt, und wie gelangt es in die Linie?",o:["in einzelnen Initiativen","in einem zentralen Team ohne Übergabe","in einem Team mit GL-Auftrag und festgelegter Übergabe"],hf:5},
- {g:"Umbauen",id:"F13",t:"Könnten Sie die Aufgaben Ihrer Agenten bei Bedarf auch ohne Agent selbst erledigen, und vergleichen Sie Ergebnisse stichprobenweise?",o:["nein","teilweise","ja, regelmässig geübt"],hf:6,h:"Sind noch keine Agenten im Einsatz, wählen Sie B."},
+ {g:"Umbauen",id:"F13",t:"Könnten Sie die Aufgaben Ihrer Agenten bei Bedarf auch ohne Agent selbst erledigen, und vergleichen Sie Ergebnisse stichprobenweise?",o:["nein","teilweise","ja, regelmässig geübt"],hf:6,h:"Sind noch keine Agenten im Einsatz, wählen Sie B und setzen Sie den Haken beim Beleg."},
  {g:"Umbauen",id:"F14",t:"Woran wird der Nutzen eines Vorhabens gemessen?",o:["an wegfallenden Stellen oder gar nicht","an gesparter Zeit, ohne Entscheid über frei werdende Kapazität","an Ergebnissen für Kunden, mit vorab vereinbarter Verwendung der Kapazität"],hf:6}];
 /* Massnahme -> Fragen der Standortbestimmung (leerzeichengetrennt), Kurztitel, [alt = Alternative, nicht in die Roadmap] */
 const MQ={
@@ -1006,8 +1012,15 @@ const L="ABC", STUFE={GL:"Geschäftsleitung",F2:"Zweite Führungsstufe",F3:"Drit
 
 /* ---------- Speicher (nur dieser Browser) ---------- */
 const KEY="rf-leitfaden-v1";
-let S={ans:{},stufe:"GL",chk:{},hf:1};
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"{}");S=Object.assign(S,s);}catch(e){}}
+let S={ans:{},bel:{},stufe:"GL",chk:{},hf:1};
+/* Belegpflicht: Antworten B und C ohne Fall oder Zahl zählen eine Stufe tiefer. EA = gewertete Antworten */
+const DOWN={C:"B",B:"A",A:"A"};
+const effOf=(a,b)=>{const e={};Object.keys(a).forEach(k=>{if(a[k])e[k]=b[k]?a[k]:DOWN[a[k]];});return e;};
+let EA={};
+function calcEA(){EA=effOf(S.ans,S.bel);}
+const nb=id=>!!S.ans[id]&&S.ans[id]!=="A"&&!S.bel[id];
+const atag=id=>{const a=EA[id];return `<span class="tag t${a||"X"}${nb(id)?" nb":""}"${nb(id)?` title="Gewählt ${S.ans[id]}, ohne Beleg als ${a} gewertet"`:""}>${id} ${a||"·"}</span>`;};
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"{}");S=Object.assign(S,s);}catch(e){}if(!S.bel)S.bel={};calcEA();}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -1035,19 +1048,19 @@ function rang(a){
  return r;}
 const nAns=()=>Q.filter(q=>S.ans[q.id]).length;
 const vollst=()=>nAns()===Q.length;
-const order=()=>rang(S.ans).map(x=>x.k);
-const startHF=()=>vollst()?startfeld(S.ans).hf:null;
+const order=()=>rang(EA).map(x=>x.k);
+const startHF=()=>vollst()?startfeld(EA).hf:null;
 function renderPrio(){
- const r=rang(S.ans),n=nAns(),st=startHF();
+ const r=rang(EA),n=nAns(),st=startHF();
  let h=n?(n<Q.length?`<p class="hint" style="margin:0 0 6px">Vorläufig, ${n} von ${Q.length} Fragen beantwortet.</p>`:""):`<div class="warnbox" style="margin:0 0 6px">Noch keine Antworten. Die Reihenfolge entsteht aus <a href="#standort">Schritt 1</a>, bis dahin gilt die Grundreihenfolge.</div>`;
  h+=r.map((x,i)=>{const f=HF[x.k],qs=Q.filter(q=>q.hf===x.k);
-  return `<button class="prow${st===x.k?" top":""}" data-h="${x.k}"><span class="rk">${i+1}</span><span class="tt"><small>HF ${x.k} · ${f.ph}${st===x.k?" · Startfeld":""}</small><b>${esc(f.t)}</b></span><span class="ans">${qs.map(q=>{const a=S.ans[q.id];return `<span class="tag t${a||"X"}">${q.id} ${a||"·"}</span>`;}).join(" ")}</span><span class="lvl ${x.lvl}">${LVL[x.lvl]}</span></button>`;}).join("");
+  return `<button class="prow${st===x.k?" top":""}" data-h="${x.k}"><span class="rk">${i+1}</span><span class="tt"><small>HF ${x.k} · ${f.ph}${st===x.k?" · Startfeld":""}</small><b>${esc(f.t)}</b></span><span class="ans">${qs.map(q=>atag(q.id)).join(" ")}</span><span class="lvl ${x.lvl}">${LVL[x.lvl]}</span></button>`;}).join("");
  $("#prioliste").innerHTML=h;
  $("#prioliste").querySelectorAll(".prow").forEach(b=>b.onclick=()=>openHF(+b.dataset.h));
 }
 function renderWeg(){
- const n=nAns(),r=rang(S.ans),st=startHF();
- $("#viz1").innerHTML=Q.map(q=>`<i class="${S.ans[q.id]||""}"></i>`).join("");
+ const n=nAns(),r=rang(EA),st=startHF();
+ $("#viz1").innerHTML=Q.map(q=>`<i class="${EA[q.id]||""}"></i>`).join("");
  $("#st1").textContent=`${n} von ${Q.length} beantwortet`;
  if(n){const R=roadmap();$("#viz2").innerHTML=R.w.map(W=>`<div><b>${W.fund.length+W.rules.length+W.it.length}</b>${W.n}</div>`).join("");$("#st2").textContent=(st?`Startfeld HF ${st} · `:"")+`${R.nr} ${R.nr===1?"Paket":"Pakete"}, ${R.plan} Vorhaben`;}
  else{$("#viz2").innerHTML=WAVES.map(W=>`<div><b>·</b>${W.n}</div>`).join("");$("#st2").textContent="Entsteht aus Schritt 1";}
@@ -1057,9 +1070,9 @@ function renderWeg(){
 }
 /* ---------- Massnahmen nach Fragen priorisieren ---------- */
 // ungünstigste Antwort unter den verknüpften Fragen: {q,a} oder null
-function mworst(k,i){let w=null;MQ[k][i][0].split(" ").forEach(q=>{const a=S.ans[q];if(a&&(!w||a<w.a))w={q,a};});return w;}
+function mworst(k,i){let w=null;MQ[k][i][0].split(" ").forEach(q=>{const a=EA[q];if(a&&(!w||a<w.a))w={q,a};});return w;}
 const mlv=(k,i)=>{const w=mworst(k,i);return w?"ABC".indexOf(w.a):3;};
-function mtag(k,i){const w=mworst(k,i);return w?`<span class="tag t${w.a}">${w.q} ${w.a}</span>`:`<span class="tag tX">${MQ[k][i][0].split(" ")[0]} ·</span>`;}
+function mtag(k,i){const w=mworst(k,i);return w?`<span class="tag t${w.a}${nb(w.q)?" nb":""}">${w.q} ${w.a}</span>`:`<span class="tag tX">${MQ[k][i][0].split(" ")[0]} ·</span>`;}
 
 /* ---------- Roadmap ---------- */
 const WAVES=[
@@ -1068,7 +1081,7 @@ const WAVES=[
  {t:"Etappe 3",n:"Ausweiten",cap:6,fix:()=>["Zweite vollständige Runde der Standortbestimmung über alle Führungsstufen"]},
  {t:"Etappe 4",n:"Verankern",cap:6,fix:()=>["Standortbestimmung regelmässig wiederholen, Roadmap an den Indikatoren überprüfen"]}];
 function roadmap(){
- const rf=rang(S.ans).map(x=>x.k),rk=k=>rf.indexOf(k);
+ const rf=rang(EA).map(x=>x.k),rk=k=>rf.indexOf(k);
  const all=[];Object.keys(HF).map(Number).forEach(k=>MQ[k].forEach((m,i)=>{if(!m[2])all.push({k,i,t:mtyp(k,i),lv:mlv(k,i),done:!!S.chk[k+"-"+i]});}));
  // Fundament (Phase Initiierung): Befähigung der GL immer in Etappe 1, solange F1 nicht auf C steht; ausserhalb der Kapazität
  const fund=all.filter(x=>x.k===1&&x.t!=="R"&&x.lv<=1);
@@ -1077,7 +1090,7 @@ function roadmap(){
  // Vorhaben: je Stufe (A, dann B) reihum über die Felder in Prioritätsreihenfolge, verteilt nach Aufwandspunkten
  const proj=[0,1].flatMap(lv=>{const g=rf.filter(k=>k!==1).map(k=>all.filter(x=>x.k===k&&x.t!=="R"&&x.lv===lv));const out=[];while(g.some(a=>a.length))g.forEach(a=>{if(a.length)out.push(a.shift());});return out;});
  let p=0;const w=WAVES.map((W,j)=>{const it=[];let pts=0;while(p<proj.length&&pts+COST[proj[p].t]<=W.cap){pts+=COST[proj[p].t];it.push(proj[p++]);}
-  return{t:W.t,n:W.n,fix:W.fix(S.ans),fund:j===0?fund:[],rules:j===0?rules.filter(x=>x.n===1||x.lv===0):j===1?rules.filter(x=>x.n!==1&&x.lv===1):[],it};});
+  return{t:W.t,n:W.n,fix:W.fix(EA),fund:j===0?fund:[],rules:j===0?rules.filter(x=>x.n===1||x.lv===0):j===1?rules.filter(x=>x.n!==1&&x.lv===1):[],it};});
  return{w,rest:proj.length-p,keep:all.filter(x=>x.t!=="R"&&x.lv===2&&!x.done).length,done:all.filter(x=>x.done).length,plan:p+fund.length,nr:rules.length,pkC:pk.filter(p=>p.lv===2).length,pkD:pk.filter(p=>p.done).length};
 }
 // Stand eines Pakets: ungünstigste Antwort unter allen Regeln (bestimmt die Etappe), erledigt wenn alle Regeln abgehakt
@@ -1112,26 +1125,28 @@ function ball(v){const q=Math.round(v*4),r=9,c=11,w=q*Math.PI/2;
  const f=q===0?"":q===4?`<circle cx="${c}" cy="${c}" r="${r}" fill="currentColor"/>`:`<path d="M${c} ${c}V${c-r}A${r} ${r} 0 ${q>2?1:0} 1 ${(c+r*Math.sin(w)).toFixed(2)} ${(c-r*Math.cos(w)).toFixed(2)}Z" fill="currentColor"/>`;
  return `<svg class="hb" viewBox="0 0 22 22" role="img" aria-label="Stand ${q} von 4"><circle cx="${c}" cy="${c}" r="${r}" fill="#fff" stroke="currentColor" stroke-width="1.5"/>${f}</svg>`;}
 function blick(){
- const r=rang(S.ans),st=startHF(),R=roadmap();
+ const r=rang(EA),st=startHF(),R=roadmap();
  const rows=Object.keys(HF).map(Number).map(k=>{const x=r.find(y=>y.k===k),qs=Q.filter(q=>q.hf===k);
-  return `<div class="bl-row${st===k?" top":""}">${ball(1-(x.need||0))}<span class="tt"><small>Handlungsfeld ${k}${st===k?" · Startfeld":""}</small><b>${esc(HF[k].t)}</b></span><span class="ans">${qs.map(q=>`<span class="tag t${S.ans[q.id]}">${q.id} ${S.ans[q.id]}</span>`).join(" ")}</span><span class="lvl ${x.lvl}">${LVL[x.lvl]}</span></div>`;}).join("");
+  return `<div class="bl-row${st===k?" top":""}">${ball(1-(x.need||0))}<span class="tt"><small>Handlungsfeld ${k}${st===k?" · Startfeld":""}</small><b>${esc(HF[k].t)}</b></span><span class="ans">${qs.map(q=>atag(q.id)).join(" ")}</span><span class="lvl ${x.lvl}">${LVL[x.lvl]}</span></div>`;}).join("");
  const next=R.w.flatMap(W=>[...W.fix,...W.fund.map(x=>MQ[x.k][x.i][1]),...W.rules.map(p=>"Beschlusspaket "+p.n+" beschliessen: "+p.t),...W.it.map(x=>MQ[x.k][x.i][1])]).slice(0,3);
- return `<div class="blick"><div class="mono muted">Auf einen Blick</div><div class="bl-rows">${rows}</div><p class="hint bl-leg">Kreis: Stand je Handlungsfeld nach Ihren Antworten, von leer (alle A) bis voll (alle C). Rechts die Dringlichkeit.</p><div class="mono muted">Die nächsten drei Schritte</div><ol class="bl-next">${next.map(t=>`<li>${esc(t)}</li>`).join("")}</ol></div>`;}
+ return `<div class="blick"><div class="mono muted">Auf einen Blick</div><div class="bl-rows">${rows}</div><p class="hint bl-leg">Kreis: Stand je Handlungsfeld nach den gewerteten Antworten, von leer (alle A) bis voll (alle C). Rechts die Dringlichkeit.${Q.some(q=>nb(q.id))?` Ohne Beleg eine Stufe tiefer gewertet und gestrichelt umrandet: ${Q.filter(q=>nb(q.id)).map(q=>q.id).join(", ")}.`:""}</p><div class="mono muted">Die nächsten drei Schritte</div><ol class="bl-next">${next.map(t=>`<li>${esc(t)}</li>`).join("")}</ol></div>`;}
 function update(){renderWeg();renderPrio();renderHFNav();renderHF();renderRoadmap();}
 /* ---------- Standortbestimmung ---------- */
 function renderFragen(){
  const box=$("#fragen");let g="",h="";
  Q.forEach(q=>{
   if(q.g!==g){g=q.g;h+=`<div class="grp">${g}</div>`;}
-  h+=`<fieldset class="q${S.ans[q.id]?" done":""}" style="border:1px solid var(--line)"><legend class="qt" style="padding:0"><span class="id">${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></legend>${q.h?`<p class="hint qh">${esc(q.h)}</p>`:""}<div class="opts">${q.o.map((o,k)=>`<label class="opt"><input type="radio" name="${q.id}" value="${L[k]}" ${S.ans[q.id]===L[k]?"checked":""}><span><i>${L[k]}</i>${esc(o)}</span></label>`).join("")}</div></fieldset>`;
+  h+=`<fieldset class="q${S.ans[q.id]?" done":""}${S.ans[q.id]&&S.ans[q.id]!=="A"?" needb":""}" style="border:1px solid var(--line)"><legend class="qt" style="padding:0"><span class="id">${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></legend>${q.h?`<p class="hint qh">${esc(q.h)}</p>`:""}<div class="opts">${q.o.map((o,k)=>`<label class="opt"><input type="radio" name="${q.id}" value="${L[k]}" ${S.ans[q.id]===L[k]?"checked":""}><span><i>${L[k]}</i>${esc(o)}</span></label>`).join("")}</div><label class="bel"><input type="checkbox" data-b="${q.id}" ${S.bel[q.id]?"checked":""}><span>Belegt durch einen Fall oder eine Zahl</span></label><span class="hint belst" id="bs-${q.id}"></span></fieldset>`;
  });
  box.innerHTML=h;
- box.querySelectorAll("input").forEach(el=>el.addEventListener("change",e=>{S.ans[e.target.name]=e.target.value;e.target.closest(".q").classList.add("done");save();stand();update();}));
- $("#stufe").value=S.stufe;stand();
+ box.querySelectorAll("input").forEach(el=>el.addEventListener("change",e=>{const t=e.target;if(t.dataset.b){if(t.checked)S.bel[t.dataset.b]=true;else delete S.bel[t.dataset.b];}else{S.ans[t.name]=t.value;const f=t.closest(".q");f.classList.add("done");f.classList.toggle("needb",t.value!=="A");}calcEA();belst();save();stand();update();}));
+ $("#stufe").value=S.stufe;belst();stand();
 }
+function belst(){Q.forEach(q=>{const e=document.getElementById("bs-"+q.id);if(e)e.textContent=nb(q.id)?`Ohne Beleg als ${EA[q.id]} gewertet.`:"";});}
 function stand(){const n=Q.filter(q=>S.ans[q.id]).length;$("#stand").textContent=`${n} von ${Q.length} beantwortet`;$("#meter").style.width=(100*n/Q.length)+"%";}
-function code(stufe,a){return "RF1-"+stufe+"-"+Q.map(q=>a[q.id]||"-").join("");}
-function parse(c){const m=c.trim().toUpperCase().match(/^RF1-(GL|F2|F3)-([ABC-]{14})$/);if(!m)return null;const a={};Q.forEach((q,i)=>{if(m[2][i]!=="-")a[q.id]=m[2][i];});return{stufe:m[1],a};}
+function code(stufe,a,b=S.bel){return "RF1-"+stufe+"-"+Q.map(q=>{const x=a[q.id];return !x?"-":x!=="A"&&!b[q.id]?x.toLowerCase():x;}).join("");}
+// Kleinbuchstabe = Antwort ohne Beleg. Codes der früheren Fassung (nur Grossbuchstaben) gelten als belegt.
+function parse(c){const m=c.trim().match(/^rf1-(gl|f2|f3)-([abc-]{14})$/i);if(!m)return null;const a={},b={};Q.forEach((q,i)=>{const ch=m[2][i];if(ch!=="-"){a[q.id]=ch.toUpperCase();if(ch===ch.toUpperCase())b[q.id]=true;}});return{stufe:m[1].toUpperCase(),a,b,e:effOf(a,b)};}
 function startfeld(a){
  const r=rang(a)[0];
  if(r.pre)return{hf:1,grund:"F1 oder F2 ist mit A beantwortet. Alle übrigen Felder setzen Entscheide der Geschäftsleitung voraus."};
@@ -1141,12 +1156,12 @@ function startfeld(a){
 }
 function ergebnis(){
  const n=Q.filter(q=>S.ans[q.id]).length, el=$("#v-ergebnis");
- if(n<Q.length){const off=Q.filter(q=>!S.ans[q.id]).map(q=>q.id).join(", ");el.innerHTML=`<div class="warnbox"><b>${Q.length-n} Fragen sind noch offen</b> (${off}). Die Auswertung setzt alle vierzehn Antworten voraus.</div>`;return;}
- const s=startfeld(S.ans);
+ if(n<Q.length){const off=Q.filter(q=>!EA[q.id]).map(q=>q.id).join(", ");el.innerHTML=`<div class="warnbox"><b>${Q.length-n} Fragen sind noch offen</b> (${off}). Die Auswertung setzt alle vierzehn Antworten voraus.</div>`;return;}
+ const s=startfeld(EA);
  let h=`<div class="card res-start"><div class="mono">Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+HF[s.hf].t:"In der Sitzung festlegen"}</h3><p>${s.grund}</p><p style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn primary small" href="#tage">Schritt 2: Roadmap →</a>${s.hf?`<button class="btn ghost small" id="goStart">Massnahmen im Handlungsfeld ${s.hf}</button>`:""}</p></div>`+blick();
- const w=[];if(S.ans.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(S.ans.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
+ const w=[];if(EA.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(EA.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
  if(w.length)h+=`<div class="warnbox"><b>Zahlen innerhalb von vier Wochen beschaffen.</b> Ohne sie lässt sich die Reaktionsfähigkeit nicht beurteilen.<br>${w.join("<br>")}</div>`;
- h+=`<div class="card" style="margin-top:14px"><div class="mono muted">Ihr Ergebniscode</div><p style="margin:8px 0 0">Der Code enthält Ihre Stufe und die vierzehn Antworten, keinen Namen. Geben Sie ihn der Person, die die Sitzung vorbereitet. Sie legt die Codes aller Beteiligten unter «Stufen vergleichen» nebeneinander. Wo die Antworten auseinanderliegen, beginnt das Gespräch.</p><code class="res" id="rc">${code(S.stufe,S.ans)}</code><button class="btn small" id="kopie">Code kopieren</button> <span class="hint" id="km"></span></div>`;
+ h+=`<div class="card" style="margin-top:14px"><div class="mono muted">Ihr Ergebniscode</div><p style="margin:8px 0 0">Der Code enthält Ihre Stufe und die vierzehn Antworten, keinen Namen. Kleinbuchstaben stehen für Antworten ohne Beleg. Geben Sie ihn der Person, die die Sitzung vorbereitet. Sie legt die Codes aller Beteiligten unter «Stufen vergleichen» nebeneinander. Wo die Antworten auseinanderliegen, beginnt das Gespräch.</p><code class="res" id="rc">${code(S.stufe,S.ans)}</code><button class="btn small" id="kopie">Code kopieren</button> <span class="hint" id="km"></span></div>`;
  el.innerHTML=h;
  const g=$("#goStart");if(g)g.onclick=()=>openHF(s.hf);
  $("#kopie").onclick=async()=>{try{await navigator.clipboard.writeText(code(S.stufe,S.ans));$("#km").textContent="kopiert";}catch(e){$("#km").textContent="Bitte den Code markieren und kopieren";}};
@@ -1158,20 +1173,21 @@ function vergleich(){
  const el=$("#vergleich");if(!rs.length){el.innerHTML="";return;}
  const stufen=["GL","F2","F3"].filter(s=>rs.some(r=>r.stufe===s));
  const cnt=s=>rs.filter(r=>r.stufe===s).length, val=x=>x==="A"?0:x==="B"?1:2;
- let h=`<div class="card"><p>${rs.length} Ergebnisse: ${stufen.map(s=>STUFE[s]+" "+cnt(s)).join(", ")}. Je Zelle die Antworten der Personen dieser Stufe.</p><div class="tablewrap"><table><tr><th>Frage</th>${stufen.map(s=>`<th>${STUFE[s]}</th>`).join("")}<th>Befund</th></tr>`;
+ let h=`<div class="card"><p>${rs.length} Ergebnisse: ${stufen.map(s=>STUFE[s]+" "+cnt(s)).join(", ")}. Je Zelle die gewerteten Antworten der Personen dieser Stufe. Antworten ohne Beleg sind eine Stufe tiefer gewertet.</p><div class="tablewrap"><table><tr><th>Frage</th>${stufen.map(s=>`<th>${STUFE[s]}</th>`).join("")}<th>Befund</th></tr>`;
  let n=0;
  Q.forEach(q=>{
-  const per={};stufen.forEach(s=>per[s]=rs.filter(r=>r.stufe===s).map(r=>r.a[q.id]).filter(Boolean));
+  const per={};stufen.forEach(s=>per[s]=rs.filter(r=>r.stufe===s).map(r=>r.e[q.id]).filter(Boolean));
   const mean=s=>per[s].length?per[s].reduce((x,y)=>x+val(y),0)/per[s].length:null;
   let bef="";
   if(per.GL&&per.GL.length){const g=mean("GL");const o=stufen.filter(s=>s!=="GL").map(mean).filter(v=>v!==null);if(o.length&&g-Math.max(...o)>=0.5){bef="GL antwortet günstiger";n++;}}
   if(stufen.some(s=>new Set(per[s]).size>1))bef+=(bef?", ":"")+"uneinig innerhalb einer Stufe";
+  const ub=rs.filter(r=>r.a[q.id]&&r.a[q.id]!=="A"&&!r.b[q.id]).length;if(ub)bef+=(bef?", ":"")+ub+" ohne Beleg";
   h+=`<tr><td><b>${q.id}</b></td>${stufen.map(s=>`<td>${per[s].map(x=>`<span class="tag t${x}">${x}</span>`).join(" ")||"<span class='hint'>keine</span>"}</td>`).join("")}<td>${bef}</td></tr>`;
  });
  h+=`</table></div></div>`;
  if(stufen.includes("GL")&&stufen.length>1)h+=n?`<div class="warnbox">Bei ${n} Fragen beurteilt die Geschäftsleitung den Stand um mindestens eine halbe Stufe günstiger als die übrigen Stufen. Diese Fragen gehören an den Anfang der Sitzung.</div>`:`<div class="card" style="margin-top:12px">Die Geschäftsleitung beurteilt keine Frage deutlich günstiger als die übrigen Stufen.</div>`;
  const gl=rs.filter(r=>r.stufe==="GL");
- if(gl.length){const agg={};Q.forEach(q=>{const v=gl.map(r=>r.a[q.id]).filter(Boolean).sort((x,y)=>val(x)-val(y));agg[q.id]=v[0];});const s=startfeld(agg);
+ if(gl.length){const agg={};Q.forEach(q=>{const v=gl.map(r=>r.e[q.id]).filter(Boolean).sort((x,y)=>val(x)-val(y));agg[q.id]=v[0];});const s=startfeld(agg);
   h+=`<div class="card res-start" style="margin-top:12px"><div class="mono">Startfeld nach den Antworten der Geschäftsleitung</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+HF[s.hf].t:"offen"}</h3><p>Je Frage zählt die ungünstigste Antwort. ${s.grund}</p></div>`;}
  el.innerHTML=h;
 }
@@ -1202,7 +1218,7 @@ function renderHF(){
  </div><div class="side">
   <div class="box"><div class="mono">Indikator</div><p>${f.ind}</p></div>
   <div class="box w"><div class="mono">Warnsignal</div><p>${f.warn}</p></div>
-  <div class="box"><div class="mono">Fragen der Standortbestimmung</div><p>${fr.map(id=>{const a=S.ans[id];return `${id} ${a?`<span class="tag t${a}">${a}</span>`:'<span class="hint">offen</span>'}`;}).join(" · ")}</p></div>
+  <div class="box"><div class="mono">Fragen der Standortbestimmung</div><p>${fr.map(id=>{const a=EA[id];return `${id} ${a?`<span class="tag t${a}${nb(id)?" nb":""}">${a}</span>`:'<span class="hint">offen</span>'}`;}).join(" · ")}</p></div>
   ${fl.length?`<div class="box"><div class="mono">Fälle dazu</div><div class="faelle-mini">${fl.map(x=>`<button class="chip" data-f="${x.n}">Fall ${x.n}, ${esc(x.t)}</button>`).join("")}</div></div>`:""}
  </div></div>`;
  $("#hfpanel").querySelectorAll(".mass input").forEach(c=>c.onchange=()=>{const id=c.id.slice(1);S.chk[id]=c.checked;if(!c.checked)delete S.chk[id];c.closest("li").classList.toggle("chk",c.checked);save();renderHFNav();renderWeg();renderRoadmap();});
@@ -1233,7 +1249,7 @@ function buildDruck(){
  const ck=on=>`<span class="d-ck${on?" on":""}"></span>`;
  const n=Q.filter(q=>S.ans[q.id]).length, voll=n===Q.length;
  const imp=[...document.querySelectorAll("footer p:not(.no-print)")].map(p=>`<p>${p.innerHTML}</p>`).join("");
- const rg=rang(S.ans), st=voll?startfeld(S.ans).hf:null;
+ const rg=rang(EA), st=voll?startfeld(EA).hf:null;
  let h=`<div class="d-cover"><div class="d-top d-lab">${H(".hero .eyebrow")}</div><h1>${H(".hero h1")}</h1><p class="d-lead">${H(".hero .lead")}</p>
   <div class="d-foot"><ul class="d-facts">${H(".facts")}</ul><div class="d-imp">${imp}</div></div></div>`;
  // Kernbefund und Vorgehen
@@ -1246,9 +1262,9 @@ function buildDruck(){
  // Standortbestimmung
  let b=`<p class="d-intro">${H("#standort .intro")}</p><div class="d-weg">${[...document.querySelectorAll("#vorab>div")].map(d=>`<div>${d.innerHTML}</div>`).join("")}</div><div class="d-stufe"><b>Führungsstufe</b>${Object.keys(STUFE).map(s=>`<span>${ck(n>0&&S.stufe===s)}${STUFE[s]}</span>`).join("")}</div>`;
  let g="";Q.forEach(q=>{if(q.g!==g){g=q.g;b+=`<div class="d-grp d-lab">${esc(g)}</div>`;}
-  b+=`<div class="d-q"><div class="t"><span>${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></div>${q.h?`<p class="d-qh">${esc(q.h)}</p>`:""}<div class="d-opts">${q.o.map((o,k)=>{const on=S.ans[q.id]===L[k];return `<div class="${on?"on":""}">${ck(on)}<i>${L[k]}</i><span>${esc(o)}</span></div>`;}).join("")}</div></div>`;});
- if(voll){const s=startfeld(S.ans),w=[];
-  if(S.ans.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(S.ans.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
+  b+=`<div class="d-q"><div class="t"><span>${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></div>${q.h?`<p class="d-qh">${esc(q.h)}</p>`:""}<div class="d-opts">${q.o.map((o,k)=>{const on=S.ans[q.id]===L[k];return `<div class="${on?"on":""}">${ck(on)}<i>${L[k]}</i><span>${esc(o)}</span></div>`;}).join("")}</div><div class="d-bel">${ck(!!S.bel[q.id])}Belegt durch einen Fall oder eine Zahl${nb(q.id)?`, ohne Beleg als ${EA[q.id]} gewertet`:""}</div></div>`;});
+ if(voll){const s=startfeld(EA),w=[];
+  if(EA.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(EA.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
   b+=`<div class="d-res"><div class="d-lab">Auswertung · ${STUFE[S.stufe]} · Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+esc(HF[s.hf].t):"In der Sitzung festlegen"}</h3><p>${s.grund}</p>
    ${w.length?`<div class="d-warn"><b>Zahlen innerhalb von vier Wochen beschaffen.</b> Ohne sie lässt sich die Reaktionsfähigkeit nicht beurteilen.<br>${w.join("<br>")}</div>`:""}
    <div class="d-lab">Ergebniscode</div><code>${code(S.stufe,S.ans)}</code></div>`;}
@@ -1256,7 +1272,7 @@ function buildDruck(){
  // Schritt 2: Roadmap mit Rangfolge der Felder
  if(n){const R=roadmap();
   b=`<p class="d-intro">${voll?"Rangfolge":"Vorläufige Rangfolge, "+n+" von "+Q.length+" Fragen beantwortet,"} nach den Antworten in Schritt 1.</p>`;
-  b+=`<table><tr><th>Rang</th><th>Handlungsfeld</th><th>Antworten</th><th>Priorität</th></tr>${rg.map((x,i)=>`<tr><td>${i+1}</td><td>${x.k} · ${esc(HF[x.k].t)}${st===x.k?" <b>(Startfeld)</b>":""}</td><td>${Q.filter(q=>q.hf===x.k).map(q=>q.id+" "+(S.ans[q.id]||"·")).join(", ")}</td><td>${LVL[x.lvl]}</td></tr>`).join("")}</table>`;
+  b+=`<table><tr><th>Rang</th><th>Handlungsfeld</th><th>Antworten</th><th>Priorität</th></tr>${rg.map((x,i)=>`<tr><td>${i+1}</td><td>${x.k} · ${esc(HF[x.k].t)}${st===x.k?" <b>(Startfeld)</b>":""}</td><td>${Q.filter(q=>q.hf===x.k).map(q=>q.id+" "+(EA[q.id]||"·")).join(", ")}</td><td>${LVL[x.lvl]}</td></tr>`).join("")}</table>`;
   b+=`<p class="d-intro" style="margin-top:6mm">${esc($("#rm-intro").textContent)}</p><div class="d-tl d-4">${R.w.map(W=>`<div><div class="d-lab">${W.t}</div><h3>${W.n}</h3><ul>${W.fix.map(t=>`<li class="fix">${esc(t)}</li>`).join("")}${W.fund.map(x=>`<li>${ck(x.done)}Fundament: ${esc(MQ[x.k][x.i][1])} <small>HF 1, ${mworst(x.k,x.i).q} ${"ABC"[x.lv]}</small></li>`).join("")}${W.rules.map(p=>`<li>${ck(p.done)}Beschliessen: Paket ${p.n}, ${esc(p.t)} <small>${p.m.length-p.off} von ${p.m.length} Regeln erledigt, ${p.qs.join(", ")}</small></li>`).join("")}${W.it.map(x=>`<li>${ck(x.done)}Umsetzen: ${esc(MQ[x.k][x.i][1])} <small>HF ${x.k}, ${mworst(x.k,x.i).q} ${"ABC"[x.lv]}, ${EFF[x.t]}</small></li>`).join("")}</ul></div>`).join("")}</div><p class="d-fr">${esc($("#roadmap .rm-foot").textContent)}</p>`;
   h+=sec("Schritt 2","Roadmap",H("#tage h2"),b,true);}
  else h+=sec("Schritt 2","Roadmap","Allgemeiner Einstieg",`<p class="d-intro">Allgemeiner Plan, bis die Standortbestimmung vorliegt.</p><div class="d-tl">${[...document.querySelectorAll("#tl-generic .card")].map(c=>`<div><div class="d-lab">${c.querySelector(".mono").textContent}</div><h3>${c.querySelector("h3").textContent}</h3><ul>${c.querySelector("ul").innerHTML}</ul></div>`).join("")}</div>`,true);
@@ -1266,7 +1282,7 @@ function buildDruck(){
   b+=`<div class="d-hf">${st===k?'<span class="d-start">EMPFOHLENES STARTFELD</span>':""}<div class="d-lab">Handlungsfeld ${k} · ${f.ph} · ${f.eb}${n?" · Rang "+(rg.findIndex(x=>x.k===k)+1)+" von 6":""}</div><h3>${esc(f.t)}</h3>
    <p class="d-ziel">${f.ziel}</p><div class="d-lab">Prinzipien</div><div class="d-hfp">${f.p.map(p=>`<div><b>P${p}</b><span>${esc(P[p-1])}<small class="d-ev">Evidenz: ${evP(p)}</small></span></div>`).join("")}</div><div class="d-lab">Massnahmen</div><ul class="d-mass">${f.m.map((_,i)=>{const w=mworst(k,i);return `<li>${ck(S.chk[k+"-"+i])}<span><b>${esc(MQ[k][i][1])}.</b> ${esc(f.m[i])}</span><span class="d-mt">${mtyp(k,i)==="R"?"Regel, Paket "+PKOF[k+"-"+i]:"Vorhaben, "+EFF[mtyp(k,i)]} · ${w?w.q+" "+w.a:MQ[k][i][0].split(" ")[0]}</span></li>`;}).join("")}</ul>
    <div class="d-two"><div><div class="d-lab">Indikator</div>${f.ind}</div><div class="w"><div class="d-lab">Warnsignal</div>${f.warn}</div></div>
-   <p class="d-fr">Fragen der Standortbestimmung: ${fr.map(q=>q.id+(S.ans[q.id]?" ("+S.ans[q.id]+")":"")).join(", ")}</p></div>`;});
+   <p class="d-fr">Fragen der Standortbestimmung: ${fr.map(q=>q.id+(EA[q.id]?" ("+EA[q.id]+")":"")).join(", ")}</p></div>`;});
  h+=sec("Schritt 3","Handlungsfelder",H("#felder h2"),b,true);
  h+=sec("Übersicht","Prinzipien","Zwölf Prinzipien",`<ol class="d-prinz">${P.map((t,i)=>`<li><span class="n">P${i+1}</span><span>${esc(t)}<small>Handlungsfeld ${PHF[i].join(", ")}</small></span></li>`).join("")}</ol>`);
  h+=sec("Evidenz","Methodik und Quellen",H("#evidenz h2"),`<p class="d-intro">${H("#evidenz .intro")}</p>
@@ -1291,7 +1307,7 @@ addEventListener("scroll",()=>{const h=document.documentElement;$("#prog").style
 load();
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>show(b.dataset.v));
 $("#zumErgebnis").onclick=()=>{show("ergebnis");$("#standort").scrollIntoView();};
-$("#leeren").onclick=()=>{if(confirm("Alle Antworten löschen?")){S.ans={};save();renderFragen();update();renderHF();}};
+$("#leeren").onclick=()=>{if(confirm("Alle Antworten löschen?")){S.ans={};S.bel={};calcEA();save();renderFragen();update();renderHF();}};
 $("#stufe").onchange=e=>{S.stufe=e.target.value;save();};
 $("#vergleichen").onclick=vergleich;
 delete S.start;
