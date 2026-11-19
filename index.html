@@ -271,6 +271,16 @@ th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 .bl-next{margin:8px 0 0;padding-left:22px}
 .bl-next li{margin-bottom:4px}
 @media (max-width:760px){.blick{padding:18px 16px}.bl-row{grid-template-columns:30px minmax(0,1fr) auto;gap:6px 12px}.bl-row .ans{grid-column:2/4;text-align:left}.bl-row .lvl{grid-column:3;grid-row:1}}
+.worum{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:16px}
+.worum>div{background:var(--mist);border-top:5px solid var(--deep);padding:24px 26px;line-height:1.6}
+.worum>div:first-child{background:var(--lemon)}
+.worum b{display:block;font-size:1.15rem;letter-spacing:.04em;margin-bottom:8px}
+@media (max-width:860px){.worum{grid-template-columns:1fr}}
+.basis{margin:0 0 12px;padding:10px 14px;background:var(--tile);border-left:5px solid var(--accent);font-size:.92rem}
+.lnk{font:inherit;font-size:.85rem;background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;cursor:pointer}
+.kk{display:block;margin-top:4px;color:var(--muted);font-size:.82rem;max-width:34ch}
+.kopt{display:flex;gap:10px;align-items:flex-start;padding:7px 0;cursor:pointer;color:var(--fg);font-size:.95rem;line-height:1.4}
+.kopt input{flex:none;width:17px;height:17px;margin-top:2px;accent-color:var(--accent)}
 .tag.nb{border-style:dashed}
 .bel{display:none;align-items:center;gap:8px;margin-top:12px;font-size:.9rem;cursor:pointer}
 .q.needb .bel{display:inline-flex}
@@ -501,6 +511,9 @@ dialog .dh{background:var(--panel)}
   #druck .bl-row .tt small,#druck .lvl,#druck .tag{font-size:7pt}
   #druck .bl-leg{font-size:8pt}
   #druck .bl-next{font-size:10pt}
+  #druck .d-line{border-bottom:.5pt solid var(--line2);height:9mm}
+  #druck .basis{font-size:8.5pt;margin:0 0 4pt}
+  #druck .basis a{display:none}
   #druck .d-bel{font-size:8pt;color:var(--muted);margin-top:3pt}
   #druck .d-qh{font-size:8pt;color:var(--muted);margin:-2pt 0 4pt}
   .d-q .t span{color:var(--accent);margin-right:5pt}
@@ -582,7 +595,7 @@ dialog .dh{background:var(--panel)}
     <h1>Reaktionsfähig mit agentischer KI</h1>
     <p class="lead">Veränderte Kundenbedürfnisse wiederholt schneller erfüllen, ohne mit jedem Vorhaben langsamer zu werden.</p>
     <div class="cta">
-      <a class="btn primary" href="#kern">Mit dem Kernbefund beginnen <span class="arr" aria-hidden="true">↓</span></a>
+      <a class="btn primary" href="#worum">Beginnen <span class="arr" aria-hidden="true">↓</span></a>
       <button class="btn ghost" onclick="buildDruck();window.print()">Als PDF sichern</button>
     </div>
     <ul class="facts">
@@ -593,6 +606,17 @@ dialog .dh{background:var(--panel)}
     </ul>
   </div>
 </div>
+
+<section id="worum">
+  <div class="wrap">
+    <div class="sec-head"><span class="mono">Einstieg</span><h2>Worum es geht</h2></div>
+    <div class="worum">
+      <div><b>Ein Beispiel</b>Ein Grillstand verkauft Schweinswürste. Immer mehr Gäste fragen nach Halal-Würsten. Mehr Würste zu braten oder sie günstiger herzustellen, hilft hier nicht. Der Stand muss das neue Bedürfnis bemerken und seinen Ablauf umbauen: ein zweites Sortiment, getrennt hergestellt und getrennt gebraten. Um diese Fähigkeit geht es im Leitfaden.</div>
+      <div><b>Was ein Kundensignal ist</b>Ein Hinweis darauf, dass sich ein Bedürfnis verschiebt. Am Grillstand sind es die Fragen nach Halal-Würsten. Im Unternehmen sind es gehäufte Anfragen nach etwas, das Sie nicht anbieten, oder wiederkehrende Beschwerden.</div>
+      <div><b>Und die Effizienz?</b>Die meisten erwarten von agentischer KI zuerst tiefere Kosten und mehr Tempo im Innern. Dieser Leitfaden setzt beim Kunden an. Er fragt, wie schnell Ihr Unternehmen ein verändertes Bedürfnis erkennt und sein Angebot anpasst.</div>
+    </div>
+  </div>
+</section>
 
 <section id="kern" class="dark">
   <div class="wrap">
@@ -694,7 +718,7 @@ dialog .dh{background:var(--panel)}
     <div id="v-ergebnis" hidden></div>
     <div id="v-vergleich" hidden>
       <div class="card">
-        <p>Sammeln Sie die Ergebniscodes aller Beteiligten und fügen Sie sie hier ein, ein Code pro Zeile. Der Vergleich zeigt je Frage die Antworten je Stufe und markiert, wo die Geschäftsleitung günstiger antwortet als die übrigen Stufen.</p>
+        <p>Sammeln Sie die Ergebniscodes aller Beteiligten und fügen Sie sie hier ein, ein Code pro Zeile. Der Vergleich zeigt je Frage die Antworten je Stufe und markiert, wo die Geschäftsleitung günstiger antwortet als die übrigen Stufen. Wo die Antworten auseinanderliegen oder ein Beleg fehlt, klären Sie die Frage in der Sitzung und halten die Einigung fest. Der gemeinsame Stand kann danach Roadmap und Handlungsfelder steuern.</p>
         <textarea id="codes" placeholder="RF1-GL-ABACBAABCBAACB&#10;RF1-F2-AAABBAAACBAAAB"></textarea>
         <div style="display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap">
           <button class="btn primary" id="vergleichen">Vergleichen</button>
@@ -1012,15 +1036,28 @@ const L="ABC", STUFE={GL:"Geschäftsleitung",F2:"Zweite Führungsstufe",F3:"Drit
 
 /* ---------- Speicher (nur dieser Browser) ---------- */
 const KEY="rf-leitfaden-v1";
-let S={ans:{},bel:{},stufe:"GL",chk:{},hf:1};
+let S={ans:{},bel:{},stufe:"GL",chk:{},hf:1,kon:{codes:"",ent:{}},gem:false};
 /* Belegpflicht: Antworten B und C ohne Fall oder Zahl zählen eine Stufe tiefer. EA = gewertete Antworten */
 const DOWN={C:"B",B:"A",A:"A"};
 const effOf=(a,b)=>{const e={};Object.keys(a).forEach(k=>{if(a[k])e[k]=b[k]?a[k]:DOWN[a[k]];});return e;};
 let EA={};
-function calcEA(){EA=effOf(S.ans,S.bel);}
-const nb=id=>!!S.ans[id]&&S.ans[id]!=="A"&&!S.bel[id];
-const atag=id=>{const a=EA[id];return `<span class="tag t${a||"X"}${nb(id)?" nb":""}"${nb(id)?` title="Gewählt ${S.ans[id]}, ohne Beleg als ${a} gewertet"`:""}>${id} ${a||"·"}</span>`;};
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"{}");S=Object.assign(S,s);}catch(e){}if(!S.bel)S.bel={};calcEA();}
+/* Gemeinsamer Stand: aus den Ergebniscodes im Stufenvergleich. Einige Antworten gelten direkt, abweichende
+   oder unbelegte werden in der Sitzung geklärt (S.kon.ent). Ist S.gem gesetzt, steuert er die Auswertung. */
+let GEM=null;
+function gemein(){
+ const rs=(S.kon.codes||"").split(/\n+/).map(parse).filter(Boolean),a={},b={},st={};let offen=0;
+ Q.forEach(q=>{const xs=rs.filter(r=>r.a[q.id]),ent=S.kon.ent[q.id];
+  const einig=xs.length>0&&new Set(xs.map(r=>r.e[q.id])).size===1&&!xs.some(r=>r.a[q.id]!=="A"&&!r.b[q.id]);
+  if(ent){a[q.id]=ent.a;if(ent.b)b[q.id]=true;st[q.id]="k";}
+  else if(einig){a[q.id]=xs[0].a[q.id];b[q.id]=true;st[q.id]="e";}
+  else{st[q.id]="o";offen++;}});
+ return{rs,a,b,st,offen};}
+const RA=()=>GEM?GEM.a:S.ans, RB=()=>GEM?GEM.b:S.bel;
+function calcEA(){GEM=S.gem?gemein():null;EA=effOf(RA(),RB());}
+const nb=id=>{const a=RA()[id];return !!a&&a!=="A"&&!RB()[id];};
+const basis=()=>GEM?`<p class="basis"><b>Grundlage: gemeinsamer Stand</b> aus ${GEM.rs.length} Ergebniscodes${GEM.offen?`, ${GEM.offen} ${GEM.offen===1?"Frage":"Fragen"} noch zu klären`:""}. <a href="#standort" data-zv>Zum Stufenvergleich</a></p>`:"";
+const atag=id=>{const a=EA[id];return `<span class="tag t${a||"X"}${nb(id)?" nb":""}"${nb(id)?` title="Gewählt ${RA()[id]}, ohne Beleg als ${a} gewertet"`:""}>${id} ${a||"·"}</span>`;};
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"{}");S=Object.assign(S,s);}catch(e){}if(!S.bel)S.bel={};if(!S.kon)S.kon={codes:"",ent:{}};if(!S.kon.ent)S.kon.ent={};calcEA();}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -1046,13 +1083,13 @@ function rang(a){
  r.sort((x,y)=>(y.pre-x.pre)||((y.need!==null)-(x.need!==null))||(y.nA-x.nA)||(y.sA-x.sA)||((y.need||0)-(x.need||0))||(x.k-y.k));
  r.forEach(x=>x.lvl=x.pre?"v":x.need===null?"o":x.nA?"h":x.need>0?"m":"g");
  return r;}
-const nAns=()=>Q.filter(q=>S.ans[q.id]).length;
+const nAns=()=>Q.filter(q=>RA()[q.id]).length;
 const vollst=()=>nAns()===Q.length;
 const order=()=>rang(EA).map(x=>x.k);
 const startHF=()=>vollst()?startfeld(EA).hf:null;
 function renderPrio(){
  const r=rang(EA),n=nAns(),st=startHF();
- let h=n?(n<Q.length?`<p class="hint" style="margin:0 0 6px">Vorläufig, ${n} von ${Q.length} Fragen beantwortet.</p>`:""):`<div class="warnbox" style="margin:0 0 6px">Noch keine Antworten. Die Reihenfolge entsteht aus <a href="#standort">Schritt 1</a>, bis dahin gilt die Grundreihenfolge.</div>`;
+ let h=basis()+(n?(n<Q.length?`<p class="hint" style="margin:0 0 6px">Vorläufig, ${n} von ${Q.length} Fragen beantwortet.</p>`:""):`<div class="warnbox" style="margin:0 0 6px">Noch keine Antworten. Die Reihenfolge entsteht aus <a href="#standort">Schritt 1</a>, bis dahin gilt die Grundreihenfolge.</div>`);
  h+=r.map((x,i)=>{const f=HF[x.k],qs=Q.filter(q=>q.hf===x.k);
   return `<button class="prow${st===x.k?" top":""}" data-h="${x.k}"><span class="rk">${i+1}</span><span class="tt"><small>HF ${x.k} · ${f.ph}${st===x.k?" · Startfeld":""}</small><b>${esc(f.t)}</b></span><span class="ans">${qs.map(q=>atag(q.id)).join(" ")}</span><span class="lvl ${x.lvl}">${LVL[x.lvl]}</span></button>`;}).join("");
  $("#prioliste").innerHTML=h;
@@ -1061,7 +1098,7 @@ function renderPrio(){
 function renderWeg(){
  const n=nAns(),r=rang(EA),st=startHF();
  $("#viz1").innerHTML=Q.map(q=>`<i class="${EA[q.id]||""}"></i>`).join("");
- $("#st1").textContent=`${n} von ${Q.length} beantwortet`;
+ $("#st1").textContent=GEM?`Gemeinsamer Stand: ${n} von ${Q.length}`:`${n} von ${Q.length} beantwortet`;
  if(n){const R=roadmap();$("#viz2").innerHTML=R.w.map(W=>`<div><b>${W.fund.length+W.rules.length+W.it.length}</b>${W.n}</div>`).join("");$("#st2").textContent=(st?`Startfeld HF ${st} · `:"")+`${R.nr} ${R.nr===1?"Paket":"Pakete"}, ${R.plan} Vorhaben`;}
  else{$("#viz2").innerHTML=WAVES.map(W=>`<div><b>·</b>${W.n}</div>`).join("");$("#st2").textContent="Entsteht aus Schritt 1";}
  const fk=st||S.hf;$("#viz3").innerHTML=P.map((_,i)=>`<i class="${HF[fk].p.includes(i+1)?"on":""}">P${i+1}</i>`).join("");
@@ -1129,7 +1166,7 @@ function blick(){
  const rows=Object.keys(HF).map(Number).map(k=>{const x=r.find(y=>y.k===k),qs=Q.filter(q=>q.hf===k);
   return `<div class="bl-row${st===k?" top":""}">${ball(1-(x.need||0))}<span class="tt"><small>Handlungsfeld ${k}${st===k?" · Startfeld":""}</small><b>${esc(HF[k].t)}</b></span><span class="ans">${qs.map(q=>atag(q.id)).join(" ")}</span><span class="lvl ${x.lvl}">${LVL[x.lvl]}</span></div>`;}).join("");
  const next=R.w.flatMap(W=>[...W.fix,...W.fund.map(x=>MQ[x.k][x.i][1]),...W.rules.map(p=>"Beschlusspaket "+p.n+" beschliessen: "+p.t),...W.it.map(x=>MQ[x.k][x.i][1])]).slice(0,3);
- return `<div class="blick"><div class="mono muted">Auf einen Blick</div><div class="bl-rows">${rows}</div><p class="hint bl-leg">Kreis: Stand je Handlungsfeld nach den gewerteten Antworten, von leer (alle A) bis voll (alle C). Rechts die Dringlichkeit.${Q.some(q=>nb(q.id))?` Ohne Beleg eine Stufe tiefer gewertet und gestrichelt umrandet: ${Q.filter(q=>nb(q.id)).map(q=>q.id).join(", ")}.`:""}</p><div class="mono muted">Die nächsten drei Schritte</div><ol class="bl-next">${next.map(t=>`<li>${esc(t)}</li>`).join("")}</ol></div>`;}
+ return `<div class="blick"><div class="mono muted">Auf einen Blick</div>${basis()}<div class="bl-rows">${rows}</div><p class="hint bl-leg">Kreis: Stand je Handlungsfeld nach den gewerteten Antworten, von leer (alle A) bis voll (alle C). Rechts die Dringlichkeit.${Q.some(q=>nb(q.id))?` Ohne Beleg eine Stufe tiefer gewertet und gestrichelt umrandet: ${Q.filter(q=>nb(q.id)).map(q=>q.id).join(", ")}.`:""}</p><div class="mono muted">Die nächsten drei Schritte</div><ol class="bl-next">${next.map(t=>`<li>${esc(t)}</li>`).join("")}</ol></div>`;}
 function update(){renderWeg();renderPrio();renderHFNav();renderHF();renderRoadmap();}
 /* ---------- Standortbestimmung ---------- */
 function renderFragen(){
@@ -1155,8 +1192,8 @@ function startfeld(a){
  return{hf:null,grund:"Alle Antworten auf Stufe C. Das Startfeld wird in der Sitzung festgelegt."};
 }
 function ergebnis(){
- const n=Q.filter(q=>S.ans[q.id]).length, el=$("#v-ergebnis");
- if(n<Q.length){const off=Q.filter(q=>!EA[q.id]).map(q=>q.id).join(", ");el.innerHTML=`<div class="warnbox"><b>${Q.length-n} Fragen sind noch offen</b> (${off}). Die Auswertung setzt alle vierzehn Antworten voraus.</div>`;return;}
+ const n=nAns(), el=$("#v-ergebnis");
+ if(n<Q.length){const off=Q.filter(q=>!EA[q.id]).map(q=>q.id).join(", ");el.innerHTML=basis()+`<div class="warnbox"><b>${Q.length-n} Fragen sind noch offen</b> (${off}). Die Auswertung setzt alle vierzehn Antworten voraus.${GEM?" Klären Sie die offenen Fragen im Stufenvergleich.":""}</div>`;return;}
  const s=startfeld(EA);
  let h=`<div class="card res-start"><div class="mono">Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+HF[s.hf].t:"In der Sitzung festlegen"}</h3><p>${s.grund}</p><p style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn primary small" href="#tage">Schritt 2: Roadmap →</a>${s.hf?`<button class="btn ghost small" id="goStart">Massnahmen im Handlungsfeld ${s.hf}</button>`:""}</p></div>`+blick();
  const w=[];if(EA.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(EA.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
@@ -1166,14 +1203,16 @@ function ergebnis(){
  const g=$("#goStart");if(g)g.onclick=()=>openHF(s.hf);
  $("#kopie").onclick=async()=>{try{await navigator.clipboard.writeText(code(S.stufe,S.ans));$("#km").textContent="kopiert";}catch(e){$("#km").textContent="Bitte den Code markieren und kopieren";}};
 }
-function vergleich(){
- const lines=$("#codes").value.split(/\n+/).filter(x=>x.trim());
+function vergleich(){S.kon.codes=$("#codes").value;calcEA();save();renderVergleich();update();}
+function renderVergleich(){
+ const lines=(S.kon.codes||"").split(/\n+/).filter(x=>x.trim());
  const rs=[],bad=[];lines.forEach(l=>{const p=parse(l);p?rs.push(p):bad.push(l.trim());});
  $("#vfehler").textContent=bad.length?`${bad.length} Zeile(n) nicht lesbar`:"";
  const el=$("#vergleich");if(!rs.length){el.innerHTML="";return;}
+ const G=gemein();
  const stufen=["GL","F2","F3"].filter(s=>rs.some(r=>r.stufe===s));
  const cnt=s=>rs.filter(r=>r.stufe===s).length, val=x=>x==="A"?0:x==="B"?1:2;
- let h=`<div class="card"><p>${rs.length} Ergebnisse: ${stufen.map(s=>STUFE[s]+" "+cnt(s)).join(", ")}. Je Zelle die gewerteten Antworten der Personen dieser Stufe. Antworten ohne Beleg sind eine Stufe tiefer gewertet.</p><div class="tablewrap"><table><tr><th>Frage</th>${stufen.map(s=>`<th>${STUFE[s]}</th>`).join("")}<th>Befund</th></tr>`;
+ let h=`<div class="card"><p>${rs.length} Ergebnisse: ${stufen.map(s=>STUFE[s]+" "+cnt(s)).join(", ")}. Je Zelle die gewerteten Antworten der Personen dieser Stufe. Antworten ohne Beleg sind eine Stufe tiefer gewertet.</p><div class="tablewrap"><table><tr><th>Frage</th>${stufen.map(s=>`<th>${STUFE[s]}</th>`).join("")}<th>Befund</th><th>Gemeinsamer Stand</th></tr>`;
  let n=0;
  Q.forEach(q=>{
   const per={};stufen.forEach(s=>per[s]=rs.filter(r=>r.stufe===s).map(r=>r.e[q.id]).filter(Boolean));
@@ -1181,15 +1220,36 @@ function vergleich(){
   let bef="";
   if(per.GL&&per.GL.length){const g=mean("GL");const o=stufen.filter(s=>s!=="GL").map(mean).filter(v=>v!==null);if(o.length&&g-Math.max(...o)>=0.5){bef="GL antwortet günstiger";n++;}}
   if(stufen.some(s=>new Set(per[s]).size>1))bef+=(bef?", ":"")+"uneinig innerhalb einer Stufe";
+  else if(new Set(stufen.flatMap(s=>per[s])).size>1&&!bef)bef="uneinig zwischen den Stufen";
   const ub=rs.filter(r=>r.a[q.id]&&r.a[q.id]!=="A"&&!r.b[q.id]).length;if(ub)bef+=(bef?", ":"")+ub+" ohne Beleg";
-  h+=`<tr><td><b>${q.id}</b></td>${stufen.map(s=>`<td>${per[s].map(x=>`<span class="tag t${x}">${x}</span>`).join(" ")||"<span class='hint'>keine</span>"}</td>`).join("")}<td>${bef}</td></tr>`;
+  const st=G.st[q.id],ent=S.kon.ent[q.id],ge=ent?effOf({x:ent.a},{x:ent.b}).x:null;
+  const gs=st==="e"?`<span class="tag t${G.a[q.id]}">${G.a[q.id]}</span> <span class="hint">einig</span>`
+   :st==="k"?`<span class="tag t${ge}${ent.a!=="A"&&!ent.b?" nb":""}">${ge}</span> <button class="lnk" data-kl="${q.id}">geklärt, ändern</button>${ent.k?`<small class="kk">${esc(ent.k)}</small>`:""}`
+   :`<button class="btn small primary" data-kl="${q.id}">Klären</button>`;
+  h+=`<tr><td><b>${q.id}</b></td>${stufen.map(s=>`<td>${per[s].map(x=>`<span class="tag t${x}">${x}</span>`).join(" ")||"<span class='hint'>keine</span>"}</td>`).join("")}<td>${bef}</td><td>${gs}</td></tr>`;
  });
  h+=`</table></div></div>`;
- if(stufen.includes("GL")&&stufen.length>1)h+=n?`<div class="warnbox">Bei ${n} Fragen beurteilt die Geschäftsleitung den Stand um mindestens eine halbe Stufe günstiger als die übrigen Stufen. Diese Fragen gehören an den Anfang der Sitzung.</div>`:`<div class="card" style="margin-top:12px">Die Geschäftsleitung beurteilt keine Frage deutlich günstiger als die übrigen Stufen.</div>`;
- const gl=rs.filter(r=>r.stufe==="GL");
- if(gl.length){const agg={};Q.forEach(q=>{const v=gl.map(r=>r.e[q.id]).filter(Boolean).sort((x,y)=>val(x)-val(y));agg[q.id]=v[0];});const s=startfeld(agg);
-  h+=`<div class="card res-start" style="margin-top:12px"><div class="mono">Startfeld nach den Antworten der Geschäftsleitung</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+HF[s.hf].t:"offen"}</h3><p>Je Frage zählt die ungünstigste Antwort. ${s.grund}</p></div>`;}
+ if(stufen.includes("GL")&&stufen.length>1)h+=n?`<div class="warnbox">Bei ${n===1?"einer Frage":n+" Fragen"} beurteilt die Geschäftsleitung den Stand um mindestens eine halbe Stufe günstiger als die übrigen Stufen. ${n===1?"Diese Frage gehört":"Diese Fragen gehören"} an den Anfang der Sitzung.</div>`:`<div class="card" style="margin-top:12px">Die Geschäftsleitung beurteilt keine Frage deutlich günstiger als die übrigen Stufen.</div>`;
+ const nE=Q.filter(q=>G.st[q.id]==="e").length,nK=Q.filter(q=>G.st[q.id]==="k").length;
+ h+=`<div class="card" style="margin-top:12px"><div class="mono muted">Gemeinsamer Stand</div><p style="margin:8px 0 12px">${nE} Fragen einig, ${nK} geklärt, ${G.offen} offen. ${S.gem?"Der gemeinsame Stand ist Grundlage von Roadmap, Übersicht und Handlungsfeldern.":"Als Grundlage gewählt, rechnen Roadmap, Übersicht und Handlungsfelder mit dem gemeinsamen Stand statt mit Ihren eigenen Antworten."}</p><div style="display:flex;gap:10px;flex-wrap:wrap">${S.gem?`<a class="btn primary" href="#tage">Zur Roadmap →</a><button class="btn" id="druckK">Konsenspapier drucken</button><button class="btn" id="gemAus">Zurück zu den eigenen Antworten</button>`:`<button class="btn primary" id="gemAn">Gemeinsamen Stand als Grundlage verwenden</button>`}</div></div>`;
  el.innerHTML=h;
+ el.querySelectorAll("[data-kl]").forEach(b=>b.onclick=()=>openKlaeren(b.dataset.kl));
+ const setGem=v=>{S.gem=v;calcEA();save();renderVergleich();update();};
+ if($("#gemAn"))$("#gemAn").onclick=()=>setGem(true);
+ if($("#gemAus"))$("#gemAus").onclick=()=>setGem(false);
+ if($("#druckK"))$("#druckK").onclick=()=>{buildDruck();window.print();};
+}
+function openKlaeren(id){
+ const q=Q.find(x=>x.id===id),G=gemein(),d=$("#dlg"),ent=S.kon.ent[id]||{};
+ $("#dlg-n").textContent=`${id} · Abweichung klären`;$("#dlg-t").textContent=q.t;
+ const wer=["GL","F2","F3"].map(s=>{const xs=G.rs.filter(r=>r.stufe===s&&r.a[id]);return xs.length?`<p style="margin:0 0 4px"><b style="color:var(--fg)">${STUFE[s]}:</b> ${xs.map(r=>r.a[id]!=="A"&&!r.b[id]?`${r.a[id]} ohne Beleg, gewertet ${r.e[id]}`:r.a[id]).join(" · ")}</p>`:"";}).join("");
+ $("#dlg-b").innerHTML=`${wer}<div class="mono" style="margin:16px 0 6px;color:var(--fg)">Gemeinsame Antwort</div>${q.o.map((o,k)=>`<label class="kopt"><input type="radio" name="kl" value="${L[k]}" ${ent.a===L[k]?"checked":""}><span><b>${L[k]}</b> ${esc(o)}</span></label>`).join("")}<label class="kopt" style="margin-top:10px"><input type="checkbox" id="kl-b" ${ent.b?"checked":""}><span>Belegt durch einen Fall oder eine Zahl</span></label><label for="kl-k" class="mono" style="display:block;margin:16px 0 6px;color:var(--fg)">Kommentar, freiwillig</label><textarea id="kl-k" maxlength="400" style="min-height:70px;font-family:inherit">${esc(ent.k||"")}</textarea><p class="hint" id="kl-f" style="margin:6px 0 0;color:var(--warn)"></p>`;
+ $("#dlg-r").innerHTML=`<button class="btn small primary" id="kl-ok">Einigung speichern</button>${S.kon.ent[id]?`<button class="btn small" id="kl-del">Einigung löschen</button>`:""}<button class="btn small" id="kl-x">Abbrechen</button>`;
+ const fertig=()=>{calcEA();save();d.close();renderVergleich();update();};
+ $("#kl-ok").onclick=()=>{const r=d.querySelector("input[name=kl]:checked");if(!r){$("#kl-f").textContent="Bitte eine gemeinsame Antwort wählen.";return;}S.kon.ent[id]={a:r.value,b:$("#kl-b").checked,k:$("#kl-k").value.trim()};fertig();};
+ if($("#kl-del"))$("#kl-del").onclick=()=>{delete S.kon.ent[id];fertig();};
+ $("#kl-x").onclick=()=>d.close();
+ if(d.showModal&&!d.open)d.showModal();
 }
 function show(v){document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v===v));["fragen","ergebnis","vergleich"].forEach(x=>$("#v-"+x).hidden=x!==v);if(v==="ergebnis")ergebnis();}
 
@@ -1247,27 +1307,28 @@ function buildDruck(){
  const H=s=>{const e=$(s);return e?e.innerHTML:"";};
  const sec=(n,lab,tit,body,neu)=>`<div class="d-sec${neu?" d-new":""}"><div class="d-lab">${n} · ${lab}</div><h2>${tit}</h2>${body}</div>`;
  const ck=on=>`<span class="d-ck${on?" on":""}"></span>`;
- const n=Q.filter(q=>S.ans[q.id]).length, voll=n===Q.length;
+ const n=nAns(), voll=n===Q.length, gm=!!GEM;
  const imp=[...document.querySelectorAll("footer p:not(.no-print)")].map(p=>`<p>${p.innerHTML}</p>`).join("");
  const rg=rang(EA), st=voll?startfeld(EA).hf:null;
  let h=`<div class="d-cover"><div class="d-top d-lab">${H(".hero .eyebrow")}</div><h1>${H(".hero h1")}</h1><p class="d-lead">${H(".hero .lead")}</p>
   <div class="d-foot"><ul class="d-facts">${H(".facts")}</ul><div class="d-imp">${imp}</div></div></div>`;
  // Kernbefund und Vorgehen
- if(voll)h+=sec("Übersicht","Ihr Ergebnis","Auf einen Blick",`<p class="d-intro">${STUFE[S.stufe]}, Ergebniscode ${code(S.stufe,S.ans)}. Empfohlenes Startfeld: ${st?"Handlungsfeld "+st+", "+esc(HF[st].t):"in der Sitzung festlegen"}.</p>${blick()}`)+`<div style="break-after:page"></div>`;
+ if(voll)h+=sec(gm?"Konsenspapier":"Übersicht",gm?"Gemeinsamer Stand":"Ihr Ergebnis","Auf einen Blick",`<p class="d-intro">${gm?"Gemeinsamer Stand aus "+GEM.rs.length+" Ergebniscodes":STUFE[S.stufe]+", Ergebniscode "+code(S.stufe,S.ans)}. Empfohlenes Startfeld: ${st?"Handlungsfeld "+st+", "+esc(HF[st].t):"in der Sitzung festlegen"}.</p>${blick()}${gm?`<div class="d-lab" style="margin-top:8mm">Vereinbarte nächste Schritte: was, wer, bis wann</div><div class="d-line"></div><div class="d-line"></div><div class="d-line"></div><div class="d-line"></div>`:""}`)+`<div style="break-after:page"></div>`;
+ h+=sec("Einstieg","Orientierung",H("#worum h2"),`<div class="d-weg">${[...document.querySelectorAll("#worum .worum>div")].map(d=>`<div>${d.innerHTML}</div>`).join("")}</div>`);
  h+=sec("01","Kernbefund",H("#kern h2"),`<p class="d-intro">${H("#kern .frame")}</p><p class="d-big">${H("#kern .big")}</p><ol class="d-kpts">${[...document.querySelectorAll("#kern .kpts li")].map(l=>`<li>${l.innerHTML}</li>`).join("")}</ol>
   ${$("#kern .flow").outerHTML}
   <div class="d-box"><div class="d-lab">${H("#kern .erwart .mono")}</div><p>${H("#kern .erwart p")}</p></div>`);
  h+=sec("02","Vorgehen",H("#weg h2"),`<div class="d-weg">${[...document.querySelectorAll("#weg .step")].map(s=>`<div><span class="d-lab">Schritt ${s.querySelector(".num").textContent}</span><b>${s.querySelector("h3").textContent}</b>${s.querySelector("p").textContent}</div>`).join("")}</div>
   <div class="d-weg">${[...document.querySelectorAll("#weg .weg-meta>div")].map(d=>`<div>${d.innerHTML}</div>`).join("")}</div>`);
  // Standortbestimmung
- let b=`<p class="d-intro">${H("#standort .intro")}</p><div class="d-weg">${[...document.querySelectorAll("#vorab>div")].map(d=>`<div>${d.innerHTML}</div>`).join("")}</div><div class="d-stufe"><b>Führungsstufe</b>${Object.keys(STUFE).map(s=>`<span>${ck(n>0&&S.stufe===s)}${STUFE[s]}</span>`).join("")}</div>`;
+ let b=`<p class="d-intro">${H("#standort .intro")}</p><div class="d-weg">${[...document.querySelectorAll("#vorab>div")].map(d=>`<div>${d.innerHTML}</div>`).join("")}</div><div class="d-stufe">${gm?`<b>Gemeinsamer Stand</b><span>aus ${GEM.rs.length} Ergebniscodes</span>`:`<b>Führungsstufe</b>${Object.keys(STUFE).map(s=>`<span>${ck(n>0&&S.stufe===s)}${STUFE[s]}</span>`).join("")}`}</div>`;
  let g="";Q.forEach(q=>{if(q.g!==g){g=q.g;b+=`<div class="d-grp d-lab">${esc(g)}</div>`;}
-  b+=`<div class="d-q"><div class="t"><span>${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></div>${q.h?`<p class="d-qh">${esc(q.h)}</p>`:""}<div class="d-opts">${q.o.map((o,k)=>{const on=S.ans[q.id]===L[k];return `<div class="${on?"on":""}">${ck(on)}<i>${L[k]}</i><span>${esc(o)}</span></div>`;}).join("")}</div><div class="d-bel">${ck(!!S.bel[q.id])}Belegt durch einen Fall oder eine Zahl${nb(q.id)?`, ohne Beleg als ${EA[q.id]} gewertet`:""}</div></div>`;});
+  b+=`<div class="d-q"><div class="t"><span>${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></div>${q.h?`<p class="d-qh">${esc(q.h)}</p>`:""}<div class="d-opts">${q.o.map((o,k)=>{const on=RA()[q.id]===L[k];return `<div class="${on?"on":""}">${ck(on)}<i>${L[k]}</i><span>${esc(o)}</span></div>`;}).join("")}</div><div class="d-bel">${ck(!!RB()[q.id])}Belegt durch einen Fall oder eine Zahl${nb(q.id)?`, ohne Beleg als ${EA[q.id]} gewertet`:""}${gm?(GEM.st[q.id]==="e"?" · alle Codes einig":GEM.st[q.id]==="k"?" · in der Sitzung geklärt"+(S.kon.ent[q.id].k?": "+esc(S.kon.ent[q.id].k):""):" · noch zu klären"):""}</div></div>`;});
  if(voll){const s=startfeld(EA),w=[];
   if(EA.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(EA.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
-  b+=`<div class="d-res"><div class="d-lab">Auswertung · ${STUFE[S.stufe]} · Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+esc(HF[s.hf].t):"In der Sitzung festlegen"}</h3><p>${s.grund}</p>
+  b+=`<div class="d-res"><div class="d-lab">Auswertung · ${gm?"Gemeinsamer Stand":STUFE[S.stufe]} · Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+esc(HF[s.hf].t):"In der Sitzung festlegen"}</h3><p>${s.grund}</p>
    ${w.length?`<div class="d-warn"><b>Zahlen innerhalb von vier Wochen beschaffen.</b> Ohne sie lässt sich die Reaktionsfähigkeit nicht beurteilen.<br>${w.join("<br>")}</div>`:""}
-   <div class="d-lab">Ergebniscode</div><code>${code(S.stufe,S.ans)}</code></div>`;}
+   ${gm?"":`<div class="d-lab">Ergebniscode</div><code>${code(S.stufe,S.ans)}</code>`}</div>`;}
  h+=sec("Schritt 1","Standortbestimmung",H("#standort h2"),b,true);
  // Schritt 2: Roadmap mit Rangfolge der Felder
  if(n){const R=roadmap();
@@ -1310,6 +1371,8 @@ $("#zumErgebnis").onclick=()=>{show("ergebnis");$("#standort").scrollIntoView();
 $("#leeren").onclick=()=>{if(confirm("Alle Antworten löschen?")){S.ans={};S.bel={};calcEA();save();renderFragen();update();renderHF();}};
 $("#stufe").onchange=e=>{S.stufe=e.target.value;save();};
 $("#vergleichen").onclick=vergleich;
+$("#codes").value=S.kon.codes||"";renderVergleich();
+document.addEventListener("click",e=>{if(e.target.closest("[data-zv]"))show("vergleich");});
 delete S.start;
 renderFlow();renderEvidenz();renderFragen();update();renderHF();
 </script>
