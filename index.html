@@ -281,6 +281,8 @@ th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu
 .kk{display:block;margin-top:4px;color:var(--muted);font-size:.82rem;max-width:34ch}
 .kopt{display:flex;gap:10px;align-items:flex-start;padding:7px 0;cursor:pointer;color:var(--fg);font-size:.95rem;line-height:1.4}
 .kopt input{flex:none;width:17px;height:17px;margin-top:2px;accent-color:var(--accent)}
+.opt.wn{grid-column:1/-1;justify-self:start}
+.opt.wn span{padding:6px 12px;font-size:.85rem;color:var(--muted);border-style:dashed;height:auto}
 .tag.nb{border-style:dashed}
 .bel{display:none;align-items:center;gap:8px;margin-top:12px;font-size:.9rem;cursor:pointer}
 .q.needb .bel{display:inline-flex}
@@ -684,7 +686,7 @@ dialog .dh{background:var(--panel)}
 <section id="standort">
   <div class="wrap">
     <div class="sec-head"><span class="mono">Schritt 1 · Standortbestimmung</span><h2>Wo steht Ihr Unternehmen heute?</h2></div>
-    <p class="intro">Massgeblich ist der heutige Zustand, nicht die Absicht. Die Antworten B und C zählen nur mit Beleg. Wer keinen Fall und keine Zahl nennen kann, wird eine Stufe tiefer gewertet.</p>
+    <p class="intro">Massgeblich ist der heutige Zustand, nicht die Absicht. Die Antworten B und C zählen nur mit Beleg. Wer keinen Fall und keine Zahl nennen kann, wird eine Stufe tiefer gewertet. Wer eine Frage nicht beantworten kann, wählt «Weiss ich nicht».</p>
     <p class="hint evnote">Die Fragen übersetzen die Kategorien, nach denen die Gespräche ausgewertet wurden, in beobachtbare Stufen. Die Regel für das Startfeld war vor der Erhebung festgelegt. <a href="#evidenz">Herleitung</a></p>
     <div class="weg-meta vorab" id="vorab">
       <div><b>Getrennt ausfüllen, gemeinsam vergleichen</b>Mehrere Personen aus der Geschäftsleitung und aus weiteren Führungsstufen füllen getrennt aus. Jede erhält einen Ergebniscode. Die Abweichungen zwischen den Codes eröffnen die Sitzung.</div>
@@ -708,6 +710,7 @@ dialog .dh{background:var(--panel)}
         <div class="meter" aria-hidden="true"><span id="meter"></span></div>
         <span class="hint" id="stand"></span>
       </div>
+      <p class="basis" id="stufhin" hidden>Sie beurteilen das Unternehmen aus Ihrer Sicht. Wo Sie etwas anders sehen als die Geschäftsleitung oder es nicht wissen, ist das ein Befund für die Sitzung. Massgeblich für Startfeld und Roadmap ist der gemeinsame Stand aus dem Stufenvergleich.</p>
       <div id="fragen"></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
         <button class="btn primary" id="zumErgebnis">Auswerten</button>
@@ -1001,7 +1004,7 @@ const Q=[
  {g:"Führung",id:"F1",t:"Hat jedes Mitglied der Geschäftsleitung in den letzten drei Monaten selbst mit einem Agenten gearbeitet?",o:["nein oder vereinzelt","ja, in einer Schulung","ja, im eigenen Arbeitsalltag"],hf:1},
  {g:"Führung",id:"F2",t:"Wo liegt die Verantwortung für agentische KI?",o:["im IT-Betrieb","in einer zentralen Digital- oder KI-Einheit","bei einem GL-Mitglied mit Budget- und Ergebnisverantwortung"],hf:1},
  {g:"Führung",id:"F3",t:"Gibt es eine Vorhabenliste, die auch festhält, was bewusst nicht verfolgt wird?",o:["nein","ja, jährlich","ja, quartalsweise überprüft"],hf:2},
- {g:"Erkennen",id:"F4",t:"Wie wird das Bild vom Kunden und vom Markt nachgeführt?",o:["über einzelne Kontakte, ohne Rhythmus","zyklisch, etwa quartalsweise oder entlang des Verkaufsplans","laufend, aus erfassten Signalen"],hf:2},
+ {g:"Erkennen",id:"F4",t:"Wie wird das Bild vom Kunden und vom Markt nachgeführt?",o:["gar nicht oder über einzelne Kontakte, ohne Rhythmus","zyklisch, etwa quartalsweise oder entlang des Verkaufsplans","laufend, aus erfassten Signalen"],hf:2},
  {g:"Erkennen",id:"F5",t:"Ist festgelegt, ab welcher Signalstärke eine Anpassung geprüft wird?",o:["nein","informell","ja, je Angebot oder Marktsegment"],h:"Signalstärke meint, wie oft und wie deutlich ein Bedürfnis auftaucht, etwa die Zahl gleichlautender Anfragen oder Beschwerden. Die Schwelle ist ein Führungsentscheid. Sie legt fest, ab wann eine Anpassung geprüft wird, auch wenn Agenten Signale laufend liefern.",hf:2},
  {g:"Erkennen",id:"F6",t:"Woher kam der Anstoss zu den letzten drei Angebotsanpassungen?",o:["aus dem Verkaufsplan oder anderer interner Planung","aus einzelnen Kundenanfragen","aus systematisch erfassten Signalen aus Kundenkontakt oder Markt"],hf:2},
  {g:"Entscheiden und Freigeben",id:"F7",t:"Wer entscheidet bei einer typischen Angebotsanpassung abschliessend?",o:["unklar oder mehrere Gremien","klar, aber mehr als drei Freigaben","eine benannte Person mit Frist, Eskalation nach Risiko geregelt"],hf:3},
@@ -1039,7 +1042,8 @@ const KEY="rf-leitfaden-v1";
 let S={ans:{},bel:{},stufe:"GL",chk:{},hf:1,kon:{codes:"",ent:{}},gem:false};
 /* Belegpflicht: Antworten B und C ohne Fall oder Zahl zählen eine Stufe tiefer. EA = gewertete Antworten */
 const DOWN={C:"B",B:"A",A:"A"};
-const effOf=(a,b)=>{const e={};Object.keys(a).forEach(k=>{if(a[k])e[k]=b[k]?a[k]:DOWN[a[k]];});return e;};
+// W = «Weiss ich nicht»: zählt wie A, bleibt im Stufenvergleich aber als eigener Befund sichtbar
+const effOf=(a,b)=>{const e={};Object.keys(a).forEach(k=>{if(a[k])e[k]=a[k]==="W"?"A":b[k]?a[k]:DOWN[a[k]];});return e;};
 let EA={};
 /* Gemeinsamer Stand: aus den Ergebniscodes im Stufenvergleich. Einige Antworten gelten direkt, abweichende
    oder unbelegte werden in der Sitzung geklärt (S.kon.ent). Ist S.gem gesetzt, steuert er die Auswertung. */
@@ -1047,16 +1051,17 @@ let GEM=null;
 function gemein(){
  const rs=(S.kon.codes||"").split(/\n+/).map(parse).filter(Boolean),a={},b={},st={};let offen=0;
  Q.forEach(q=>{const xs=rs.filter(r=>r.a[q.id]),ent=S.kon.ent[q.id];
-  const einig=xs.length>0&&new Set(xs.map(r=>r.e[q.id])).size===1&&!xs.some(r=>r.a[q.id]!=="A"&&!r.b[q.id]);
+  const einig=xs.length>0&&new Set(xs.map(r=>r.e[q.id])).size===1&&!xs.some(r=>r.a[q.id]==="W"||(r.a[q.id]!=="A"&&!r.b[q.id]));
   if(ent){a[q.id]=ent.a;if(ent.b)b[q.id]=true;st[q.id]="k";}
   else if(einig){a[q.id]=xs[0].a[q.id];b[q.id]=true;st[q.id]="e";}
   else{st[q.id]="o";offen++;}});
  return{rs,a,b,st,offen};}
 const RA=()=>GEM?GEM.a:S.ans, RB=()=>GEM?GEM.b:S.bel;
 function calcEA(){GEM=S.gem?gemein():null;EA=effOf(RA(),RB());}
-const nb=id=>{const a=RA()[id];return !!a&&a!=="A"&&!RB()[id];};
+const nb=id=>{const a=RA()[id];return !!a&&a!=="A"&&a!=="W"&&!RB()[id];};
+const wn=id=>RA()[id]==="W";
 const basis=()=>GEM?`<p class="basis"><b>Grundlage: gemeinsamer Stand</b> aus ${GEM.rs.length} Ergebniscodes${GEM.offen?`, ${GEM.offen} ${GEM.offen===1?"Frage":"Fragen"} noch zu klären`:""}. <a href="#standort" data-zv>Zum Stufenvergleich</a></p>`:"";
-const atag=id=>{const a=EA[id];return `<span class="tag t${a||"X"}${nb(id)?" nb":""}"${nb(id)?` title="Gewählt ${RA()[id]}, ohne Beleg als ${a} gewertet"`:""}>${id} ${a||"·"}</span>`;};
+const atag=id=>{const a=EA[id];return `<span class="tag t${a||"X"}${nb(id)?" nb":""}"${nb(id)?` title="Gewählt ${RA()[id]}, ohne Beleg als ${a} gewertet"`:wn(id)?` title="Weiss ich nicht, als A gewertet"`:""}>${id} ${wn(id)?"?":a||"·"}</span>`;};
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"{}");S=Object.assign(S,s);}catch(e){}if(!S.bel)S.bel={};if(!S.kon)S.kon={codes:"",ent:{}};if(!S.kon.ent)S.kon.ent={};calcEA();}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 const $=s=>document.querySelector(s);
@@ -1173,17 +1178,17 @@ function renderFragen(){
  const box=$("#fragen");let g="",h="";
  Q.forEach(q=>{
   if(q.g!==g){g=q.g;h+=`<div class="grp">${g}</div>`;}
-  h+=`<fieldset class="q${S.ans[q.id]?" done":""}${S.ans[q.id]&&S.ans[q.id]!=="A"?" needb":""}" style="border:1px solid var(--line)"><legend class="qt" style="padding:0"><span class="id">${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></legend>${q.h?`<p class="hint qh">${esc(q.h)}</p>`:""}<div class="opts">${q.o.map((o,k)=>`<label class="opt"><input type="radio" name="${q.id}" value="${L[k]}" ${S.ans[q.id]===L[k]?"checked":""}><span><i>${L[k]}</i>${esc(o)}</span></label>`).join("")}</div><label class="bel"><input type="checkbox" data-b="${q.id}" ${S.bel[q.id]?"checked":""}><span>Belegt durch einen Fall oder eine Zahl</span></label><span class="hint belst" id="bs-${q.id}"></span></fieldset>`;
+  h+=`<fieldset class="q${S.ans[q.id]?" done":""}${S.ans[q.id]==="B"||S.ans[q.id]==="C"?" needb":""}" style="border:1px solid var(--line)"><legend class="qt" style="padding:0"><span class="id">${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></legend>${q.h?`<p class="hint qh">${esc(q.h)}</p>`:""}<div class="opts">${q.o.map((o,k)=>`<label class="opt"><input type="radio" name="${q.id}" value="${L[k]}" ${S.ans[q.id]===L[k]?"checked":""}><span><i>${L[k]}</i>${esc(o)}</span></label>`).join("")}<label class="opt wn"><input type="radio" name="${q.id}" value="W" ${S.ans[q.id]==="W"?"checked":""}><span><i>?</i>Weiss ich nicht</span></label></div><label class="bel"><input type="checkbox" data-b="${q.id}" ${S.bel[q.id]?"checked":""}><span>Belegt durch einen Fall oder eine Zahl</span></label><span class="hint belst" id="bs-${q.id}"></span></fieldset>`;
  });
  box.innerHTML=h;
- box.querySelectorAll("input").forEach(el=>el.addEventListener("change",e=>{const t=e.target;if(t.dataset.b){if(t.checked)S.bel[t.dataset.b]=true;else delete S.bel[t.dataset.b];}else{S.ans[t.name]=t.value;const f=t.closest(".q");f.classList.add("done");f.classList.toggle("needb",t.value!=="A");}calcEA();belst();save();stand();update();}));
- $("#stufe").value=S.stufe;belst();stand();
+ box.querySelectorAll("input").forEach(el=>el.addEventListener("change",e=>{const t=e.target;if(t.dataset.b){if(t.checked)S.bel[t.dataset.b]=true;else delete S.bel[t.dataset.b];}else{S.ans[t.name]=t.value;const f=t.closest(".q");f.classList.add("done");f.classList.toggle("needb",t.value==="B"||t.value==="C");}calcEA();belst();save();stand();update();}));
+ $("#stufe").value=S.stufe;$("#stufhin").hidden=S.stufe==="GL";belst();stand();
 }
-function belst(){Q.forEach(q=>{const e=document.getElementById("bs-"+q.id);if(e)e.textContent=nb(q.id)?`Ohne Beleg als ${EA[q.id]} gewertet.`:"";});}
+function belst(){Q.forEach(q=>{const e=document.getElementById("bs-"+q.id);if(e){e.style.color=S.ans[q.id]==="W"?"var(--muted)":"";e.style.marginLeft=S.ans[q.id]==="W"?"0":"";}if(e)e.textContent=S.ans[q.id]==="W"?"Zählt wie A und erscheint im Stufenvergleich als «weiss es nicht».":nb(q.id)?`Ohne Beleg als ${EA[q.id]} gewertet.`:"";});}
 function stand(){const n=Q.filter(q=>S.ans[q.id]).length;$("#stand").textContent=`${n} von ${Q.length} beantwortet`;$("#meter").style.width=(100*n/Q.length)+"%";}
-function code(stufe,a,b=S.bel){return "RF1-"+stufe+"-"+Q.map(q=>{const x=a[q.id];return !x?"-":x!=="A"&&!b[q.id]?x.toLowerCase():x;}).join("");}
-// Kleinbuchstabe = Antwort ohne Beleg. Codes der früheren Fassung (nur Grossbuchstaben) gelten als belegt.
-function parse(c){const m=c.trim().match(/^rf1-(gl|f2|f3)-([abc-]{14})$/i);if(!m)return null;const a={},b={};Q.forEach((q,i)=>{const ch=m[2][i];if(ch!=="-"){a[q.id]=ch.toUpperCase();if(ch===ch.toUpperCase())b[q.id]=true;}});return{stufe:m[1].toUpperCase(),a,b,e:effOf(a,b)};}
+function code(stufe,a,b=S.bel){return "RF1-"+stufe+"-"+Q.map(q=>{const x=a[q.id];return !x?"-":x==="W"?"?":x!=="A"&&!b[q.id]?x.toLowerCase():x;}).join("");}
+// Kleinbuchstabe = Antwort ohne Beleg, Fragezeichen = «Weiss ich nicht». Codes der früheren Fassung (nur Grossbuchstaben) gelten als belegt.
+function parse(c){const m=c.trim().match(/^rf1-(gl|f2|f3)-([abc?-]{14})$/i);if(!m)return null;const a={},b={};Q.forEach((q,i)=>{const ch=m[2][i];if(ch==="?")a[q.id]="W";else if(ch!=="-"){a[q.id]=ch.toUpperCase();if(ch===ch.toUpperCase())b[q.id]=true;}});return{stufe:m[1].toUpperCase(),a,b,e:effOf(a,b)};}
 function startfeld(a){
  const r=rang(a)[0];
  if(r.pre)return{hf:1,grund:"F1 oder F2 ist mit A beantwortet. Alle übrigen Felder setzen Entscheide der Geschäftsleitung voraus."};
@@ -1198,7 +1203,7 @@ function ergebnis(){
  let h=`<div class="card res-start"><div class="mono">Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+HF[s.hf].t:"In der Sitzung festlegen"}</h3><p>${s.grund}</p><p style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn primary small" href="#tage">Schritt 2: Roadmap →</a>${s.hf?`<button class="btn ghost small" id="goStart">Massnahmen im Handlungsfeld ${s.hf}</button>`:""}</p></div>`+blick();
  const w=[];if(EA.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(EA.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
  if(w.length)h+=`<div class="warnbox"><b>Zahlen innerhalb von vier Wochen beschaffen.</b> Ohne sie lässt sich die Reaktionsfähigkeit nicht beurteilen.<br>${w.join("<br>")}</div>`;
- h+=`<div class="card" style="margin-top:14px"><div class="mono muted">Ihr Ergebniscode</div><p style="margin:8px 0 0">Der Code enthält Ihre Stufe und die vierzehn Antworten, keinen Namen. Kleinbuchstaben stehen für Antworten ohne Beleg. Geben Sie ihn der Person, die die Sitzung vorbereitet. Sie legt die Codes aller Beteiligten unter «Stufen vergleichen» nebeneinander. Wo die Antworten auseinanderliegen, beginnt das Gespräch.</p><code class="res" id="rc">${code(S.stufe,S.ans)}</code><button class="btn small" id="kopie">Code kopieren</button> <span class="hint" id="km"></span></div>`;
+ h+=`<div class="card" style="margin-top:14px"><div class="mono muted">Ihr Ergebniscode</div><p style="margin:8px 0 0">Der Code enthält Ihre Stufe und die vierzehn Antworten, keinen Namen. Kleinbuchstaben stehen für Antworten ohne Beleg, ein Fragezeichen für «weiss ich nicht». Geben Sie ihn der Person, die die Sitzung vorbereitet. Sie legt die Codes aller Beteiligten unter «Stufen vergleichen» nebeneinander. Wo die Antworten auseinanderliegen, beginnt das Gespräch.</p><code class="res" id="rc">${code(S.stufe,S.ans)}</code><button class="btn small" id="kopie">Code kopieren</button> <span class="hint" id="km"></span></div>`;
  el.innerHTML=h;
  const g=$("#goStart");if(g)g.onclick=()=>openHF(s.hf);
  $("#kopie").onclick=async()=>{try{await navigator.clipboard.writeText(code(S.stufe,S.ans));$("#km").textContent="kopiert";}catch(e){$("#km").textContent="Bitte den Code markieren und kopieren";}};
@@ -1212,7 +1217,7 @@ function renderVergleich(){
  const G=gemein();
  const stufen=["GL","F2","F3"].filter(s=>rs.some(r=>r.stufe===s));
  const cnt=s=>rs.filter(r=>r.stufe===s).length, val=x=>x==="A"?0:x==="B"?1:2;
- let h=`<div class="card"><p>${rs.length} Ergebnisse: ${stufen.map(s=>STUFE[s]+" "+cnt(s)).join(", ")}. Je Zelle die gewerteten Antworten der Personen dieser Stufe. Antworten ohne Beleg sind eine Stufe tiefer gewertet.</p><div class="tablewrap"><table><tr><th>Frage</th>${stufen.map(s=>`<th>${STUFE[s]}</th>`).join("")}<th>Befund</th><th>Gemeinsamer Stand</th></tr>`;
+ let h=`<div class="card"><p>${rs.length} Ergebnisse: ${stufen.map(s=>STUFE[s]+" "+cnt(s)).join(", ")}. Je Zelle die gewerteten Antworten der Personen dieser Stufe. Antworten ohne Beleg sind eine Stufe tiefer gewertet, ein Fragezeichen steht für «weiss ich nicht».</p><div class="tablewrap"><table><tr><th>Frage</th>${stufen.map(s=>`<th>${STUFE[s]}</th>`).join("")}<th>Befund</th><th>Gemeinsamer Stand</th></tr>`;
  let n=0;
  Q.forEach(q=>{
   const per={};stufen.forEach(s=>per[s]=rs.filter(r=>r.stufe===s).map(r=>r.e[q.id]).filter(Boolean));
@@ -1221,12 +1226,14 @@ function renderVergleich(){
   if(per.GL&&per.GL.length){const g=mean("GL");const o=stufen.filter(s=>s!=="GL").map(mean).filter(v=>v!==null);if(o.length&&g-Math.max(...o)>=0.5){bef="GL antwortet günstiger";n++;}}
   if(stufen.some(s=>new Set(per[s]).size>1))bef+=(bef?", ":"")+"uneinig innerhalb einer Stufe";
   else if(new Set(stufen.flatMap(s=>per[s])).size>1&&!bef)bef="uneinig zwischen den Stufen";
-  const ub=rs.filter(r=>r.a[q.id]&&r.a[q.id]!=="A"&&!r.b[q.id]).length;if(ub)bef+=(bef?", ":"")+ub+" ohne Beleg";
+  const ub=rs.filter(r=>r.a[q.id]==="B"||r.a[q.id]==="C").filter(r=>!r.b[q.id]).length;if(ub)bef+=(bef?", ":"")+ub+" ohne Beleg";
+  const nw=rs.filter(r=>r.a[q.id]==="W").length;if(nw)bef+=(bef?", ":"")+(nw===1?"1 weiss es nicht":nw+" wissen es nicht");
+  const zeig=s=>rs.filter(r=>r.stufe===s&&r.a[q.id]).map(r=>r.a[q.id]==="W"?`<span class="tag tX" title="Weiss ich nicht, als A gewertet">?</span>`:`<span class="tag t${r.e[q.id]}">${r.e[q.id]}</span>`).join(" ");
   const st=G.st[q.id],ent=S.kon.ent[q.id],ge=ent?effOf({x:ent.a},{x:ent.b}).x:null;
   const gs=st==="e"?`<span class="tag t${G.a[q.id]}">${G.a[q.id]}</span> <span class="hint">einig</span>`
    :st==="k"?`<span class="tag t${ge}${ent.a!=="A"&&!ent.b?" nb":""}">${ge}</span> <button class="lnk" data-kl="${q.id}">geklärt, ändern</button>${ent.k?`<small class="kk">${esc(ent.k)}</small>`:""}`
    :`<button class="btn small primary" data-kl="${q.id}">Klären</button>`;
-  h+=`<tr><td><b>${q.id}</b></td>${stufen.map(s=>`<td>${per[s].map(x=>`<span class="tag t${x}">${x}</span>`).join(" ")||"<span class='hint'>keine</span>"}</td>`).join("")}<td>${bef}</td><td>${gs}</td></tr>`;
+  h+=`<tr><td><b>${q.id}</b></td>${stufen.map(s=>`<td>${zeig(s)||"<span class='hint'>keine</span>"}</td>`).join("")}<td>${bef}</td><td>${gs}</td></tr>`;
  });
  h+=`</table></div></div>`;
  if(stufen.includes("GL")&&stufen.length>1)h+=n?`<div class="warnbox">Bei ${n===1?"einer Frage":n+" Fragen"} beurteilt die Geschäftsleitung den Stand um mindestens eine halbe Stufe günstiger als die übrigen Stufen. ${n===1?"Diese Frage gehört":"Diese Fragen gehören"} an den Anfang der Sitzung.</div>`:`<div class="card" style="margin-top:12px">Die Geschäftsleitung beurteilt keine Frage deutlich günstiger als die übrigen Stufen.</div>`;
@@ -1242,7 +1249,7 @@ function renderVergleich(){
 function openKlaeren(id){
  const q=Q.find(x=>x.id===id),G=gemein(),d=$("#dlg"),ent=S.kon.ent[id]||{};
  $("#dlg-n").textContent=`${id} · Abweichung klären`;$("#dlg-t").textContent=q.t;
- const wer=["GL","F2","F3"].map(s=>{const xs=G.rs.filter(r=>r.stufe===s&&r.a[id]);return xs.length?`<p style="margin:0 0 4px"><b style="color:var(--fg)">${STUFE[s]}:</b> ${xs.map(r=>r.a[id]!=="A"&&!r.b[id]?`${r.a[id]} ohne Beleg, gewertet ${r.e[id]}`:r.a[id]).join(" · ")}</p>`:"";}).join("");
+ const wer=["GL","F2","F3"].map(s=>{const xs=G.rs.filter(r=>r.stufe===s&&r.a[id]);return xs.length?`<p style="margin:0 0 4px"><b style="color:var(--fg)">${STUFE[s]}:</b> ${xs.map(r=>r.a[id]==="W"?"weiss es nicht":r.a[id]!=="A"&&!r.b[id]?`${r.a[id]} ohne Beleg, gewertet ${r.e[id]}`:r.a[id]).join(" · ")}</p>`:"";}).join("");
  $("#dlg-b").innerHTML=`${wer}<div class="mono" style="margin:16px 0 6px;color:var(--fg)">Gemeinsame Antwort</div>${q.o.map((o,k)=>`<label class="kopt"><input type="radio" name="kl" value="${L[k]}" ${ent.a===L[k]?"checked":""}><span><b>${L[k]}</b> ${esc(o)}</span></label>`).join("")}<label class="kopt" style="margin-top:10px"><input type="checkbox" id="kl-b" ${ent.b?"checked":""}><span>Belegt durch einen Fall oder eine Zahl</span></label><label for="kl-k" class="mono" style="display:block;margin:16px 0 6px;color:var(--fg)">Kommentar, freiwillig</label><textarea id="kl-k" maxlength="400" style="min-height:70px;font-family:inherit">${esc(ent.k||"")}</textarea><p class="hint" id="kl-f" style="margin:6px 0 0;color:var(--warn)"></p>`;
  $("#dlg-r").innerHTML=`<button class="btn small primary" id="kl-ok">Einigung speichern</button>${S.kon.ent[id]?`<button class="btn small" id="kl-del">Einigung löschen</button>`:""}<button class="btn small" id="kl-x">Abbrechen</button>`;
  const fertig=()=>{calcEA();save();d.close();renderVergleich();update();};
@@ -1323,7 +1330,7 @@ function buildDruck(){
  // Standortbestimmung
  let b=`<p class="d-intro">${H("#standort .intro")}</p><div class="d-weg">${[...document.querySelectorAll("#vorab>div")].map(d=>`<div>${d.innerHTML}</div>`).join("")}</div><div class="d-stufe">${gm?`<b>Gemeinsamer Stand</b><span>aus ${GEM.rs.length} Ergebniscodes</span>`:`<b>Führungsstufe</b>${Object.keys(STUFE).map(s=>`<span>${ck(n>0&&S.stufe===s)}${STUFE[s]}</span>`).join("")}`}</div>`;
  let g="";Q.forEach(q=>{if(q.g!==g){g=q.g;b+=`<div class="d-grp d-lab">${esc(g)}</div>`;}
-  b+=`<div class="d-q"><div class="t"><span>${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></div>${q.h?`<p class="d-qh">${esc(q.h)}</p>`:""}<div class="d-opts">${q.o.map((o,k)=>{const on=RA()[q.id]===L[k];return `<div class="${on?"on":""}">${ck(on)}<i>${L[k]}</i><span>${esc(o)}</span></div>`;}).join("")}</div><div class="d-bel">${ck(!!RB()[q.id])}Belegt durch einen Fall oder eine Zahl${nb(q.id)?`, ohne Beleg als ${EA[q.id]} gewertet`:""}${gm?(GEM.st[q.id]==="e"?" · alle Codes einig":GEM.st[q.id]==="k"?" · in der Sitzung geklärt"+(S.kon.ent[q.id].k?": "+esc(S.kon.ent[q.id].k):""):" · noch zu klären"):""}</div></div>`;});
+  b+=`<div class="d-q"><div class="t"><span>${q.id}</span>${esc(q.t)}<small>HF ${q.hf}</small></div>${q.h?`<p class="d-qh">${esc(q.h)}</p>`:""}<div class="d-opts">${q.o.map((o,k)=>{const on=RA()[q.id]===L[k];return `<div class="${on?"on":""}">${ck(on)}<i>${L[k]}</i><span>${esc(o)}</span></div>`;}).join("")}</div><div class="d-bel">${ck(RA()[q.id]==="W")}Weiss ich nicht &nbsp; ${ck(!!RB()[q.id])}Belegt durch einen Fall oder eine Zahl${nb(q.id)?`, ohne Beleg als ${EA[q.id]} gewertet`:""}${gm?(GEM.st[q.id]==="e"?" · alle Codes einig":GEM.st[q.id]==="k"?" · in der Sitzung geklärt"+(S.kon.ent[q.id].k?": "+esc(S.kon.ent[q.id].k):""):" · noch zu klären"):""}</div></div>`;});
  if(voll){const s=startfeld(EA),w=[];
   if(EA.F8==="A")w.push("F8: Zahl der wartenden Vorhaben und Durchsatz der Freigabestellen");if(EA.F10==="A")w.push("F10: Dauer der letzten beiden Anpassungen");
   b+=`<div class="d-res"><div class="d-lab">Auswertung · ${gm?"Gemeinsamer Stand":STUFE[S.stufe]} · Empfohlenes Startfeld</div><h3>${s.hf?"Handlungsfeld "+s.hf+", "+esc(HF[s.hf].t):"In der Sitzung festlegen"}</h3><p>${s.grund}</p>
@@ -1369,7 +1376,7 @@ load();
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>show(b.dataset.v));
 $("#zumErgebnis").onclick=()=>{show("ergebnis");$("#standort").scrollIntoView();};
 $("#leeren").onclick=()=>{if(confirm("Alle Antworten löschen?")){S.ans={};S.bel={};calcEA();save();renderFragen();update();renderHF();}};
-$("#stufe").onchange=e=>{S.stufe=e.target.value;save();};
+$("#stufe").onchange=e=>{S.stufe=e.target.value;$("#stufhin").hidden=S.stufe==="GL";save();};
 $("#vergleichen").onclick=vergleich;
 $("#codes").value=S.kon.codes||"";renderVergleich();
 document.addEventListener("click",e=>{if(e.target.closest("[data-zv]"))show("vergleich");});

@@ -8,7 +8,7 @@ Interaktiver Leitfaden für Geschäftsleitungen etablierter Unternehmen. Ergebni
 2. Im Repository unter Settings, Pages die Quelle «Deploy from a branch» wählen, Branch `main`, Ordner `/` oder `/docs`.
 3. Nach rund einer Minute ist die Seite unter `https://<konto>.github.io/<repository>/` erreichbar.
 
-Die Seite ist eine einzelne Datei ohne externe Abhängigkeiten. Antworten der Standortbestimmung und abgehakte Massnahmen bleiben im Browser der jeweiligen Person (localStorage), es wird nichts übertragen. Der Ergebniscode (`RF1-GL-…`) ist mit der früheren Webanwendung kompatibel.
+Die Seite ist eine einzelne Datei ohne externe Abhängigkeiten. Antworten der Standortbestimmung und abgehakte Massnahmen bleiben im Browser der jeweiligen Person (localStorage), es wird nichts übertragen. Der Ergebniscode (`RF1-GL-…`) hat denselben Aufbau wie in der früheren Webanwendung. Kleinbuchstaben stehen für Antworten ohne Beleg, ein Fragezeichen für «Weiss ich nicht». Codes mit Fragezeichen liest die frühere Webanwendung nicht.
 
 ## Inhalt ändern
 
