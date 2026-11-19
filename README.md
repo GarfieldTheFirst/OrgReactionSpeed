@@ -12,4 +12,4 @@ Die Seite ist eine einzelne Datei ohne externe Abhängigkeiten. Antworten der St
 
 ## Inhalt ändern
 
-Alle Inhalte stehen am Anfang des Skripts in `index.html`: `HF` (Handlungsfelder), `P` (Prinzipien), `FAELLE` und `Q` (Fragen). Massgeblich bleibt die Fassung in Anhang F der Arbeit. Änderungen dort hier nachführen.
+Alle Inhalte stehen am Anfang des Skripts in `index.html`: `HF` (Handlungsfelder), `P` (Prinzipien), `FAELLE` und `Q` (Fragen). Massgeblich ist diese Webfassung. Die Lesefassung in Anhang F der Arbeit wird aus ihr nachgeführt, jede Änderung steht im Änderungsprotokoll der Arbeit.
