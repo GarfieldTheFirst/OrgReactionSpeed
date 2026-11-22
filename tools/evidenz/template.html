@@ -73,7 +73,7 @@ mark{background:#f1f18a;color:inherit;padding:0 1px}
 .leer{padding:30px;background:var(--mist);text-align:center;color:var(--muted)}
 .mx{border-collapse:collapse;font-size:.82rem;width:100%}
 .mx th,.mx td{border:1px solid var(--line);padding:5px 6px;text-align:center}
-.mx thead th{font-size:.7rem;letter-spacing:.06em;color:var(--muted);font-weight:700;background:#fff;position:sticky;top:49px}
+.mx thead th{font-size:.7rem;letter-spacing:.06em;color:var(--muted);font-weight:700;background:#fff}
 .mx thead th.g{background:var(--mist);text-transform:uppercase;letter-spacing:.1em}
 .mx tbody th{text-align:left;white-space:nowrap;font-weight:400}
 .mx tbody th b{font-family:var(--mono);margin-right:6px}
@@ -82,7 +82,27 @@ mark{background:#f1f18a;color:inherit;padding:0 1px}
 .mx td.z{color:var(--line2);cursor:default}
 .mx td.z:hover{outline:0}
 .mx .sum{font-weight:700;background:#fff;cursor:pointer}
+.mx td.on{outline:3px solid var(--deep);outline-offset:-3px;font-weight:700}
+.mx tr.inlr>td{padding:0;text-align:left;cursor:default;border-left:0;border-right:0}
+.mx tr.inlr>td:hover{outline:0}
+.mx tr.inlr .inl{position:sticky;left:0;margin:0;font-size:1rem}
+.mx tr.inlr .def{margin:0 0 10px;font-size:.88rem;color:var(--muted)}
 .scroll{overflow-x:auto}
+.ueb{margin:0 0 30px}
+.ueb .kern{background:var(--deep);color:#fff;padding:22px 26px}
+.ueb .kern .lab{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow)}
+.ueb .kern p{font-size:1.25rem;font-weight:300;line-height:1.4;margin:8px 0 12px;max-width:70ch}
+.ueb .kern button{background:none;border:1px solid #fff;color:#fff;padding:6px 12px;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.ueb .kern button:hover{background:#fff;color:var(--deep)}
+.ueb .cols{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px;margin-top:24px}
+@media (max-width:900px){.ueb .cols{grid-template-columns:minmax(0,1fr)}}
+.ueb h3{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.ueb ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.ueb li button{display:grid;grid-template-columns:2.6em minmax(0,1fr) auto;gap:8px;align-items:baseline;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:9px 4px;cursor:pointer;color:var(--fg);font-size:.93rem;line-height:1.35}
+.ueb li button:hover{background:var(--tile)}
+.ueb li b{font-family:var(--mono);color:var(--accent)}
+.ueb li small{color:var(--soft);white-space:nowrap;font-size:.78rem}
+.ueb .mehr{margin:12px 0 0}
 .txt{max-width:74ch}
 .txt h2{font-size:1.6rem;margin:30px 0 10px}
 .txt h2:first-child{margin-top:0}
@@ -104,6 +124,17 @@ button.ref:hover{background:var(--accent);color:#fff}
 .ref.s1{border-style:dashed;background:#fff}
 .ref.s2,.ref.s3{border-color:var(--line);background:#fff;color:var(--soft)}
 .ref.ein{border-color:var(--warn);background:var(--warnbg)}
+button.ref.s2,button.ref.s3{cursor:pointer}
+button.ref.s2:hover,button.ref.s3:hover{background:var(--mist);color:var(--fg)}
+.ref[aria-expanded=true]{background:var(--deep);border-color:var(--deep);border-style:solid;color:#fff}
+.inl{margin:10px 0 4px;padding:14px 14px 4px;background:var(--mist);border-left:5px solid var(--deep)}
+.inl .ih{display:flex;gap:12px;align-items:baseline;font-size:.82rem;color:var(--muted);margin-bottom:10px}
+.inl .ih button{margin-left:auto;background:none;border:0;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:.8rem;padding:0}
+.inl .ev{margin-bottom:10px}
+.inl .code{cursor:default}
+.inl .code:hover{border-color:var(--line2)}
+.inl .leer{padding:14px;margin-bottom:10px;background:#fff;text-align:left}
+.ms tr.inlr td{border-top:0;padding-top:0;width:auto}
 .as details{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
 .as summary{cursor:pointer;color:var(--accent);font-weight:700;font-size:.9rem}
 .ms{width:100%;border-collapse:collapse;margin-top:10px;font-size:.9rem}
@@ -117,7 +148,7 @@ button.ref:hover{background:var(--accent);color:#fff}
 .kb td:first-child{font-family:var(--mono);font-weight:700}
 footer{background:#072a22;color:#cddbd4;padding:28px 0;font-size:.85rem;border-top:40px solid var(--deep)}
 footer b{color:#fff}
-@media print{.tabs,.filt,.btn,.jump,.ev .hd button,.as .hd button{display:none!important}.as{break-inside:avoid}.as details>*{display:block}.lay{display:block}header{background:#fff;color:#000}header h1,.facts b{color:#000}header p,.facts li{color:#333}.ev{break-inside:avoid}}
+@media print{.tabs,.filt,.btn,.jump,.ueb .kern button,.ev .hd button,.as .hd button{display:none!important}.as{break-inside:avoid}.as details>*{display:block}.lay{display:block}header{background:#fff;color:#000}header h1,.facts b{color:#000}header p,.facts li{color:#333}.ev{break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -155,7 +186,7 @@ footer b{color:#fff}
     </section>
   </div>
   <div id="v-matrix" hidden>
-    <p class="hint" style="margin-top:0">Zahl der Evidenzeinheiten je Code und Fall. Ein Klick auf eine Zelle zeigt die Belege dazu.</p>
+    <p class="hint" style="margin-top:0">Zahl der Evidenzeinheiten je Code und Fall. Ein Klick auf eine Zelle klappt die Belege unter der Zeile auf, ein zweiter Klick schliesst sie wieder. Die Spalte «Einheiten» zeigt alle Belege eines Codes.</p>
     <div class="scroll"><table class="mx" id="mx"></table></div>
   </div>
   <div id="v-hinweise" hidden><div class="txt" id="hinweise"></div></div>
@@ -227,7 +258,7 @@ const aid=k=>"a-"+k.replace(/\s+/g,"");
 const ZN=k=>/^Zusammenhang/.test(k);
 function ref(r,ein){
  const lab=r[0].replace(/^ID-(\d+)-/,"ID $1 "),cl=`ref s${r[1]}${ein?" ein":""}`;
- return r[2].length?`<button class="${cl}" data-ids="${r[2].join(",")}" title="${SL[r[1]]}. Klick zeigt ${r[2].length===1?"die Einheit":r[2].length+" Einheiten"}.">${lab}</button>`:`<span class="${cl}" title="${SL[r[1]]}">${lab}</span>`;}
+ return `<button type="button" class="${cl}" data-ids="${r[2].join(",")}" data-st="${r[1]}" data-lab="${lab}" aria-expanded="false" title="${SL[r[1]]}">${lab}</button>`;}
 function sum(rs){
  const gs=[...new Set(rs.map(r=>r[0].slice(0,5)))],grp=[...new Set(gs.map(i=>(FALL.find(f=>f.i===i)||{}).g))].filter(Boolean);
  return `${rs.length} ${rs.length===1?"Stelle":"Stellen"} aus ${gs.length} ${gs.length===1?"Gespräch":"Gesprächen"}, ${GR.filter(g=>grp.includes(g)).map(g=>GN[g]).join(", ")}`;}
@@ -240,21 +271,45 @@ function acard(a){
  <div class="lab">Begründung</div><p class="b">${esc(a.b)}</p>
  <div class="lab">Stützende Belegstellen<small>${sum(st)}</small></div><div class="refs">${st.map(r=>ref(r)).join("")}</div>
  ${ein.length?`<div class="lab">Einschränkende Belegstellen<small>${sum(ein)}</small></div><div class="refs">${ein.map(r=>ref(r,1)).join("")}</div>`:""}
- ${ids.length?`<p style="margin:14px 0 0"><button class="btn" data-ids="${ids.join(",")}">Alle ${ids.length} Evidenzeinheiten zeigen</button></p>`:""}
+ ${ids.length?`<p style="margin:14px 0 0"><button class="btn" data-ids="${ids.join(",")}" data-st="0" data-lab="Alle ${ids.length} Evidenzeinheiten dieser Aussage" data-all="${ids.length}" aria-expanded="false">Alle ${ids.length} Evidenzeinheiten zeigen</button></p>`:""}
  ${ms.length?`<details><summary>${ms.length} ${ms.length===1?"Massnahme":"Massnahmen"} zu diesem Prinzip</summary><table class="ms">${ms.map(mrow).join("")}</table></details>`:""}</article>`;}
+function ueber(alle){
+ const kern=AUS.find(a=>a.k==="Kernbefund"),zs=AUS.filter(a=>ZN(a.k)),ps=AUS.filter(a=>/^P\d+$/.test(a.k));
+ const li=(a,nr)=>{const n=a.r.filter(r=>!r[3]).length;return `<li><button type="button" data-j="${aid(a.k)}"><b>${nr}</b><span>${esc(a.w)}</span><small>${n} ${n===1?"Stelle":"Stellen"}</small></button></li>`;};
+ return `<section class="ueb" aria-label="Übersicht">${kern?`<div class="kern"><div class="lab">Kernbefund</div><p>${esc(kern.w)}</p><button type="button" data-j="${aid(kern.k)}">Belegstellen ansehen</button></div>`:""}
+ <div class="cols"><div><h3>${zs.length} Zusammenhänge</h3><ol>${zs.map(a=>li(a,a.k.replace("Zusammenhang ","Z"))).join("")}</ol>${alle?`<p class="mehr"><button type="button" class="chip" data-j="a-alle">Übergreifende Elemente des Leitfadens</button></p>`:""}</div>
+ <div><h3>${ps.length} Prinzipien</h3><ol>${ps.map(a=>li(a,a.k)).join("")}</ol></div></div></section>`;}
 function aussagen(){
  if(!AUS.length){$("#v-aussagen").innerHTML=`<div class="leer">Zu diesem Datenstand ist keine Zuordnung von Aussagen zu Belegstellen hinterlegt.</div>`;return;}
  const alle=MAS.filter(m=>m.p[0]==="alle");
- $("#v-aussagen").innerHTML=`<p class="hint" style="margin-top:0;max-width:86ch">Der Kernbefund, die fünf Zusammenhänge und die zwölf Prinzipien des Leitfadens, je mit Begründung und den Stellen in den Gesprächen, auf die sich die Aussage stützt. Ein Klick auf eine Stelle zeigt die Evidenzeinheit dazu.</p>
+ $("#v-aussagen").innerHTML=`<p class="hint" style="margin-top:0;max-width:86ch">Der Kernbefund, die fünf Zusammenhänge und die zwölf Prinzipien des Leitfadens im Überblick. Ein Klick auf eine Zeile führt zur Aussage mit Begründung und Belegstellen.</p>
+ ${ueber(alle.length)}
+ <p class="hint" style="max-width:86ch">Ein Klick auf eine Belegstelle klappt die Evidenzeinheit direkt darunter auf, ein zweiter Klick schliesst sie wieder.</p>
  <div class="leg"><span class="ref s0">ID 01 P0098</span> Evidenzeinheit zu diesem Absatz <span class="ref s1">ID 01 P0097</span> Evidenzeinheit im angrenzenden Absatz <span class="ref s2">ID 05 P0140</span> Absatz ohne aktive Evidenzeinheit <span class="ref s0 ein">ID 01 P0037</span> schränkt die Aussage ein</div>
- <div class="jump">${AUS.map(a=>`<button class="chip" data-j="${aid(a.k)}">${esc(a.k)}</button>`).join("")}${alle.length?`<button class="chip" data-j="a-alle">Übergreifend</button>`:""}</div>
  ${AUS.map(acard).join("")}
  ${alle.length?`<article class="as" id="a-alle"><div class="hd"><h2>Übergreifende Elemente des Leitfadens</h2></div><table class="ms">${alle.map(mrow).join("")}</table></article>`:""}`;
  const v=$("#v-aussagen");
  v.querySelectorAll("[data-j]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.j).scrollIntoView());
- v.querySelectorAll("[data-ids]").forEach(b=>b.onclick=()=>{const c=b.closest(".as");FROM=c.id==="a-alle"?"Übergreifend":(AUS.find(a=>aid(a.k)===c.id)||{}).k||"";FROMID=c.id;F={q:"",g:[],f:[],c:[],ff:[],x:false,ids:b.dataset.ids.split(",")};LIM=40;show("belege");draw();scrollTo({top:$(".tabs").offsetTop});});
+ v.querySelectorAll("[data-ids]").forEach(b=>b.onclick=()=>inline(b));
  v.querySelectorAll("[data-al]").forEach(b=>b.onclick=()=>copy(location.href.split("#")[0]+"#a="+encodeURIComponent(b.dataset.al),b));}
 let FROMID="";
+const SN=["","Der zitierte Absatz trägt selbst keine Einheit. Gezeigt wird die Einheit aus dem angrenzenden Absatz.","Zu diesem Absatz führt die Datenbank keine aktive Evidenzeinheit. Die Stelle lässt sich nur in der Kodierfassung nachlesen.","Dieser Absatz kommt in der Datenbank nicht vor."];
+function zu(b){b.setAttribute("aria-expanded","false");if(b.dataset.all)b.textContent=`Alle ${b.dataset.all} Evidenzeinheiten zeigen`;}
+function inline(b){
+ const tr=b.closest("tr"),anker=tr||b.closest(".refs")||b.closest("p"),war=b.getAttribute("aria-expanded")==="true";
+ let n=anker.nextElementSibling;
+ if(n&&n.classList.contains(tr?"inlr":"inl")){n.remove();}
+ (tr||anker.parentNode).querySelectorAll('[aria-expanded="true"]').forEach(x=>{if(x.closest("tr")===tr&&(tr||x.parentNode===b.parentNode))zu(x);});
+ if(war)return;
+ const ids=b.dataset.ids?b.dataset.ids.split(","):[],es=ids.map(i=>E.find(e=>e.id===i)).filter(Boolean),st=+b.dataset.st;
+ const h=`<div class="ih"><b>${esc(b.dataset.lab)}</b><span>${es.length?es.length+(es.length===1?" Evidenzeinheit":" Evidenzeinheiten"):""}</span><button type="button" data-zu>Schliessen</button></div>${SN[st]?`<div class="leer">${SN[st]}</div>`:""}${es.map(card).join("")}`;
+ const box=document.createElement(tr?"tr":"div");
+ if(tr){box.className="inlr";box.innerHTML=`<td colspan="2"><div class="inl">${h}</div></td>`;}else{box.className="inl";box.innerHTML=h;}
+ anker.after(box);
+ b.setAttribute("aria-expanded","true");if(b.dataset.all)b.textContent="Evidenzeinheiten ausblenden";
+ box.querySelector("[data-zu]").onclick=()=>{box.remove();zu(b);b.focus();};
+ box.querySelectorAll(".code").forEach(c=>{c.disabled=false;c.onclick=null;});
+ box.querySelectorAll("[data-l]").forEach(x=>x.onclick=()=>copy(location.href.split("#")[0]+"#ids="+x.dataset.l,x));}
 function zurAussage(id){show("aussagen");try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}const el=document.getElementById(id);if(el){if(el.querySelector("details"))el.querySelector("details").open=true;el.scrollIntoView();}}
 function start(){const any=F.q||F.x||["g","f","c","ff","ids"].some(k=>F[k].length);FROM="";
  if(A0){show("aussagen");const el=document.getElementById(aid(A0));if(el)el.scrollIntoView();}
@@ -267,7 +322,18 @@ function matrix(){
  CODES.forEach(c=>{const fs=GR.flatMap(g=>FALL.filter(f=>f.g===g));const vals=fs.map(f=>n(c,f.f));
   h+=`<tr><th><b>${c}</b>${esc(CN[c]||"")}</th>${fs.map((f,i)=>vals[i]?`<td data-c="${c}" data-f="${f.f}" style="background:rgba(8,122,84,${(0.08+0.6*vals[i]/mxv).toFixed(2)})">${vals[i]}</td>`:`<td class="z">·</td>`).join("")}<td class="sum" data-c="${c}">${n(c)}</td><td>${vals.filter(Boolean).length}</td></tr>`;});
  $("#mx").innerHTML=h+"</tbody>";
- $("#mx").querySelectorAll("td[data-c]").forEach(td=>td.onclick=()=>{FROM="";F={q:"",g:[],f:td.dataset.f?[td.dataset.f]:[],c:[td.dataset.c],ff:[],x:false,ids:[]};LIM=40;show("belege");draw();scrollTo({top:$(".tabs").offsetTop});});}
+ $("#mx").querySelectorAll("td[data-c]").forEach(td=>td.onclick=()=>mxInline(td));}
+function mxInline(td){
+ const tr=td.closest("tr"),war=td.classList.contains("on"),mx=$("#mx");
+ mx.querySelectorAll("tr.inlr").forEach(x=>x.remove());mx.querySelectorAll("td.on").forEach(x=>x.classList.remove("on"));
+ if(war)return;
+ const c=td.dataset.c,f=td.dataset.f,es=E.filter(e=>(!f||e.f===f)&&e.c.some(x=>x[0]===c)),fall=f?FALL.find(x=>x.f===f):null,N=12;
+ const box=document.createElement("tr");box.className="inlr";
+ box.innerHTML=`<td colspan="${FALL.length+3}"><div class="inl" style="width:${$("#v-matrix .scroll").clientWidth}px"><div class="ih"><b>${esc(cname(c))} · ${fall?esc(f+", "+GN[fall.g]):"alle Fälle"}</b><span>${es.length} ${es.length===1?"Evidenzeinheit":"Evidenzeinheiten"}</span><button type="button" data-zu>Schliessen</button></div>${KB[c]?`<p class="def">${esc(KB[c].d)}</p>`:""}<div data-k>${es.slice(0,N).map(card).join("")}</div>${es.length>N?`<p><button type="button" class="btn" data-mehr>Weitere ${es.length-N} zeigen</button></p>`:""}</div></td>`;
+ tr.after(box);td.classList.add("on");
+ const bind=()=>box.querySelectorAll("[data-l]").forEach(x=>x.onclick=()=>copy(location.href.split("#")[0]+"#ids="+x.dataset.l,x));bind();
+ box.querySelector("[data-zu]").onclick=()=>{box.remove();td.classList.remove("on");};
+ const m=box.querySelector("[data-mehr]");if(m)m.onclick=()=>{box.querySelector("[data-k]").innerHTML=es.map(card).join("");m.parentNode.remove();bind();};}
 function hinweise(){
  $("#hinweise").innerHTML=`<h2>Was eine Evidenzeinheit ist</h2>
  <p>Eine Evidenzeinheit ist eine einzelne ausgewertete Aussage aus einem Erhebungsgespräch. Sie trägt eine Kennung, den Fall, die Fallgruppe, eine Paraphrase der Aussage, die zugeordneten Codes mit ihrer Ausprägung und den Absatz der Kodierfassung, aus dem sie stammt.</p>
@@ -280,7 +346,7 @@ function hinweise(){
  <li><b>Fall.</b> ET steht für etablierte Unternehmen, EX für Experten, AI für AI-First Firms.</li></ul>
  <h2>Aussagen des Leitfadens und ihre Belegstellen</h2>
  <p>Die Ansicht «Aussagen des Leitfadens» führt den Kernbefund, die fünf Zusammenhänge und die zwölf Prinzipien auf die Stellen in den Gesprächen zurück. Die Zuordnung stammt vom Autorenteam. Die Begründungen sind ein Entwurf des Autorenteams.</p>
- <ul><li><b>Evidenzeinheit zu diesem Absatz.</b> Der zitierte Absatz ist in der Datenbank als Evidenzeinheit kodiert. Der Klick führt direkt zu ihr.</li>
+ <ul><li><b>Evidenzeinheit zu diesem Absatz.</b> Der zitierte Absatz ist in der Datenbank als Evidenzeinheit kodiert. Der Klick klappt sie unter der Stelle auf.</li>
  <li><b>Evidenzeinheit im angrenzenden Absatz.</b> Der zitierte Absatz selbst trägt keine Einheit, der Absatz davor oder danach schon. Der Klick zeigt diese benachbarte Einheit.</li>
  <li><b>Absatz ohne aktive Evidenzeinheit.</b> Die Stelle ist in der Arbeit zitiert, in diesem Datenstand aber nicht als aktive Einheit geführt. Sie lässt sich nur in der Kodierfassung nachlesen.</li>
  <li><b>Einschränkende Belegstelle.</b> Eine Stelle, die der Aussage widerspricht oder ihre Reichweite begrenzt.</li></ul>
@@ -291,7 +357,7 @@ function hinweise(){
  <h2>Auf eine Auswahl verweisen</h2><p>Jede Auswahl hat eine eigene Adresse. «Link zur Auswahl kopieren» legt sie in die Zwischenablage, «Link kopieren» an einer Einheit verweist auf diese eine Einheit. So lässt sich aus der Arbeit oder aus dem Leitfaden auf die Belege einer Aussage verweisen.</p>`;}
 $("#facts").innerHTML=`<li><b>${E.length}</b>Evidenzeinheiten</li><li><b>${FALL.length}</b>Erhebungsgespräche</li><li><b>${CODES.length}</b>Codes</li><li><b>${E.reduce((s,e)=>s+e.c.length,0)}</b>Zuordnungen</li>`;
 $("#stand").textContent="Datenstand "+D.stand+".";
-document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{show(b.dataset.v);if(b.dataset.v==="belege")draw();});
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{show(b.dataset.v);if(b.dataset.v==="belege")draw();else{try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}}});
 $("#q").addEventListener("input",e=>{F.q=e.target.value.trim();F.ids=[];LIM=40;draw();});
 $("#f-x").onchange=e=>{F.x=e.target.checked;F.ids=[];LIM=40;draw();};
 $("#reset").onclick=()=>{F={q:"",g:[],f:[],c:[],ff:[],x:false,ids:[]};LIM=40;draw();};
