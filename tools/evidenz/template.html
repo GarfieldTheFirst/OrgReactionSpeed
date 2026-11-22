@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Evidenz-Browser · Reaktionsfähig mit agentischer KI</title>
+<style>
+:root{
+  --navy:#0c2f27; --deep:#0f4a3c; --panel:#0a3329; --accent:#087a54; --yellow:#e9e84f;
+  --tile:#e4f3ec; --mist:#e3ece8; --line:#d2e0d9; --line2:#9db5aa;
+  --fg:#16211d; --muted:#4a5a53; --soft:#6a7a73; --warn:#a81c1c; --warnbg:#fdf1f0;
+  --sans:"Univers Next","Univers","Helvetica Neue","Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;font-family:var(--sans);color:var(--fg);background:#fff;line-height:1.55;font-size:16px;letter-spacing:.02em}
+h1,h2,h3{font-weight:300;color:var(--navy);line-height:1.25;margin:0}
+button,input,select{font:inherit;letter-spacing:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+header{background:var(--deep);color:#fff}
+header .wrap{padding-top:34px;padding-bottom:0}
+header .eb{font-size:.9rem;font-weight:700;letter-spacing:.06em}
+header .eb::after{content:"";display:block;width:200px;max-width:60%;height:5px;background:var(--yellow);margin-top:18px}
+header h1{color:#fff;font-size:clamp(1.9rem,4vw,2.9rem);margin:26px 0 10px}
+header p{margin:0;max-width:70ch;color:#d5e6de}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);list-style:none;margin:30px 0 0;padding:0;border-top:1px solid rgba(255,255,255,.3)}
+.facts li{padding:16px 16px 20px 0;font-size:.85rem;color:#d5e6de}
+.facts li+li{padding-left:16px;border-left:1px solid rgba(255,255,255,.3)}
+.facts b{display:block;font-weight:300;font-size:2rem;line-height:1.1;color:#fff}
+@media (max-width:640px){.facts{grid-template-columns:repeat(2,1fr)}.facts li:nth-child(3){padding-left:0;border-left:0}.facts li:nth-child(n+3){border-top:1px solid rgba(255,255,255,.3)}}
+.tabs{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;gap:4px;overflow-x:auto}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;padding:14px 16px;color:var(--muted);cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected=true]{color:var(--accent);font-weight:700;border-bottom-color:var(--accent)}
+main{padding:28px 0 80px}
+.lay{display:grid;grid-template-columns:300px minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:900px){.lay{grid-template-columns:minmax(0,1fr)}}
+.filt{position:sticky;top:62px;max-height:calc(100vh - 80px);overflow:auto;padding-right:6px}
+@media (max-width:900px){.filt{position:static;max-height:none}}
+.filt h3{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+.filt h3:first-child{margin-top:0}
+#q{width:100%;padding:10px 12px;border:1px solid var(--line2);background:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line2);background:#fff;color:var(--fg);padding:4px 9px;font-size:.82rem;cursor:pointer;line-height:1.3}
+.chip small{color:var(--soft);margin-left:4px}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.chip[aria-pressed=true] small{color:#d5e6de}
+.tog{display:flex;gap:8px;align-items:center;font-size:.9rem;cursor:pointer;margin-top:4px}
+.tog input{width:17px;height:17px;accent-color:var(--accent)}
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:16px}
+.bar b{font-size:1.05rem}
+.btn{border:1px solid var(--accent);background:#fff;color:var(--accent);padding:8px 14px;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.btn:hover{background:var(--tile)}
+.ev{border:1px solid var(--line);border-left:5px solid var(--deep);padding:16px 20px;margin-bottom:12px;background:#fff}
+.ev.gx{border-left-color:var(--warn)}
+.ev .hd{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;font-size:.78rem;color:var(--soft);margin-bottom:8px}
+.ev .hd b{font-family:var(--mono);color:var(--muted);font-weight:400}
+.ev .hd .grp{font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.ev .hd button{margin-left:auto;background:none;border:0;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:.78rem;padding:0}
+.ev .p{font-size:1.05rem;line-height:1.5;margin:0 0 10px}
+.ev .lab{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:10px 0 2px}
+.ev .t,.ev .u{font-size:.88rem;color:var(--muted);margin:0}
+.ev .x{font-size:.9rem;margin:0;padding:8px 12px;background:var(--warnbg);border-left:3px solid var(--warn)}
+.codes{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.code{font-size:.8rem;border:1px solid var(--line2);padding:2px 8px;background:var(--mist);cursor:pointer}
+.code b{font-family:var(--mono);font-weight:700;margin-right:5px}
+.code:hover{border-color:var(--accent)}
+.abs{font-family:var(--mono);font-size:.78rem;color:var(--soft)}
+mark{background:#f1f18a;color:inherit;padding:0 1px}
+.leer{padding:30px;background:var(--mist);text-align:center;color:var(--muted)}
+.mx{border-collapse:collapse;font-size:.82rem;width:100%}
+.mx th,.mx td{border:1px solid var(--line);padding:5px 6px;text-align:center}
+.mx thead th{font-size:.7rem;letter-spacing:.06em;color:var(--muted);font-weight:700;background:#fff;position:sticky;top:49px}
+.mx thead th.g{background:var(--mist);text-transform:uppercase;letter-spacing:.1em}
+.mx tbody th{text-align:left;white-space:nowrap;font-weight:400}
+.mx tbody th b{font-family:var(--mono);margin-right:6px}
+.mx td{cursor:pointer;font-variant-numeric:tabular-nums;min-width:38px}
+.mx td:hover{outline:2px solid var(--accent);outline-offset:-2px}
+.mx td.z{color:var(--line2);cursor:default}
+.mx td.z:hover{outline:0}
+.mx .sum{font-weight:700;background:#fff;cursor:pointer}
+.scroll{overflow-x:auto}
+.txt{max-width:74ch}
+.txt h2{font-size:1.6rem;margin:30px 0 10px}
+.txt h2:first-child{margin-top:0}
+.txt li{margin-bottom:6px}
+.hint{color:var(--soft);font-size:.88rem}
+.jump{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.as{border:1px solid var(--line);border-top:5px solid var(--deep);padding:20px 24px;margin-bottom:18px;background:#fff;scroll-margin-top:64px}
+.as .hd{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;margin-bottom:6px}
+.as .hd h2{font-size:1.5rem}
+.as .hd button{margin-left:auto;background:none;border:0;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:.78rem;padding:0}
+.as .w{font-size:1.1rem;line-height:1.45;margin:0 0 12px;max-width:80ch}
+.as .b{margin:0 0 6px;max-width:80ch;color:var(--muted)}
+.as .lab{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 6px}
+.as .lab small{font-weight:400;text-transform:none;letter-spacing:.02em;color:var(--soft);margin-left:6px;font-size:.8rem}
+.refs{display:flex;flex-wrap:wrap;gap:6px}
+.ref{font-family:var(--mono);font-size:.78rem;padding:3px 8px;border:1px solid var(--accent);background:var(--tile);color:var(--fg);line-height:1.4}
+button.ref{cursor:pointer}
+button.ref:hover{background:var(--accent);color:#fff}
+.ref.s1{border-style:dashed;background:#fff}
+.ref.s2,.ref.s3{border-color:var(--line);background:#fff;color:var(--soft)}
+.ref.ein{border-color:var(--warn);background:var(--warnbg)}
+.as details{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.as summary{cursor:pointer;color:var(--accent);font-weight:700;font-size:.9rem}
+.ms{width:100%;border-collapse:collapse;margin-top:10px;font-size:.9rem}
+.ms td{border-top:1px solid var(--line);padding:8px 10px 8px 0;vertical-align:top}
+.ms td:first-child{width:46%}
+.ms .hint{font-style:italic}
+.leg{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:.82rem;color:var(--muted);margin:0 0 20px}
+.kb{border-collapse:collapse;font-size:.88rem;width:100%}
+.kb th,.kb td{border-top:1px solid var(--line);padding:7px 10px 7px 0;text-align:left;vertical-align:top}
+.kb th{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kb td:first-child{font-family:var(--mono);font-weight:700}
+footer{background:#072a22;color:#cddbd4;padding:28px 0;font-size:.85rem;border-top:40px solid var(--deep)}
+footer b{color:#fff}
+@media print{.tabs,.filt,.btn,.jump,.ev .hd button,.as .hd button{display:none!important}.as{break-inside:avoid}.as details>*{display:block}.lay{display:block}header{background:#fff;color:#000}header h1,.facts b{color:#000}header p,.facts li{color:#333}.ev{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eb">Reaktionsfähig mit agentischer KI · Beilage zur Masterarbeit</div>
+    <h1>Evidenz-Browser</h1>
+    <p>Die Aussagen des Leitfadens mit ihren Belegstellen und alle ausgewerteten Aussagen aus den Erhebungsgesprächen, je Einheit zurückführbar auf Gespräch und Absatz der Kodierfassung. Die Ansicht läuft lokal im Browser, es wird nichts übertragen.</p>
+    <ul class="facts" id="facts"></ul>
+  </div>
+</header>
+<div class="tabs" role="tablist"><div class="wrap">
+  <button role="tab" data-v="aussagen" aria-selected="true">Aussagen des Leitfadens</button>
+  <button role="tab" data-v="belege" aria-selected="false">Belege</button>
+  <button role="tab" data-v="matrix" aria-selected="false">Übersicht Codes und Fälle</button>
+  <button role="tab" data-v="hinweise" aria-selected="false">Lesehinweise</button>
+</div></div>
+<main><div class="wrap">
+  <div id="v-aussagen"></div>
+  <div id="v-belege" class="lay" hidden>
+    <aside class="filt" aria-label="Filter">
+      <h3><label for="q">Suche</label></h3>
+      <input id="q" type="search" placeholder="Stichwort, Absatz oder Kennung" autocomplete="off">
+      <h3>Fallgruppe</h3><div class="chips" id="f-g"></div>
+      <h3>Fall</h3><div class="chips" id="f-f"></div>
+      <h3>Code</h3><div class="chips" id="f-c"></div>
+      <h3>Forschungsfrage</h3><div class="chips" id="f-ff"></div>
+      <h3>Weitere</h3>
+      <label class="tog"><input type="checkbox" id="f-x"> nur mit Gegenbeleg</label>
+    </aside>
+    <section>
+      <div class="bar"><button class="btn" id="back" hidden></button><b id="anz"></b><span class="hint" id="akt"></span><button class="btn" id="reset">Filter zurücksetzen</button><button class="btn" id="perma">Link zur Auswahl kopieren</button><span class="hint" id="pm"></span></div>
+      <div id="liste"></div>
+      <p style="text-align:center"><button class="btn" id="mehr" hidden>Weitere anzeigen</button></p>
+    </section>
+  </div>
+  <div id="v-matrix" hidden>
+    <p class="hint" style="margin-top:0">Zahl der Evidenzeinheiten je Code und Fall. Ein Klick auf eine Zelle zeigt die Belege dazu.</p>
+    <div class="scroll"><table class="mx" id="mx"></table></div>
+  </div>
+  <div id="v-hinweise" hidden><div class="txt" id="hinweise"></div></div>
+</div></main>
+<footer><div class="wrap"><p><b>Evidenz-Browser.</b> Beilage zur Masterarbeit «Organisationale Reaktionsfähigkeit im Zeitalter agentischer KI», Executive MBA in Business Engineering, Universität St.Gallen. Andreas Klopp, Dario Meier, Gerrit Alexander Schatte.</p><p id="stand"></p></div></footer>
+<script>
+const D=/*DATA*/null;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const GR=["Etabliert","Experte","AI-First"], GN={"Etabliert":"Etablierte Unternehmen","Experte":"Experten","AI-First":"AI-First Firms"};
+const E=D.e, FALL=D.faelle, CODES=D.codes, CN=D.codenamen||{};
+const cname=c=>CN[c]?`${c} · ${CN[c]}`:c;
+const AUS=D.aus||[], MAS=D.mas||[], KB=D.kb||{};
+const ctip=c=>KB[c]?esc(KB[c].b+": "+KB[c].d):"Nach diesem Code filtern";
+let FROM="";
+E.forEach(e=>{e.s=(e.id+" "+e.f+" "+e.i+" "+e.p+" "+e.t+" "+e.c.map(c=>c[0]+" "+(c[1]||"")).join(" ")+" "+e.a.join(" ")+" "+(e.u||[]).join(" ")+" "+(e.x||[]).join(" ")).toLowerCase();});
+let F={q:"",g:[],f:[],c:[],ff:[],x:false,ids:[]}, LIM=40;
+const tog=(a,v)=>{const i=a.indexOf(v);i<0?a.push(v):a.splice(i,1);};
+function match(e){
+ if(F.ids.length&&!F.ids.includes(e.id))return false;
+ if(F.g.length&&!F.g.includes(e.g))return false;
+ if(F.f.length&&!F.f.includes(e.f))return false;
+ if(F.c.length&&!e.c.some(c=>F.c.includes(c[0])))return false;
+ if(F.ff.length&&!(e.ff||[]).some(x=>F.ff.includes(x)))return false;
+ if(F.x&&!(e.x&&e.x.length))return false;
+ if(F.q){const ts=F.q.toLowerCase().split(/\s+/).filter(Boolean);if(!ts.every(t=>e.s.includes(t)))return false;}
+ return true;}
+function hl(s){s=esc(s);if(!F.q)return s;F.q.split(/\s+/).filter(t=>t.length>1).forEach(t=>{const r=new RegExp("("+t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","gi");s=s.replace(r,"<mark>$1</mark>");});return s;}
+function card(e){
+ return `<article class="ev${e.x&&e.x.length?" gx":""}" id="${e.id}"><div class="hd"><b>${e.id}</b><span>${e.f} · ${e.i}</span><span class="grp">${GN[e.g]}</span>${(e.ff||[]).length?`<span>${e.ff.join(", ")}</span>`:""}<button data-l="${e.id}">Link kopieren</button></div>
+ <p class="p">${hl(e.p)}</p>
+ ${e.t&&e.t!==e.p?`<div class="lab">Kodiervermerk</div><p class="t">${hl(e.t)}</p>`:""}
+ ${e.x&&e.x.length?`<div class="lab">Gegenbeleg</div>${e.x.map(x=>`<p class="x">${hl(x)}</p>`).join("")}`:""}
+ ${e.u&&e.u.length?`<div class="lab">Unsicherheit</div>${e.u.map(x=>`<p class="u">${hl(x)}</p>`).join("")}`:""}
+ <div class="codes">${e.c.map(c=>`<button class="code" data-c="${c[0]}" title="${ctip(c[0])}"><b>${cname(c[0])}</b>${esc(c[1]||"")}</button>`).join("")}</div>
+ <div class="lab">Absatz der Kodierfassung</div><div class="abs">${e.a.map(esc).join(", ")||"nicht angegeben"}</div></article>`;}
+function chips(el,items,key){
+ $(el).innerHTML=items.map(([v,l,n])=>`<button class="chip" data-v="${v}"${key==="c"&&KB[v]?` title="${ctip(v)}"`:""} aria-pressed="${F[key].includes(v)}">${esc(l)}${n!==undefined?`<small>${n}</small>`:""}</button>`).join("");
+ $(el).querySelectorAll("button").forEach(b=>b.onclick=()=>{tog(F[key],b.dataset.v);F.ids=[];LIM=40;draw();});}
+function draw(){
+ const base=key=>{const k=F[key];F[key]=[];const r=E.filter(match);F[key]=k;return r;};
+ const cnt=(arr,fn)=>arr.reduce((m,e)=>{fn(e).forEach(v=>m[v]=(m[v]||0)+1);return m;},{});
+ const cg=cnt(base("g"),e=>[e.g]),cf=cnt(base("f"),e=>[e.f]),cc=cnt(base("c"),e=>[...new Set(e.c.map(c=>c[0]))]),cff=cnt(base("ff"),e=>e.ff||[]);
+ chips("#f-g",GR.map(g=>[g,GN[g],cg[g]||0]),"g");
+ chips("#f-f",FALL.map(f=>[f.f,f.f,cf[f.f]||0]),"f");
+ chips("#f-c",CODES.map(c=>[c,cname(c),cc[c]||0]),"c");
+ chips("#f-ff",D.ff.map(x=>[x,x,cff[x]||0]),"ff");
+ $("#f-x").checked=F.x;if($("#q").value!==F.q)$("#q").value=F.q;
+ const r=E.filter(match);
+ $("#anz").textContent=`${r.length} von ${E.length} Evidenzeinheiten`;
+ const a=[];if(F.ids.length)a.push(`${F.ids.length} verlinkte ${F.ids.length===1?"Einheit":"Einheiten"}`);
+ $("#akt").textContent=a.join(" · ");
+ if(!F.ids.length)FROM="";
+ $("#back").hidden=!FROM;$("#back").textContent=FROM?"Zurück zu "+FROM:"";
+ $("#liste").innerHTML=r.length?r.slice(0,LIM).map(card).join(""):`<div class="leer">Keine Evidenzeinheit passt zu dieser Auswahl.</div>`;
+ $("#mehr").hidden=r.length<=LIM;$("#mehr").textContent=`Weitere anzeigen (${Math.max(0,r.length-LIM)})`;
+ $("#liste").querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{F.c=[b.dataset.c];F.ids=[];LIM=40;draw();scrollTo({top:$(".tabs").offsetTop});});
+ $("#liste").querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>copy(location.href.split("#")[0]+"#ids="+b.dataset.l,b));
+ hash();}
+function ser(){const p=[];if(F.q)p.push("q="+encodeURIComponent(F.q));["g","f","c","ff","ids"].forEach(k=>{if(F[k].length)p.push(k+"="+F[k].map(encodeURIComponent).join(","));});if(F.x)p.push("x=1");return p.join("&");}
+function hash(){if(!$("#v-aussagen").hidden)return;const s=ser();try{history.replaceState(null,"",s?"#"+s:location.pathname+location.search);}catch(e){}}
+function readHash(){const h=location.hash.replace(/^#/,"");F={q:"",g:[],f:[],c:[],ff:[],x:false,ids:[]};A0="";if(!h)return;h.split("&").forEach(kv=>{const[k,v=""]=kv.split("=");if(k==="a")A0=decodeURIComponent(v);else if(k==="q")F.q=decodeURIComponent(v);else if(k==="x")F.x=v==="1";else if(k in F)F[k]=v.split(",").filter(Boolean).map(decodeURIComponent);});}
+async function copy(t,el){let ok=true;try{await navigator.clipboard.writeText(t);}catch(e){ok=false;}const o=el.textContent;el.textContent=ok?"kopiert":"bitte Adresszeile kopieren";setTimeout(()=>el.textContent=o,1600);}
+function show(v){document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v===v));["aussagen","belege","matrix","hinweise"].forEach(x=>$("#v-"+x).hidden=x!==v);}
+
+let A0="";
+const SL=["Evidenzeinheit zu diesem Absatz","Evidenzeinheit im angrenzenden Absatz","Absatz ohne aktive Evidenzeinheit","Absatz nicht in der Datenbank"];
+const aid=k=>"a-"+k.replace(/\s+/g,"");
+const ZN=k=>/^Zusammenhang/.test(k);
+function ref(r,ein){
+ const lab=r[0].replace(/^ID-(\d+)-/,"ID $1 "),cl=`ref s${r[1]}${ein?" ein":""}`;
+ return r[2].length?`<button class="${cl}" data-ids="${r[2].join(",")}" title="${SL[r[1]]}. Klick zeigt ${r[2].length===1?"die Einheit":r[2].length+" Einheiten"}.">${lab}</button>`:`<span class="${cl}" title="${SL[r[1]]}">${lab}</span>`;}
+function sum(rs){
+ const gs=[...new Set(rs.map(r=>r[0].slice(0,5)))],grp=[...new Set(gs.map(i=>(FALL.find(f=>f.i===i)||{}).g))].filter(Boolean);
+ return `${rs.length} ${rs.length===1?"Stelle":"Stellen"} aus ${gs.length} ${gs.length===1?"Gespräch":"Gesprächen"}, ${GR.filter(g=>grp.includes(g)).map(g=>GN[g]).join(", ")}`;}
+function mrow(m){return `<tr><td>${esc(m.m)}${m.p.length>1&&m.p[0]!=="alle"?` <span class="hint">(${m.p.join(", ")})</span>`:""}</td><td>${m.r.length?`<div class="refs">${m.r.map(r=>ref(r)).join("")}</div>`:`<span class="hint">${esc(m.h||"keine Belegstelle")}</span>`}</td></tr>`;}
+function acard(a){
+ const st=a.r.filter(r=>!r[3]),ein=a.r.filter(r=>r[3]),ms=MAS.filter(m=>m.p.includes(a.k));
+ const ids=[...new Set(a.r.flatMap(r=>r[1]===0?r[2]:[]))];
+ return `<article class="as" id="${aid(a.k)}"><div class="hd"><h2>${esc(a.k)}${ZN(a.k)?": "+esc(a.w):""}</h2><button data-al="${esc(a.k)}">Link kopieren</button></div>
+ ${ZN(a.k)?"":`<p class="w">${esc(a.w)}</p>`}
+ <div class="lab">Begründung</div><p class="b">${esc(a.b)}</p>
+ <div class="lab">Stützende Belegstellen<small>${sum(st)}</small></div><div class="refs">${st.map(r=>ref(r)).join("")}</div>
+ ${ein.length?`<div class="lab">Einschränkende Belegstellen<small>${sum(ein)}</small></div><div class="refs">${ein.map(r=>ref(r,1)).join("")}</div>`:""}
+ ${ids.length?`<p style="margin:14px 0 0"><button class="btn" data-ids="${ids.join(",")}">Alle ${ids.length} Evidenzeinheiten zeigen</button></p>`:""}
+ ${ms.length?`<details><summary>${ms.length} ${ms.length===1?"Massnahme":"Massnahmen"} zu diesem Prinzip</summary><table class="ms">${ms.map(mrow).join("")}</table></details>`:""}</article>`;}
+function aussagen(){
+ if(!AUS.length){$("#v-aussagen").innerHTML=`<div class="leer">Zu diesem Datenstand ist keine Zuordnung von Aussagen zu Belegstellen hinterlegt.</div>`;return;}
+ const alle=MAS.filter(m=>m.p[0]==="alle");
+ $("#v-aussagen").innerHTML=`<p class="hint" style="margin-top:0;max-width:86ch">Der Kernbefund, die fünf Zusammenhänge und die zwölf Prinzipien des Leitfadens, je mit Begründung und den Stellen in den Gesprächen, auf die sich die Aussage stützt. Ein Klick auf eine Stelle zeigt die Evidenzeinheit dazu.</p>
+ <div class="leg"><span class="ref s0">ID 01 P0098</span> Evidenzeinheit zu diesem Absatz <span class="ref s1">ID 01 P0097</span> Evidenzeinheit im angrenzenden Absatz <span class="ref s2">ID 05 P0140</span> Absatz ohne aktive Evidenzeinheit <span class="ref s0 ein">ID 01 P0037</span> schränkt die Aussage ein</div>
+ <div class="jump">${AUS.map(a=>`<button class="chip" data-j="${aid(a.k)}">${esc(a.k)}</button>`).join("")}${alle.length?`<button class="chip" data-j="a-alle">Übergreifend</button>`:""}</div>
+ ${AUS.map(acard).join("")}
+ ${alle.length?`<article class="as" id="a-alle"><div class="hd"><h2>Übergreifende Elemente des Leitfadens</h2></div><table class="ms">${alle.map(mrow).join("")}</table></article>`:""}`;
+ const v=$("#v-aussagen");
+ v.querySelectorAll("[data-j]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.j).scrollIntoView());
+ v.querySelectorAll("[data-ids]").forEach(b=>b.onclick=()=>{const c=b.closest(".as");FROM=c.id==="a-alle"?"Übergreifend":(AUS.find(a=>aid(a.k)===c.id)||{}).k||"";FROMID=c.id;F={q:"",g:[],f:[],c:[],ff:[],x:false,ids:b.dataset.ids.split(",")};LIM=40;show("belege");draw();scrollTo({top:$(".tabs").offsetTop});});
+ v.querySelectorAll("[data-al]").forEach(b=>b.onclick=()=>copy(location.href.split("#")[0]+"#a="+encodeURIComponent(b.dataset.al),b));}
+let FROMID="";
+function zurAussage(id){show("aussagen");try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}const el=document.getElementById(id);if(el){if(el.querySelector("details"))el.querySelector("details").open=true;el.scrollIntoView();}}
+function start(){const any=F.q||F.x||["g","f","c","ff","ids"].some(k=>F[k].length);FROM="";
+ if(A0){show("aussagen");const el=document.getElementById(aid(A0));if(el)el.scrollIntoView();}
+ else if(any||!AUS.length){show("belege");}
+ else show("aussagen");}
+function matrix(){
+ const n=(c,f)=>E.filter(e=>(!f||e.f===f)&&e.c.some(x=>x[0]===c)).length;
+ const mxv=Math.max(...CODES.flatMap(c=>FALL.map(f=>n(c,f.f))));
+ let h=`<thead><tr><th rowspan="2">Code</th>${GR.map(g=>`<th class="g" colspan="${FALL.filter(f=>f.g===g).length}">${GN[g]}</th>`).join("")}<th rowspan="2">Einheiten</th><th rowspan="2">Fälle</th></tr><tr>${GR.map(g=>FALL.filter(f=>f.g===g).map(f=>`<th>${f.f}</th>`).join("")).join("")}</tr></thead><tbody>`;
+ CODES.forEach(c=>{const fs=GR.flatMap(g=>FALL.filter(f=>f.g===g));const vals=fs.map(f=>n(c,f.f));
+  h+=`<tr><th><b>${c}</b>${esc(CN[c]||"")}</th>${fs.map((f,i)=>vals[i]?`<td data-c="${c}" data-f="${f.f}" style="background:rgba(8,122,84,${(0.08+0.6*vals[i]/mxv).toFixed(2)})">${vals[i]}</td>`:`<td class="z">·</td>`).join("")}<td class="sum" data-c="${c}">${n(c)}</td><td>${vals.filter(Boolean).length}</td></tr>`;});
+ $("#mx").innerHTML=h+"</tbody>";
+ $("#mx").querySelectorAll("td[data-c]").forEach(td=>td.onclick=()=>{FROM="";F={q:"",g:[],f:td.dataset.f?[td.dataset.f]:[],c:[td.dataset.c],ff:[],x:false,ids:[]};LIM=40;show("belege");draw();scrollTo({top:$(".tabs").offsetTop});});}
+function hinweise(){
+ $("#hinweise").innerHTML=`<h2>Was eine Evidenzeinheit ist</h2>
+ <p>Eine Evidenzeinheit ist eine einzelne ausgewertete Aussage aus einem Erhebungsgespräch. Sie trägt eine Kennung, den Fall, die Fallgruppe, eine Paraphrase der Aussage, die zugeordneten Codes mit ihrer Ausprägung und den Absatz der Kodierfassung, aus dem sie stammt.</p>
+ <h2>Wie die Angaben zu lesen sind</h2>
+ <ul><li><b>Paraphrase.</b> Die Aussage in den Worten der Auswertung. Es sind keine wörtlichen Zitate.</li>
+ <li><b>Kodiervermerk.</b> Die Begründung, mit der die Zuordnung zu den Codes in der Konsolidierung festgehalten wurde. Der Vermerk richtet sich an die Auswertenden und ist entsprechend knapp.</li>
+ <li><b>Gegenbeleg.</b> Stellen im selben Gespräch, die der Aussage widersprechen oder sie einschränken. Einheiten mit Gegenbeleg tragen einen roten Rand.</li>
+ <li><b>Unsicherheit.</b> Vorbehalte der Auswertung zu dieser Einheit.</li>
+ <li><b>Absatz der Kodierfassung.</b> Die Fundstelle, etwa ID-01-P0035 für Absatz 35 im Gespräch ID 01. Die Kodierfassungen liegen beim Autorenteam.</li>
+ <li><b>Fall.</b> ET steht für etablierte Unternehmen, EX für Experten, AI für AI-First Firms.</li></ul>
+ <h2>Aussagen des Leitfadens und ihre Belegstellen</h2>
+ <p>Die Ansicht «Aussagen des Leitfadens» führt den Kernbefund, die fünf Zusammenhänge und die zwölf Prinzipien auf die Stellen in den Gesprächen zurück. Die Zuordnung stammt vom Autorenteam. Die Begründungen sind ein Entwurf des Autorenteams.</p>
+ <ul><li><b>Evidenzeinheit zu diesem Absatz.</b> Der zitierte Absatz ist in der Datenbank als Evidenzeinheit kodiert. Der Klick führt direkt zu ihr.</li>
+ <li><b>Evidenzeinheit im angrenzenden Absatz.</b> Der zitierte Absatz selbst trägt keine Einheit, der Absatz davor oder danach schon. Der Klick zeigt diese benachbarte Einheit.</li>
+ <li><b>Absatz ohne aktive Evidenzeinheit.</b> Die Stelle ist in der Arbeit zitiert, in diesem Datenstand aber nicht als aktive Einheit geführt. Sie lässt sich nur in der Kodierfassung nachlesen.</li>
+ <li><b>Einschränkende Belegstelle.</b> Eine Stelle, die der Aussage widerspricht oder ihre Reichweite begrenzt.</li></ul>
+ <p>Die Zahl der Gespräche je Aussage zählt die hier aufgeführten Belegstellen aus. Sie ist kein Mass für das Gewicht eines Befunds.</p>
+ ${Object.keys(KB).length?`<h2>Kodierbuch</h2><div class="scroll"><table class="kb"><thead><tr><th>Code</th><th>Name</th><th>Bereich</th><th>Definition</th><th>Ausprägungen</th></tr></thead><tbody>${CODES.map(c=>KB[c]?`<tr><td>${c}</td><td>${esc(KB[c].n)}</td><td>${esc(KB[c].b)}</td><td>${esc(KB[c].d)}</td><td>${esc(KB[c].a)}</td></tr>`:"").join("")}</tbody></table></div>`:""}
+ <h2>Grenzen der Daten</h2><ul>${D.grenzen.map(g=>`<li>${esc(g)}</li>`).join("")}</ul>
+ <h2>Datenstand</h2><p>${esc(D.stand)}. ${E.length} Evidenzeinheiten aus ${FALL.length} Gesprächen, ${CODES.length} Codes, ${E.reduce((s,e)=>s+e.c.length,0)} Zuordnungen.</p>
+ <h2>Auf eine Auswahl verweisen</h2><p>Jede Auswahl hat eine eigene Adresse. «Link zur Auswahl kopieren» legt sie in die Zwischenablage, «Link kopieren» an einer Einheit verweist auf diese eine Einheit. So lässt sich aus der Arbeit oder aus dem Leitfaden auf die Belege einer Aussage verweisen.</p>`;}
+$("#facts").innerHTML=`<li><b>${E.length}</b>Evidenzeinheiten</li><li><b>${FALL.length}</b>Erhebungsgespräche</li><li><b>${CODES.length}</b>Codes</li><li><b>${E.reduce((s,e)=>s+e.c.length,0)}</b>Zuordnungen</li>`;
+$("#stand").textContent="Datenstand "+D.stand+".";
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{show(b.dataset.v);if(b.dataset.v==="belege")draw();});
+$("#q").addEventListener("input",e=>{F.q=e.target.value.trim();F.ids=[];LIM=40;draw();});
+$("#f-x").onchange=e=>{F.x=e.target.checked;F.ids=[];LIM=40;draw();};
+$("#reset").onclick=()=>{F={q:"",g:[],f:[],c:[],ff:[],x:false,ids:[]};LIM=40;draw();};
+$("#back").onclick=()=>{const id=FROMID;FROM="";F={q:"",g:[],f:[],c:[],ff:[],x:false,ids:[]};LIM=40;draw();zurAussage(id);};
+$("#perma").onclick=()=>copy(location.href,$("#perma"));
+$("#mehr").onclick=()=>{LIM+=60;draw();};
+addEventListener("hashchange",()=>{readHash();LIM=40;start();draw();});
+readHash();aussagen();matrix();hinweise();start();draw();
+</script>
+</body>
+</html>

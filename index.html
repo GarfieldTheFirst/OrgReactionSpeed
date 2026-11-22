@@ -389,6 +389,15 @@ footer b{color:#fff;font-weight:700}
 
 dialog{border:0;border-radius:var(--radius);padding:0;max-width:560px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(10,51,41,.3)}
 dialog::backdrop{background:rgba(10,51,41,.5)}
+.bz{font:inherit;font-size:.72rem;font-weight:700;letter-spacing:.04em;border:1px solid var(--accent);background:#fff;color:var(--accent);padding:1px 8px;margin-left:6px;cursor:pointer;white-space:nowrap;vertical-align:baseline}
+.bz:hover{background:var(--accent);color:#fff}
+#belbar{background:var(--yellow);color:#16211d;font-size:.85rem;padding:8px 24px;text-align:center}
+#belbar a{color:inherit;font-weight:700}
+#dlg-b .bq{margin:10px 0 0;padding:8px 12px;border-left:3px solid var(--accent);background:#f2f8f5;font-size:.9rem;color:var(--fg)}
+#dlg-b .bq.ein{border-left-color:#a81c1c;background:#fdf1f0}
+#dlg-b .bq small{display:block;color:var(--muted);font-size:.75rem;margin-bottom:2px}
+#dlg-b .bl{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:16px 0 0}
+@media print{.bz,#belbar{display:none!important}}
 dialog .dh{background:var(--deep);padding:22px 24px}
 dialog .dh h3{color:#fff}
 dialog .dh .mono{color:var(--accentlight)}
@@ -635,7 +644,7 @@ dialog .dh{background:var(--panel)}
       <div><b>8 von 13</b>Gesprächen nennen Zeitfresser wie Freigaben, Governance, Daten oder Infrastruktur, aus allen drei Gruppen. Fünf davon nennen Freigaben oder Governance.</div>
       <div><b>bestätigt</b>Koordinationskosten wachsen mit der Grösse (Williamson 1981), durch agentische KI verschärft</div>
       <div><b>neu</b>Kapazität der Prüf- und Freigabestellen als Barriere, die die Literatur bisher nicht führt</div>
-      <a href="#evidenz">Zur Herleitung →</a>
+      <a href="#evidenz">Zur Herleitung →</a><span id="kern-bz"></span>
     </div>
     <figure class="flow" aria-labelledby="flow-t">
       <div class="flow-h">
@@ -780,7 +789,7 @@ dialog .dh{background:var(--panel)}
     <div class="sec-head"><span class="mono">Evidenz · Methodik und Quellen</span><h2>Worauf der Leitfaden beruht</h2></div>
     <p class="intro">Jede Empfehlung ist auf Literatur oder auf ausgewertete Gespräche zurückgeführt. Die Gesprächsbelege sind hier nur zusammengefasst ausgewiesen, ohne Rückschluss auf Personen oder Unternehmen. Einzelbelege mit Fundstellen dokumentiert die Masterarbeit.</p>
     <div class="chain">
-      <div class="cstep"><span class="mono">Grundlagen</span><h3>Literatur</h3><ul><li>3 Mikrofundamente dynamischer Fähigkeiten nach Teece (2007): Sensing, Seizing, Transforming</li><li>5 Handlungsprinzipien und 4 Leistungsmerkmale von AI-First Firms</li><li>7 Barrieren etablierter Unternehmen</li><li>3 Hypothesen, vor der Erhebung festgelegt</li></ul></div>
+      <div class="cstep"><span class="mono">Grundlagen</span><h3>Literatur</h3><ul><li>3 Mikrofundamente dynamischer Fähigkeiten nach Teece (2007): Sensing, Seizing, Transforming</li><li>5 Handlungsprinzipien der Super-Flexibilität nach Bahrami & Evans (2011)</li><li>4 Leistungsmerkmale von AI-First Firms, geordnet nach den Geschäftsmodelldimensionen von Gassmann et al. (2017)</li><li>7 Barrieren etablierter Unternehmen, aus der Literatur abgeleitet</li><li>3 Hypothesen, vor der Erhebung festgelegt</li></ul></div>
       <div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h17m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
       <div class="cstep"><span class="mono">Erhebung</span><h3>13 Experteninterviews</h3><ul><li>5 etablierte Unternehmen, 4 Experten, 4 AI-First Firms</li><li>425 Evidenzeinheiten mit 587 Zuordnungen in 22 Kategorien</li><li>167 aus etablierten Unternehmen, 102 von Experten, 156 aus AI-First Firms</li></ul></div>
       <div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h17m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
@@ -827,12 +836,14 @@ dialog .dh{background:var(--panel)}
 <footer>
   <div class="wrap">
     <p><b>Reaktionsfähig mit agentischer KI</b>. Ergebnis der Masterarbeit «Organisationale Reaktionsfähigkeit im Zeitalter agentischer KI», Executive MBA in Business Engineering, Universität St.Gallen. Andreas Klopp, Dario Meier, Gerrit Alexander Schatte.</p>
-    <p>Fassung 13 vom 19. November 2026. Validierungsfassung. Die Herleitung jeder Empfehlung ist in Anhang F der Arbeit dokumentiert.</p>
+    <p>Fassung 14 vom 22. November 2026. Validierungsfassung. Die Herleitung jeder Empfehlung ist in Anhang F der Arbeit dokumentiert.</p>
     <p class="no-print"><button class="btn small ghost" onclick="buildDruck();window.print()">Leitfaden drucken oder als PDF sichern</button></p>
   </div>
 </footer>
 
 <div id="druck" aria-hidden="true"></div>
+
+<div id="belbar" hidden>Belegansicht des Autorenteams. Die Belegzeichen neben den Aussagen öffnen Begründung und Belegstellen. <a href="evidenz/index.html" target="_blank" rel="noopener">Evidenz-Browser öffnen</a></div>
 
 <dialog id="dlg">
   <div class="dh"><div class="mono" id="dlg-n"></div><h3 id="dlg-t" style="margin:6px 0 0"></h3></div>
@@ -932,7 +943,7 @@ const PHF=P.map((_,i)=>Object.keys(HF).map(Number).filter(h=>HF[h].p.includes(i+
 /* ---------- Evidenz (aus «Leitfaden und Herleitung», Stand 8.11.2026; nur aggregiert, ohne Gesprächs-IDs) ---------- */
 // Literatur: k = Kurzzitat, f = vollständige Angabe
 const LIT={
- // Wörtlich aus dem Literaturverzeichnis der Masterarbeit (V0, S. 68–73)
+ // Nur Quellen aus Kapitel 2 und dem Literaturverzeichnis der Masterarbeit
  bah:{k:"Bahrami & Evans 2010",f:"Bahrami, H., & Evans, S. (2010). Super-Flexibility for Knowledge Enterprises: A Toolkit for Dynamic Adaptation (2. Aufl.). Springer Berlin Heidelberg. https://doi.org/10.1007/978-3-642-02447-4"},
  cap:{k:"Capon & Mintzberg 1996",f:"Capon, N., & Mintzberg, H. (1996). The Rise and Fall of Strategic Planning. The Academy of Management Review, 21(1), 298. https://doi.org/10.2307/258641"},
  coh:{k:"Cohen & Levinthal 1990",f:"Cohen, W. M., & Levinthal, D. A. (1990). Absorptive Capacity: A New Perspective on Learning and Innovation. Administrative Science Quarterly, 35(1), 128. https://doi.org/10.2307/2393553"},
@@ -946,14 +957,12 @@ const LIT={
  tee:{k:"Teece 2007",f:"Teece, D. J. (2007). Explicating dynamic capabilities: the nature and microfoundations of (sustainable) enterprise performance. Strategic Management Journal, 28(13), 1319–1350. https://doi.org/10.1002/smj.640"},
  wil:{k:"Williamson 1981",f:"Williamson, O. E. (1981). The Economics of Organization: The Transaction Cost Approach. American Journal of Sociology, 87(3), 548–577. https://doi.org/10.1086/227496"},
  win:{k:"Winter et al. 2008",f:"Winter, R., Müller, J., & Gericke, A. (2008). Business Engineering: der St. Galler Ansatz zum Veränderungsmanagement. OrganisationsEntwicklung, 27(2), 40–47."},
- // Nicht im Literaturverzeichnis der Arbeit (V0), aber in der Herleitung zitiert: Angaben aus Standardquellen, in die Arbeit aufnehmen
- bai:{k:"Bainbridge 1983",f:"Bainbridge, L. (1983). Ironies of automation. Automatica, 19(6), 775–779. https://doi.org/10.1016/0005-1098(83)90046-8"},
- ore:{k:"O'Reilly & Tushman 2004",f:"O'Reilly, C. A., & Tushman, M. L. (2004). The Ambidextrous Organization. Harvard Business Review, 82(4), 74–81."}};
+ b11:{k:"Bahrami & Evans 2011",f:"Bahrami, H., & Evans, S. (2011). Super-Flexibility for Real-Time Adaptation: Perspectives from Silicon Valley. California Management Review, 53(3), 21–39. https://doi.org/10.1525/cmr.2011.53.3.21"}};
 // Fünf Zusammenhänge aus der Auswertung; g = Gespräche (null = wegen Zuschnitt der Unterlage nicht sicher zählbar), gr = Gruppen
 const ZUS=[
  {n:1,t:"Der Engpass liegt im Entscheid",a:"Agentische KI beschleunigt die Umsetzung, während Entscheid, Spezifikation und Freigabe mit fester Kapazität arbeiten. Mehr Vorhaben verlängern so die Wartezeit; im Einzelfall verschiebt sich der Engpass bis zum Kunden.",g:8,gr:3,lit:["wil","kle","coh"],s:"tragfähigster Befund"},
  {n:2,t:"Die Führungskette",a:"Fehlt der Geschäftsleitung das Verständnis für Möglichkeiten und Grenzen agentischer Systeme, wird das Thema an Einheiten delegiert, die Struktur und Zuständigkeiten nicht verändern können.",g:null,gr:3,lit:["coh","bah"]},
- {n:3,t:"Das Kontrollparadox",a:"Mehr Autonomie setzt wirksame menschliche Kontrolle voraus. Gerade sie baut jedoch die Fähigkeit ab, auf der die Kontrolle beruht, weil Prüfende die Aufgabe nicht mehr selbst ausführen.",g:6,gr:3,lit:["bai","par"]},
+ {n:3,t:"Das Kontrollparadox",a:"Mehr Autonomie setzt wirksame menschliche Kontrolle voraus. Gerade sie baut jedoch die Fähigkeit ab, auf der die Kontrolle beruht, weil Prüfende die Aufgabe nicht mehr selbst ausführen.",g:6,gr:3,lit:["par"]},
  {n:4,t:"Anreize und Ertragslogik",a:"Wie der Nutzen verbucht wird, bestimmt, ob die Beteiligten die Anpassung mittragen. Bewilligung nur bei Stellenabbau oder Abrechnung nach Aufwand bremst sie.",g:null,gr:3,lit:["win"]},
  {n:5,t:"Agenten koordinieren",a:"Agenten können Koordinationskosten senken oder selbst erhöhen. Welche Richtung eintritt, hängt davon ab, ob Identität, Berechtigung, Eigner und Übersicht der Agenten geregelt sind.",g:3,gr:3,lit:["kle"]}];
 // Je Prinzip: Gespräche mit Belegen (aus der Spalte Good Practice gezählt), Gruppen, Stärke, Zusammenhänge, Literatur, Befund
@@ -962,9 +971,9 @@ const EV={
  2:{g:5,gr:3,st:"z",z:[1],lit:["han"],k:"Ein Entscheid durch eine benannte Person fällt innerhalb von Stunden; dieselbe Frage über viele Fachabteilungen bleibt Monate offen.",f:[1,5]},
  3:{g:4,gr:2,st:"z",z:[1],lit:["wil","kle"],k:"Prüfteams fester Grösse und zusätzliche Bestätigungsebenen werden bei steigender Zahl von Vorhaben zum Engpass, auch Prüfagenten mit offener Prüfschwelle.",f:[2,3]},
  4:{g:5,gr:3,st:"z",z:[5],lit:["kle"],k:"Governance-Prüfung zu Beginn, Berechtigung je Datenklasse, benannte Eigner sowie Dashboards und Alerts nach Vorfällen; Kunden verlangen Souveränität und Datenstandort.",f:[4]},
- 5:{g:3,gr:3,st:"f",z:[],lit:["ore"],k:"Erprobungsteams mit Auftrag der Geschäftsleitung oder virtuelle Teams in der Linie; geklärte Themen gehen über Beta-Programme und die Linie in den Betrieb."},
+ 5:{g:3,gr:3,st:"f",z:[],lit:["b11"],k:"Erprobungsteams mit Auftrag der Geschäftsleitung oder virtuelle Teams in der Linie; geklärte Themen gehen über Beta-Programme und die Linie in den Betrieb."},
  6:{g:4,gr:2,st:"f",z:[],lit:["hen"],k:"Prozesse werden mit dem Agenten als Basis entworfen und eine Datenstrategie geht voraus, statt bestehende Abläufe unverändert zu automatisieren."},
- 7:{g:4,gr:3,st:"z",z:[3],lit:["par","bai"],k:"Kundenprodukte bleiben durchgehend unter menschlicher Prüfung, Selbstoptimierung wurde nach Vorfällen zurückgenommen, Autonomie folgt erst nach Ende-zu-Ende-Erprobung.",f:[4]},
+ 7:{g:4,gr:3,st:"z",z:[3],lit:["par"],k:"Kundenprodukte bleiben durchgehend unter menschlicher Prüfung, Selbstoptimierung wurde nach Vorfällen zurückgenommen, Autonomie folgt erst nach Ende-zu-Ende-Erprobung.",f:[4]},
  8:{g:5,gr:3,st:"f",z:[],lit:["eis"],k:"Ideen werden in kleinste, messbare Fälle zerlegt und früh als Prototyp geprüft; ohne festes Ende scheitert der Abbruch an versunkenen Kosten."},
  9:{g:1,gr:1,st:"e",z:[],lit:[],lt:"keine, Einzelbefund",k:"Empfehlung aus einem Gespräch, kein berichteter Fall. In der Validierung gezielt zu prüfen."},
  10:{g:4,gr:1,st:"f",z:[4],lit:["win"],k:"Betroffene als Supervisoren neuer Systeme und eine Rahmung über Entlastung; Widerstand bei Stellenwirkung und Überforderung durch zu viele Werkzeuge. Belege bisher nur aus etablierten Unternehmen."},
@@ -973,6 +982,20 @@ const EV={
 const STK={z:"Zusammenhang",f:"mehrere Fälle",e:"Einzelbefund"};
 const GRP=n=>n===3?"alle drei Gruppen":n===1?"eine Gruppe":"zwei Gruppen";
 const litK=a=>a.map(x=>LIT[x].k).join("; ");
+/* ---------- Belegansicht: nur mit ?belege in der Adresse. Die Daten liegen in evidenz/belege.js und werden sonst nicht geladen. ---------- */
+let BEL=null;
+const bz=k=>BEL&&BEL.aus[k]?` <button type="button" class="bz" data-bz="${k}">${BEL.aus[k].n} ${BEL.aus[k].n===1?"Belegstelle":"Belegstellen"}</button>`:"";
+function openBeleg(k){const a=BEL.aus[k],d=$("#dlg"),q=(x,c)=>`<p class="bq${c?" ein":""}"><small>${esc(x.f)} · ${esc(x.g)}</small>${esc(x.t)}</p>`;
+ $("#dlg-n").textContent="Belege · "+k;$("#dlg-t").textContent=a.w;
+ $("#dlg-b").innerHTML=`<p>${esc(a.b)}</p><p class="hint">${a.n} stützende ${a.n===1?"Belegstelle":"Belegstellen"} aus ${a.i} ${a.i===1?"Gespräch":"Gesprächen"} (${esc(a.gr.join(", "))})${a.e?`, ${a.e} einschränkende`:""}. Davon ${a.u} mit eigener Evidenzeinheit.</p>${a.p.length?`<div class="bl">Aus den Gesprächen, paraphrasiert</div>${a.p.map(x=>q(x)).join("")}`:""}${a.x.length?`<div class="bl">Einschränkend</div>${a.x.map(x=>q(x,1)).join("")}`:""}`;
+ $("#dlg-r").innerHTML=`<a class="btn small primary" href="evidenz/index.html#a=${encodeURIComponent(k)}" target="_blank" rel="noopener">Alle Belege ansehen</a><button class="btn small">Schliessen</button>`;
+ $("#dlg-r").querySelector("button").onclick=()=>d.close();
+ if(d.showModal&&!d.open)d.showModal();}
+function ladeBelege(){if(!new URLSearchParams(location.search).has("belege"))return;
+ const sc=document.createElement("script");sc.src="evidenz/belege.js";
+ sc.onload=()=>{BEL=window.RF_BELEGE||null;if(!BEL)return;$("#belbar").hidden=false;$("#kern-bz").innerHTML=bz("Kernbefund");renderEvidenz();renderHF();};
+ document.head.appendChild(sc);}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-bz]");if(b&&BEL){e.preventDefault();openBeleg(b.dataset.bz);}});
 function evLine(p){const e=EV[p];return `<span class="evb ${e.st}">${e.st==="z"?"Zusammenhang "+e.z.join(", "):STK[e.st]}</span> ${e.g} ${e.g===1?"Gespräch":"Gespräche"}, ${GRP(e.gr)}${e.lit.length?" · "+esc(litK(e.lit)):""}`;}
 const BAR=[
  ["Sensing","Dominante Branchenlogik","gas","bestätigt"],
@@ -988,12 +1011,12 @@ const BAR=[
  ["Transforming","Aufnahmefähigkeit der Kunden","","neu, Einzelfall"],
  ["Transforming","Agenten als Koordinationslast","","neu"]];
 function renderEvidenz(){
- $("#zusliste").innerHTML=ZUS.map(z=>`<div class="zcard"><span class="mono">Zusammenhang ${z.n}${z.s?" · "+z.s:""}</span><h3>${esc(z.t)}</h3><p>${esc(z.a)}</p><p class="hint">${z.g?z.g+" Gespräche, "+GRP(z.gr):"Gespräche aus "+GRP(z.gr).replace("alle ","allen ")} · ${esc(litK(z.lit))} · Prinzipien ${Object.keys(EV).filter(p=>EV[p].z.includes(z.n)).map(p=>"P"+p).join(", ")}</p></div>`).join("");
+ $("#zusliste").innerHTML=ZUS.map(z=>`<div class="zcard"><span class="mono">Zusammenhang ${z.n}${z.s?" · "+z.s:""}</span>${bz("Zusammenhang "+z.n)}<h3>${esc(z.t)}</h3><p>${esc(z.a)}</p><p class="hint">${z.g?z.g+" Gespräche, "+GRP(z.gr):"Gespräche aus "+GRP(z.gr).replace("alle ","allen ")} · ${esc(litK(z.lit))} · Prinzipien ${Object.keys(EV).filter(p=>EV[p].z.includes(z.n)).map(p=>"P"+p).join(", ")}</p></div>`).join("");
  $("#bartab").innerHTML=`<tr><th>Mikrofundament</th><th>Barriere</th><th>Quelle</th><th>Befund</th></tr>`+BAR.map(b=>`<tr><td>${b[0]}</td><td>${esc(b[1])}</td><td>${b[2]?esc(LIT[b[2]].k):"<span class='hint'>Erhebung</span>"}</td><td><span class="evb ${b[3].startsWith("neu")?"n":b[3]==="mittelbar"?"e":"z"}">${b[3]}</span></td></tr>`).join("");
- $("#evtab").innerHTML=`<tr><th>Prinzip</th><th>Stärke</th><th>Gespräche</th><th>Literatur</th><th>Handlungsfeld</th></tr>`+P.map((t,i)=>{const e=EV[i+1];return `<tr><td><b>P${i+1}</b> ${esc(t)}</td><td><span class="evb ${e.st}">${e.st==="z"?"Zusammenhang "+e.z.join(", "):STK[e.st]}</span></td><td>${e.g}, ${GRP(e.gr)}</td><td>${e.lit.length?esc(litK(e.lit)):`<span class='hint'>${esc(e.lt||"")}</span>`}</td><td>${PHF[i].join(", ")}</td></tr>`;}).join("");
+ $("#evtab").innerHTML=`<tr><th>Prinzip</th><th>Stärke</th><th>Gespräche</th><th>Literatur</th><th>Handlungsfeld</th></tr>`+P.map((t,i)=>{const e=EV[i+1];return `<tr><td><b>P${i+1}</b> ${esc(t)}${bz("P"+(i+1))}</td><td><span class="evb ${e.st}">${e.st==="z"?"Zusammenhang "+e.z.join(", "):STK[e.st]}</span></td><td>${e.g}, ${GRP(e.gr)}</td><td>${e.lit.length?esc(litK(e.lit)):`<span class='hint'>${esc(e.lt||"")}</span>`}</td><td>${PHF[i].join(", ")}</td></tr>`;}).join("");
  $("#litliste").innerHTML=Object.values(LIT).sort((a,b)=>a.f.localeCompare(b.f,"de")).map(l=>`<li>${esc(l.f).replace(/(https:\/\/\S+?)(\.?)$/,'<a href="$1" target="_blank" rel="noopener">$1</a>$2')}</li>`).join("");
 }
-function evDetails(p){const e=EV[p];return `<details class="ev"><summary>${evLine(p)}</summary><p>${esc(e.k)}</p>${e.z.length&&e.st==="z"?`<p class="hint">${e.z.map(z=>`Zusammenhang ${z}: ${esc(ZUS[z-1].t)}`).join(" · ")} · <a href="#evidenz">Herleitung</a></p>`:`<p class="hint"><a href="#evidenz">Herleitung</a></p>`}${(e.f||[]).length?`<div class="faelle-mini">${e.f.map(n=>`<button class="chip" data-f="${n}">Fall: ${esc(FAELLE[n-1].t)}</button>`).join("")}</div>`:""}</details>`;}
+function evDetails(p){const e=EV[p];return `<details class="ev"><summary>${evLine(p)}</summary><p>${esc(e.k)}</p>${e.z.length&&e.st==="z"?`<p class="hint">${e.z.map(z=>`Zusammenhang ${z}: ${esc(ZUS[z-1].t)}`).join(" · ")} · <a href="#evidenz">Herleitung</a>${bz("P"+p)}</p>`:`<p class="hint"><a href="#evidenz">Herleitung</a>${bz("P"+p)}</p>`}${(e.f||[]).length?`<div class="faelle-mini">${e.f.map(n=>`<button class="chip" data-f="${n}">Fall: ${esc(FAELLE[n-1].t)}</button>`).join("")}</div>`:""}</details>`;}
 const FAELLE=[
  {n:1,t:"Entscheid in Stunden",m:"Stunden",p:[2,12],b:"In einem kleinen Software-Unternehmen sammelt das Team Produktinputs aus dem Kundenkontakt einmal pro Woche. Eine Person entscheidet innerhalb von Stunden, was gebaut wird. Aus einer Kundenidee kann am Abend ein Prototyp entstehen, der in derselben Woche gezeigt wird. Grössere Komponenten bleiben aufwendig."},
  {n:2,t:"Fertig nach 48 Stunden, eingeführt nach sechs Wochen",m:"48 h → 6 Wo.",p:[3],b:"In einem Industrieunternehmen stand ein Chatbot für Anfragen nach 48 Stunden bereit. Eingeführt war er nach rund sechs Wochen, vier davon entfielen auf das Warten bis zur nächsten regulären Sitzung."},
@@ -1382,7 +1405,7 @@ $("#vergleichen").onclick=vergleich;
 $("#codes").value=S.kon.codes||"";renderVergleich();
 document.addEventListener("click",e=>{if(e.target.closest("[data-zv]"))show("vergleich");});
 delete S.start;
-renderFlow();renderEvidenz();renderFragen();update();renderHF();
+renderFlow();renderEvidenz();renderFragen();update();renderHF();ladeBelege();
 </script>
 </body>
 </html>
