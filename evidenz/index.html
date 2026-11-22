@@ -73,7 +73,7 @@ mark{background:#f1f18a;color:inherit;padding:0 1px}
 .leer{padding:30px;background:var(--mist);text-align:center;color:var(--muted)}
 .mx{border-collapse:collapse;font-size:.82rem;width:100%}
 .mx th,.mx td{border:1px solid var(--line);padding:5px 6px;text-align:center}
-.mx thead th{font-size:.7rem;letter-spacing:.06em;color:var(--muted);font-weight:700;background:#fff;position:sticky;top:49px}
+.mx thead th{font-size:.7rem;letter-spacing:.06em;color:var(--muted);font-weight:700;background:#fff}
 .mx thead th.g{background:var(--mist);text-transform:uppercase;letter-spacing:.1em}
 .mx tbody th{text-align:left;white-space:nowrap;font-weight:400}
 .mx tbody th b{font-family:var(--mono);margin-right:6px}
@@ -82,7 +82,27 @@ mark{background:#f1f18a;color:inherit;padding:0 1px}
 .mx td.z{color:var(--line2);cursor:default}
 .mx td.z:hover{outline:0}
 .mx .sum{font-weight:700;background:#fff;cursor:pointer}
+.mx td.on{outline:3px solid var(--deep);outline-offset:-3px;font-weight:700}
+.mx tr.inlr>td{padding:0;text-align:left;cursor:default;border-left:0;border-right:0}
+.mx tr.inlr>td:hover{outline:0}
+.mx tr.inlr .inl{position:sticky;left:0;margin:0;font-size:1rem}
+.mx tr.inlr .def{margin:0 0 10px;font-size:.88rem;color:var(--muted)}
 .scroll{overflow-x:auto}
+.ueb{margin:0 0 30px}
+.ueb .kern{background:var(--deep);color:#fff;padding:22px 26px}
+.ueb .kern .lab{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow)}
+.ueb .kern p{font-size:1.25rem;font-weight:300;line-height:1.4;margin:8px 0 12px;max-width:70ch}
+.ueb .kern button{background:none;border:1px solid #fff;color:#fff;padding:6px 12px;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.ueb .kern button:hover{background:#fff;color:var(--deep)}
+.ueb .cols{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px;margin-top:24px}
+@media (max-width:900px){.ueb .cols{grid-template-columns:minmax(0,1fr)}}
+.ueb h3{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.ueb ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.ueb li button{display:grid;grid-template-columns:2.6em minmax(0,1fr) auto;gap:8px;align-items:baseline;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:9px 4px;cursor:pointer;color:var(--fg);font-size:.93rem;line-height:1.35}
+.ueb li button:hover{background:var(--tile)}
+.ueb li b{font-family:var(--mono);color:var(--accent)}
+.ueb li small{color:var(--soft);white-space:nowrap;font-size:.78rem}
+.ueb .mehr{margin:12px 0 0}
 .txt{max-width:74ch}
 .txt h2{font-size:1.6rem;margin:30px 0 10px}
 .txt h2:first-child{margin-top:0}
@@ -128,7 +148,7 @@ button.ref.s2:hover,button.ref.s3:hover{background:var(--mist);color:var(--fg)}
 .kb td:first-child{font-family:var(--mono);font-weight:700}
 footer{background:#072a22;color:#cddbd4;padding:28px 0;font-size:.85rem;border-top:40px solid var(--deep)}
 footer b{color:#fff}
-@media print{.tabs,.filt,.btn,.jump,.ev .hd button,.as .hd button{display:none!important}.as{break-inside:avoid}.as details>*{display:block}.lay{display:block}header{background:#fff;color:#000}header h1,.facts b{color:#000}header p,.facts li{color:#333}.ev{break-inside:avoid}}
+@media print{.tabs,.filt,.btn,.jump,.ueb .kern button,.ev .hd button,.as .hd button{display:none!important}.as{break-inside:avoid}.as details>*{display:block}.lay{display:block}header{background:#fff;color:#000}header h1,.facts b{color:#000}header p,.facts li{color:#333}.ev{break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -166,7 +186,7 @@ footer b{color:#fff}
     </section>
   </div>
   <div id="v-matrix" hidden>
-    <p class="hint" style="margin-top:0">Zahl der Evidenzeinheiten je Code und Fall. Ein Klick auf eine Zelle zeigt die Belege dazu.</p>
+    <p class="hint" style="margin-top:0">Zahl der Evidenzeinheiten je Code und Fall. Ein Klick auf eine Zelle klappt die Belege unter der Zeile auf, ein zweiter Klick schliesst sie wieder. Die Spalte «Einheiten» zeigt alle Belege eines Codes.</p>
     <div class="scroll"><table class="mx" id="mx"></table></div>
   </div>
   <div id="v-hinweise" hidden><div class="txt" id="hinweise"></div></div>
@@ -253,12 +273,19 @@ function acard(a){
  ${ein.length?`<div class="lab">Einschränkende Belegstellen<small>${sum(ein)}</small></div><div class="refs">${ein.map(r=>ref(r,1)).join("")}</div>`:""}
  ${ids.length?`<p style="margin:14px 0 0"><button class="btn" data-ids="${ids.join(",")}" data-st="0" data-lab="Alle ${ids.length} Evidenzeinheiten dieser Aussage" data-all="${ids.length}" aria-expanded="false">Alle ${ids.length} Evidenzeinheiten zeigen</button></p>`:""}
  ${ms.length?`<details><summary>${ms.length} ${ms.length===1?"Massnahme":"Massnahmen"} zu diesem Prinzip</summary><table class="ms">${ms.map(mrow).join("")}</table></details>`:""}</article>`;}
+function ueber(alle){
+ const kern=AUS.find(a=>a.k==="Kernbefund"),zs=AUS.filter(a=>ZN(a.k)),ps=AUS.filter(a=>/^P\d+$/.test(a.k));
+ const li=(a,nr)=>{const n=a.r.filter(r=>!r[3]).length;return `<li><button type="button" data-j="${aid(a.k)}"><b>${nr}</b><span>${esc(a.w)}</span><small>${n} ${n===1?"Stelle":"Stellen"}</small></button></li>`;};
+ return `<section class="ueb" aria-label="Übersicht">${kern?`<div class="kern"><div class="lab">Kernbefund</div><p>${esc(kern.w)}</p><button type="button" data-j="${aid(kern.k)}">Belegstellen ansehen</button></div>`:""}
+ <div class="cols"><div><h3>${zs.length} Zusammenhänge</h3><ol>${zs.map(a=>li(a,a.k.replace("Zusammenhang ","Z"))).join("")}</ol>${alle?`<p class="mehr"><button type="button" class="chip" data-j="a-alle">Übergreifende Elemente des Leitfadens</button></p>`:""}</div>
+ <div><h3>${ps.length} Prinzipien</h3><ol>${ps.map(a=>li(a,a.k)).join("")}</ol></div></div></section>`;}
 function aussagen(){
  if(!AUS.length){$("#v-aussagen").innerHTML=`<div class="leer">Zu diesem Datenstand ist keine Zuordnung von Aussagen zu Belegstellen hinterlegt.</div>`;return;}
  const alle=MAS.filter(m=>m.p[0]==="alle");
- $("#v-aussagen").innerHTML=`<p class="hint" style="margin-top:0;max-width:86ch">Der Kernbefund, die fünf Zusammenhänge und die zwölf Prinzipien des Leitfadens, je mit Begründung und den Stellen in den Gesprächen, auf die sich die Aussage stützt. Ein Klick auf eine Stelle klappt die Evidenzeinheit direkt darunter auf, ein zweiter Klick schliesst sie wieder.</p>
+ $("#v-aussagen").innerHTML=`<p class="hint" style="margin-top:0;max-width:86ch">Der Kernbefund, die fünf Zusammenhänge und die zwölf Prinzipien des Leitfadens im Überblick. Ein Klick auf eine Zeile führt zur Aussage mit Begründung und Belegstellen.</p>
+ ${ueber(alle.length)}
+ <p class="hint" style="max-width:86ch">Ein Klick auf eine Belegstelle klappt die Evidenzeinheit direkt darunter auf, ein zweiter Klick schliesst sie wieder.</p>
  <div class="leg"><span class="ref s0">ID 01 P0098</span> Evidenzeinheit zu diesem Absatz <span class="ref s1">ID 01 P0097</span> Evidenzeinheit im angrenzenden Absatz <span class="ref s2">ID 05 P0140</span> Absatz ohne aktive Evidenzeinheit <span class="ref s0 ein">ID 01 P0037</span> schränkt die Aussage ein</div>
- <div class="jump">${AUS.map(a=>`<button class="chip" data-j="${aid(a.k)}">${esc(a.k)}</button>`).join("")}${alle.length?`<button class="chip" data-j="a-alle">Übergreifend</button>`:""}</div>
  ${AUS.map(acard).join("")}
  ${alle.length?`<article class="as" id="a-alle"><div class="hd"><h2>Übergreifende Elemente des Leitfadens</h2></div><table class="ms">${alle.map(mrow).join("")}</table></article>`:""}`;
  const v=$("#v-aussagen");
@@ -295,7 +322,18 @@ function matrix(){
  CODES.forEach(c=>{const fs=GR.flatMap(g=>FALL.filter(f=>f.g===g));const vals=fs.map(f=>n(c,f.f));
   h+=`<tr><th><b>${c}</b>${esc(CN[c]||"")}</th>${fs.map((f,i)=>vals[i]?`<td data-c="${c}" data-f="${f.f}" style="background:rgba(8,122,84,${(0.08+0.6*vals[i]/mxv).toFixed(2)})">${vals[i]}</td>`:`<td class="z">·</td>`).join("")}<td class="sum" data-c="${c}">${n(c)}</td><td>${vals.filter(Boolean).length}</td></tr>`;});
  $("#mx").innerHTML=h+"</tbody>";
- $("#mx").querySelectorAll("td[data-c]").forEach(td=>td.onclick=()=>{FROM="";F={q:"",g:[],f:td.dataset.f?[td.dataset.f]:[],c:[td.dataset.c],ff:[],x:false,ids:[]};LIM=40;show("belege");draw();scrollTo({top:$(".tabs").offsetTop});});}
+ $("#mx").querySelectorAll("td[data-c]").forEach(td=>td.onclick=()=>mxInline(td));}
+function mxInline(td){
+ const tr=td.closest("tr"),war=td.classList.contains("on"),mx=$("#mx");
+ mx.querySelectorAll("tr.inlr").forEach(x=>x.remove());mx.querySelectorAll("td.on").forEach(x=>x.classList.remove("on"));
+ if(war)return;
+ const c=td.dataset.c,f=td.dataset.f,es=E.filter(e=>(!f||e.f===f)&&e.c.some(x=>x[0]===c)),fall=f?FALL.find(x=>x.f===f):null,N=12;
+ const box=document.createElement("tr");box.className="inlr";
+ box.innerHTML=`<td colspan="${FALL.length+3}"><div class="inl" style="width:${$("#v-matrix .scroll").clientWidth}px"><div class="ih"><b>${esc(cname(c))} · ${fall?esc(f+", "+GN[fall.g]):"alle Fälle"}</b><span>${es.length} ${es.length===1?"Evidenzeinheit":"Evidenzeinheiten"}</span><button type="button" data-zu>Schliessen</button></div>${KB[c]?`<p class="def">${esc(KB[c].d)}</p>`:""}<div data-k>${es.slice(0,N).map(card).join("")}</div>${es.length>N?`<p><button type="button" class="btn" data-mehr>Weitere ${es.length-N} zeigen</button></p>`:""}</div></td>`;
+ tr.after(box);td.classList.add("on");
+ const bind=()=>box.querySelectorAll("[data-l]").forEach(x=>x.onclick=()=>copy(location.href.split("#")[0]+"#ids="+x.dataset.l,x));bind();
+ box.querySelector("[data-zu]").onclick=()=>{box.remove();td.classList.remove("on");};
+ const m=box.querySelector("[data-mehr]");if(m)m.onclick=()=>{box.querySelector("[data-k]").innerHTML=es.map(card).join("");m.parentNode.remove();bind();};}
 function hinweise(){
  $("#hinweise").innerHTML=`<h2>Was eine Evidenzeinheit ist</h2>
  <p>Eine Evidenzeinheit ist eine einzelne ausgewertete Aussage aus einem Erhebungsgespräch. Sie trägt eine Kennung, den Fall, die Fallgruppe, eine Paraphrase der Aussage, die zugeordneten Codes mit ihrer Ausprägung und den Absatz der Kodierfassung, aus dem sie stammt.</p>
@@ -319,7 +357,7 @@ function hinweise(){
  <h2>Auf eine Auswahl verweisen</h2><p>Jede Auswahl hat eine eigene Adresse. «Link zur Auswahl kopieren» legt sie in die Zwischenablage, «Link kopieren» an einer Einheit verweist auf diese eine Einheit. So lässt sich aus der Arbeit oder aus dem Leitfaden auf die Belege einer Aussage verweisen.</p>`;}
 $("#facts").innerHTML=`<li><b>${E.length}</b>Evidenzeinheiten</li><li><b>${FALL.length}</b>Erhebungsgespräche</li><li><b>${CODES.length}</b>Codes</li><li><b>${E.reduce((s,e)=>s+e.c.length,0)}</b>Zuordnungen</li>`;
 $("#stand").textContent="Datenstand "+D.stand+".";
-document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{show(b.dataset.v);if(b.dataset.v==="belege")draw();else if(b.dataset.v==="aussagen"){try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}}});
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{show(b.dataset.v);if(b.dataset.v==="belege")draw();else{try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}}});
 $("#q").addEventListener("input",e=>{F.q=e.target.value.trim();F.ids=[];LIM=40;draw();});
 $("#f-x").onchange=e=>{F.x=e.target.checked;F.ids=[];LIM=40;draw();};
 $("#reset").onclick=()=>{F={q:"",g:[],f:[],c:[],ff:[],x:false,ids:[]};LIM=40;draw();};
